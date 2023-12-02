@@ -12,6 +12,7 @@ import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/icon_text.dart';
 import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 import 'package:incheon_knowhow/presentation/widget/password_form_field.dart';
+import 'package:incheon_knowhow/presentation/widget/school_search_form_field.dart';
 import 'package:incheon_knowhow/route/app_router.dart';
 
 @RoutePage()
@@ -111,9 +112,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
-                  const AppTextFormField(
-                    hintText: '학교명 입력',
-                  ),
+                  const SchoolSearchFormField(),
                   const Row(
                     children: [
                       Expanded(

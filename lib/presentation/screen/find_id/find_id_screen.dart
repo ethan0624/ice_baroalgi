@@ -8,6 +8,7 @@ import 'package:incheon_knowhow/presentation/screen/find_id/bloc/find_id_bloc.da
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
+import 'package:incheon_knowhow/presentation/widget/underline_text_button.dart';
 
 @RoutePage()
 class FindIdScreen extends StatefulWidget {
@@ -121,27 +122,9 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   onPressed: () => context.router.pop(),
                 ),
                 Center(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 1, color: AppTextColor.light),
-                      ),
-                    ),
-                    child: TextButton(
-                      onPressed: () => context.router.replaceNamed('/resetPw'),
-                      style: TextButton.styleFrom(
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        minimumSize: const Size(10, 10),
-                        padding: EdgeInsets.zero,
-                      ),
-                      child: Text(
-                        '비밀번호가 생각나지 않으세요?',
-                        style: context.textTheme.labelLarge?.copyWith(
-                          color: AppTextColor.dark,
-                        ),
-                      ),
-                    ),
+                  child: UnderlineTextButton(
+                    text: '비밀번호가 생각나지 않으세요?',
+                    onPressed: () {},
                   ),
                 ),
               ],

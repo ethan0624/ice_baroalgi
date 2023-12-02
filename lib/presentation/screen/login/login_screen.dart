@@ -5,7 +5,6 @@ import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
-import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/login/bloc/login_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';

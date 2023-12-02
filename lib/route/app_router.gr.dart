@@ -142,10 +142,28 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const NotificationListScreen(),
       );
     },
-    ResetPwRoute.name: (routeData) {
+    ResetPwCertificationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ResetPwScreen(),
+        child: const ResetPwCertificationScreen(),
+      );
+    },
+    ResetPwFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ResetPwFormScreen(),
+      );
+    },
+    ResetPwUpdateRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ResetPwUpdateScreen(),
+      );
+    },
+    SearchSchoolRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchSchoolScreen(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -539,15 +557,57 @@ class NotificationListRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ResetPwScreen]
-class ResetPwRoute extends PageRouteInfo<void> {
-  const ResetPwRoute({List<PageRouteInfo>? children})
+/// [ResetPwCertificationScreen]
+class ResetPwCertificationRoute extends PageRouteInfo<void> {
+  const ResetPwCertificationRoute({List<PageRouteInfo>? children})
       : super(
-          ResetPwRoute.name,
+          ResetPwCertificationRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ResetPwRoute';
+  static const String name = 'ResetPwCertificationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResetPwFormScreen]
+class ResetPwFormRoute extends PageRouteInfo<void> {
+  const ResetPwFormRoute({List<PageRouteInfo>? children})
+      : super(
+          ResetPwFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPwFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResetPwUpdateScreen]
+class ResetPwUpdateRoute extends PageRouteInfo<void> {
+  const ResetPwUpdateRoute({List<PageRouteInfo>? children})
+      : super(
+          ResetPwUpdateRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPwUpdateRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchSchoolScreen]
+class SearchSchoolRoute extends PageRouteInfo<void> {
+  const SearchSchoolRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchSchoolRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchSchoolRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
