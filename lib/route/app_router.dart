@@ -5,6 +5,7 @@ import 'package:incheon_knowhow/presentation/screen/certification/certification_
 import 'package:incheon_knowhow/presentation/screen/course/course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/find_id/find_id_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/home/home_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/jinro_account/jinro_account_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/join/agreement/join_agreement_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/join/certification/join_certification_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/join/complete/join_complete_screen.dart';
@@ -24,13 +25,13 @@ import 'package:incheon_knowhow/presentation/screen/reset_pw/form/reset_pw_form_
 import 'package:incheon_knowhow/presentation/screen/reset_pw/update/reset_pw_update_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/search_school/search_school_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/splash/splash_screen.dart';
-import 'package:incheon_knowhow/route/auth_guard.dart';
+// import 'package:incheon_knowhow/route/auth_guard.dart';
 
 part 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
-  final _authGuard = AuthGuard();
+  // final _authGuard = AuthGuard();
 
   @override
   List<AutoRoute> get routes => [
@@ -78,5 +79,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/language', page: LanguageRoute.page),
         AutoRoute(path: '/notice', page: NoticeRoute.page),
         AutoRoute(path: '/searchSchool', page: SearchSchoolRoute.page),
+        AutoRoute(path: '/jinroAccount', page: JinroAccountRoute.page),
       ];
 }

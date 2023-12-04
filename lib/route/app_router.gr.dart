@@ -39,6 +39,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
+    JinroAccountRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JinroAccountScreen(),
+      );
+    },
     JoinAgreementRoute.name: (routeData) {
       final args = routeData.argsAs<JoinAgreementRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -227,6 +233,20 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [JinroAccountScreen]
+class JinroAccountRoute extends PageRouteInfo<void> {
+  const JinroAccountRoute({List<PageRouteInfo>? children})
+      : super(
+          JinroAccountRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'JinroAccountRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

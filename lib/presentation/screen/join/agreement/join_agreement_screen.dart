@@ -24,7 +24,6 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
 
   _onNextPressed() {
     // todo: validate required agreement
-    print('>>>>> _onNextPressed');
     if (widget.joinData.isFourteenOver) {
       context.router.push(JoinCertificationRoute(joinData: widget.joinData));
     } else {

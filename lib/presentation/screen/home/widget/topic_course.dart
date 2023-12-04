@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
-import 'package:incheon_knowhow/presentation/widget/checkbox_text.dart';
 import 'package:incheon_knowhow/presentation/widget/course_topic_expansion.dart';
 
 class TopicCourse extends StatefulWidget {

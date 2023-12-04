@@ -4,14 +4,13 @@ import 'package:incheon_knowhow/presentation/widget/app_back_button.dart';
 
 class AppSubAppBar extends AppBar {
   final String? text;
-  final double? elevation;
   final VoidCallback? onBackPressed;
 
   AppSubAppBar({
     super.key,
     super.actions,
+    super.elevation = 2,
     this.text,
-    this.elevation = 2,
     this.onBackPressed,
   }) : super(
           title: Text(
@@ -24,6 +23,5 @@ class AppSubAppBar extends AppBar {
           centerTitle: true,
           automaticallyImplyLeading: true,
           leading: AppBackButton(onBackPressed: onBackPressed),
-          elevation: elevation,
         );
 }

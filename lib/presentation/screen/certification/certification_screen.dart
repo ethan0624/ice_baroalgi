@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:iamport_flutter/Iamport_certification.dart';
-import 'package:iamport_flutter/model/certification_data.dart';
 import 'package:incheon_knowhow/presentation/base/base_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';

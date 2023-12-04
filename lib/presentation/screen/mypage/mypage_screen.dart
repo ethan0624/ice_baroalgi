@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/bloc/mypage_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_guest_setting_view.dart';
-import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_user_setting_view.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 
 @RoutePage()

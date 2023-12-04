@@ -13,6 +13,15 @@ class MainTabScreen extends StatefulWidget {
 
 class _MainTabScreenState extends State<MainTabScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.router.pushNamed('/jinroAccount');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       backgroundColor: Colors.white,
