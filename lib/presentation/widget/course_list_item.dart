@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/presentation/widget/label.dart';
+import 'package:incheon_knowhow/presentation/widget/progress_bar.dart';
 
 class CourseListItem extends StatelessWidget {
   const CourseListItem({super.key});
@@ -14,6 +17,7 @@ class CourseListItem extends StatelessWidget {
         color: Colors.white,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
@@ -34,7 +38,7 @@ class CourseListItem extends StatelessWidget {
                   children: [
                     Text(
                       '미추홀구',
-                      style: context.textTheme.labelLarge?.copyWith(
+                      style: context.textTheme.labelMedium?.copyWith(
                         color: Colors.black,
                       ),
                     ),
@@ -43,9 +47,43 @@ class CourseListItem extends StatelessWidget {
                 ),
                 Text(
                   '민주주의의 길',
-                  style: context.textTheme.bodyLarge?.copyWith(
+                  style: context.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Wrap(
+                    spacing: 4,
+                    children: [
+                      Label(
+                        text: '2km',
+                        borderColor: AppColor.linePurple,
+                      ),
+                      Label(
+                        text: '60분 소요',
+                        borderColor: AppColor.lineBlue,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 8),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: ProgressBar(value: 0.5),
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        '3/6',
+                        style: context.textTheme.labelLarge
+                            ?.copyWith(color: AppTextColor.light),
+                      ),
+                    ],
                   ),
                 ),
               ],

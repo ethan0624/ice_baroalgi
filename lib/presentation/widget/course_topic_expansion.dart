@@ -39,6 +39,7 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
                       '주제별 제목',
                       style: context.textTheme.bodySmall?.copyWith(
                         color: Colors.black,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -46,10 +47,10 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
               ),
               RotatedBox(
                 quarterTurns: widget.expended ? 1 : 0,
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_forward_ios,
                   size: 22,
-                  color: widget.expended ? AppColor.primary : Colors.black,
+                  color: Colors.black,
                 ),
               ),
             ],
