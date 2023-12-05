@@ -5,6 +5,8 @@ import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/home/bloc/home_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/home_app_bar.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/recommand_course.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/region_course.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/topic_course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 
@@ -95,14 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           TopicCourse(
                             scrollController: _scrollController,
                           ),
-                          Container(
-                            color: Colors.red,
-                            height: 100,
+                          RegionCourse(
+                            scrollController: _scrollController,
                           ),
-                          Container(
-                            color: Colors.green,
-                            height: 100,
-                          ),
+                          RecommandCourse(),
                         ],
                       ),
                     ),

@@ -15,6 +15,14 @@ class TopicCourse extends StatefulWidget {
 }
 
 class _TopicCourseState extends State<TopicCourse> {
+  int _expendedIndex = -1;
+
+  _onChangedExpanedIndex(int index, bool isExpaned) {
+    setState(() {
+      _expendedIndex = isExpaned ? index : -1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -46,7 +54,10 @@ class _TopicCourseState extends State<TopicCourse> {
         ),
         ...List.generate(10, (index) {
           return CourseTopicExpansion(
-            expended: index == 0,
+            expended: index == _expendedIndex,
+            onExpended: (isExpaned) {
+              _onChangedExpanedIndex(index, isExpaned);
+            },
           );
         }),
       ],
