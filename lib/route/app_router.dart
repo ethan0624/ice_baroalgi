@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_screen.dart';
-import 'package:incheon_knowhow/presentation/screen/course/course_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/my_course/my_course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/find_id/find_id_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/home/home_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/jinro_account/jinro_account_screen.dart';
@@ -63,7 +63,7 @@ class AppRouter extends _$AppRouter {
           page: MainTabRoute.page,
           children: [
             AutoRoute(path: 'home', page: HomeRoute.page, initial: true),
-            AutoRoute(path: 'course', page: CourseRoute.page),
+            AutoRoute(path: 'myCourse', page: MyCourseRoute.page),
           ],
         ),
 

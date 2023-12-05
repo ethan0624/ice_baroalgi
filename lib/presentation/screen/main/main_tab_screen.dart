@@ -27,7 +27,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
       backgroundColor: Colors.white,
       routes: const [
         HomeRoute(),
-        CourseRoute(),
+        MyCourseRoute(),
       ],
       bottomNavigationBuilder: (context, tabsRouter) {
         return AppBottomNavigationBar(

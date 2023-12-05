@@ -21,12 +21,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CertificationScreen(),
       );
     },
-    CourseRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CourseScreen(),
-      );
-    },
     FindIdRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -124,6 +118,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainTabScreen(),
       );
     },
+    MyCourseRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyCourseScreen(),
+      );
+    },
     MypageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -191,20 +191,6 @@ class CertificationRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CertificationRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [CourseScreen]
-class CourseRoute extends PageRouteInfo<void> {
-  const CourseRoute({List<PageRouteInfo>? children})
-      : super(
-          CourseRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CourseRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -516,6 +502,20 @@ class MainTabRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainTabRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MyCourseScreen]
+class MyCourseRoute extends PageRouteInfo<void> {
+  const MyCourseRoute({List<PageRouteInfo>? children})
+      : super(
+          MyCourseRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyCourseRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

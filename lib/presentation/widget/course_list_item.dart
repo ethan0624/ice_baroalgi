@@ -5,13 +5,19 @@ import 'package:incheon_knowhow/presentation/widget/label.dart';
 import 'package:incheon_knowhow/presentation/widget/progress_bar.dart';
 
 class CourseListItem extends StatelessWidget {
-  const CourseListItem({super.key});
+  final EdgeInsets margin;
+  final EdgeInsets padding;
+  const CourseListItem({
+    super.key,
+    this.margin = const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
+    this.padding = const EdgeInsets.all(14),
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
-      padding: const EdgeInsets.all(14),
+      margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
