@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 
 class MyCourseAppBar extends AppBar {
-  final VoidCallback? onFarivotePressed;
+  final VoidCallback? onFavoritePressed;
   MyCourseAppBar({
     super.key,
-    this.onFarivotePressed,
+    this.onFavoritePressed,
   }) : super(
           leading: Center(
             child: Text(
@@ -19,7 +19,7 @@ class MyCourseAppBar extends AppBar {
           leadingWidth: 120,
           actions: [
             IconButton(
-              onPressed: onFarivotePressed,
+              onPressed: onFavoritePressed,
               icon: const Icon(
                 Icons.favorite_outline,
                 color: Colors.black,

@@ -20,6 +20,7 @@ class CourseListItem extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(width: 1, color: AppColor.background),
         color: Colors.white,
       ),
       child: Row(

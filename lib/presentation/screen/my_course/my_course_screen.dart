@@ -20,7 +20,11 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<MyCourseBloc, MyCourseBloc, MyCourseState>(
-      appBar: MyCourseAppBar(),
+      appBar: MyCourseAppBar(
+        onFavoritePressed: () {
+          context.router.pushNamed('/favoriteCourse');
+        },
+      ),
       create: (_) => MyCourseBloc(),
       builder: (context, bloc, state) {
         return ListView(
@@ -72,7 +76,6 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                 3,
                 (index) => const CourseListItem(
                       margin: EdgeInsets.symmetric(vertical: 12),
-                      padding: EdgeInsets.zero,
                     )),
             const SizedBox(height: 26),
             const AppTitleText(text: '완료코스'),
@@ -80,7 +83,6 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                 10,
                 (index) => const CourseListItem(
                       margin: EdgeInsets.symmetric(vertical: 12),
-                      padding: EdgeInsets.zero,
                     )),
           ],
         );

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/favorite_course/favorite_course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/my_course/my_course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/find_id/find_id_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/home/home_screen.dart';
@@ -66,6 +67,8 @@ class AppRouter extends _$AppRouter {
             AutoRoute(path: 'myCourse', page: MyCourseRoute.page),
           ],
         ),
+
+        AutoRoute(path: '/favoriteCourse', page: FavoriteCourseRoute.page),
 
         // 알림
         AutoRoute(path: '/notification', page: NotificationListRoute.page),

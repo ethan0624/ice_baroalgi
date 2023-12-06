@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CertificationScreen(),
       );
     },
+    FavoriteCourseRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FavoriteCourseScreen(),
+      );
+    },
     FindIdRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -191,6 +197,20 @@ class CertificationRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CertificationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FavoriteCourseScreen]
+class FavoriteCourseRoute extends PageRouteInfo<void> {
+  const FavoriteCourseRoute({List<PageRouteInfo>? children})
+      : super(
+          FavoriteCourseRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FavoriteCourseRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -7,6 +7,10 @@ extension LocaleExtension on Locale {
         return '한국어';
       case 'en':
         return 'English';
+      case 'ru':
+        return 'Русский';
+      case 'vi':
+        return 'Tiếng Việt';
       default:
         return '';
     }
@@ -18,6 +22,10 @@ extension LocaleExtension on Locale {
         return '🇰🇷';
       case 'en':
         return '🇺🇸';
+      case 'ru':
+        return '🇷🇺';
+      case 'vi':
+        return '🇻🇳';
       default:
         return '';
     }
