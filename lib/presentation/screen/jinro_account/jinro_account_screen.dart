@@ -20,6 +20,10 @@ class JinroAccountScreen extends StatefulWidget {
 }
 
 class _JinroAccountScreenState extends State<JinroAccountScreen> {
+  _onAuthPressed() {
+    context.router.pop();
+  }
+
   _onSkipPressed() {
     context.router.pop();
   }
@@ -106,7 +110,7 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                   children: [
                     AppButton(
                       text: '인증하기',
-                      onPressed: () {},
+                      onPressed: _onAuthPressed,
                     ),
                     Center(
                       child: UnderlineTextButton(
