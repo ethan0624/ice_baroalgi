@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeAppBar extends AppBar {
   final VoidCallback? onSearchPressed;
@@ -16,11 +17,19 @@ class HomeAppBar extends AppBar {
           actions: [
             IconButton(
               onPressed: onSearchPressed,
-              icon: const Icon(Icons.search_outlined),
+              icon: SvgPicture.asset(
+                'assets/images/ic_search.svg',
+                width: 25,
+                height: 25,
+              ),
             ),
             IconButton(
               onPressed: onNotificationPressed,
-              icon: const Icon(Icons.notifications_outlined),
+              icon: SvgPicture.asset(
+                'assets/images/ic_notification.svg',
+                width: 25,
+                height: 25,
+              ),
             ),
           ],
         );

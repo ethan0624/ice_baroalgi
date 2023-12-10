@@ -22,17 +22,25 @@ class AccordianListView extends StatefulWidget {
 }
 
 class _AccordianListViewState extends State<AccordianListView> {
-  int _expanedIndex = -1;
+  final List<int> _expanedIndexs = [];
 
   _initial() {
     setState(() {
-      _expanedIndex = widget.initialExpanedIndex;
+      if (widget.initialExpanedIndex > -1) {
+        _expanedIndexs.add(widget.initialExpanedIndex);
+      }
     });
   }
 
   _onPressed(int index, bool isExpaned) {
     setState(() {
-      _expanedIndex = isExpaned ? index : -1;
+      if (isExpaned) {
+        if (_expanedIndexs.contains(index)) return;
+
+        _expanedIndexs.add(index);
+      } else {
+        _expanedIndexs.remove(index);
+      }
     });
   }
 
@@ -49,7 +57,7 @@ class _AccordianListViewState extends State<AccordianListView> {
       itemCount: widget.itemCount,
       itemBuilder: (context, index) {
         return AppExpansionTile(
-          isExpaned: index == _expanedIndex,
+          isExpaned: _expanedIndexs.contains(index),
           title: widget.titleBuilder(context, index),
           content: widget.contentBuilder(context, index),
           onExpansionChanged: (isExpaned) => _onPressed(index, isExpaned),

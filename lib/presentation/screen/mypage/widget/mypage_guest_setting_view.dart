@@ -44,9 +44,7 @@ class MypageGuestSettingView extends StatelessWidget {
             Icons.arrow_forward_ios,
             size: 20,
           ),
-          onPressed: () {
-            // todo :
-          },
+          onPressed: () => context.router.pushNamed('/cscenter/qna'),
         ),
         MypageSettingListItem(
           title: '앱 버전정보',

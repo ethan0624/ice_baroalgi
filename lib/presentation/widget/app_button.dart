@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets padding;
   final Color? background;
+  final Color? borderColor;
   final Widget? suffixIcon;
   final VoidCallback? onPressed;
 
@@ -26,6 +27,7 @@ class AppButton extends StatelessWidget {
     this.margin,
     this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
     this.background,
+    this.borderColor,
     this.suffixIcon,
     this.onPressed,
   });
@@ -40,8 +42,11 @@ class AppButton extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-            color: background ?? AppColor.primary,
-            borderRadius: BorderRadius.circular(12)),
+          color: background ?? AppColor.primary,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+              width: 1, color: borderColor ?? (background ?? AppColor.primary)),
+        ),
         child: Row(
           mainAxisAlignment: centerText
               ? MainAxisAlignment.center
