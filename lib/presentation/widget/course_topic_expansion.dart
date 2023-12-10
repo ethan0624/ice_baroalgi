@@ -3,6 +3,7 @@ import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
+import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class CourseTopicExpansion extends StatefulWidget {
   final bool expended;
@@ -37,13 +38,9 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
                     spacing: 14,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Container(
-                          width: 75,
-                          height: 75,
-                          color: Colors.grey.shade200,
-                        ),
+                      const Thumbnail(
+                        width: 75,
+                        height: 75,
                       ),
                       Text(
                         '주제별 제목',

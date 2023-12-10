@@ -9,7 +9,7 @@ class CourseAppBar extends AppBar {
 
   CourseAppBar({
     super.key,
-    super.elevation = 2,
+    super.elevation = 3,
     this.text,
     this.onBackPressed,
   }) : super(

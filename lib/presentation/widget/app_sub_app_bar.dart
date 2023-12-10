@@ -9,7 +9,7 @@ class AppSubAppBar extends AppBar {
   AppSubAppBar({
     super.key,
     super.actions,
-    super.elevation = 2,
+    super.elevation = 3,
     this.text,
     this.onBackPressed,
   }) : super(

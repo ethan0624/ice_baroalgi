@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class SpotCardView extends StatelessWidget {
   const SpotCardView({super.key});
@@ -22,14 +23,7 @@ class SpotCardView extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.grey.shade200,
-            ),
-          ),
+          const Thumbnail(),
           const SizedBox(width: 14),
           Expanded(
             child: Column(

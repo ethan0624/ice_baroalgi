@@ -4,6 +4,7 @@ import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/label.dart';
 import 'package:incheon_knowhow/presentation/widget/progress_bar.dart';
+import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class CourseListItem extends StatelessWidget {
   final EdgeInsets margin;
@@ -29,14 +30,7 @@ class CourseListItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.grey.shade200,
-              ),
-            ),
+            const Thumbnail(),
             const SizedBox(width: 14),
             Expanded(
               child: Column(
