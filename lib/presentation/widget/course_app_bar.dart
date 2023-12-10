@@ -20,7 +20,7 @@ class CourseAppBar extends AppBar {
               fontWeight: FontWeight.w500,
             ),
           ),
-          centerTitle: true,
+          centerTitle: false,
           automaticallyImplyLeading: true,
           leading: AppBackButton(onBackPressed: onBackPressed),
           actions: [

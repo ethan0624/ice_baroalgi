@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
-import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/course/map/bloc/course_map_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/course_app_bar.dart';
+import 'package:incheon_knowhow/presentation/widget/course_header.dart';
 import 'package:incheon_knowhow/presentation/widget/custom_map_marker.dart';
-import 'package:incheon_knowhow/presentation/widget/label.dart';
 import 'package:incheon_knowhow/presentation/widget/spot_card_view.dart';
 
 @RoutePage()
@@ -160,48 +159,11 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                   },
                 ),
               ),
-              Positioned(
+              const Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(26),
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '미추홀구',
-                        style: context.textTheme.labelMedium?.copyWith(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text(
-                          '민주주의의 길',
-                          style: context.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Wrap(
-                        spacing: 4,
-                        children: [
-                          Label(
-                            text: '2km',
-                            borderColor: AppColor.linePurple,
-                          ),
-                          Label(
-                            text: '60분 소요',
-                            borderColor: AppColor.lineBlue,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                child: CourseHeader(),
               ),
               Positioned(
                 bottom: 0,
@@ -264,7 +226,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                               background: Colors.white,
                               textColor: Colors.black,
                               borderColor: AppColor.secondary,
-                              onPressed: () {},
+                              onPressed: () =>
+                                  context.router.pushNamed('/course/1/info'),
                             ),
                           ),
                           const SizedBox(width: 14),
