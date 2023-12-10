@@ -21,6 +21,38 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CertificationScreen(),
       );
     },
+    CourseInfoRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CourseInfoRouteArgs>(
+          orElse: () =>
+              CourseInfoRouteArgs(courseId: pathParams.getInt('courseId')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CourseInfoScreen(
+          key: args.key,
+          courseId: args.courseId,
+        ),
+      );
+    },
+    CourseMapRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CourseMapRouteArgs>(
+          orElse: () =>
+              CourseMapRouteArgs(courseId: pathParams.getInt('courseId')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CourseMapScreen(
+          key: args.key,
+          courseId: args.courseId,
+        ),
+      );
+    },
+    CscenterQnaRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CscenterQnaScreen(),
+      );
+    },
     FavoriteCourseRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -197,6 +229,98 @@ class CertificationRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CertificationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CourseInfoScreen]
+class CourseInfoRoute extends PageRouteInfo<CourseInfoRouteArgs> {
+  CourseInfoRoute({
+    Key? key,
+    required int courseId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CourseInfoRoute.name,
+          args: CourseInfoRouteArgs(
+            key: key,
+            courseId: courseId,
+          ),
+          rawPathParams: {'courseId': courseId},
+          initialChildren: children,
+        );
+
+  static const String name = 'CourseInfoRoute';
+
+  static const PageInfo<CourseInfoRouteArgs> page =
+      PageInfo<CourseInfoRouteArgs>(name);
+}
+
+class CourseInfoRouteArgs {
+  const CourseInfoRouteArgs({
+    this.key,
+    required this.courseId,
+  });
+
+  final Key? key;
+
+  final int courseId;
+
+  @override
+  String toString() {
+    return 'CourseInfoRouteArgs{key: $key, courseId: $courseId}';
+  }
+}
+
+/// generated route for
+/// [CourseMapScreen]
+class CourseMapRoute extends PageRouteInfo<CourseMapRouteArgs> {
+  CourseMapRoute({
+    Key? key,
+    required int courseId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CourseMapRoute.name,
+          args: CourseMapRouteArgs(
+            key: key,
+            courseId: courseId,
+          ),
+          rawPathParams: {'courseId': courseId},
+          initialChildren: children,
+        );
+
+  static const String name = 'CourseMapRoute';
+
+  static const PageInfo<CourseMapRouteArgs> page =
+      PageInfo<CourseMapRouteArgs>(name);
+}
+
+class CourseMapRouteArgs {
+  const CourseMapRouteArgs({
+    this.key,
+    required this.courseId,
+  });
+
+  final Key? key;
+
+  final int courseId;
+
+  @override
+  String toString() {
+    return 'CourseMapRouteArgs{key: $key, courseId: $courseId}';
+  }
+}
+
+/// generated route for
+/// [CscenterQnaScreen]
+class CscenterQnaRoute extends PageRouteInfo<void> {
+  const CscenterQnaRoute({List<PageRouteInfo>? children})
+      : super(
+          CscenterQnaRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CscenterQnaRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

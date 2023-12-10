@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+    <g data-name="그룹 19585">
+        <g data-name="그룹 19055">
+            <path data-name="선 1" transform="translate(38 39)" style="stroke:#191919;stroke-linecap:round;stroke-width:4px;fill:none" d="m0 0 10 10"/>
+            <g data-name="타원 29" transform="translate(9 8)" style="stroke:#191919;stroke-linecap:round;stroke-width:4px;fill:none">
+                <circle cx="18" cy="18" r="18" style="stroke:none"/>
+                <circle cx="18" cy="18" r="16" style="fill:none"/>
+            </g>
+        </g>
+        <path data-name="사각형 24700" style="fill:none" d="M0 0h56v56H0z"/>
+    </g>
+</svg>

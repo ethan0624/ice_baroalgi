@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/course/info/course_info_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/course/map/course_map_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/cscenter/qna/cscenter_qna_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/favorite_course/favorite_course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/my_course/my_course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/find_id/find_id_screen.dart';
@@ -70,6 +73,9 @@ class AppRouter extends _$AppRouter {
 
         AutoRoute(path: '/favoriteCourse', page: FavoriteCourseRoute.page),
 
+        AutoRoute(path: '/course/:courseId/map', page: CourseMapRoute.page),
+        AutoRoute(path: '/course/:courseId/info', page: CourseInfoRoute.page),
+
         // 알림
         AutoRoute(path: '/notification', page: NotificationListRoute.page),
         AutoRoute(
@@ -81,6 +87,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/mypage', page: MypageRoute.page),
         AutoRoute(path: '/language', page: LanguageRoute.page),
         AutoRoute(path: '/notice', page: NoticeRoute.page),
+        AutoRoute(path: '/cscenter/qna', page: CscenterQnaRoute.page),
         AutoRoute(path: '/searchSchool', page: SearchSchoolRoute.page),
         AutoRoute(path: '/jinroAccount', page: JinroAccountRoute.page),
       ];
