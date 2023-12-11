@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -9,6 +8,7 @@ import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
 import 'package:incheon_knowhow/presentation/widget/course_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/course_header.dart';
+import 'package:incheon_knowhow/presentation/widget/image_slider.dart';
 import 'package:incheon_knowhow/presentation/widget/spot_list_item.dart';
 
 @RoutePage()
@@ -37,53 +37,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
               child: ListView(
                 children: [
                   const CourseHeader(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: CarouselSlider.builder(
-                            itemCount: 5,
-                            itemBuilder: (context, index, realIndex) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: index % 2 == 0
-                                      ? Colors.grey
-                                      : Colors.blue,
-                                ),
-                              );
-                            },
-                            options: CarouselOptions(
-                              height: 185,
-                              viewportFraction: 1,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(
-                              5,
-                              (index) => Container(
-                                width: 6,
-                                height: 6,
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 4),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color:
-                                      index == 0 ? Colors.black : Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  const ImageSlider(
+                    padding: EdgeInsets.symmetric(horizontal: 26),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(

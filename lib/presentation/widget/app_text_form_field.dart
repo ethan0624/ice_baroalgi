@@ -23,6 +23,7 @@ class AppTextFormField extends StatelessWidget {
   final Widget? suffix;
   final int? maxLength;
   final int? maxLines;
+  final int? minLines;
   final String? Function(String?)? validator;
   final VoidCallback? onSubmitted;
   final VoidCallback? onTap;
@@ -51,6 +52,7 @@ class AppTextFormField extends StatelessWidget {
     this.margin = const EdgeInsets.symmetric(vertical: 14),
     this.maxLength,
     this.maxLines = 1,
+    this.minLines,
     this.validator,
     this.onSubmitted,
     this.onTap,
@@ -137,6 +139,7 @@ class AppTextFormField extends StatelessWidget {
             ),
             maxLength: maxLength,
             maxLines: maxLines,
+            minLines: minLines,
             textInputAction: textInputAction,
             textAlign: textAlign ?? TextAlign.start,
             readOnly: readOnly,

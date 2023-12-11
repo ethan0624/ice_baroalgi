@@ -75,7 +75,7 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
               right: 26,
               child: AppButton(
                 text: '문의작성하기',
-                onPressed: () {},
+                onPressed: () => context.router.pushNamed('/cscenter/inquiry'),
               ),
             ),
           ],

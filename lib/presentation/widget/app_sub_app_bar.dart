@@ -10,6 +10,7 @@ class AppSubAppBar extends AppBar {
     super.key,
     super.actions,
     super.elevation = 3,
+    super.centerTitle = true,
     this.text,
     this.onBackPressed,
   }) : super(
@@ -20,7 +21,6 @@ class AppSubAppBar extends AppBar {
               fontWeight: FontWeight.w500,
             ),
           ),
-          centerTitle: true,
           automaticallyImplyLeading: true,
           leading: AppBackButton(onBackPressed: onBackPressed),
         );

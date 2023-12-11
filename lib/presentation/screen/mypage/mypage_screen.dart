@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/bloc/mypage_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_guest_setting_view.dart';
@@ -24,8 +25,12 @@ class _MypageScreenState extends State<MypageScreen> {
             onPressed: () {
               context.router.pushNamed('/notification');
             },
-            icon: const Icon(Icons.notifications_outlined),
-          )
+            icon: SvgPicture.asset(
+              'assets/images/ic_notification.svg',
+              width: 25,
+              height: 25,
+            ),
+          ),
         ],
       ),
       builder: (context, bloc, state) {

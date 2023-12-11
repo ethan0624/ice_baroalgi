@@ -6,6 +6,7 @@ import 'package:incheon_knowhow/presentation/screen/course/info/course_info_scre
 import 'package:incheon_knowhow/presentation/screen/course/map/course_map_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/cscenter/qna/cscenter_qna_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/favorite_course/favorite_course_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/cscenter/inquiry/inquiry_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/my_course/my_course_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/find_id/find_id_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/home/home_screen.dart';
@@ -29,6 +30,7 @@ import 'package:incheon_knowhow/presentation/screen/reset_pw/form/reset_pw_form_
 import 'package:incheon_knowhow/presentation/screen/reset_pw/update/reset_pw_update_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/search_school/search_school_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/splash/splash_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/spot_detail/spot_detail_screen.dart';
 // import 'package:incheon_knowhow/route/auth_guard.dart';
 
 part 'app_router.gr.dart';
@@ -76,6 +78,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/course/:courseId/map', page: CourseMapRoute.page),
         AutoRoute(path: '/course/:courseId/info', page: CourseInfoRoute.page),
 
+        AutoRoute(path: '/spot/:spotId', page: SpotDetailRoute.page),
+
         // 알림
         AutoRoute(path: '/notification', page: NotificationListRoute.page),
         AutoRoute(
@@ -88,6 +92,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/language', page: LanguageRoute.page),
         AutoRoute(path: '/notice', page: NoticeRoute.page),
         AutoRoute(path: '/cscenter/qna', page: CscenterQnaRoute.page),
+        AutoRoute(path: '/cscenter/inquiry', page: InquiryRoute.page),
         AutoRoute(path: '/searchSchool', page: SearchSchoolRoute.page),
         AutoRoute(path: '/jinroAccount', page: JinroAccountRoute.page),
       ];

@@ -71,6 +71,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
+    InquiryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const InquiryScreen(),
+      );
+    },
     JinroAccountRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -214,6 +220,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
+      );
+    },
+    SpotDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SpotDetailScreen(),
       );
     },
   };
@@ -363,6 +375,20 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [InquiryScreen]
+class InquiryRoute extends PageRouteInfo<void> {
+  const InquiryRoute({List<PageRouteInfo>? children})
+      : super(
+          InquiryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'InquiryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -786,6 +812,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SpotDetailScreen]
+class SpotDetailRoute extends PageRouteInfo<void> {
+  const SpotDetailRoute({List<PageRouteInfo>? children})
+      : super(
+          SpotDetailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SpotDetailRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
