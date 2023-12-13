@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/string_extension.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
@@ -26,12 +27,26 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _idTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
+  final _passwordFocusNode = FocusNode();
 
   _onLoginPressed() {
+    // _onResult();
+
+    if (!_emailTextController.text.isValidEmail()) {
+      context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
+      return;
+    }
+
+    if (!_passwordTextController.text.isValidPassword()) {
+      context.showAlert(title: '입력오류', message: '비밀번호를 정확하게 입력해주세요');
+      return;
+    }
+
+    FocusManager.instance.primaryFocus?.unfocus();
+
     // todo
-    _onResult();
   }
 
   _onFindIdPressed() {
@@ -50,12 +65,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _onResult() {
     if (widget.onResult != null) {
-      getIt<AuthProvider>().loggedIn(user: const User(name: 'test'));
+      getIt<AuthProvider>().loggedIn(user: User.tester());
       widget.onResult?.call(true);
       return;
     }
 
     context.router.pushNamed('/main');
+  }
+
+  @override
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
   }
 
   @override
@@ -86,8 +108,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
                   AppTextFormField(
-                    controller: _idTextController,
+                    controller: _emailTextController,
                     hintText: '이메일 주소 입력',
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    onSubmitted: () {
+                      final value = _emailTextController.text;
+                      if (value.isNotEmpty && value.isValidEmail()) {
+                        _passwordFocusNode.requestFocus();
+                      }
+                    },
                   ),
                   const SizedBox(height: 28),
                   Text(
@@ -97,6 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   PasswordFormField(
                     controller: _passwordTextController,
+                    focusNode: _passwordFocusNode,
+                    onSubmitted: _onLoginPressed,
                   ),
                   const SizedBox(height: 28),
                   AppButton(

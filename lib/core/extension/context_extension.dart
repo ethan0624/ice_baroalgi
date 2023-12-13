@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextExtension on BuildContext {
@@ -28,4 +29,36 @@ extension BuildContextExtension on BuildContext {
         Locale('en', 'EN'),
         Locale('zh', 'CN'),
       ];
+
+  Future<bool?> showAlert({
+    required String title,
+    String? message,
+  }) {
+    return showDialog<bool>(
+      context: this,
+      builder: (context) {
+        return AlertDialog.adaptive(
+          title: Text(
+            title,
+            style: textTheme.bodySmall,
+          ),
+          content: message != null
+              ? Text(
+                  message,
+                  style: textTheme.labelLarge,
+                )
+              : null,
+          actions: [
+            TextButton(
+              onPressed: () => context.router.pop(true),
+              child: Text(
+                '확인',
+                style: textTheme.bodySmall?.copyWith(color: Colors.blue),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

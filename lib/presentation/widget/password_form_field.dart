@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:incheon_knowhow/core/extension/string_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/icon_text.dart';
 
 class PasswordFormField extends StatefulWidget {
   final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
   final String? hint;
   final EdgeInsets margin;
+  final VoidCallback? onSubmitted;
   const PasswordFormField({
     super.key,
     this.controller,
+    this.focusNode,
+    this.textInputAction,
     this.hint,
     this.margin = const EdgeInsets.symmetric(vertical: 14),
+    this.onSubmitted,
   });
 
   @override
@@ -18,6 +26,44 @@ class PasswordFormField extends StatefulWidget {
 }
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
+  final _textController = TextEditingController();
+  final _passIconPath = 'assets/images/ic_checked.svg';
+  final _failIconPath = 'assets/images/ic_close.svg';
+  bool _showPassword = false;
+  bool _containAlphabet = false;
+  bool _containNumber = false;
+  bool _minLength = false;
+
+  _onTextChanged() {
+    final text = _textController.text;
+    widget.controller?.text = text;
+    setState(() {
+      _containAlphabet = text.hasAlphabet();
+      _containNumber = text.hasNumber();
+      _minLength = text.length >= 8;
+    });
+  }
+
+  _togglePasswordShow() {
+    setState(() {
+      _showPassword = !_showPassword;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _textController.addListener(_onTextChanged);
+  }
+
+  @override
+  void dispose() {
+    _textController.removeListener(_onTextChanged);
+    _textController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,38 +71,70 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppTextFormField(
-            controller: widget.controller,
-            hintText: widget.hint ?? '비밀번호 입력',
-            margin: EdgeInsets.zero,
-            isObscureText: true,
+          Stack(
+            children: [
+              AppTextFormField(
+                controller: _textController,
+                focusNode: widget.focusNode,
+                hintText: widget.hint ?? '비밀번호 입력',
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: widget.textInputAction ?? TextInputAction.done,
+                maxLength: 40,
+                margin: EdgeInsets.zero,
+                isObscureText: !_showPassword,
+                onSubmitted: widget.onSubmitted,
+              ),
+              Positioned(
+                top: 0,
+                bottom: 0,
+                right: 10,
+                child: InkWell(
+                  onTap: _togglePasswordShow,
+                  child: SvgPicture.asset(
+                    _showPassword
+                        ? 'assets/images/ic_password_show.svg'
+                        : 'assets/images/ic_password_hide.svg',
+                    width: 26,
+                    height: 26,
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
-          const Wrap(
+          const SizedBox(height: 10),
+          Wrap(
             spacing: 8,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               IconText(
-                icon: Icon(
-                  Icons.close_rounded,
-                  size: 22,
-                  color: Colors.red,
+                icon: SvgPicture.asset(
+                  _containAlphabet ? _passIconPath : _failIconPath,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                      _containAlphabet ? Colors.green : Colors.red,
+                      BlendMode.srcIn),
                 ),
                 label: '영문포함',
               ),
               IconText(
-                icon: Icon(
-                  Icons.close_rounded,
-                  size: 22,
-                  color: Colors.red,
+                icon: SvgPicture.asset(
+                  _containNumber ? _passIconPath : _failIconPath,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                      _containNumber ? Colors.green : Colors.red,
+                      BlendMode.srcIn),
                 ),
                 label: '숫자포함',
               ),
               IconText(
-                icon: Icon(
-                  Icons.close_rounded,
-                  size: 22,
-                  color: Colors.red,
+                icon: SvgPicture.asset(
+                  _minLength ? _passIconPath : _failIconPath,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                      _minLength ? Colors.green : Colors.red, BlendMode.srcIn),
                 ),
                 label: '8자 이상',
               ),

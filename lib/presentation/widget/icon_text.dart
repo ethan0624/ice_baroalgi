@@ -13,13 +13,13 @@ class IconText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 6,
+      spacing: 4,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         icon,
         Text(
           label,
-          style: context.textTheme.labelLarge,
+          style: context.textTheme.labelMedium,
         ),
       ],
     );

@@ -5,10 +5,9 @@ extension StringExtension on String {
     return regex.hasMatch(this);
   }
 
-  // 8~12자의 영문 대/소문자, 숫자, 특수문자를 조합
+  // 8~40자의 영문, 숫자를 포함
   bool isValidPassword() {
-    final regex = RegExp(
-        r'''^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#$%^&*~(),.?\":{}|<>_\-+₩=\[\]\\'`/;]).{8,12}''');
+    final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,40}$');
     return regex.hasMatch(this);
   }
 
@@ -20,6 +19,18 @@ extension StringExtension on String {
   bool isPhoneNumber() {
     // 대한민국 휴대폰 기준
     final regex = RegExp(r'^01[0-9]\d{3,4}\d{4}$');
+    return regex.hasMatch(this);
+  }
+
+  //영문 포함여부
+  bool hasAlphabet() {
+    final regex = RegExp(r'[a-zA-Z]');
+    return regex.hasMatch(this);
+  }
+
+  // 숫자 포함여부
+  bool hasNumber() {
+    final regex = RegExp(r'\d');
     return regex.hasMatch(this);
   }
 }
