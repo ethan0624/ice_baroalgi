@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/app.dart';
+import 'package:incheon_knowhow/config/app_config.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 
 void main() async {
@@ -14,7 +15,7 @@ void main() async {
     await EasyLocalization.ensureInitialized();
 
     await NaverMapSdk.instance.initialize(
-      clientId: 'uihnwow7tv',
+      clientId: AppConfig.naverMapClientId,
       onAuthFailed: (error) {
         debugPrint("********* 네이버맵 인증오류 : $error *********");
       },
