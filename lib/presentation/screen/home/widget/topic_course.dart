@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_topic_expansion.dart';
@@ -29,13 +30,13 @@ class _TopicCourseState extends State<TopicCourse> {
       controller: widget.scrollController,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 '총 5주제',
-                style: context.textTheme.labelLarge?.copyWith(
+                style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
               Wrap(
@@ -44,7 +45,7 @@ class _TopicCourseState extends State<TopicCourse> {
                   const AppCheckbox(),
                   Text(
                     '완료코스 숨김',
-                    style: context.textTheme.labelLarge?.copyWith(
+                    style: context.textTheme.labelMedium?.copyWith(
                         color: Colors.black, fontWeight: FontWeight.w600),
                   ),
                 ],

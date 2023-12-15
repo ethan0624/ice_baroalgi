@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 
 class MypageSettingSectionTitle extends StatelessWidget {
@@ -14,7 +15,7 @@ class MypageSettingSectionTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
           child: Text(
             title,
             style: context.textTheme.bodyMedium

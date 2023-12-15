@@ -174,13 +174,14 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                     // button
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 26, vertical: 26),
+                          horizontal: defaultMarginValue,
+                          vertical: defaultMarginValue),
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: InkWell(
                           onTap: () {},
                           child: Container(
-                            padding: const EdgeInsets.all(14),
+                            padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
                               color: Colors.white,
@@ -205,7 +206,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                     // bottom
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 26),
+                          vertical: 10, horizontal: defaultMarginValue),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
@@ -230,7 +231,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                   context.router.pushNamed('/course/1/info'),
                             ),
                           ),
-                          const SizedBox(width: 14),
+                          const SizedBox(width: 16),
                           Expanded(
                             flex: 4,
                             child: AppButton(

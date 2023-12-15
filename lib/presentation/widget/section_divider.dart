@@ -8,7 +8,7 @@ class SectionDivider extends StatelessWidget {
   const SectionDivider({
     super.key,
     this.height = 6,
-    this.margin = const EdgeInsets.symmetric(vertical: 14),
+    this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.color,
   });
 

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/notice/bloc/notice_bloc.dart';
@@ -26,17 +27,18 @@ class _NoticeScreenState extends State<NoticeScreen> {
           itemCount: 10,
           titleBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '공지사항 제목',
-                    style: context.textTheme.bodySmall,
+                    style: context.textTheme.bodyMedium,
                   ),
                   Text(
                     '2023.12.09',
-                    style: context.textTheme.labelLarge,
+                    style: context.textTheme.labelMedium
+                        ?.copyWith(color: AppTextColor.medium),
                   ),
                 ],
               ),
@@ -45,7 +47,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
           contentBuilder: (context, index) {
             return Text(
               'contents',
-              style: context.textTheme.bodySmall,
+              style: context.textTheme.bodyMedium,
             );
           },
         );

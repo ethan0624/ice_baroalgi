@@ -36,7 +36,7 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
       create: (_) => JinroAccountBloc(),
       builder: (context, bloc, state) {
         return Padding(
-          padding: const EdgeInsets.all(26),
+          padding: const EdgeInsets.all(defaultMarginValue),
           child: Stack(
             children: [
               Positioned.fill(
@@ -45,11 +45,12 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                   children: [
                     const AppTitleText(text: '인천사이버진로교육원 회원이신가요?'),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 26),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: defaultMarginValue),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 18, horizontal: 16),
+                          vertical: 16, horizontal: defaultMarginValue),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           width: 2,
                           color: AppColor.secondary,

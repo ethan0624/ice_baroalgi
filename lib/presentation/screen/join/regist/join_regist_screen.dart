@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/enum/user_type.dart';
@@ -37,13 +38,13 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
       create: (_) => JoinRegistBloc(),
       builder: (context, bloc, state) {
         return ListView(
-          padding: const EdgeInsets.all(26),
+          padding: const EdgeInsets.all(defaultMarginValue),
           children: [
             Text(
               '서비스이용을 위해\n아래정보를 입력해주세요.',
               style: context.textTheme.titleSmall,
             ),
-            const SizedBox(height: 56),
+            const SizedBox(height: 50),
             Text(
               '이메일(아이디)',
               style: context.textTheme.bodyMedium
@@ -57,33 +58,37 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                     keyboardType: TextInputType.emailAddress,
                   ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 8),
                 OutlineButton(
                   text: '중복확인',
                   backgroundColor: AppColor.secondaryBackground,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   onPressed: () {},
                 ),
               ],
             ),
-            const IconText(
-              icon: Icon(
-                Icons.close_rounded,
-                size: 22,
-                color: Colors.red,
+            IconText(
+              icon: SvgPicture.asset(
+                'assets/images/ic_close.svg',
+                width: 20,
+                height: 20,
+                colorFilter:
+                    const ColorFilter.mode(Colors.red, BlendMode.srcIn),
               ),
               label: '이메일 형식이 잘못되었습니다.',
             ),
-            const IconText(
-              icon: Icon(
-                Icons.close_rounded,
-                size: 22,
-                color: Colors.red,
+            IconText(
+              icon: SvgPicture.asset(
+                'assets/images/ic_close.svg',
+                width: 20,
+                height: 20,
+                colorFilter:
+                    const ColorFilter.mode(Colors.red, BlendMode.srcIn),
               ),
               label: '이미 가입된 이메일입니다.',
             ),
-            const SizedBox(height: 26),
+            const SizedBox(height: defaultMarginValue),
             Text(
               '비밀번호',
               style: context.textTheme.bodyMedium
@@ -92,13 +97,15 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
             const PasswordFormField(),
             const PasswordFormField(
               hint: '비밀번호 확인',
-              margin: EdgeInsets.symmetric(vertical: 8),
+              margin: EdgeInsets.symmetric(vertical: 4),
             ),
-            const IconText(
-              icon: Icon(
-                Icons.close_rounded,
-                size: 22,
-                color: Colors.red,
+            IconText(
+              icon: SvgPicture.asset(
+                'assets/images/ic_close.svg',
+                width: 20,
+                height: 20,
+                colorFilter:
+                    const ColorFilter.mode(Colors.red, BlendMode.srcIn),
               ),
               label: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
             ),
@@ -106,7 +113,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 26),
+                  const SizedBox(height: defaultMarginValue),
                   Text(
                     '학교',
                     style: context.textTheme.bodyMedium
@@ -121,7 +128,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                           margin: EdgeInsets.zero,
                         ),
                       ),
-                      SizedBox(width: 10),
+                      SizedBox(width: 8),
                       Expanded(
                         child: AppTextFormField(
                           hintText: '반 입력',
@@ -133,7 +140,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                   ),
                 ],
               ),
-            const SizedBox(height: 46),
+            const SizedBox(height: 50),
             AppButton(
               text: '가입완료',
               textBold: true,

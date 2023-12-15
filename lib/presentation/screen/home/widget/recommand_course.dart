@@ -38,10 +38,10 @@ class _RecommandCourseState extends State<RecommandCourse> {
     return ListView(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 14),
-          height: 34,
+          margin: const EdgeInsets.symmetric(vertical: 12),
+          height: 30,
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 26),
+            padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             scrollDirection: Axis.horizontal,
             itemCount: _recommandFillters.length,
             itemBuilder: (context, index) {
@@ -58,13 +58,13 @@ class _RecommandCourseState extends State<RecommandCourse> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 '총 87코스',
-                style: context.textTheme.labelLarge?.copyWith(
+                style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
               Wrap(
@@ -73,7 +73,7 @@ class _RecommandCourseState extends State<RecommandCourse> {
                   const AppCheckbox(),
                   Text(
                     '완료코스 숨김',
-                    style: context.textTheme.labelLarge?.copyWith(
+                    style: context.textTheme.labelMedium?.copyWith(
                         color: Colors.black, fontWeight: FontWeight.w600),
                   )
                 ],
@@ -82,7 +82,7 @@ class _RecommandCourseState extends State<RecommandCourse> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           color: AppColor.background,
           child: Column(
               children: List.generate(30, (index) => const CourseListItem())),

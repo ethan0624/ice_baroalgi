@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
@@ -32,17 +33,18 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
     return BaseLayout(
       appBar: AppSubAppBar(text: '회원가입'),
       child: ListView(
-        padding: const EdgeInsets.all(26),
+        padding: const EdgeInsets.all(defaultMarginValue),
         children: [
           Text(
-            '보호자 휴대폰으로 인증하기\n(문구변경예정)',
+            '보호자 휴대폰으로 인증하기',
             style: context.textTheme.titleSmall,
           ),
+          const SizedBox(height: 5),
           Text(
             '* 가입자 정보를 입력해주세요.',
             style: context.textTheme.bodySmall,
           ),
-          const SizedBox(height: 56),
+          const SizedBox(height: 50),
           Text(
             '이름',
             style: context.textTheme.bodyMedium
@@ -51,7 +53,7 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
           const AppTextFormField(
             hintText: '이름을 입력하세요',
           ),
-          const SizedBox(height: 26),
+          const SizedBox(height: defaultMarginValue),
           Text(
             '생년월일',
             style: context.textTheme.bodyMedium
@@ -60,13 +62,13 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
           const AppTextFormField(
             hintText: 'YYYY / MM / DD',
           ),
-          const SizedBox(height: 26),
+          const SizedBox(height: defaultMarginValue),
           Text(
             '성별',
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 26),
+          const SizedBox(height: defaultMarginValue),
           Text(
             '휴대폰 번호',
             style: context.textTheme.bodyMedium
@@ -75,14 +77,14 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
           const AppTextFormField(
             hintText: '가입자의 휴대폰 번호를 입력하세요',
           ),
-          const SizedBox(height: 26),
+          const SizedBox(height: defaultMarginValue),
           Text(
             '보호자 인증',
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
           AppButton(
-            margin: const EdgeInsets.symmetric(vertical: 14),
+            margin: const EdgeInsets.symmetric(vertical: 12),
             text: '보호자 휴대폰 인증하기',
             textBold: true,
             onPressed: _onCertificationPressed,

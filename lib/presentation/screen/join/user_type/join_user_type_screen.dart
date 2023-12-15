@@ -34,13 +34,13 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
     return BaseLayout(
       appBar: AppSubAppBar(text: '회원가입'),
       child: ListView(
-        padding: const EdgeInsets.all(26),
+        padding: const EdgeInsets.all(defaultMarginValue),
         children: [
           Text(
             '회원유형을 선택해주세요.',
             style: context.textTheme.titleSmall,
           ),
-          const SizedBox(height: 64),
+          const SizedBox(height: 62),
           Text(
             '학생',
             style: context.textTheme.bodyMedium
@@ -56,7 +56,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                   child: Center(
                     child: Text(
                       '14세 미만\n가입하기',
-                      style: context.textTheme.labelLarge
+                      style: context.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w600),
                       textAlign: TextAlign.center,
                     ),
@@ -71,7 +71,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                   borderColor: AppColor.primary,
                   child: Text(
                     '14세 이상\n가입하기',
-                    style: context.textTheme.labelLarge
+                    style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
@@ -104,7 +104,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                       type: UserType.other, isFourteenOver: false),
                   child: Text(
                     '14세 미만\n가입하기',
-                    style: context.textTheme.labelLarge
+                    style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
@@ -118,7 +118,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                   borderColor: AppColor.primary,
                   child: Text(
                     '14세 이상\n가입하기',
-                    style: context.textTheme.labelLarge
+                    style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),

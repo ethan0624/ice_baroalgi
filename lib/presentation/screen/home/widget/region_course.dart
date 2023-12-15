@@ -22,11 +22,15 @@ class _RegionCourseState extends State<RegionCourse> {
     '남동구/연수구',
     '부평구/계양구/서구'
   ];
-  String _selectedRegion = '';
+  final List<String> _selectedRegion = [];
 
   _onRegionChanged(String region) {
     setState(() {
-      _selectedRegion = region;
+      if (_selectedRegion.contains(region)) {
+        _selectedRegion.remove(region);
+      } else {
+        _selectedRegion.add(region);
+      }
     });
   }
 
@@ -36,7 +40,7 @@ class _RegionCourseState extends State<RegionCourse> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        _selectedRegion = _regionFillters.first;
+        _selectedRegion.add(_regionFillters.first);
       });
     });
   }
@@ -47,33 +51,33 @@ class _RegionCourseState extends State<RegionCourse> {
       controller: widget.scrollController,
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 14),
-          height: 34,
+          margin: const EdgeInsets.symmetric(vertical: 12),
+          height: 30,
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 26),
+            padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             scrollDirection: Axis.horizontal,
             itemCount: _regionFillters.length,
             itemBuilder: (context, index) {
               final region = _regionFillters[index];
               return FilterButton(
                 text: region,
-                isSelected: region == _selectedRegion,
+                isSelected: _selectedRegion.contains(region),
                 onPressed: () => _onRegionChanged(region),
               );
             },
             separatorBuilder: (context, index) {
-              return const SizedBox(width: 10);
+              return const SizedBox(width: 8);
             },
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 '총 87코스',
-                style: context.textTheme.labelLarge?.copyWith(
+                style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
               Wrap(
@@ -82,7 +86,7 @@ class _RegionCourseState extends State<RegionCourse> {
                   const AppCheckbox(),
                   Text(
                     '완료코스 숨김',
-                    style: context.textTheme.labelLarge?.copyWith(
+                    style: context.textTheme.labelMedium?.copyWith(
                         color: Colors.black, fontWeight: FontWeight.w600),
                   )
                 ],
@@ -91,7 +95,7 @@ class _RegionCourseState extends State<RegionCourse> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           color: AppColor.background,
           child: Column(
               children: List.generate(30, (index) => const CourseListItem())),

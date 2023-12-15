@@ -28,27 +28,27 @@ class _InquiryScreenState extends State<InquiryScreen> {
           child: Column(
             children: [
               TabBar(
-                padding: const EdgeInsets.all(26),
+                padding: const EdgeInsets.all(defaultMarginValue),
                 splashFactory: NoSplash.splashFactory,
                 indicator: const BoxDecoration(
                   color: Color(0xffffedf3),
                 ),
                 labelColor: AppColor.primary,
-                labelStyle: context.textTheme.bodySmall?.copyWith(
+                labelStyle: context.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
                 unselectedLabelColor: AppTextColor.medium,
-                unselectedLabelStyle: context.textTheme.bodySmall,
+                unselectedLabelStyle: context.textTheme.bodyMedium,
                 tabs: const [
                   Tab(text: '문의하기'),
                   Tab(text: '문의내역'),
                 ],
               ),
-              Expanded(
+              const Expanded(
                 child: TabBarView(
                   children: [
-                    const InquiryForm(),
-                    const InquiryListView(),
+                    InquiryForm(),
+                    InquiryListView(),
                   ],
                 ),
               ),

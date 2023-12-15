@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/cscenter/qna/bloc/cscenter_qna_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/accordian_list_view.dart';
@@ -34,13 +35,14 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.all(26),
+                    padding: EdgeInsets.all(defaultMarginValue),
                     child: AppTitleText(text: '자주묻는질문'),
                   ),
                   SizedBox(
-                    height: 32,
+                    height: 30,
                     child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: defaultMarginValue),
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,
                       itemBuilder: (context, index) {
@@ -54,7 +56,7 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 12),
                   Expanded(
                     child: AccordianListView(
                       itemCount: 30,
@@ -70,9 +72,9 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
               ),
             ),
             Positioned(
-              bottom: 26,
-              left: 26,
-              right: 26,
+              bottom: defaultMarginValue,
+              left: defaultMarginValue,
+              right: defaultMarginValue,
               child: AppButton(
                 text: '문의작성하기',
                 onPressed: () => context.router.pushNamed('/cscenter/inquiry'),

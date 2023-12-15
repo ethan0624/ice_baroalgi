@@ -6,6 +6,7 @@ class AppButton extends StatelessWidget {
   final String text;
   final bool textBold;
   final bool centerText;
+  final TextStyle? textStyle;
   final Color? textColor;
   final double? width;
   final double? height;
@@ -22,10 +23,11 @@ class AppButton extends StatelessWidget {
     this.centerText = true,
     this.textBold = false,
     this.textColor,
+    this.textStyle,
     this.width,
     this.height,
     this.margin,
-    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
     this.background,
     this.borderColor,
     this.suffixIcon,
@@ -44,7 +46,7 @@ class AppButton extends StatelessWidget {
           height: height,
           decoration: BoxDecoration(
             color: background ?? AppColor.primary,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(
                 width: 1,
                 color: borderColor ?? (background ?? AppColor.primary)),
@@ -56,10 +58,12 @@ class AppButton extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: textColor ?? Colors.white,
-                  fontWeight: textBold ? FontWeight.bold : FontWeight.normal,
-                ),
+                style: textStyle ??
+                    context.textTheme.bodyLarge?.copyWith(
+                      color: textColor ?? Colors.white,
+                      fontWeight:
+                          textBold ? FontWeight.bold : FontWeight.normal,
+                    ),
               ),
               if (suffixIcon != null) suffixIcon!,
             ],

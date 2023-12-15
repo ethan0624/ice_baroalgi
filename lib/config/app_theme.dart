@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const double defaultMarginValue = 24;
+
 class AppColor {
   // 브랜드 컬러
   static Color primary = const Color(0xFFE65185);
@@ -74,13 +76,13 @@ class AppTheme {
     titleMedium: defaultTextStyle.copyWith(
         fontWeight: FontWeight.bold, fontSize: 22, height: 1.44),
     titleSmall: defaultTextStyle.copyWith(
-        fontWeight: FontWeight.bold, fontSize: 20, height: 1.42),
+        fontWeight: FontWeight.bold, fontSize: 19, height: 1.42),
     bodyLarge: defaultTextStyle.copyWith(
-        fontWeight: FontWeight.w500, fontSize: 20, height: 1.5),
+        fontWeight: FontWeight.w500, fontSize: 18, height: 1.5),
     bodyMedium: defaultTextStyle.copyWith(
-        fontWeight: FontWeight.w500, fontSize: 18, height: 1.42), // 32
+        fontWeight: FontWeight.w500, fontSize: 15, height: 1.42), // 32
     bodySmall: defaultTextStyle.copyWith(
-        fontWeight: FontWeight.w500, fontSize: 16, height: 1.42),
+        fontWeight: FontWeight.w500, fontSize: 13, height: 1.42),
     labelLarge: defaultTextStyle.copyWith(
         fontWeight: FontWeight.w500, fontSize: 14, height: 1.38),
     labelMedium: defaultTextStyle.copyWith(

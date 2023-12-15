@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 
 class MypageSettingListItem extends StatelessWidget {
@@ -17,7 +18,8 @@ class MypageSettingListItem extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
+        padding: const EdgeInsets.symmetric(
+            horizontal: defaultMarginValue, vertical: 12),
         child: Row(
           children: [
             Expanded(

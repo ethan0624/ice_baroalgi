@@ -28,14 +28,18 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
           children: [
             Container(
               color: AppColor.background,
-              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: defaultMarginValue,
+                  vertical: defaultMarginValue / 2),
               child: Text(
                 '학교 분류 또는 학교명 클릭 시 선택된 학교가 자동으로 입력됩니다.\n\n검색한 학교가 없을 경우 학생 회원으로 가입하실 수 없습니다.\n일반 회원으로 가입을 진행하시기 바랍니다.',
-                style: context.textTheme.labelLarge,
+                style: context.textTheme.labelMedium,
               ),
             ),
             const AppTextFormField(
-              margin: EdgeInsets.symmetric(horizontal: 26, vertical: 16),
+              margin: EdgeInsets.symmetric(
+                  horizontal: defaultMarginValue,
+                  vertical: defaultMarginValue / 2),
               hintText: '학교명을 검색하세요',
               suffix: Icon(
                 Icons.search,
@@ -43,7 +47,7 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
               ),
             ),
             Container(
-              height: 6,
+              height: 5,
               color: AppColor.dividerLight,
             ),
             Expanded(
@@ -52,15 +56,16 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
                 itemCount: 30,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 26),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: defaultMarginValue),
                     title: Text(
                       '가나다초등학교',
-                      style: context.textTheme.bodyMedium
+                      style: context.textTheme.labelLarge
                           ?.copyWith(fontWeight: FontWeight.w500),
                     ),
                     subtitle: Text(
                       '인천광역시북부교육지원청',
-                      style: context.textTheme.labelLarge?.copyWith(
+                      style: context.textTheme.labelMedium?.copyWith(
                         color: AppTextColor.light,
                       ),
                     ),

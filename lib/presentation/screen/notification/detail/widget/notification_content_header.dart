@@ -8,7 +8,7 @@ class NotificationContentHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 26),
+      margin: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -18,12 +18,12 @@ class NotificationContentHeader extends StatelessWidget {
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(top: 10),
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
                 '2023.06.30',
-                style: context.textTheme.labelLarge
+                style: context.textTheme.labelMedium
                     ?.copyWith(color: AppTextColor.light),
               ),
             ),

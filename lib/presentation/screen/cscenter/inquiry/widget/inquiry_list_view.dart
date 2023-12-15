@@ -14,43 +14,44 @@ class _InquiryListViewState extends State<InquiryListView> {
   @override
   Widget build(BuildContext context) {
     return AccordianListView(
-        itemCount: 20,
-        titleBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '문의 제목이 작성됩니다.',
-                style: context.textTheme.bodySmall,
+      itemCount: 20,
+      titleBuilder: (context, index) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '문의 제목이 작성됩니다.',
+              style: context.textTheme.bodyMedium,
+            ),
+            Text(
+              '2023.12.04',
+              style: context.textTheme.labelMedium?.copyWith(
+                color: AppTextColor.medium,
               ),
-              Text(
-                '2023.12.04',
-                style: context.textTheme.labelMedium?.copyWith(
-                  color: AppTextColor.medium,
-                ),
-              ),
-            ],
-          );
-        },
-        contentBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '문의내용이 작성됩니다.',
-                style: context.textTheme.bodySmall,
-              ),
-              Container(
-                height: 1,
-                margin: const EdgeInsets.symmetric(vertical: 12),
-                color: AppColor.dividerDark,
-              ),
-              Text(
-                '답변내용이 작성됩니다.',
-                style: context.textTheme.bodySmall,
-              ),
-            ],
-          );
-        });
+            ),
+          ],
+        );
+      },
+      contentBuilder: (context, index) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '문의내용이 작성됩니다.',
+              style: context.textTheme.bodyMedium,
+            ),
+            Container(
+              height: 1,
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              color: AppColor.dividerDark,
+            ),
+            Text(
+              '답변내용이 작성됩니다.',
+              style: context.textTheme.bodyMedium,
+            ),
+          ],
+        );
+      },
+    );
   }
 }

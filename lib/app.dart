@@ -29,14 +29,17 @@ class _AppState extends State<App> {
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.light,
       builder: (context, child) {
-        return GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          behavior: HitTestBehavior.translucent,
-          child: AnnotatedRegion<SystemUiOverlayStyle>(
-            value:
-                const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-            child: Container(
-              child: child,
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            behavior: HitTestBehavior.translucent,
+            child: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: const SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent),
+              child: Container(
+                child: child,
+              ),
             ),
           ),
         );

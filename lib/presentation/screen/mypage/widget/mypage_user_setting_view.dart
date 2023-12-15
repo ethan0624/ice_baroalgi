@@ -12,17 +12,18 @@ class MypageUserSettingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 26),
+      padding: const EdgeInsets.symmetric(vertical: defaultMarginValue),
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 26),
+          padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
           child: Text(
             '이름',
-            style: context.textTheme.titleSmall,
+            style: context.textTheme.bodyLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
         const SectionDivider(
-          margin: EdgeInsets.symmetric(vertical: 26),
+          margin: EdgeInsets.symmetric(vertical: defaultMarginValue),
         ),
         const MypageSettingSectionTitle(title: '사용자설정'),
         MypageSettingListItem(
@@ -52,8 +53,9 @@ class MypageUserSettingView extends StatelessWidget {
         ),
         Container(
           color: AppColor.background,
-          margin: const EdgeInsets.only(bottom: 26),
-          padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
+          margin: const EdgeInsets.only(bottom: defaultMarginValue),
+          padding: const EdgeInsets.symmetric(
+              horizontal: defaultMarginValue, vertical: 12),
           child: Text(
             '알림 받기 활성화 시 마케팅 수신 동의로 간주됩니다.\n\n정보성 푸시 알림은 위 설정 여부와 무관하게 받을 수 있습니다.\n기기의 알림 설정은 휴대폰 설정에서 변경할 수 있습니다.',
             style: context.textTheme.labelMedium,
@@ -64,7 +66,7 @@ class MypageUserSettingView extends StatelessWidget {
           title: '앱 버전정보',
           tail: Text(
             '1.0.0',
-            style: context.textTheme.bodySmall?.copyWith(
+            style: context.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -88,7 +90,7 @@ class MypageUserSettingView extends StatelessWidget {
           },
         ),
         const SectionDivider(
-          margin: EdgeInsets.symmetric(vertical: 26),
+          margin: EdgeInsets.symmetric(vertical: defaultMarginValue),
         ),
         const MypageSettingSectionTitle(title: '서비스약관'),
         MypageSettingListItem(

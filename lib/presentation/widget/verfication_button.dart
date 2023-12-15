@@ -21,9 +21,9 @@ class VerificationButton extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(color: AppColor.primary, width: 2),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 24),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             Text(
@@ -35,7 +35,7 @@ class VerificationButton extends StatelessWidget {
             const SizedBox(height: 6),
             Image.asset(
               iconPath,
-              height: 90,
+              height: 80,
             ),
           ],
         ),

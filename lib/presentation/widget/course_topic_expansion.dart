@@ -29,22 +29,22 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 14),
+            margin: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Row(
               children: [
                 Expanded(
                   child: Wrap(
-                    spacing: 14,
+                    spacing: 12,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       const Thumbnail(
-                        width: 75,
-                        height: 75,
+                        width: 65,
+                        height: 65,
                       ),
                       Text(
                         '주제별 제목',
-                        style: context.textTheme.bodySmall?.copyWith(
+                        style: context.textTheme.bodyMedium?.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
@@ -56,7 +56,7 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
                   quarterTurns: widget.expended ? 1 : 0,
                   child: const Icon(
                     Icons.arrow_forward_ios,
-                    size: 22,
+                    size: 20,
                     color: Colors.black,
                   ),
                 ),
@@ -73,7 +73,7 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
             secondChild: Container(
               width: double.infinity,
               color: AppColor.background,
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.symmetric(vertical: 6),
               child: Column(
                 children: List.generate(5, (index) {
                   return const CourseListItem();

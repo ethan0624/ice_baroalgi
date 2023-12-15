@@ -13,14 +13,14 @@ class Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: borderColor, width: 1),
       ),
       child: Text(
         text,
-        style: context.textTheme.labelMedium,
+        style: context.textTheme.labelMedium?.copyWith(height: 1),
       ),
     );
   }

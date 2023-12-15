@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 
 class HomeAppBar extends AppBar {
   final VoidCallback? onSearchPressed;
@@ -10,7 +11,7 @@ class HomeAppBar extends AppBar {
     this.onNotificationPressed,
   }) : super(
           leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             child: Image.asset('assets/images/app_logo_text.png'),
           ),
           leadingWidth: 185,
@@ -19,16 +20,16 @@ class HomeAppBar extends AppBar {
               onPressed: onSearchPressed,
               icon: SvgPicture.asset(
                 'assets/images/ic_search.svg',
-                width: 25,
-                height: 25,
+                width: 28,
+                height: 28,
               ),
             ),
             IconButton(
               onPressed: onNotificationPressed,
               icon: SvgPicture.asset(
                 'assets/images/ic_notification.svg',
-                width: 25,
-                height: 25,
+                width: 28,
+                height: 28,
               ),
             ),
           ],

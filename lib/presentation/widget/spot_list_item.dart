@@ -9,8 +9,8 @@ class SpotListItem extends StatelessWidget {
   final EdgeInsets padding;
   const SpotListItem({
     super.key,
-    this.margin = const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
-    this.padding = const EdgeInsets.all(14),
+    this.margin = const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+    this.padding = const EdgeInsets.all(12),
   });
 
   @override
@@ -22,7 +22,7 @@ class SpotListItem extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             width: 1,
             color: AppColor.dividerLight,
@@ -31,17 +31,17 @@ class SpotListItem extends StatelessWidget {
         child: Row(
           children: [
             const Thumbnail(
-              width: 75,
-              height: 75,
+              width: 50,
+              height: 50,
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '주안역 뒷역',
-                    style: context.textTheme.bodySmall?.copyWith(
+                    style: context.textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
@@ -49,7 +49,7 @@ class SpotListItem extends StatelessWidget {
                   ),
                   Text(
                     '인천광역시 미추홀구 주안로 95-19',
-                    style: context.textTheme.labelLarge,
+                    style: context.textTheme.labelMedium,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

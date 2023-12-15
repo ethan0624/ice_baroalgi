@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/reset_pw/certification/bloc/reset_pw_certification_bloc.dart';
@@ -36,12 +38,12 @@ class _ResetPwCertificationScreenState
       create: (_) => ResetPwCertificationBloc(),
       builder: (context, bloc, state) {
         return ListView(
-          padding: const EdgeInsets.all(26),
+          padding: const EdgeInsets.all(defaultMarginValue),
           children: [
             const AppTitleText(
               text: 'sample@sample.com으로\n인증번호를 발송했습니다.',
             ),
-            const SizedBox(height: 56),
+            const SizedBox(height: 50),
             Text(
               '인증번호',
               style: context.textTheme.bodyMedium
@@ -54,23 +56,27 @@ class _ResetPwCertificationScreenState
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       IconText(
-                        icon: Icon(
-                          Icons.close_rounded,
-                          size: 22,
-                          color: Colors.red,
+                        icon: SvgPicture.asset(
+                          'assets/images/ic_close.svg',
+                          width: 20,
+                          height: 20,
+                          colorFilter: const ColorFilter.mode(
+                              Colors.red, BlendMode.srcIn),
                         ),
                         label: '인증번호가 다릅니다.',
                       ),
                       IconText(
-                        icon: Icon(
-                          Icons.check,
-                          size: 22,
-                          color: Colors.green,
+                        icon: SvgPicture.asset(
+                          'assets/images/ic_checked.svg',
+                          width: 20,
+                          height: 20,
+                          colorFilter: const ColorFilter.mode(
+                              Colors.green, BlendMode.srcIn),
                         ),
                         label: '인증되었습니다!',
                       ),
@@ -84,7 +90,7 @@ class _ResetPwCertificationScreenState
                 ),
               ],
             ),
-            const SizedBox(height: 106),
+            const SizedBox(height: 78),
             AppButton(
               text: '다음',
               onPressed: _onNext,

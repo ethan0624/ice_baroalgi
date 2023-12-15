@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/extension/string_extension.dart';
 import 'package:incheon_knowhow/core/injection.dart';
@@ -10,8 +11,8 @@ import 'package:incheon_knowhow/presentation/screen/login/bloc/login_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
-import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 import 'package:incheon_knowhow/presentation/widget/password_form_field.dart';
+import 'package:incheon_knowhow/presentation/widget/underline_text_button.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
@@ -32,19 +33,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordFocusNode = FocusNode();
 
   _onLoginPressed() {
-    // _onResult();
+    _onResult();
 
-    if (!_emailTextController.text.isValidEmail()) {
-      context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
-      return;
-    }
+    // if (!_emailTextController.text.isValidEmail()) {
+    //   context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
+    //   return;
+    // }
 
-    if (!_passwordTextController.text.isValidPassword()) {
-      context.showAlert(title: '입력오류', message: '비밀번호를 정확하게 입력해주세요');
-      return;
-    }
+    // if (!_passwordTextController.text.isValidPassword()) {
+    //   context.showAlert(title: '입력오류', message: '비밀번호를 정확하게 입력해주세요');
+    //   return;
+    // }
 
-    FocusManager.instance.primaryFocus?.unfocus();
+    // FocusManager.instance.primaryFocus?.unfocus();
 
     // todo
   }
@@ -95,13 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
             Positioned.fill(
               bottom: MediaQuery.of(context).viewInsets.bottom,
               child: ListView(
-                padding: const EdgeInsets.all(26),
+                padding: const EdgeInsets.all(defaultMarginValue),
                 children: [
                   Text(
                     '서비스 이용을 위해\n로그인해주세요.',
                     style: context.textTheme.titleSmall,
                   ),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 50),
                   Text(
                     '아이디',
                     style: context.textTheme.bodyMedium
@@ -119,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: defaultMarginValue),
                   Text(
                     '비밀번호',
                     style: context.textTheme.bodyMedium
@@ -130,26 +131,55 @@ class _LoginScreenState extends State<LoginScreen> {
                     focusNode: _passwordFocusNode,
                     onSubmitted: _onLoginPressed,
                   ),
-                  const SizedBox(height: 28),
                   AppButton(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: defaultMarginValue),
                     text: '로그인',
                     textBold: true,
                     onPressed: _onLoginPressed,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: UnderlineTextButton(
+                      text: '아이디 찾기',
+                      margin: EdgeInsets.zero,
+                      onPressed: _onFindIdPressed,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: UnderlineTextButton(
+                      text: '비밀번호 재설정',
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      onPressed: _onFindPasswordPressed,
+                    ),
                   ),
                 ],
               ),
             ),
             Positioned(
-              bottom: 30,
-              left: 26,
-              right: 26,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              bottom: 35,
+              left: 24,
+              right: 24,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  OutlineButton(text: '아이디 찾기', onPressed: _onFindIdPressed),
-                  OutlineButton(
-                      text: '비밀번호 재설정', onPressed: _onFindPasswordPressed),
-                  OutlineButton(text: '회원가입', onPressed: _onJoinPressed),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      '회원이 아니신가요?',
+                      style: context.textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  AppButton(
+                    text: '회원가입',
+                    textStyle: context.textTheme.bodyMedium,
+                    textColor: Colors.black,
+                    background: Colors.white,
+                    borderColor: AppColor.secondary,
+                    onPressed: _onJoinPressed,
+                  ),
                 ],
               ),
             ),

@@ -39,7 +39,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
     return BaseLayout(
       appBar: AppSubAppBar(text: '언어'.tr()),
       child: ListView(
-        padding: const EdgeInsets.all(26),
+        padding: const EdgeInsets.symmetric(
+            horizontal: defaultMarginValue, vertical: 12),
         children: _supportedLocales
             .map(
               (e) => ListTile(
@@ -52,12 +53,13 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       borderRadius: BorderRadius.circular(100)),
                   child: Text(
                     e.flag,
-                    style: context.textTheme.titleSmall,
+                    style: context.textTheme.bodyLarge,
                   ),
                 ),
                 title: Text(
                   e.title,
-                  style: context.textTheme.titleSmall,
+                  style: context.textTheme.bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 trailing: context.locale.languageCode == e.languageCode
                     ? const Icon(

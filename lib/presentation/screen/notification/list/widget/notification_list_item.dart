@@ -16,17 +16,18 @@ class NotificationListItem extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 26),
+        padding: const EdgeInsets.symmetric(
+            vertical: 12, horizontal: defaultMarginValue),
         color: isNew ? AppColor.secondary.withOpacity(0.3) : Colors.white,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
               backgroundColor: AppColor.primary,
-              radius: 35,
+              radius: 25,
               child: Image.asset('assets/images/ic_logo_text.png'),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -34,13 +35,13 @@ class NotificationListItem extends StatelessWidget {
                 children: [
                   Text(
                     '알림제목',
-                    style: context.textTheme.bodySmall
+                    style: context.textTheme.labelMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 6),
                     child: Text(
                       '알림 내용이 작성됩니다. \n최대 2줄까지 내용이 노출됩니다.',
                       style: context.textTheme.bodySmall,
@@ -49,7 +50,7 @@ class NotificationListItem extends StatelessWidget {
                   ),
                   Text(
                     '05월 05일',
-                    style: context.textTheme.labelLarge?.copyWith(
+                    style: context.textTheme.labelMedium?.copyWith(
                       color: AppTextColor.light,
                     ),
                   ),

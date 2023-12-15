@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     AppButton(
-                      margin: const EdgeInsets.symmetric(horizontal: 14),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: defaultMarginValue),
                       width: double.infinity,
                       text: '정복중인 코스',
                       textBold: true,
@@ -58,8 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: defaultMarginValue),
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
@@ -71,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         indicatorColor: AppColor.primary,
                         indicatorWeight: 1,
                         indicatorPadding:
-                            const EdgeInsets.symmetric(horizontal: 6),
+                            const EdgeInsets.symmetric(horizontal: 4),
                         unselectedLabelColor: AppTextColor.light,
                         unselectedLabelStyle: context.textTheme.bodyMedium,
                         labelColor: Colors.black,
@@ -100,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           RegionCourse(
                             scrollController: _scrollController,
                           ),
-                          RecommandCourse(),
+                          const RecommandCourse(),
                         ],
                       ),
                     ),

@@ -15,7 +15,7 @@ class _InquiryFormState extends State<InquiryForm> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 26),
+      padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
       children: [
         Text(
           '문의제목',
@@ -27,6 +27,7 @@ class _InquiryFormState extends State<InquiryForm> {
           maxLength: 80,
           keyboardType: TextInputType.text,
         ),
+        const SizedBox(height: 12),
         Text(
           '문의내용',
           style: context.textTheme.bodyMedium
@@ -39,6 +40,7 @@ class _InquiryFormState extends State<InquiryForm> {
           minLines: 5,
           keyboardType: TextInputType.multiline,
         ),
+        const SizedBox(height: 12),
         Wrap(
           spacing: 8,
           crossAxisAlignment: WrapCrossAlignment.end,
@@ -56,16 +58,16 @@ class _InquiryFormState extends State<InquiryForm> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
+          padding: const EdgeInsets.symmetric(vertical: 12),
           child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
+            spacing: 10,
+            runSpacing: 10,
             children: [
               Container(
-                width: 80,
-                height: 80,
+                width: 75,
+                height: 75,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     width: 1,
                     color: AppColor.dividerMedium,
@@ -90,10 +92,10 @@ class _InquiryFormState extends State<InquiryForm> {
               ...List.generate(
                 5,
                 (index) => Container(
-                  width: 80,
-                  height: 80,
+                  width: 75,
+                  height: 75,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       width: 1,
                       color: AppColor.dividerMedium,
@@ -106,7 +108,7 @@ class _InquiryFormState extends State<InquiryForm> {
           ),
         ),
         AppButton(
-          margin: const EdgeInsets.symmetric(vertical: 24),
+          margin: const EdgeInsets.symmetric(vertical: defaultMarginValue),
           text: '문의남기기',
           onPressed: () {},
         ),

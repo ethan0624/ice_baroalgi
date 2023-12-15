@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 
 class AppExpansionTile extends StatelessWidget {
@@ -26,7 +27,8 @@ class AppExpansionTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 20),
+            padding: const EdgeInsets.symmetric(
+                horizontal: defaultMarginValue, vertical: 12),
             child: Row(
               children: [
                 Expanded(child: title),
@@ -46,7 +48,8 @@ class AppExpansionTile extends StatelessWidget {
             firstChild: Container(),
             secondChild: Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: defaultMarginValue, vertical: 14),
               color: const Color(0xfff5f5f5),
               child: content,
             ),

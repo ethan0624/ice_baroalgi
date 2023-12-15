@@ -43,13 +43,13 @@ class AppTextFormField extends StatelessWidget {
     this.keyboardType,
     this.textInputAction,
     this.border = 1,
-    this.borderRadius = 12,
+    this.borderRadius = 10,
     this.borderColor = const Color(0xFFDBDBDB),
     this.focusBorderColor = const Color(0xFFE65185),
     this.backgroundColor = Colors.white,
     this.isObscureText = false,
     this.readOnly = false,
-    this.margin = const EdgeInsets.symmetric(vertical: 14),
+    this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.maxLength,
     this.maxLines = 1,
     this.minLines,
@@ -80,7 +80,7 @@ class AppTextFormField extends StatelessWidget {
           TextFormField(
             controller: controller,
             focusNode: focusNode,
-            style: textStyle ?? context.textTheme.bodySmall,
+            style: textStyle ?? context.textTheme.bodyMedium,
             autofocus: autoFocus,
             obscureText: isObscureText,
             keyboardType: keyboardType,
@@ -90,7 +90,7 @@ class AppTextFormField extends StatelessWidget {
               counterText: '',
               hintText: hintText,
               hintStyle: hintTextStyle ??
-                  context.textTheme.bodySmall
+                  context.textTheme.bodyMedium
                       ?.copyWith(color: AppTextColor.light),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
@@ -132,7 +132,7 @@ class AppTextFormField extends StatelessWidget {
               ),
               isDense: true,
               contentPadding:
-                  const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
               filled: true,
               fillColor: enabled ? backgroundColor : AppColor.dividerDark,
               suffix: suffix,

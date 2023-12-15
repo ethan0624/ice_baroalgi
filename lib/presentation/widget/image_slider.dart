@@ -15,7 +15,7 @@ class ImageSlider extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             child: CarouselSlider.builder(
               itemCount: 5,
               itemBuilder: (context, index, realIndex) {

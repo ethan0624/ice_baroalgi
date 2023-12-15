@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/enum/terms_agreement_type.dart';
 import 'package:incheon_knowhow/presentation/base/base_layout.dart';
@@ -51,7 +52,7 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
     return BaseLayout(
       appBar: AppSubAppBar(text: '회원가입'),
       child: Padding(
-        padding: const EdgeInsets.all(26),
+        padding: const EdgeInsets.all(defaultMarginValue),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,10 +60,10 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
               '서비스 이용을 위해\n약관에 동의해주세요.',
               style: context.textTheme.titleSmall,
             ),
-            const SizedBox(height: 56),
+            const SizedBox(height: 50),
             CheckBoxText(
               title: '전체선택',
-              titleStyle: context.textTheme.bodySmall
+              titleStyle: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Divider(),
@@ -74,7 +75,7 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
                   Expanded(
                     child: Text(
                       '${e.title} (${e.isRequired ? '필수' : '선택'})',
-                      style: context.textTheme.bodySmall,
+                      style: context.textTheme.bodyMedium,
                     ),
                   ),
                   const Icon(

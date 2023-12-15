@@ -33,23 +33,25 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
         return Stack(
           children: [
             Positioned.fill(
-              bottom: 75,
+              bottom: 70,
               child: ListView(
                 children: [
                   const CourseHeader(),
                   const ImageSlider(
-                    padding: EdgeInsets.symmetric(horizontal: 26),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: defaultMarginValue),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 26, vertical: 14),
+                        horizontal: defaultMarginValue, vertical: 12),
                     child: Text(
                       '간단한 코스에 대한 설명이 작성됩니다.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
                       style: context.textTheme.labelLarge,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultMarginValue),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
@@ -67,14 +69,17 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 26),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: defaultMarginValue),
                     height: 6,
                     color: AppColor.dividerLight,
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 26),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: defaultMarginValue),
                     child: AppTitleText(text: '스팟 리스트'),
                   ),
+                  const SizedBox(height: 6),
                   ...List.generate(5, (index) => const SpotListItem()),
                 ],
               ),
@@ -84,8 +89,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
               left: 0,
               right: 0,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: defaultMarginValue, vertical: 10),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   boxShadow: [

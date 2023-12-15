@@ -27,8 +27,8 @@ class _MypageScreenState extends State<MypageScreen> {
             },
             icon: SvgPicture.asset(
               'assets/images/ic_notification.svg',
-              width: 25,
-              height: 25,
+              width: 28,
+              height: 28,
             ),
           ),
         ],

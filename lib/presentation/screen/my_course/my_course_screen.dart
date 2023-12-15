@@ -28,13 +28,14 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
       create: (_) => MyCourseBloc(),
       builder: (context, bloc, state) {
         return ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
+          padding: const EdgeInsets.symmetric(
+              horizontal: defaultMarginValue, vertical: 12),
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 26),
-              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(vertical: defaultMarginValue),
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 color: AppColor.secondaryBackground,
               ),
               child: Row(
@@ -47,7 +48,7 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 14),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +62,7 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                         ),
                         Text(
                           '새로운 코스를 찾아보세요.',
-                          style: context.textTheme.labelLarge?.copyWith(
+                          style: context.textTheme.bodySmall?.copyWith(
                             color: AppTextColor.medium,
                           ),
                         ),
@@ -72,17 +73,19 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
               ),
             ),
             const AppTitleText(text: '정복중인 코스'),
+            const SizedBox(height: 6),
             ...List.generate(
                 3,
                 (index) => const CourseListItem(
-                      margin: EdgeInsets.symmetric(vertical: 12),
+                      margin: EdgeInsets.symmetric(vertical: 6),
                     )),
-            const SizedBox(height: 26),
+            const SizedBox(height: defaultMarginValue),
             const AppTitleText(text: '완료코스'),
+            const SizedBox(height: 6),
             ...List.generate(
                 10,
                 (index) => const CourseListItem(
-                      margin: EdgeInsets.symmetric(vertical: 12),
+                      margin: EdgeInsets.symmetric(vertical: 6),
                     )),
           ],
         );

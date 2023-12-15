@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/reset_pw/form/bloc/reseet_pw_bloc.dart';
@@ -28,12 +29,12 @@ class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
       create: (_) => ReseetPwBloc(),
       builder: (context, bloc, state) {
         return ListView(
-          padding: const EdgeInsets.all(26),
+          padding: const EdgeInsets.all(defaultMarginValue),
           children: [
             const AppTitleText(
               text: '회원가입 시 등록한 이름과 \n이메일 입력 시 인증메일을 발송드립니다',
             ),
-            const SizedBox(height: 56),
+            const SizedBox(height: 50),
             Text(
               '이름',
               style: context.textTheme.bodyMedium
@@ -43,7 +44,7 @@ class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
               hintText: '이름을 입력하세요',
               keyboardType: TextInputType.name,
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: defaultMarginValue),
             Text(
               '이메일',
               style: context.textTheme.bodyMedium
@@ -53,7 +54,7 @@ class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
               hintText: '이메일 주소 입력',
               keyboardType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: defaultMarginValue),
             AppButton(
               text: '인증번호 받기',
               onPressed: _onCertificationPressed,

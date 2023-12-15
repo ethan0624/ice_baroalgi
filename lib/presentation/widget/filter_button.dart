@@ -39,7 +39,7 @@ class FilterButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: context.textTheme.labelLarge?.copyWith(
+            style: context.textTheme.labelMedium?.copyWith(
               color: textColor ?? Colors.black,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               height: 1.25,

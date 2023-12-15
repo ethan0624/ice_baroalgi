@@ -5,14 +5,14 @@ class Thumbnail extends StatelessWidget {
   final double height;
   const Thumbnail({
     super.key,
-    this.width = 100,
-    this.height = 100,
+    this.width = 90,
+    this.height = 90,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         width: width,
         height: height,

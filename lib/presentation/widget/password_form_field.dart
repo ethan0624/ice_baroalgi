@@ -87,21 +87,21 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               Positioned(
                 top: 0,
                 bottom: 0,
-                right: 10,
+                right: 12,
                 child: InkWell(
                   onTap: _togglePasswordShow,
                   child: SvgPicture.asset(
                     _showPassword
                         ? 'assets/images/ic_password_show.svg'
                         : 'assets/images/ic_password_hide.svg',
-                    width: 26,
-                    height: 26,
+                    width: 28,
+                    height: 28,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 6),
           Wrap(
             spacing: 8,
             crossAxisAlignment: WrapCrossAlignment.center,

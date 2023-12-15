@@ -33,22 +33,24 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
         return Stack(
           children: [
             Positioned.fill(
-              bottom: 75,
+              bottom: 70,
               child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 26),
+                padding:
+                    const EdgeInsets.symmetric(vertical: defaultMarginValue),
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultMarginValue),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const AppTitleText(text: '주안역 뒷역'),
                         const ImageSlider(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(vertical: 12),
                         ),
                         Text(
                           '간단한 코스에 대한 설명이 작성됩니다.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                          style: context.textTheme.labelLarge,
+                          style: context.textTheme.bodySmall,
                         ),
                         const SizedBox(height: 12),
                         Align(
@@ -70,19 +72,21 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 26),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: defaultMarginValue),
                     height: 6,
                     color: AppColor.dividerLight,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultMarginValue),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const AppTitleText(text: '기본정보'),
                         Container(
-                          margin: const EdgeInsets.symmetric(vertical: 14),
-                          height: 180,
+                          margin: const EdgeInsets.symmetric(vertical: 12),
+                          height: 175,
                           child: NaverMap(
                             options: const NaverMapViewOptions(),
                             onMapReady: (controller) {},
@@ -90,19 +94,20 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.all(14),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 14, horizontal: 12),
                           decoration: BoxDecoration(
                               color: AppColor.background,
-                              borderRadius: BorderRadius.circular(12)),
+                              borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 100,
+                                    width: 88,
                                     child: Text(
                                       '주소',
-                                      style: context.textTheme.bodySmall
+                                      style: context.textTheme.labelLarge
                                           ?.copyWith(
                                               fontWeight: FontWeight.bold),
                                     ),
@@ -110,28 +115,8 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                   Expanded(
                                     child: Text(
                                       '인천광역시 미추홀구 주안로 95-19',
-                                      style: context.textTheme.bodySmall,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 12),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 100,
-                                    child: Text(
-                                      '전화번호',
-                                      style: context.textTheme.bodySmall
+                                      style: context.textTheme.labelLarge
                                           ?.copyWith(
-                                              fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      '032-1234-1234',
-                                      style:
-                                          context.textTheme.bodySmall?.copyWith(
                                         decoration: TextDecoration.underline,
                                       ),
                                     ),
@@ -142,18 +127,21 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 100,
+                                    width: 88,
                                     child: Text(
-                                      '운영시간',
-                                      style: context.textTheme.bodySmall
+                                      '전화번호',
+                                      style: context.textTheme.labelLarge
                                           ?.copyWith(
                                               fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Expanded(
                                     child: Text(
-                                      '오전 10시부터 오후 4시',
-                                      style: context.textTheme.bodySmall,
+                                      '032-1234-1234',
+                                      style: context.textTheme.labelLarge
+                                          ?.copyWith(
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -162,10 +150,30 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 100,
+                                    width: 88,
+                                    child: Text(
+                                      '운영시간',
+                                      style: context.textTheme.labelLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '오전 10시부터 오후 4시',
+                                      style: context.textTheme.labelLarge,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 88,
                                     child: Text(
                                       '휴무일',
-                                      style: context.textTheme.bodySmall
+                                      style: context.textTheme.labelLarge
                                           ?.copyWith(
                                               fontWeight: FontWeight.bold),
                                     ),
@@ -173,7 +181,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                   Expanded(
                                     child: Text(
                                       '매주 월요일',
-                                      style: context.textTheme.bodySmall,
+                                      style: context.textTheme.labelLarge,
                                     ),
                                   ),
                                 ],
@@ -185,20 +193,23 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 26),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: defaultMarginValue),
                     height: 6,
                     color: AppColor.dividerLight,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultMarginValue),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const AppTitleText(text: '포함하는 코스'),
+                        const SizedBox(height: 6),
                         ...List.generate(
                           3,
                           (index) => const CourseListItem(
-                            margin: EdgeInsets.symmetric(vertical: 12),
+                            margin: EdgeInsets.symmetric(vertical: 6),
                           ),
                         ),
                       ],
@@ -212,8 +223,8 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
               left: 0,
               right: 0,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: defaultMarginValue, vertical: 10),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   boxShadow: [

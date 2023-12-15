@@ -36,7 +36,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
       ),
       builder: (context, bloc, state) {
         return Padding(
-          padding: const EdgeInsets.all(26),
+          padding: const EdgeInsets.all(defaultMarginValue),
           child: AnimatedCrossFade(
             firstChild: ListView(
               children: [
@@ -48,7 +48,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   '* 가입자 정보를 입력해주세요.',
                   style: context.textTheme.bodySmall,
                 ),
-                const SizedBox(height: 56),
+                const SizedBox(height: 50),
                 Text(
                   '이름',
                   style: context.textTheme.bodyMedium
@@ -57,7 +57,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                 const AppTextFormField(
                   hintText: '이름을 입력하세요',
                 ),
-                const SizedBox(height: 26),
+                const SizedBox(height: defaultMarginValue),
                 Text(
                   '생년월일',
                   style: context.textTheme.bodyMedium
@@ -66,7 +66,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                 const AppTextFormField(
                   hintText: 'YYYY / MM / DD',
                 ),
-                const SizedBox(height: 26),
+                const SizedBox(height: defaultMarginValue),
                 Text(
                   '휴대폰 번호',
                   style: context.textTheme.bodyMedium
@@ -77,7 +77,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                 ),
                 const SizedBox(height: 56),
                 AppButton(
-                  margin: const EdgeInsets.symmetric(vertical: 14),
+                  margin: const EdgeInsets.symmetric(vertical: 12),
                   text: '아이디 찾기',
                   textBold: true,
                   onPressed: _onFindPressed,
@@ -91,30 +91,31 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   '아이디 찾기를 완료하였습니다.',
                   style: context.textTheme.titleSmall,
                 ),
-                const SizedBox(height: 56),
+                const SizedBox(height: 50),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(width: 1, color: AppColor.dividerLight),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 14),
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         '아이디',
-                        style: context.textTheme.bodySmall
+                        style: context.textTheme.bodyMedium
                             ?.copyWith(color: AppTextColor.light),
                       ),
                       Text(
                         'sample@sample.com',
-                        style: context.textTheme.bodySmall,
+                        style: context.textTheme.bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 26),
+                const SizedBox(height: defaultMarginValue),
                 AppButton(
                   margin: EdgeInsets.zero,
                   text: '로그인 하기',
