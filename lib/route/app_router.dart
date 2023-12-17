@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/presentation/screen/account/account_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/course/info/course_info_screen.dart';
@@ -31,13 +32,13 @@ import 'package:incheon_knowhow/presentation/screen/reset_pw/update/reset_pw_upd
 import 'package:incheon_knowhow/presentation/screen/search_school/search_school_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/splash/splash_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/spot_detail_screen.dart';
-// import 'package:incheon_knowhow/route/auth_guard.dart';
+import 'package:incheon_knowhow/route/auth_guard.dart';
 
 part 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
-  // final _authGuard = AuthGuard();
+  final _authGuard = AuthGuard();
 
   @override
   List<AutoRoute> get routes => [
@@ -69,7 +70,11 @@ class AppRouter extends _$AppRouter {
           page: MainTabRoute.page,
           children: [
             AutoRoute(path: 'home', page: HomeRoute.page, initial: true),
-            AutoRoute(path: 'myCourse', page: MyCourseRoute.page),
+            AutoRoute(
+              path: 'myCourse',
+              page: MyCourseRoute.page,
+              guards: [_authGuard],
+            ),
           ],
         ),
 
@@ -89,6 +94,7 @@ class AppRouter extends _$AppRouter {
 
         // 설정
         AutoRoute(path: '/mypage', page: MypageRoute.page),
+        AutoRoute(path: '/account', page: AccountRoute.page),
         AutoRoute(path: '/language', page: LanguageRoute.page),
         AutoRoute(path: '/notice', page: NoticeRoute.page),
         AutoRoute(path: '/cscenter/qna', page: CscenterQnaRoute.page),

@@ -5,6 +5,7 @@ import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/extension/string_extension.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
+import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/login/bloc/login_bloc.dart';
@@ -14,13 +15,9 @@ import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/password_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/underline_text_button.dart';
 
-@RoutePage()
+@RoutePage<bool>()
 class LoginScreen extends StatefulWidget {
-  final ValueChanged<bool>? onResult;
-  const LoginScreen({
-    super.key,
-    this.onResult,
-  });
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -33,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordFocusNode = FocusNode();
 
   _onLoginPressed() {
-    _onResult();
+    _testLoggedIn();
 
     // if (!_emailTextController.text.isValidEmail()) {
     //   context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
@@ -64,14 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
     context.router.pushNamed('/join');
   }
 
-  _onResult() {
-    if (widget.onResult != null) {
-      getIt<AuthProvider>().loggedIn(user: User.tester());
-      widget.onResult?.call(true);
-      return;
-    }
-
-    context.router.pushNamed('/main');
+  _testLoggedIn() {
+    getIt<AuthProvider>().loggedIn(token: Token.mock(), user: User.tester());
+    context.router.pop(true);
   }
 
   @override
@@ -89,6 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
       create: (_) => LoginBloc(),
       appBar: AppSubAppBar(
         text: '로그인',
+        onBackPressed: () {
+          context.router.pop(false);
+        },
       ),
       builder: (context, bloc, state) {
         return Stack(

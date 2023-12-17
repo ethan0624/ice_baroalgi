@@ -32,6 +32,11 @@ abstract class BlocEffect {
   }
 }
 
+class SuccessEffect<T> implements BlocEffect {
+  final T? data;
+  const SuccessEffect({this.data});
+}
+
 class OpenSnackBarEffect implements BlocEffect {
   final String message;
   const OpenSnackBarEffect(this.message);

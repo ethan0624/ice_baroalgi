@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/bloc/mypage_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_guest_setting_view.dart';
+import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_user_setting_view.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 
 @RoutePage()
@@ -18,7 +19,7 @@ class _MypageScreenState extends State<MypageScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<MypageBloc, MypageBloc, MypageState>(
-      create: (_) => MypageBloc(),
+      create: (_) => MypageBloc()..add(const MypageEvent.initial()),
       appBar: AppSubAppBar(
         actions: [
           IconButton(
@@ -34,9 +35,9 @@ class _MypageScreenState extends State<MypageScreen> {
         ],
       ),
       builder: (context, bloc, state) {
-        return const MypageGuestSettingView();
-        // 로그인 이후 설정
-        // return const MypageUserSettingView();
+        return (state.userMe != null)
+            ? MypageUserSettingView(user: state.userMe!)
+            : const MypageGuestSettingView();
       },
     );
   }

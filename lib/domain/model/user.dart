@@ -42,10 +42,10 @@ class User {
 
   factory User.tester() {
     return const User(
-      id: '',
-      name: '',
-      email: '',
-      phone: '',
+      id: '1',
+      name: 'tester',
+      email: 'test@test.co.kr',
+      phone: '010-1234-5678',
       type: UserType.student,
       genderType: UserGenderType.male,
     );

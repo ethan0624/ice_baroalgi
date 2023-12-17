@@ -6,6 +6,7 @@ import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/splash/bloc/splash_bloc.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   _requestTrackingIfNeeded() async {
     if (await AppTrackingTransparency.trackingAuthorizationStatus ==
         TrackingStatus.notDetermined) {
@@ -23,11 +25,15 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
     await Future.delayed(AnimationDuration.medium);
+
     _onNext();
   }
 
   _onNext() {
-    context.router.replaceNamed('/login');
+    final bloc = _scaffoldKey.currentContext?.read<SplashBloc>();
+    if (bloc == null) return;
+
+    bloc.add(const SplashEvent.initial());
   }
 
   @override
@@ -43,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<SplashBloc, SplashBloc, SplashState>(
+      scaffoldKey: _scaffoldKey,
       create: (_) => SplashBloc(),
       backgroundColor: Colors.white,
       builder: (context, bloc, state) {

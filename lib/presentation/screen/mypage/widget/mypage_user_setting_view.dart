@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_setting_list_item.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_setting_section_title.dart';
 import 'package:incheon_knowhow/presentation/widget/section_divider.dart';
 
 class MypageUserSettingView extends StatelessWidget {
-  const MypageUserSettingView({super.key});
+  final User user;
+  const MypageUserSettingView({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class MypageUserSettingView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
           child: Text(
-            '이름',
+            user.name,
             style: context.textTheme.bodyLarge
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
@@ -32,9 +34,7 @@ class MypageUserSettingView extends StatelessWidget {
             Icons.arrow_forward_ios,
             size: 20,
           ),
-          onPressed: () {
-            // todo :
-          },
+          onPressed: () => context.router.pushNamed('/account'),
         ),
         MypageSettingListItem(
           title: '언어',
@@ -85,9 +85,7 @@ class MypageUserSettingView extends StatelessWidget {
             Icons.arrow_forward_ios,
             size: 20,
           ),
-          onPressed: () {
-            // todo :
-          },
+          onPressed: () => context.router.pushNamed('/cscenter/qna'),
         ),
         const SectionDivider(
           margin: EdgeInsets.symmetric(vertical: defaultMarginValue),
