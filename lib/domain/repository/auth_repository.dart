@@ -5,17 +5,19 @@ import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 abstract class AuthRepository {
-  Future<Result<DataResponse<Token>, Exception>> login({
+  Future<Result<Token, Exception>> getToken({
     required String email,
     required String password,
   });
 
-  Future<Result<DataResponse<bool>, Exception>> register({
-    required UserRegisterRequest request,
+  Future<Result<User, Exception>> getUserMe();
+
+  Future<Result<DataResponse<User>, Exception>> getUserInfo({
+    required int userId,
   });
 
-  Future<Result<DataResponse<User>, Exception>> getUser({
-    required int userId,
+  Future<Result<DataResponse<bool>, Exception>> register({
+    required UserRegisterRequest request,
   });
 
   Future<Result<DataResponse<bool>, Exception>> updatePassword({

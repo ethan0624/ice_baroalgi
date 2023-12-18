@@ -45,6 +45,14 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  updateToken({required Token token}) async {
+    _token = token;
+
+    await secureStorage.write(key: _tokenPrefsKey, value: token.serialize());
+
+    notifyListeners();
+  }
+
   updateUser({required User user}) async {
     _user = user;
 

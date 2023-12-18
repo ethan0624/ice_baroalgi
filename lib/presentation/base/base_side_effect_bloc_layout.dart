@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,12 +73,10 @@ class BaseSideEffectBlocLayout<SB extends SideEffectProvider<BlocEffect>,
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   } else if (effect is ShowAlertMessageEffect) {
-                    // context
-                    //     .showAlertDialog(
-                    //         title: effect.title, message: effect.message)
-                    //     .then((value) {
-                    //   effect.callback != null && effect.callback!.call();
-                    // });
+                    context.showAlert(
+                      title: effect.title,
+                      message: effect.message,
+                    );
                   } else if (effect is PushRouteNavigateEffect) {
                     context.router.push(effect.route);
                   } else if (effect is PushNamedNavigateEffect) {

@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/extension/string_extension.dart';
-import 'package:incheon_knowhow/core/injection.dart';
-import 'package:incheon_knowhow/core/provider/auth_provider.dart';
-import 'package:incheon_knowhow/domain/model/token.dart';
-import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 import 'package:incheon_knowhow/presentation/screen/login/bloc/login_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/password_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/underline_text_button.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage<bool>()
 class LoginScreen extends StatefulWidget {
@@ -30,21 +28,25 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordFocusNode = FocusNode();
 
   _onLoginPressed() {
-    _testLoggedIn();
+    if (!_emailTextController.text.isValidEmail()) {
+      context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
+      return;
+    }
 
-    // if (!_emailTextController.text.isValidEmail()) {
-    //   context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
-    //   return;
-    // }
+    if (!_passwordTextController.text.isValidPassword()) {
+      context.showAlert(title: '입력오류', message: '비밀번호를 정확하게 입력해주세요');
+      return;
+    }
 
-    // if (!_passwordTextController.text.isValidPassword()) {
-    //   context.showAlert(title: '입력오류', message: '비밀번호를 정확하게 입력해주세요');
-    //   return;
-    // }
+    final bloc = _scaffoldKey.currentContext?.read<LoginBloc>();
+    if (bloc == null) return;
 
-    // FocusManager.instance.primaryFocus?.unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
 
-    // todo
+    bloc.add(LoginEvent.login(
+      _emailTextController.text,
+      _passwordTextController.text,
+    ));
   }
 
   _onFindIdPressed() {
@@ -56,14 +58,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _onJoinPressed() async {
-    // final ret =
-    //     await context.router.pushNamed<CertificationResult>('/certification');
     context.router.pushNamed('/join');
   }
 
-  _testLoggedIn() {
-    getIt<AuthProvider>().loggedIn(token: Token.mock(), user: User.tester());
-    context.router.pop(true);
+  _handlerEffect(BlocEffect effect) {
+    if (effect is SuccessEffect) {
+      context.router.pop(true);
+      return;
+    }
+  }
+
+  _cancel() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    context.router.pop(false);
   }
 
   @override
@@ -78,13 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return BaseSideEffectBlocLayout<LoginBloc, LoginBloc, LoginState>(
       scaffoldKey: _scaffoldKey,
       resizeToAvoidBottomInset: false,
-      create: (_) => LoginBloc(),
       appBar: AppSubAppBar(
         text: '로그인',
-        onBackPressed: () {
-          context.router.pop(false);
-        },
+        onBackPressed: _cancel,
       ),
+      create: (_) => LoginBloc(),
+      effectChanged: (context, effect) {
+        _handlerEffect(effect);
+      },
       builder: (context, bloc, state) {
         return Stack(
           children: [

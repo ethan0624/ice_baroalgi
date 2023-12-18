@@ -9,7 +9,7 @@ class DataResponse<T> {
   @JsonKey(name: 'message')
   final String message;
   @JsonKey(name: 'data')
-  final List<T>? data;
+  final T? data;
 
   const DataResponse({
     required this.result,
