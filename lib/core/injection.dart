@@ -57,7 +57,10 @@ class Injection {
           repository: getIt(),
         ));
     getIt.registerLazySingleton<GetUserInfo>(
-      () => GetUserInfo(authProvider: getIt()),
+      () => GetUserInfo(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
     );
     getIt.registerLazySingleton<RegistUser>(
       () => RegistUser(repository: getIt()),

@@ -1,5 +1,4 @@
 import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
-import 'package:incheon_knowhow/domain/enum/user_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
@@ -14,8 +13,8 @@ class User {
   final String email;
   @JsonKey(name: 'phone')
   final String phone;
-  @JsonKey(name: 'type', unknownEnumValue: UserType.student)
-  final UserType type;
+  @JsonKey(name: 'type')
+  final String type;
   @JsonKey(name: 'gender', unknownEnumValue: UserGenderType.male)
   final UserGenderType genderType;
   @JsonKey(name: 'school')
@@ -46,7 +45,7 @@ class User {
       name: 'tester',
       email: 'test@test.co.kr',
       phone: '010-1234-5678',
-      type: UserType.student,
+      type: '일반인',
       genderType: UserGenderType.male,
     );
   }

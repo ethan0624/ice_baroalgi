@@ -6,3 +6,14 @@ enum UserType {
   @JsonValue('일반인')
   other,
 }
+
+extension UserTypeExension on UserType {
+  String get value {
+    switch (this) {
+      case UserType.student:
+        return '1';
+      case UserType.other:
+        return '2';
+    }
+  }
+}

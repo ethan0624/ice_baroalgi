@@ -21,7 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
       'email': email,
       'password': password,
     };
-    final res = await safetyCall(apiClient.login(data));
+    final res = await safetyCall<Token>(apiClient.login(data));
     final token = res.tryGetSuccess()?.data;
     return res.isSuccess() && token != null
         ? Result.success(token)

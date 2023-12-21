@@ -12,7 +12,6 @@ DataResponse<T> _$DataResponseFromJson<T>(
 ) =>
     DataResponse<T>(
       result: json['result'] as int,
-      message: json['message'] as String,
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
     );
 
@@ -22,7 +21,6 @@ Map<String, dynamic> _$DataResponseToJson<T>(
 ) =>
     <String, dynamic>{
       'result': instance.result,
-      'message': instance.message,
       'data': _$nullableGenericToJson(instance.data, toJsonT),
     };
 

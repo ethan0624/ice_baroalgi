@@ -16,15 +16,29 @@ class MainTabScreen extends StatefulWidget {
 
 class _MainTabScreenState extends State<MainTabScreen> {
   final _authProvider = getIt<AuthProvider>();
+
+  _handleAuthChanged() {
+    if (!_authProvider.isAuthenticated()) {
+      context.router.navigateNamed('/main/home');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
+    _authProvider.addListener(_handleAuthChanged);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (!_authProvider.skipJinroAccountRegist) {
         context.router.pushNamed('/jinroAccount');
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _authProvider.removeListener(_handleAuthChanged);
+    super.dispose();
   }
 
   @override

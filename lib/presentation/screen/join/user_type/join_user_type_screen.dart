@@ -18,15 +18,18 @@ class JoinUserTypeScreen extends StatefulWidget {
 }
 
 class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
-  _onPressUserType({
+  _onUserTypePressed({
     required UserType type,
     required bool isFourteenOver,
   }) {
-    context.router.push(JoinAgreementRoute(
+    context.router.push(
+      JoinAgreementRoute(
         joinData: JoinData(
-      type: type,
-      isFourteenOver: isFourteenOver,
-    )));
+          type: type,
+          isFourteenOver: isFourteenOver,
+        ),
+      ),
+    );
   }
 
   @override
@@ -51,7 +54,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
             children: [
               Expanded(
                 child: OutlineLargeButton(
-                  onPressed: () => _onPressUserType(
+                  onPressed: () => _onUserTypePressed(
                       type: UserType.student, isFourteenOver: false),
                   child: Center(
                     child: Text(
@@ -66,7 +69,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: OutlineLargeButton(
-                  onPressed: () => _onPressUserType(
+                  onPressed: () => _onUserTypePressed(
                       type: UserType.student, isFourteenOver: true),
                   borderColor: AppColor.primary,
                   child: Text(
@@ -100,7 +103,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
             children: [
               Expanded(
                 child: OutlineLargeButton(
-                  onPressed: () => _onPressUserType(
+                  onPressed: () => _onUserTypePressed(
                       type: UserType.other, isFourteenOver: false),
                   child: Text(
                     '14세 미만\n가입하기',
@@ -113,7 +116,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: OutlineLargeButton(
-                  onPressed: () => _onPressUserType(
+                  onPressed: () => _onUserTypePressed(
                       type: UserType.other, isFourteenOver: true),
                   borderColor: AppColor.primary,
                   child: Text(

@@ -12,7 +12,7 @@ Future<Result<DataResponse<T>, Exception>> safetyCall<T>(
     if (response.isSuccess) {
       return Success(response);
     } else {
-      return Error(Exception(response.message));
+      return Error(Exception('api error'));
     }
   } catch (e, s) {
     if (!isRelease) {

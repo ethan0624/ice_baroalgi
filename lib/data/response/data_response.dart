@@ -6,14 +6,11 @@ part 'data_response.g.dart';
 class DataResponse<T> {
   @JsonKey(name: 'result')
   final int result;
-  @JsonKey(name: 'message')
-  final String message;
   @JsonKey(name: 'data')
   final T? data;
 
   const DataResponse({
     required this.result,
-    required this.message,
     this.data,
   });
 

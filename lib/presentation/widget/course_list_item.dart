@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
-import 'package:incheon_knowhow/core/extension/int_extension.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/widget/label.dart';
 import 'package:incheon_knowhow/presentation/widget/progress_bar.dart';
