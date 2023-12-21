@@ -56,6 +56,7 @@ class AppTheme {
     onSurface: AppColor.background,
     brightness: Brightness.light,
     outline: AppColor.dividerMedium,
+    surfaceTint: Colors.transparent,
   );
 
   static final defaultTextTheme = TextTheme(

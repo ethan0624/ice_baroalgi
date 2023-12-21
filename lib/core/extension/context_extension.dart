@@ -41,14 +41,20 @@ extension BuildContextExtension on BuildContext {
       context: this,
       builder: (context) {
         return AlertDialog.adaptive(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          surfaceTintColor: Colors.transparent,
           title: Text(
             title,
-            style: textTheme.bodySmall,
+            style: textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           content: message != null
               ? Text(
                   message,
-                  style: textTheme.labelLarge,
+                  style: textTheme.bodyMedium,
                 )
               : null,
           actions: [
@@ -73,29 +79,41 @@ extension BuildContextExtension on BuildContext {
       context: this,
       builder: (context) {
         return AlertDialog.adaptive(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          surfaceTintColor: Colors.transparent,
           title: Text(
             title,
-            style: textTheme.bodySmall,
+            style: textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           content: message != null
               ? Text(
                   message,
-                  style: textTheme.labelLarge,
+                  style: textTheme.bodyMedium,
                 )
               : null,
           actions: [
             TextButton(
-              onPressed: () => context.router.pop(true),
-              child: Text(
-                '확인',
-                style: textTheme.bodySmall?.copyWith(color: Colors.blue),
-              ),
-            ),
-            TextButton(
               onPressed: () => context.router.pop(false),
               child: Text(
                 '취소',
-                style: textTheme.bodySmall?.copyWith(color: Colors.blue),
+                style: textTheme.bodyMedium?.copyWith(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => context.router.pop(true),
+              child: Text(
+                '확인',
+                style: textTheme.bodyMedium?.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],
