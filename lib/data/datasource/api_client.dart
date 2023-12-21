@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/data/response/data_response.dart';
 import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:incheon_knowhow/config/app_config.dart';
 import 'package:incheon_knowhow/config/app_info.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
@@ -13,7 +14,7 @@ part 'api_client.g.dart';
 
 @RestApi()
 abstract class ApiClient {
-  factory ApiClient() {
+  factory ApiClient(AuthProvider authProvider) {
     final appInfo = AppInfo();
     final dio = Dio();
 
@@ -26,7 +27,9 @@ abstract class ApiClient {
           options.headers['x-client-context'] = appInfo.userAgent;
           options.headers['x-app-version'] = appInfo.appVersion;
 
-          // todo: add access token
+          if (authProvider.accessToken.isNotEmpty) {
+            options.headers['token'] = authProvider.accessToken;
+          }
 
           return handler.next(options);
         },

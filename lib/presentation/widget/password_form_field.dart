@@ -5,20 +5,20 @@ import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/icon_text.dart';
 
 class PasswordFormField extends StatefulWidget {
-  final TextEditingController? controller;
   final FocusNode? focusNode;
   final TextInputAction? textInputAction;
   final String? hint;
   final EdgeInsets margin;
   final VoidCallback? onSubmitted;
+  final Function(TextEditingController controller)? onCreated;
   const PasswordFormField({
     super.key,
-    this.controller,
     this.focusNode,
     this.textInputAction,
     this.hint,
     this.margin = const EdgeInsets.symmetric(vertical: 14),
     this.onSubmitted,
+    this.onCreated,
   });
 
   @override
@@ -36,7 +36,6 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
 
   _onTextChanged() {
     final text = _textController.text;
-    widget.controller?.text = text;
     setState(() {
       _containAlphabet = text.hasAlphabet();
       _containNumber = text.hasNumber();
@@ -55,6 +54,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
     super.initState();
 
     _textController.addListener(_onTextChanged);
+    widget.onCreated?.call(_textController);
   }
 
   @override

@@ -1,5 +1,7 @@
 // ignore: implementation_imports
 import 'package:multiple_result/src/result.dart';
+import 'package:incheon_knowhow/data/response/safety_call.dart';
+import 'package:incheon_knowhow/data/datasource/api_client.dart';
 import 'package:incheon_knowhow/data/request/user_register_request.dart';
 import 'package:incheon_knowhow/data/response/data_response.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
@@ -7,20 +9,23 @@ import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  const AuthRepositoryImpl();
+  final ApiClient apiClient;
+  const AuthRepositoryImpl({required this.apiClient});
 
   @override
   Future<Result<Token, Exception>> getToken({
     required String email,
     required String password,
   }) async {
-    // fixme: remove
-    if (email == 'test@test.co.kr') {
-      return Result.success(Token.mock());
-    } else {
-      return Result.error(
-          Exception('일치하는 회원이 없습니다\n(테스트는 test@test.co.kr을 입력해주세요)'));
-    }
+    final data = {
+      'email': email,
+      'password': password,
+    };
+    final res = await safetyCall(apiClient.login(data));
+    final token = res.tryGetSuccess()?.data;
+    return res.isSuccess() && token != null
+        ? Result.success(token)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 
   @override

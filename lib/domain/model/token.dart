@@ -7,18 +7,14 @@ part 'token.g.dart';
 class Token {
   @JsonKey(name: 'accessToken')
   final String accessToken;
-  @JsonKey(name: 'refreshToken')
-  final String refreshToken;
 
   const Token({
     required this.accessToken,
-    required this.refreshToken,
   });
 
   factory Token.mock() {
     return const Token(
       accessToken: '1224',
-      refreshToken: '4333',
     );
   }
 

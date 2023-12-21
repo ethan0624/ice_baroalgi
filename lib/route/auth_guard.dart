@@ -11,7 +11,7 @@ class AuthGuard extends AutoRouteGuard {
     if (_authProvider.isAuthenticated()) {
       resolver.next(true);
     } else {
-      final isLogginedIn = await resolver.redirect<bool>(LoginRoute());
+      final isLogginedIn = await resolver.redirect<bool>(const LoginRoute());
       resolver.next(isLogginedIn == true);
     }
   }

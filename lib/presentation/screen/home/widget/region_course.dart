@@ -1,47 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/int_extension.dart';
+import 'package:incheon_knowhow/domain/model/category.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
 
 class RegionCourse extends StatefulWidget {
+  final List<Category> regions;
+  final List<Course> courseList;
   final ScrollController? scrollController;
-  const RegionCourse({super.key, this.scrollController});
+  const RegionCourse({
+    super.key,
+    required this.regions,
+    required this.courseList,
+    this.scrollController,
+  });
 
   @override
   State<RegionCourse> createState() => _RegionCourseState();
 }
 
 class _RegionCourseState extends State<RegionCourse> {
-  final _regionFillters = [
-    '전체',
-    '강화군',
-    '옹진군',
-    '중구/동구/미추홀구',
-    '남동구/연수구',
-    '부평구/계양구/서구'
-  ];
-  final List<String> _selectedRegion = [];
+  Category? _selectedRegionCategory;
+  bool _allSelected = true;
 
-  _onRegionChanged(String region) {
+  _onRegionChanged(Category category) {
     setState(() {
-      if (_selectedRegion.contains(region)) {
-        _selectedRegion.remove(region);
-      } else {
-        _selectedRegion.add(region);
-      }
+      _selectedRegionCategory = category;
+      _allSelected = false;
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() {
-        _selectedRegion.add(_regionFillters.first);
-      });
+  _onAllSlected() {
+    setState(() {
+      _selectedRegionCategory = null;
+      _allSelected = true;
     });
   }
 
@@ -56,12 +52,19 @@ class _RegionCourseState extends State<RegionCourse> {
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             scrollDirection: Axis.horizontal,
-            itemCount: _regionFillters.length,
+            itemCount: widget.regions.length + 1,
             itemBuilder: (context, index) {
-              final region = _regionFillters[index];
+              if (index == 0) {
+                return FilterButton(
+                  text: '전체',
+                  isSelected: _allSelected,
+                  onPressed: () => _onAllSlected(),
+                );
+              }
+              final region = widget.regions[index - 1];
               return FilterButton(
-                text: region,
-                isSelected: _selectedRegion.contains(region),
+                text: region.name,
+                isSelected: region == _selectedRegionCategory,
                 onPressed: () => _onRegionChanged(region),
               );
             },
@@ -76,7 +79,7 @@ class _RegionCourseState extends State<RegionCourse> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '총 87코스',
+                '총 ${widget.courseList.length.toNumberFormat}코스',
                 style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
@@ -98,7 +101,12 @@ class _RegionCourseState extends State<RegionCourse> {
           padding: const EdgeInsets.symmetric(vertical: 8),
           color: AppColor.background,
           child: Column(
-              children: List.generate(30, (index) => const CourseListItem())),
+            children: widget.courseList
+                .map((e) => CourseListItem(
+                      course: e,
+                    ))
+                .toList(),
+          ),
         ),
       ],
     );

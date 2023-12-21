@@ -30,15 +30,17 @@ class _InquiryScreenState extends State<InquiryScreen> {
               TabBar(
                 padding: const EdgeInsets.all(defaultMarginValue),
                 splashFactory: NoSplash.splashFactory,
-                indicator: const BoxDecoration(
-                  color: Color(0xffffedf3),
-                ),
+                // indicator: const BoxDecoration(
+                //   color: Color(0xffffedf3),
+                // ),
+
                 labelColor: AppColor.primary,
                 labelStyle: context.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
                 unselectedLabelColor: AppTextColor.medium,
                 unselectedLabelStyle: context.textTheme.bodyMedium,
+                dividerHeight: 0,
                 tabs: const [
                   Tab(text: '문의하기'),
                   Tab(text: '문의내역'),

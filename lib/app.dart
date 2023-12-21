@@ -30,13 +30,16 @@ class _AppState extends State<App> {
       themeMode: ThemeMode.light,
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          data: MediaQuery.of(context).copyWith(
+            textScaler: const TextScaler.linear(1),
+          ),
           child: GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             behavior: HitTestBehavior.translucent,
             child: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: const SystemUiOverlayStyle(
-                  statusBarColor: Colors.transparent),
+              value: SystemUiOverlayStyle.dark.copyWith(
+                statusBarColor: Colors.transparent,
+              ),
               child: Container(
                 child: child,
               ),

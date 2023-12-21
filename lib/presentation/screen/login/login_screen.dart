@@ -24,8 +24,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _emailTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
   final _passwordFocusNode = FocusNode();
+  late TextEditingController _passwordTextController;
 
   _onLoginPressed() {
     if (!_emailTextController.text.isValidEmail()) {
@@ -61,9 +61,18 @@ class _LoginScreenState extends State<LoginScreen> {
     context.router.pushNamed('/join');
   }
 
+  _onClear() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    _emailTextController.text = '';
+    _passwordTextController.text = '';
+  }
+
   _handlerEffect(BlocEffect effect) {
     if (effect is SuccessEffect) {
       context.router.pop(true);
+      return;
+    } else if (effect is ShowAlertMessageEffect) {
+      _onClear();
       return;
     }
   }
@@ -76,7 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     _emailTextController.dispose();
-    _passwordTextController.dispose();
     super.dispose();
   }
 
@@ -130,8 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
                   PasswordFormField(
-                    controller: _passwordTextController,
                     focusNode: _passwordFocusNode,
+                    onCreated: (controller) {
+                      _passwordTextController = controller;
+                    },
                     onSubmitted: _onLoginPressed,
                   ),
                   AppButton(

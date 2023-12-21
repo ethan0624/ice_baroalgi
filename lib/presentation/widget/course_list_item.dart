@@ -2,15 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/int_extension.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/widget/label.dart';
 import 'package:incheon_knowhow/presentation/widget/progress_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class CourseListItem extends StatelessWidget {
+  final Course course;
   final EdgeInsets margin;
   final EdgeInsets padding;
   const CourseListItem({
     super.key,
+    required this.course,
     this.margin = const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
     this.padding = const EdgeInsets.all(12),
   });
@@ -46,7 +50,7 @@ class CourseListItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '민주주의의 길',
+                        course.title,
                         style: context.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -60,11 +64,15 @@ class CourseListItem extends StatelessWidget {
                           spacing: 4,
                           children: [
                             Label(
-                              text: '2km',
+                              text: '${course.km}km',
                               borderColor: AppColor.linePurple,
                             ),
                             Label(
-                              text: '60분 소요',
+                              text: (course.hour > 0 && course.min > 0)
+                                  ? '${course.hour}시간 ${course.min}분 소요'
+                                  : (course.hour > 0)
+                                      ? '${course.hour}시간 소요'
+                                      : '${course.min}분 소요',
                               borderColor: AppColor.lineBlue,
                             ),
                           ],

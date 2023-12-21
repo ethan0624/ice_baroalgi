@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<HomeBloc, HomeBloc, HomeState>(
-      create: (_) => HomeBloc(),
+      create: (_) => HomeBloc()..add(const HomeEvent.initial()),
       appBar: HomeAppBar(
         onSearchPressed: () {
           // todo: push search screen
@@ -97,12 +97,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TabBarView(
                         children: [
                           TopicCourse(
+                            categories: state.topicCategories,
                             scrollController: _scrollController,
                           ),
                           RegionCourse(
+                            regions: state.regionCategories,
+                            courseList: state.filterRegionCourse,
                             scrollController: _scrollController,
                           ),
-                          const RecommandCourse(),
+                          RecommandCourse(
+                            recommands: state.recommendCategories,
+                          ),
                         ],
                       ),
                     ),

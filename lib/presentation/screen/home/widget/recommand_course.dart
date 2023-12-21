@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/category.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
 
 class RecommandCourse extends StatefulWidget {
-  const RecommandCourse({super.key});
+  final List<Category> recommands;
+  const RecommandCourse({
+    super.key,
+    required this.recommands,
+  });
 
   @override
   State<RecommandCourse> createState() => _RecommandCourseState();
 }
 
 class _RecommandCourseState extends State<RecommandCourse> {
-  final _recommandFillters = ['강추코스', '초', '중', '고'];
-  String _selectedRecommand = '';
+  Category? _selectedRecommand;
 
-  _onRecommandChanged(String recommand) {
+  _onRecommandChanged(Category recommand) {
     setState(() {
       _selectedRecommand = recommand;
     });
@@ -28,7 +33,7 @@ class _RecommandCourseState extends State<RecommandCourse> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        _selectedRecommand = _recommandFillters.first;
+        _selectedRecommand = widget.recommands.first;
       });
     });
   }
@@ -43,11 +48,11 @@ class _RecommandCourseState extends State<RecommandCourse> {
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             scrollDirection: Axis.horizontal,
-            itemCount: _recommandFillters.length,
+            itemCount: widget.recommands.length,
             itemBuilder: (context, index) {
-              final recommand = _recommandFillters[index];
+              final recommand = widget.recommands[index];
               return FilterButton(
-                text: recommand,
+                text: recommand.name,
                 isSelected: recommand == _selectedRecommand,
                 onPressed: () => _onRecommandChanged(recommand),
               );
@@ -85,7 +90,11 @@ class _RecommandCourseState extends State<RecommandCourse> {
           padding: const EdgeInsets.symmetric(vertical: 8),
           color: AppColor.background,
           child: Column(
-              children: List.generate(30, (index) => const CourseListItem())),
+              children: Course.mocks()
+                  .map((e) => CourseListItem(
+                        course: e,
+                      ))
+                  .toList()),
         ),
       ],
     );

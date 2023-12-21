@@ -95,30 +95,23 @@ class BaseSideEffectBlocLayout<SB extends SideEffectProvider<BlocEffect>,
                     children: [
                       builder(context, bloc, state),
                       // loading
-                      // Offstage(
-                      //   offstage: !state.isLoading,
-                      //   child: Container(
-                      //     width: double.infinity,
-                      //     height: double.infinity,
-                      //     color: Colors.grey.withOpacity(0.4),
-                      //     child: Column(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       children: [
-                      //         const CircularProgressIndicator(
-                      //           strokeWidth: 2,
-                      //         ),
-                      //         Padding(
-                      //           padding:
-                      //               const EdgeInsets.symmetric(vertical: 20),
-                      //           child: Text(
-                      //             '데이터 로딩중입니다..',
-                      //             style: AppTheme.textStyle.body01,
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+                      Offstage(
+                        offstage: !state.isLoading,
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          color: Colors.grey.withOpacity(0.2),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(
+                                strokeWidth: 1,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   );
                 },

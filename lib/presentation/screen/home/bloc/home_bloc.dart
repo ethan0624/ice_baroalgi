@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:incheon_knowhow/core/injection.dart';
+import 'package:incheon_knowhow/domain/model/category.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_recommend_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_region_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_topic_categories.dart';
@@ -17,13 +18,24 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
   // todo : 정복중인 코스 조회
   HomeBloc() : super(const HomeState()) {
     on<HomeOnInitial>((event, emit) async {
-      final futures = Future.wait([
+      final futures = await Future.wait([
         _findTopicCategories(),
         _findRegionCategories(),
         _findRecommnedCategories(),
       ]);
 
-      final results = await futures;
+      final topics = futures[0].tryGetSuccess() ?? [];
+      final regions = futures[1].tryGetSuccess() ?? [];
+      final recommends = futures[2].tryGetSuccess() ?? [];
+
+      emit(state.copyWith(
+        topicCategories: topics,
+        regionCategories: regions,
+        recommendCategories: recommends,
+        filterRegionCourse: Course.mocks(),
+      ));
     });
+
+    on<HomeOnChangedRegon>((event, emit) async {});
   }
 }

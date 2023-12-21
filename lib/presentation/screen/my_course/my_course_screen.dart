@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/my_course/bloc/my_course_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/my_course/widget/my_course_app_bar.dart';
@@ -76,16 +77,18 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
             const SizedBox(height: 6),
             ...List.generate(
                 3,
-                (index) => const CourseListItem(
-                      margin: EdgeInsets.symmetric(vertical: 6),
+                (index) => CourseListItem(
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      course: Course.mock(),
                     )),
             const SizedBox(height: defaultMarginValue),
             const AppTitleText(text: '완료코스'),
             const SizedBox(height: 6),
             ...List.generate(
                 10,
-                (index) => const CourseListItem(
-                      margin: EdgeInsets.symmetric(vertical: 6),
+                (index) => CourseListItem(
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      course: Course.mock(),
                     )),
           ],
         );

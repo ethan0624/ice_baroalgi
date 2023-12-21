@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/bloc/spot_detail_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
@@ -208,8 +209,9 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                         const SizedBox(height: 6),
                         ...List.generate(
                           3,
-                          (index) => const CourseListItem(
-                            margin: EdgeInsets.symmetric(vertical: 6),
+                          (index) => CourseListItem(
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            course: Course.mock(),
                           ),
                         ),
                       ],

@@ -1,17 +1,21 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
+import 'package:incheon_knowhow/data/datasource/api_client.dart';
 import 'package:incheon_knowhow/data/repository/auth_repository_impl.dart';
 import 'package:incheon_knowhow/data/repository/category_repository_impl.dart';
+import 'package:incheon_knowhow/data/repository/course_repository_impl.dart';
 import 'package:incheon_knowhow/domain/repository/auth_repository.dart';
 import 'package:incheon_knowhow/domain/repository/category_repository.dart';
-import 'package:incheon_knowhow/domain/usecase/auth/get_token.dart';
+import 'package:incheon_knowhow/domain/repository/course_repository.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/get_user_info.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/login.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/regist_user.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_recommend_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_region_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_topic_categories.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_course.dart';
+import 'package:incheon_knowhow/domain/usecase/course/get_course_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,28 +38,46 @@ class Injection {
 
     final authProvider = AuthProvider(secureStorage: secureStorage)..initial();
     getIt.registerSingleton<AuthProvider>(authProvider);
+    getIt.registerSingleton<ApiClient>(ApiClient(getIt()));
 
     // regist repository
-    getIt.registerSingleton<AuthRepository>(const AuthRepositoryImpl());
-    getIt.registerSingleton<CategoryRepository>(const CategoryRepositoryImpl());
+    getIt.registerSingleton<AuthRepository>(AuthRepositoryImpl(
+      apiClient: getIt(),
+    ));
+    getIt.registerSingleton<CategoryRepository>(CategoryRepositoryImpl(
+      apiClient: getIt(),
+    ));
+    getIt.registerSingleton<CourseRepository>(CourseRepositoryImpl(
+      apiClient: getIt(),
+    ));
 
     // regist usecase
     getIt.registerLazySingleton<Login>(() => Login(
           authProvider: getIt(),
           repository: getIt(),
         ));
-    getIt.registerLazySingleton<GetToken>(() => const GetToken());
     getIt.registerLazySingleton<GetUserInfo>(
-        () => GetUserInfo(authProvider: getIt()));
+      () => GetUserInfo(authProvider: getIt()),
+    );
     getIt.registerLazySingleton<RegistUser>(
-        () => RegistUser(repository: getIt()));
+      () => RegistUser(repository: getIt()),
+    );
 
     getIt.registerLazySingleton<FindTopicCategoreis>(
-        () => FindTopicCategoreis(repository: getIt()));
+      () => FindTopicCategoreis(repository: getIt()),
+    );
     getIt.registerLazySingleton<FindRegionCategoreis>(
-        () => FindRegionCategoreis(repository: getIt()));
+      () => FindRegionCategoreis(repository: getIt()),
+    );
     getIt.registerLazySingleton<FindRecommendCategoreis>(
-        () => FindRecommendCategoreis(repository: getIt()));
+      () => FindRecommendCategoreis(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindCourse>(
+      () => const FindCourse(),
+    );
+    getIt.registerLazySingleton<GetCourseInfo>(
+      () => const GetCourseInfo(),
+    );
   }
 
   static _clearSecureStorageOnReinstall({

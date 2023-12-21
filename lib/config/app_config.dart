@@ -4,8 +4,9 @@ class AppConfig {
   static const String appScheme = '';
   static const String naverMapClientId = 'uihnwow7tv';
 
-  static const String baseUrl =
-      isRelease ? 'https://ice.co.kr' : 'https://device.co.kr';
+  static const String baseUrl = isRelease
+      ? 'https://ice.co.kr'
+      : 'https://ec2-54-174-12-34.compute-1.amazonaws.com';
   static const String apiBaseUrl = '$baseUrl/api/v1';
-  static const Duration apiTimeout = Duration(seconds: 30);
+  static const Duration apiTimeout = Duration(seconds: 20);
 }

@@ -23,5 +23,6 @@ class AppSubAppBar extends AppBar {
           ),
           automaticallyImplyLeading: true,
           leading: AppBackButton(onBackPressed: onBackPressed),
+          surfaceTintColor: Colors.transparent,
         );
 }
