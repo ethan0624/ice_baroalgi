@@ -2,13 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/enum/region_category_type.dart';
+import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/home/bloc/home_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/home_app_bar.dart';
-import 'package:incheon_knowhow/presentation/screen/home/widget/recommand_course.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/recommend_course.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/region_course.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/topic_course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -19,11 +22,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _scrollController = ScrollController();
+
+  _onExpanededTopic(Category topicCategory, bool isExpaneded) {
+    final bloc = _scaffoldKey.currentContext?.read<HomeBloc>();
+    if (bloc == null) return;
+
+    bloc.add(HomeEvent.expanededTopic(topicCategory, isExpaneded));
+  }
+
+  _onRegionChanged(RegionCategoryType regionCategoryType) {
+    final bloc = _scaffoldKey.currentContext?.read<HomeBloc>();
+    if (bloc == null) return;
+
+    bloc.add(HomeEvent.changeRegion(regionCategoryType));
+  }
+
+  _onRecommendChanged(Category recommendCategory) {
+    final bloc = _scaffoldKey.currentContext?.read<HomeBloc>();
+    if (bloc == null) return;
+
+    bloc.add(HomeEvent.changeRecommend(recommendCategory));
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<HomeBloc, HomeBloc, HomeState>(
+      scaffoldKey: _scaffoldKey,
       create: (_) => HomeBloc()..add(const HomeEvent.initial()),
       appBar: HomeAppBar(
         onSearchPressed: () {
@@ -98,15 +124,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           TopicCourse(
                             categories: state.topicCategories,
-                            scrollController: _scrollController,
+                            expandedCategory: state.expandedTopicCategory,
+                            // scrollController: _scrollController,
+                            onExpaned: _onExpanededTopic,
                           ),
                           RegionCourse(
-                            regions: state.regionCategories,
+                            regions: RegionCategoryType.values,
+                            selectedRegion: state.selectedRegionCategoryType,
                             courseList: state.filterRegionCourse,
-                            scrollController: _scrollController,
+                            // scrollController: _scrollController,
+                            onRegionChanged: _onRegionChanged,
                           ),
-                          RecommandCourse(
-                            recommands: state.recommendCategories,
+                          RecommendCourse(
+                            recommends: state.recommendCategories,
+                            selectedRecommend: state.selectedRecommendCategory,
+                            onRecommendChanged: _onRecommendChanged,
                           ),
                         ],
                       ),

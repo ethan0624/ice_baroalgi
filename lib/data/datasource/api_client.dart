@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:incheon_knowhow/domain/model/find_id_result.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
@@ -51,22 +52,28 @@ abstract class ApiClient {
     return _ApiClient(dio);
   }
 
-  // 회원가입
-  @POST('/register')
-  Future<DataResponse<String>> register(
-    @Body() Map<String, dynamic> data,
-  );
-
   // 로그인(엑세스 토큰 발급)
   @POST('/login')
   Future<DataResponse<Token>> login(
     @Body() Map<String, dynamic> data,
   );
 
+  // 회원 아이디 찾기
+  @POST('/user/findId')
+  Future<DataResponse<FindIdResult>> findUserId(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 회원조회
-  @GET('/user/:id')
-  Future<DataResponse<User>> getUser(
-    @Path() int id,
+  @GET('/user/info')
+  Future<DataResponse<User>> getUserMe();
+
+  /// todo:
+
+  // 회원가입
+  @POST('/register')
+  Future<DataResponse<String>> register(
+    @Body() Map<String, dynamic> data,
   );
 
   // 회원 비밀번호 수정
@@ -101,12 +108,6 @@ abstract class ApiClient {
   @DELETE('/user/:id')
   Future<DataResponse<String>> withdraw(
     @Path() int id,
-  );
-
-  // 회원 아이디 찾기
-  @POST('/user/findId')
-  Future<DataResponse<String>> findUserId(
-    @Body() Map<String, dynamic> data,
   );
 
   // 회원 패스워드 찾기

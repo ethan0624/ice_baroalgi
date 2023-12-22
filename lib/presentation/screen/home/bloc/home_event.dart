@@ -5,8 +5,12 @@ sealed class HomeEvent extends Equatable {
 
   const factory HomeEvent.initial() = HomeOnInitial;
 
-  const factory HomeEvent.changeRegion(List<Category> regions) =
+  const factory HomeEvent.expanededTopic(
+      Category topicCategory, bool isExpanded) = HomeOnExpanededTopic;
+  const factory HomeEvent.changeRegion(RegionCategoryType regionCategoryType) =
       HomeOnChangedRegon;
+  const factory HomeEvent.changeRecommend(Category category) =
+      HomeOnChangedRecommend;
 
   @override
   List<Object> get props => [];
@@ -16,7 +20,18 @@ class HomeOnInitial extends HomeEvent {
   const HomeOnInitial();
 }
 
+class HomeOnExpanededTopic extends HomeEvent {
+  final Category topicCategory;
+  final bool isExpanded;
+  const HomeOnExpanededTopic(this.topicCategory, this.isExpanded);
+}
+
 class HomeOnChangedRegon extends HomeEvent {
-  final List<Category> regions;
-  const HomeOnChangedRegon(this.regions);
+  final RegionCategoryType regionCategoryType;
+  const HomeOnChangedRegon(this.regionCategoryType);
+}
+
+class HomeOnChangedRecommend extends HomeEvent {
+  final Category category;
+  const HomeOnChangedRecommend(this.category);
 }

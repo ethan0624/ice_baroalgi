@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 
@@ -30,6 +31,7 @@ class AppTextFormField extends StatelessWidget {
   final VoidCallback? onChange;
   final bool enabled;
   final bool autoFocus;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextFormField({
     super.key,
@@ -60,6 +62,7 @@ class AppTextFormField extends StatelessWidget {
     this.enabled = true,
     this.autoFocus = false,
     this.suffix,
+    this.inputFormatters,
   });
 
   @override
@@ -84,6 +87,7 @@ class AppTextFormField extends StatelessWidget {
             autofocus: autoFocus,
             obscureText: isObscureText,
             keyboardType: keyboardType,
+            inputFormatters: inputFormatters,
             scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom + 80),
             decoration: InputDecoration(

@@ -52,18 +52,21 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
       id: 'test',
       position: current.target.offsetByMeter(northMeter: 100),
       icon: markerIcon,
+      size: const Size(36, 44),
     );
 
     final marker2 = NMarker(
       id: 'test2',
       position: current.target.offsetByMeter(northMeter: 100, eastMeter: 100),
       icon: markerIcon,
+      size: const Size(36, 44),
     );
 
     final marker3 = NMarker(
       id: 'test3',
       position: current.target.offsetByMeter(northMeter: -100, eastMeter: -100),
       icon: markerIcon,
+      size: const Size(36, 44),
     );
     marker.setOnTapListener(_onMarkerPressed);
     marker2.setOnTapListener(_onMarkerPressed);
@@ -211,7 +214,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withOpacity(0.15),
+                            offset: const Offset(0, -6),
                             blurRadius: 6,
                           )
                         ],

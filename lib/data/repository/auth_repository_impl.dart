@@ -6,6 +6,7 @@ import 'package:incheon_knowhow/data/request/user_register_request.dart';
 import 'package:incheon_knowhow/data/response/data_response.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
+import 'package:incheon_knowhow/domain/model/find_id_result.dart';
 import 'package:incheon_knowhow/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -29,8 +30,30 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Result<FindIdResult, Exception>> findUserId({
+    required String name,
+    required String birth,
+    required String phone,
+  }) async {
+    final data = {
+      'name': name,
+      'birth': birth,
+      'phone': phone.replaceAll('-', ''),
+    };
+    final res = await safetyCall<FindIdResult>(apiClient.findUserId(data));
+    final result = res.tryGetSuccess()?.data;
+    return res.isSuccess() && result != null
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
   Future<Result<User, Exception>> getUserMe() async {
-    return Result.success(User.tester());
+    final res = await safetyCall<User>(apiClient.getUserMe());
+    final result = res.tryGetSuccess()?.data;
+    return res.isSuccess() && result != null
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 
   @override

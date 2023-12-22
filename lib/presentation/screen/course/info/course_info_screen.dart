@@ -95,7 +95,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
+                      offset: Offset(0, -12),
                       blurRadius: 12,
                     ),
                   ],

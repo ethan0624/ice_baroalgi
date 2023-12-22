@@ -6,17 +6,17 @@ part 'user.g.dart';
 @JsonSerializable()
 class User {
   @JsonKey(name: 'id')
-  final String id;
+  final int id;
   @JsonKey(name: 'name')
   final String name;
   @JsonKey(name: 'email')
   final String email;
   @JsonKey(name: 'phone')
   final String phone;
-  @JsonKey(name: 'type')
-  final String type;
   @JsonKey(name: 'gender', unknownEnumValue: UserGenderType.male)
   final UserGenderType genderType;
+  @JsonKey(name: 'type')
+  final String? type;
   @JsonKey(name: 'school')
   final String? schoolName;
   @JsonKey(name: 'grade')
@@ -31,8 +31,8 @@ class User {
     required this.name,
     required this.email,
     required this.phone,
-    required this.type,
     required this.genderType,
+    this.type,
     this.schoolName,
     this.grade,
     this.group,
@@ -41,7 +41,7 @@ class User {
 
   factory User.tester() {
     return const User(
-      id: '1',
+      id: 1,
       name: 'tester',
       email: 'test@test.co.kr',
       phone: '010-1234-5678',

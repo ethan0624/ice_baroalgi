@@ -8,32 +8,24 @@ import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_topic_expansion.dart';
 
-class TopicCourse extends StatefulWidget {
+class TopicCourse extends StatelessWidget {
   final List<Category> categories;
+  final Category? expandedCategory;
   final ScrollController? scrollController;
+  final Function(Category category, bool isExpaned)? onExpaned;
   const TopicCourse({
     super.key,
     required this.categories,
+    this.expandedCategory,
     this.scrollController,
+    this.onExpaned,
   });
-
-  @override
-  State<TopicCourse> createState() => _TopicCourseState();
-}
-
-class _TopicCourseState extends State<TopicCourse> {
-  int _expendedIndex = -1;
-
-  _onChangedExpanedIndex(int index, bool isExpaned) {
-    setState(() {
-      _expendedIndex = isExpaned ? index : -1;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      controller: widget.scrollController,
+      key: const PageStorageKey('home-topic-list'),
+      controller: scrollController,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
@@ -41,7 +33,7 @@ class _TopicCourseState extends State<TopicCourse> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '총 ${widget.categories.length.toNumberFormat}주제',
+                '총 ${categories.length.toNumberFormat}주제',
                 style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
@@ -59,11 +51,11 @@ class _TopicCourseState extends State<TopicCourse> {
             ],
           ),
         ),
-        ...widget.categories.mapIndexed((index, e) => CourseTopicExpansion(
+        ...categories.mapIndexed((index, e) => CourseTopicExpansion(
               category: e,
-              expended: index == _expendedIndex,
-              onExpended: (isExpaned) {
-                _onChangedExpanedIndex(index, isExpaned);
+              expended: e == expandedCategory,
+              onExpended: (expaned) {
+                onExpaned?.call(e, expaned);
               },
             )),
       ],

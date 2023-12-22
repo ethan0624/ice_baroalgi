@@ -161,7 +161,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      '오전 10시부터 오후 4시',
+                                      '오전 10시부터 오후 4시\n주말 오전 10시부터 오후 8시',
                                       style: context.textTheme.labelLarge,
                                     ),
                                   ),
@@ -231,9 +231,9 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 12,
-                    ),
+                        color: Colors.black12,
+                        blurRadius: 12,
+                        offset: Offset(0, -12)),
                   ],
                 ),
                 child: AppButton(

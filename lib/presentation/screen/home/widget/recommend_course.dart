@@ -7,54 +7,36 @@ import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
 
-class RecommandCourse extends StatefulWidget {
-  final List<Category> recommands;
-  const RecommandCourse({
+class RecommendCourse extends StatelessWidget {
+  final List<Category> recommends;
+  final Category? selectedRecommend;
+  final ValueChanged<Category>? onRecommendChanged;
+  const RecommendCourse({
     super.key,
-    required this.recommands,
+    required this.recommends,
+    this.selectedRecommend,
+    this.onRecommendChanged,
   });
-
-  @override
-  State<RecommandCourse> createState() => _RecommandCourseState();
-}
-
-class _RecommandCourseState extends State<RecommandCourse> {
-  Category? _selectedRecommand;
-
-  _onRecommandChanged(Category recommand) {
-    setState(() {
-      _selectedRecommand = recommand;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() {
-        _selectedRecommand = widget.recommands.first;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
+      key: const PageStorageKey('home-recommend-list'),
       children: [
         Container(
           margin: const EdgeInsets.symmetric(vertical: 12),
           height: 30,
           child: ListView.separated(
+            key: const PageStorageKey('home-recommend-category-list'),
             padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             scrollDirection: Axis.horizontal,
-            itemCount: widget.recommands.length,
+            itemCount: recommends.length,
             itemBuilder: (context, index) {
-              final recommand = widget.recommands[index];
+              final recommand = recommends[index];
               return FilterButton(
                 text: recommand.name,
-                isSelected: recommand == _selectedRecommand,
-                onPressed: () => _onRecommandChanged(recommand),
+                isSelected: recommand == selectedRecommend,
+                onPressed: () => onRecommendChanged?.call(recommand),
               );
             },
             separatorBuilder: (context, index) {

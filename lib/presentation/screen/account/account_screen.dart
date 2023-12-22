@@ -51,7 +51,7 @@ class _AccountScreenState extends State<AccountScreen> {
       appBar: AppSubAppBar(
         text: '계정',
       ),
-      create: (_) => AccountBloc(),
+      create: (_) => AccountBloc()..add(const AccountEvent.initial()),
       effectChanged: (context, effect) {
         _handleEffect(effect);
       },

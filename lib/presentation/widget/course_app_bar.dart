@@ -33,6 +33,7 @@ class CourseAppBar extends AppBar {
                   Colors.black,
                   BlendMode.srcIn,
                 ),
+                width: 46,
               ),
             ),
             IconButton(
@@ -44,6 +45,7 @@ class CourseAppBar extends AppBar {
                   Colors.black,
                   BlendMode.srcIn,
                 ),
+                width: 46,
               ),
             ),
           ],

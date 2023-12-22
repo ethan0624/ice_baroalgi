@@ -22,7 +22,7 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<FavoriteCourseBloc, FavoriteCourseBloc,
         FavoriteCourseState>(
-      appBar: AppSubAppBar(text: '짬한코스'),
+      appBar: AppSubAppBar(text: '찜한코스'),
       create: (_) => FavoriteCourseBloc(),
       builder: (context, bloc, state) {
         return ListView(

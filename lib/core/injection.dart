@@ -8,6 +8,7 @@ import 'package:incheon_knowhow/data/repository/course_repository_impl.dart';
 import 'package:incheon_knowhow/domain/repository/auth_repository.dart';
 import 'package:incheon_knowhow/domain/repository/category_repository.dart';
 import 'package:incheon_knowhow/domain/repository/course_repository.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/find_user_id.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/get_user_info.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/login.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/regist_user.dart';
@@ -52,6 +53,9 @@ class Injection {
     ));
 
     // regist usecase
+    getIt.registerLazySingleton<FindUserId>(() => FindUserId(
+          repository: getIt(),
+        ));
     getIt.registerLazySingleton<Login>(() => Login(
           authProvider: getIt(),
           repository: getIt(),

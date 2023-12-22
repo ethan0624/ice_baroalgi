@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
+import 'package:incheon_knowhow/presentation/widget/custom_map_marker.dart';
 import 'package:incheon_knowhow/route/app_router.dart';
 import 'package:incheon_knowhow/presentation/widget/app_bottom_navigation_bar.dart';
 
@@ -16,11 +18,34 @@ class MainTabScreen extends StatefulWidget {
 
 class _MainTabScreenState extends State<MainTabScreen> {
   final _authProvider = getIt<AuthProvider>();
+  bool _isAuthenticated = false;
 
   _handleAuthChanged() {
-    if (!_authProvider.isAuthenticated()) {
-      context.router.navigateNamed('/main/home');
+    final authenticated = _authProvider.isAuthenticated();
+    if (_isAuthenticated != authenticated) {
+      _isAuthenticated = authenticated;
+
+      if (!authenticated) {
+        context.router.navigateNamed('/main/home');
+      }
     }
+  }
+
+  _loadMapMarker() async {
+    await Future.wait([
+      NOverlayImage.fromWidget(
+        widget: const CustomMapMarker(),
+        size: const Size(36, 44),
+        context: context,
+      ),
+      NOverlayImage.fromWidget(
+        widget: const CustomMapMarker(
+          type: CustomMapMarkerType.focus,
+        ),
+        size: const Size(36, 44),
+        context: context,
+      )
+    ]);
   }
 
   @override
@@ -29,9 +54,13 @@ class _MainTabScreenState extends State<MainTabScreen> {
 
     _authProvider.addListener(_handleAuthChanged);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _isAuthenticated = _authProvider.isAuthenticated();
+
       if (!_authProvider.skipJinroAccountRegist) {
         context.router.pushNamed('/jinroAccount');
       }
+
+      _loadMapMarker();
     });
   }
 

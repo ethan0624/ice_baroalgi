@@ -62,7 +62,10 @@ extension BuildContextExtension on BuildContext {
               onPressed: () => context.router.pop(true),
               child: Text(
                 '확인',
-                style: textTheme.bodySmall?.copyWith(color: Colors.blue),
+                style: textTheme.bodySmall?.copyWith(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
@@ -102,7 +105,7 @@ extension BuildContextExtension on BuildContext {
                 '취소',
                 style: textTheme.bodyMedium?.copyWith(
                   color: Colors.grey,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -111,8 +114,8 @@ extension BuildContextExtension on BuildContext {
               child: Text(
                 '확인',
                 style: textTheme.bodyMedium?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),

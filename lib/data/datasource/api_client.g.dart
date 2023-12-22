@@ -19,37 +19,6 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<DataResponse<String>> register(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(data);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResponse<String>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/register',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = DataResponse<String>.fromJson(
-      _result.data!,
-      (json) => json as String,
-    );
-    return value;
-  }
-
-  @override
   Future<DataResponse<Token>> login(Map<String, dynamic> data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -81,7 +50,39 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<DataResponse<User>> getUser(int id) async {
+  Future<DataResponse<FindIdResult>> findUserId(
+      Map<String, dynamic> data) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<FindIdResult>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/findId',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<FindIdResult>.fromJson(
+      _result.data!,
+      (json) => FindIdResult.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<DataResponse<User>> getUserMe() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -94,7 +95,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/user/:id',
+              '/user/info',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -106,6 +107,37 @@ class _ApiClient implements ApiClient {
     final value = DataResponse<User>.fromJson(
       _result.data!,
       (json) => User.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<DataResponse<String>> register(Map<String, dynamic> data) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<String>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<String>.fromJson(
+      _result.data!,
+      (json) => json as String,
     );
     return value;
   }
@@ -261,37 +293,6 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/user/:id',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = DataResponse<String>.fromJson(
-      _result.data!,
-      (json) => json as String,
-    );
-    return value;
-  }
-
-  @override
-  Future<DataResponse<String>> findUserId(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(data);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResponse<String>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/user/findId',
               queryParameters: queryParameters,
               data: _data,
             )

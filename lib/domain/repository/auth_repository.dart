@@ -1,5 +1,6 @@
 import 'package:incheon_knowhow/data/request/user_register_request.dart';
 import 'package:incheon_knowhow/data/response/data_response.dart';
+import 'package:incheon_knowhow/domain/model/find_id_result.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -8,6 +9,12 @@ abstract class AuthRepository {
   Future<Result<Token, Exception>> getToken({
     required String email,
     required String password,
+  });
+
+  Future<Result<FindIdResult, Exception>> findUserId({
+    required String name,
+    required String birth,
+    required String phone,
   });
 
   Future<Result<User, Exception>> getUserMe();
