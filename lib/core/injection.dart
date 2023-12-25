@@ -80,7 +80,7 @@ class Injection {
       () => FindRecommendCategoreis(repository: getIt()),
     );
     getIt.registerLazySingleton<FindCourse>(
-      () => const FindCourse(),
+      () => FindCourse(repository: getIt()),
     );
     getIt.registerLazySingleton<GetCourseInfo>(
       () => const GetCourseInfo(),

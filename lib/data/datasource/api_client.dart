@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/find_id_result.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -67,6 +68,12 @@ abstract class ApiClient {
   // 회원조회
   @GET('/user/info')
   Future<DataResponse<User>> getUserMe();
+
+  // 코스 목록 조회
+  @GET('/course')
+  Future<DataResponse<List<Course>>> findCourse(
+    @Body() Map<String, dynamic> data,
+  );
 
   /// todo:
 

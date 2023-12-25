@@ -5,6 +5,7 @@ import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_recommend_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_topic_categories.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_course.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc.dart';
 import 'package:incheon_knowhow/presentation/base/base_state.dart';
 
@@ -14,6 +15,7 @@ part 'home_state.dart';
 class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
   final _findTopicCategories = getIt<FindTopicCategoreis>();
   final _findRecommnedCategories = getIt<FindRecommendCategoreis>();
+  final _findCourse = getIt<FindCourse>();
   // todo : 정복중인 코스 조회
   HomeBloc() : super(const HomeState()) {
     on<HomeOnInitial>((event, emit) async {
@@ -25,9 +27,13 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
       final topics = futures[0].tryGetSuccess() ?? [];
       final recommandCategories = futures[1].tryGetSuccess() ?? [];
 
+      // find region course
+      // final regionRes = await _findCourse();
+
       emit(state.copyWith(
         topicCategories: topics,
         recommendCategories: recommandCategories,
+        // filterRegionCourse: regionRes.tryGetSuccess(),
         filterRegionCourse: Course.mocks(),
         selectedRecommendCategory: recommandCategories.first,
       ));
