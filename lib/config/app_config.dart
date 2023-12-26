@@ -9,4 +9,7 @@ class AppConfig {
       : 'https://ec2-54-174-12-34.compute-1.amazonaws.com';
   static const String apiBaseUrl = '$baseUrl/api/v1';
   static const Duration apiTimeout = Duration(seconds: 20);
+
+  // open neis (나이스 교육정보 개방 포털)
+  static const String openNeisApiKey = '905ffa25d86a44e689bbd3958680c6d0';
 }

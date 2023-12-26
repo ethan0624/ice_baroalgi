@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
@@ -16,10 +18,26 @@ class SearchSchoolScreen extends StatefulWidget {
 }
 
 class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _keywordTextController = TextEditingController();
+
+  _onSearch() {
+    if (_keywordTextController.text.isEmpty) {
+      context.showAlert(title: '검색어 입력', message: '학교명을 입력해주세요');
+      return;
+    }
+
+    final bloc = _scaffoldKey.currentContext?.read<SearchSchoolBloc>();
+    if (bloc == null) return;
+
+    bloc.add(SearchSchoolEvent.search(_keywordTextController.text));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<SearchSchoolBloc, SearchSchoolBloc,
         SearchSchoolState>(
+      scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(text: '학교검색', elevation: 0),
       backgroundColor: Colors.white,
       create: (_) => SearchSchoolBloc(),
@@ -36,14 +54,27 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
                 style: context.textTheme.labelMedium,
               ),
             ),
-            const AppTextFormField(
-              margin: EdgeInsets.symmetric(
+            AppTextFormField(
+              controller: _keywordTextController,
+              margin: const EdgeInsets.symmetric(
                   horizontal: defaultMarginValue,
                   vertical: defaultMarginValue / 2),
               hintText: '학교명을 검색하세요',
-              suffix: Icon(
-                Icons.search,
-                color: Colors.black,
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.search,
+              onSubmitted: () => _onSearch,
+              suffix: IconButton(
+                onPressed: _onSearch,
+                style: IconButton.styleFrom(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: const Size(10, 10),
+                  padding: EdgeInsets.zero,
+                ),
+                icon: SvgPicture.asset(
+                  'assets/images/ic_search.svg',
+                  height: 18,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Container(

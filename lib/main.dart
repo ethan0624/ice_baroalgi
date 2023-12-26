@@ -49,6 +49,6 @@ void main() async {
       ),
     );
   }, (error, stack) {
-    debugPrint('>>>> error : $error');
+    debugPrint('>>>> error : $error, $stack');
   });
 }
