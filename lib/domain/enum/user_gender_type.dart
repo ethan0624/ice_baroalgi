@@ -6,3 +6,14 @@ enum UserGenderType {
   @JsonValue('f')
   female,
 }
+
+extension UserGenderTypeExtension on UserGenderType {
+  String get title {
+    switch (this) {
+      case UserGenderType.male:
+        return '남자';
+      case UserGenderType.female:
+        return '여자';
+    }
+  }
+}

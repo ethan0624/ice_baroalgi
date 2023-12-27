@@ -26,6 +26,8 @@ class JoinRegistScreen extends StatefulWidget {
 }
 
 class _JoinRegistScreenState extends State<JoinRegistScreen> {
+  final _schoolTextController = TextEditingController();
+
   _onJoinPressed() {
     context.router.replace(JoinCompleteRoute(userName: 'TEST'));
   }
@@ -119,7 +121,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
-                  const SchoolSearchFormField(),
+                  SchoolSearchFormField(controller: _schoolTextController),
                   const Row(
                     children: [
                       Expanded(

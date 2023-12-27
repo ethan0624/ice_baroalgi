@@ -212,7 +212,7 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SearchSchoolRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return AutoRoutePage<School>(
         routeData: routeData,
         child: const SearchSchoolScreen(),
       );

@@ -1,5 +1,7 @@
 // ignore_for_file: implementation_imports
+import 'dart:convert';
 import 'package:incheon_knowhow/config/app_config.dart';
+import 'package:incheon_knowhow/domain/model/school.dart';
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/datasource/neis_api_client.dart';
 import 'package:incheon_knowhow/domain/model/school_paging.dart';
@@ -19,8 +21,6 @@ class SchoolRepositoryImpl implements SchoolRepository {
       final pageNumber = page ?? 1;
       final pageSize = size ?? 10;
 
-      print('>>> call');
-
       final res = await apiClient.findSchools(
         AppConfig.openNeisApiKey,
         pageNumber,
@@ -28,23 +28,29 @@ class SchoolRepositoryImpl implements SchoolRepository {
         'json',
         keyword ?? '',
       );
-      print('>>> res : $res');
-      if (res.infos.isEmpty) {
-        return Result.error(Exception('data not found'));
+
+      final json = jsonDecode(res);
+      final info = json['schoolInfo'] as List<dynamic>?;
+      if (info == null) {
+        return Result.error(Exception('not found'));
       }
 
-      final info = res.infos.firstOrNull;
-      final infoPage = info?.pages.firstOrNull;
-      final totalCount = infoPage?.totalCount ?? 0;
+      final head = info.firstOrNull?['head'];
+      final totalCount = head[0]?['list_total_count'] as int? ?? 0;
+      final data = info[1]?['row'] ?? [];
+      List<School> rows = [];
+      for (Map<String, dynamic> row in data) {
+        final school = School.fromJson(row);
+        rows.add(school);
+      }
       final totalPage = (totalCount / pageSize).round();
-      final paging = SchoolPaging(
+
+      return Result.success(SchoolPaging(
         totalCount: totalCount,
         totalPage: totalPage,
-        page: totalPage,
-        rows: info?.rows ?? [],
-      );
-
-      return Result.success(paging);
+        page: pageNumber,
+        rows: rows,
+      ));
     } catch (e, s) {
       print('>>>>>> api error : $e /// $s');
       return Result.error(Exception(e));

@@ -96,10 +96,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       child: TabBar(
-                        indicatorColor: AppColor.primary,
-                        indicatorWeight: 1,
-                        indicatorPadding:
-                            const EdgeInsets.symmetric(horizontal: 4),
+                        indicator: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                                width: 1.5, color: AppColor.secondary),
+                          ),
+                        ),
+                        splashFactory: NoSplash.splashFactory,
+                        padding: EdgeInsets.zero,
+                        dividerColor: Colors.transparent,
                         unselectedLabelColor: AppTextColor.light,
                         unselectedLabelStyle: context.textTheme.bodyMedium,
                         labelColor: Colors.black,

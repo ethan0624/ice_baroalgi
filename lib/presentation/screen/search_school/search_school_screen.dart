@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/school.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/search_school/bloc/search_school_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 
-@RoutePage()
+@RoutePage<School>()
 class SearchSchoolScreen extends StatefulWidget {
   const SearchSchoolScreen({super.key});
 
@@ -31,6 +32,10 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
     if (bloc == null) return;
 
     bloc.add(SearchSchoolEvent.search(_keywordTextController.text));
+  }
+
+  _onSelected(School school) {
+    context.router.pop(school);
   }
 
   @override
@@ -81,36 +86,44 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
               height: 5,
               color: AppColor.dividerLight,
             ),
-            Expanded(
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: 30,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: defaultMarginValue),
-                    title: Text(
-                      '가나다초등학교',
-                      style: context.textTheme.labelLarge
-                          ?.copyWith(fontWeight: FontWeight.w500),
+            state.schools.isEmpty
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 60),
+                    child: Center(
+                      child: Text('조회된 데이터가 없습니다'),
                     ),
-                    subtitle: Text(
-                      '인천광역시북부교육지원청',
-                      style: context.textTheme.labelMedium?.copyWith(
-                        color: AppTextColor.light,
-                      ),
+                  )
+                : Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: state.schools.length,
+                      itemBuilder: (context, index) {
+                        final school = state.schools[index];
+                        return ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: defaultMarginValue),
+                          title: Text(
+                            school.name,
+                            style: context.textTheme.labelLarge
+                                ?.copyWith(fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: Text(
+                            school.organizationName,
+                            style: context.textTheme.labelMedium?.copyWith(
+                              color: AppTextColor.light,
+                            ),
+                          ),
+                          onTap: () => _onSelected(school),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Container(
+                          height: 1,
+                          color: AppColor.dividerLight,
+                        );
+                      },
                     ),
-                    onTap: () {},
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Container(
-                    height: 1,
-                    color: AppColor.dividerLight,
-                  );
-                },
-              ),
-            )
+                  ),
           ],
         );
       },

@@ -16,10 +16,11 @@ class SearchSchoolBloc
       emit(state.copyWith(isLoading: true));
 
       final res = await _findSchool(page: 1, keyword: event.keyword);
+      final paging = res.tryGetSuccess();
 
-      print('>>> res : $res');
       emit(state.copyWith(
         isLoading: false,
+        schools: paging?.rows,
       ));
     });
   }

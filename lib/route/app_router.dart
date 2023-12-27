@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/domain/model/school.dart';
 import 'package:incheon_knowhow/presentation/screen/account/account_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_screen.dart';

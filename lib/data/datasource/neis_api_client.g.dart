@@ -21,7 +21,7 @@ class _NeisApiClient implements NeisApiClient {
   String? baseUrl;
 
   @override
-  Future<SchoolResponse> findSchools(
+  Future<String> findSchools(
     String key,
     int page,
     int size,
@@ -39,24 +39,23 @@ class _NeisApiClient implements NeisApiClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SchoolResponse>(Options(
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/schoolInfo',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SchoolResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/schoolInfo',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
     return value;
   }
 
