@@ -2,12 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/string_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
-import 'package:incheon_knowhow/presentation/screen/reset_pw/form/bloc/reseet_pw_bloc.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
+import 'package:incheon_knowhow/presentation/screen/reset_pw/form/bloc/reset_pw_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
+import 'package:incheon_knowhow/route/app_router.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class ResetPwFormScreen extends StatefulWidget {
@@ -18,15 +22,55 @@ class ResetPwFormScreen extends StatefulWidget {
 }
 
 class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
-  _onCertificationPressed() {
-    context.router.pushNamed('/resetPw/certification');
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _nameTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _nameFocusNode = FocusNode();
+  final _emailFocusNode = FocusNode();
+
+  _onCertificationPressed() async {
+    if (_nameTextController.text.isEmpty) {
+      await context.showAlert(title: '입력오류', message: '이름을 입력해주세요');
+      _nameFocusNode.requestFocus();
+      return;
+    }
+
+    if (_emailTextController.text.isEmpty) {
+      await context.showAlert(title: '입력오류', message: '이메일을 입력해주세요');
+      _emailFocusNode.requestFocus();
+      return;
+    }
+
+    if (!_emailTextController.text.isValidEmail()) {
+      await context.showAlert(title: '입력오류', message: '올바른 이메일 형식을 입력해주세요');
+      _emailFocusNode.requestFocus();
+      return;
+    }
+
+    final bloc = _scaffoldKey.currentContext?.read<ResetPwBloc>();
+    if (bloc == null) return;
+
+    FocusManager.instance.primaryFocus?.unfocus();
+    bloc.add(
+        ResetPwEvent.find(_nameTextController.text, _emailTextController.text));
+  }
+
+  _handleEffect(BlocEffect effect) {
+    if (effect is SuccessEffect) {
+      context.router
+          .push(ResetPwCertificationRoute(certificationCode: effect.data));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseSideEffectBlocLayout<ReseetPwBloc, ReseetPwBloc, ReseetPwState>(
+    return BaseSideEffectBlocLayout<ResetPwBloc, ResetPwBloc, ResetPwState>(
+      scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(text: '비밀번호 재설정'),
-      create: (_) => ReseetPwBloc(),
+      create: (_) => ResetPwBloc(),
+      effectChanged: (context, effect) {
+        _handleEffect(effect);
+      },
       builder: (context, bloc, state) {
         return ListView(
           padding: const EdgeInsets.all(defaultMarginValue),
@@ -40,7 +84,9 @@ class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
-            const AppTextFormField(
+            AppTextFormField(
+              controller: _nameTextController,
+              focusNode: _nameFocusNode,
               hintText: '이름을 입력하세요',
               keyboardType: TextInputType.name,
             ),
@@ -50,7 +96,9 @@ class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
-            const AppTextFormField(
+            AppTextFormField(
+              controller: _emailTextController,
+              focusNode: _emailFocusNode,
               hintText: '이메일 주소 입력',
               keyboardType: TextInputType.emailAddress,
             ),

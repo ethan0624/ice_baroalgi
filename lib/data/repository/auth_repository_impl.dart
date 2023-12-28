@@ -1,4 +1,5 @@
 // ignore: implementation_imports
+import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
@@ -57,6 +58,38 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Result<CertificationCode, Exception>> sendCertificationCode({
+    required String name,
+    required String email,
+  }) async {
+    final data = {
+      'name': name,
+      'email': email,
+    };
+    final res = await safetyCall(apiClient.sendEmailCertificationCode(data));
+    final result =
+        res.tryGetSuccess()?.data?.copyWith(email: email, name: name);
+    return res.isSuccess() && result != null
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> updatePassword({
+    required int userId,
+    required String password,
+  }) async {
+    final data = {
+      'password': password,
+      'userId': userId,
+    };
+    final res = await safetyCall(apiClient.updateUserPassword(data));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
   Future<Result<DataResponse<User>, Exception>> getUserInfo(
       {required int userId}) {
     // TODO: implement getUserInfo
@@ -67,13 +100,6 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Result<DataResponse<bool>, Exception>> register(
       {required UserRegisterRequest request}) {
     // TODO: implement register
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Result<DataResponse<bool>, Exception>> updatePassword(
-      {required int userId, required String password}) {
-    // TODO: implement updatePassword
     throw UnimplementedError();
   }
 

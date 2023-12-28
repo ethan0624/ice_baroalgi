@@ -7,11 +7,11 @@ import 'dart:async' as _i4;
 
 import 'package:incheon_knowhow/data/datasource/api_client.dart' as _i3;
 import 'package:incheon_knowhow/data/response/data_response.dart' as _i2;
-import 'package:incheon_knowhow/domain/model/certification_code.dart' as _i9;
-import 'package:incheon_knowhow/domain/model/course.dart' as _i8;
+import 'package:incheon_knowhow/domain/model/certification_code.dart' as _i7;
+import 'package:incheon_knowhow/domain/model/course.dart' as _i9;
 import 'package:incheon_knowhow/domain/model/find_id_result.dart' as _i6;
 import 'package:incheon_knowhow/domain/model/token.dart' as _i5;
-import 'package:incheon_knowhow/domain/model/user.dart' as _i7;
+import 'package:incheon_knowhow/domain/model/user.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -82,38 +82,57 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
       ) as _i4.Future<_i2.DataResponse<_i6.FindIdResult>>);
 
   @override
-  _i4.Future<_i2.DataResponse<_i7.User>> getUserMe() => (super.noSuchMethod(
+  _i4.Future<_i2.DataResponse<_i7.CertificationCode>>
+      sendEmailCertificationCode(Map<String, dynamic>? data) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #sendEmailCertificationCode,
+              [data],
+            ),
+            returnValue:
+                _i4.Future<_i2.DataResponse<_i7.CertificationCode>>.value(
+                    _FakeDataResponse_0<_i7.CertificationCode>(
+              this,
+              Invocation.method(
+                #sendEmailCertificationCode,
+                [data],
+              ),
+            )),
+          ) as _i4.Future<_i2.DataResponse<_i7.CertificationCode>>);
+
+  @override
+  _i4.Future<_i2.DataResponse<_i8.User>> getUserMe() => (super.noSuchMethod(
         Invocation.method(
           #getUserMe,
           [],
         ),
-        returnValue: _i4.Future<_i2.DataResponse<_i7.User>>.value(
-            _FakeDataResponse_0<_i7.User>(
+        returnValue: _i4.Future<_i2.DataResponse<_i8.User>>.value(
+            _FakeDataResponse_0<_i8.User>(
           this,
           Invocation.method(
             #getUserMe,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.DataResponse<_i7.User>>);
+      ) as _i4.Future<_i2.DataResponse<_i8.User>>);
 
   @override
-  _i4.Future<_i2.DataResponse<List<_i8.Course>>> findCourse(
+  _i4.Future<_i2.DataResponse<List<_i9.Course>>> findCourse(
           Map<String, dynamic>? data) =>
       (super.noSuchMethod(
         Invocation.method(
           #findCourse,
           [data],
         ),
-        returnValue: _i4.Future<_i2.DataResponse<List<_i8.Course>>>.value(
-            _FakeDataResponse_0<List<_i8.Course>>(
+        returnValue: _i4.Future<_i2.DataResponse<List<_i9.Course>>>.value(
+            _FakeDataResponse_0<List<_i9.Course>>(
           this,
           Invocation.method(
             #findCourse,
             [data],
           ),
         )),
-      ) as _i4.Future<_i2.DataResponse<List<_i8.Course>>>);
+      ) as _i4.Future<_i2.DataResponse<List<_i9.Course>>>);
 
   @override
   _i4.Future<_i2.DataResponse<String>> register(Map<String, dynamic>? data) =>
@@ -134,26 +153,18 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
 
   @override
   _i4.Future<_i2.DataResponse<String>> updateUserPassword(
-    int? id,
-    Map<String, dynamic>? data,
-  ) =>
+          Map<String, dynamic>? data) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateUserPassword,
-          [
-            id,
-            data,
-          ],
+          [data],
         ),
         returnValue: _i4.Future<_i2.DataResponse<String>>.value(
             _FakeDataResponse_0<String>(
           this,
           Invocation.method(
             #updateUserPassword,
-            [
-              id,
-              data,
-            ],
+            [data],
           ),
         )),
       ) as _i4.Future<_i2.DataResponse<String>>);
@@ -251,23 +262,4 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
           ),
         )),
       ) as _i4.Future<_i2.DataResponse<String>>);
-
-  @override
-  _i4.Future<_i2.DataResponse<_i9.CertificationCode>>
-      sendEmailCertificationCode(Map<String, dynamic>? data) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #sendEmailCertificationCode,
-              [data],
-            ),
-            returnValue:
-                _i4.Future<_i2.DataResponse<_i9.CertificationCode>>.value(
-                    _FakeDataResponse_0<_i9.CertificationCode>(
-              this,
-              Invocation.method(
-                #sendEmailCertificationCode,
-                [data],
-              ),
-            )),
-          ) as _i4.Future<_i2.DataResponse<_i9.CertificationCode>>);
 }

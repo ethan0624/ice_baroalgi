@@ -65,6 +65,12 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 
+  // 회원 패스워드 찾기
+  @POST('/user/findPw')
+  Future<DataResponse<CertificationCode>> sendEmailCertificationCode(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 회원조회
   @GET('/user/info')
   Future<DataResponse<User>> getUserMe();
@@ -84,9 +90,8 @@ abstract class ApiClient {
   );
 
   // 회원 비밀번호 수정
-  @PUT('/user/pw/:id')
+  @PUT('/user/pw')
   Future<DataResponse<String>> updateUserPassword(
-    @Path() int id,
     @Body() Map<String, dynamic> data,
   );
 
@@ -115,11 +120,5 @@ abstract class ApiClient {
   @DELETE('/user/:id')
   Future<DataResponse<String>> withdraw(
     @Path() int id,
-  );
-
-  // 회원 패스워드 찾기
-  @POST('/user/findPw')
-  Future<DataResponse<CertificationCode>> sendEmailCertificationCode(
-    @Body() Map<String, dynamic> data,
   );
 }

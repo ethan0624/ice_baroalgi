@@ -1,6 +1,6 @@
 name: incheon_knowhow
 description: incheon knowhow Flutter project
-version: 1.0.0+1
+version: 0.0.2+2
 
 environment:
   sdk: ">=3.1.2 <4.0.0"

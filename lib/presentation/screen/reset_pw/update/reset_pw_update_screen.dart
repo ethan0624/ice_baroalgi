@@ -4,16 +4,22 @@ import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 import 'package:incheon_knowhow/presentation/screen/reset_pw/update/bloc/reset_pw_update_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
 import 'package:incheon_knowhow/presentation/widget/icon_text.dart';
 import 'package:incheon_knowhow/presentation/widget/password_form_field.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class ResetPwUpdateScreen extends StatefulWidget {
-  const ResetPwUpdateScreen({super.key});
+  final int? userId;
+  const ResetPwUpdateScreen({
+    super.key,
+    @queryParam this.userId,
+  });
 
   @override
   State<ResetPwUpdateScreen> createState() => _ResetPwUpdateScreenState();
@@ -21,11 +27,76 @@ class ResetPwUpdateScreen extends StatefulWidget {
 
 class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  late TextEditingController _passwordTextController;
+  late TextEditingController _confirmPasswordTextController;
+
+  bool _isPasswordValidate = true;
+
+  bool _isValid() {
+    if (_passwordTextController.text.isEmpty ||
+        _confirmPasswordTextController.text.isEmpty) {
+      return false;
+    }
+
+    print('>>> _passwordTextController.text : ${_passwordTextController.text}');
+
+    return _passwordTextController.text == _confirmPasswordTextController.text;
+  }
+
+  _validate() {
+    setState(() {
+      if (_passwordTextController.text.isEmpty ||
+          _confirmPasswordTextController.text.isEmpty) {
+        _isPasswordValidate = true;
+        return;
+      }
+
+      print(
+          '>>> _passwordTextController.text : ${_passwordTextController.text}');
+
+      _isPasswordValidate =
+          _passwordTextController.text == _confirmPasswordTextController.text;
+    });
+  }
+
+  _onTextChanged() {
+    _validate();
+  }
 
   _onUpdatePressed() {
+    if (_passwordTextController.text.isEmpty) {
+      context.showAlert(title: '입력오류', message: '비밀번호를 입력해주세요');
+      return;
+    }
+
+    if (_confirmPasswordTextController.text.isEmpty) {
+      context.showAlert(title: '입력오류', message: '비밀번호 확인을 입력해주세요');
+      return;
+    }
+
+    if (_confirmPasswordTextController.text != _passwordTextController.text) {
+      context.showAlert(title: '입력오류', message: '비밀번호와 비밀번호 확인이 일치하지 않습니다');
+      return;
+    }
+
+    final bloc = _scaffoldKey.currentContext?.read<ResetPwUpdateBloc>();
+    if (bloc == null) return;
+
+    bloc.add(ResetPwUpdateEvent.submit(_passwordTextController.text));
+  }
+
+  _onSuccess() {
+    // todo : show toast
     context.router.popUntil((route) {
       return !(route.data?.path.contains('resetPw') ?? false);
     });
+  }
+
+  @override
+  void dispose() {
+    _passwordTextController.removeListener(_onTextChanged);
+    _confirmPasswordTextController.removeListener(_onTextChanged);
+    super.dispose();
   }
 
   @override
@@ -34,7 +105,12 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
         ResetPwUpdateState>(
       scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(text: '비밀번호 재설정'),
-      create: (_) => ResetPwUpdateBloc(),
+      create: (_) => ResetPwUpdateBloc(userId: widget.userId ?? 0),
+      effectChanged: (context, effect) {
+        if (effect is SuccessEffect) {
+          _onSuccess();
+        }
+      },
       builder: (context, bloc, state) {
         return ListView(
           padding: const EdgeInsets.all(defaultMarginValue),
@@ -48,20 +124,32 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
-            const PasswordFormField(),
-            const PasswordFormField(
-              hint: '비밀번호 확인',
-              margin: EdgeInsets.symmetric(vertical: 8),
+            PasswordFormField(
+              onCreated: (controller) {
+                _passwordTextController = controller;
+                _passwordTextController.addListener(_onTextChanged);
+              },
             ),
-            IconText(
-              icon: SvgPicture.asset(
-                'assets/images/ic_close.svg',
-                width: 20,
-                height: 20,
-                colorFilter:
-                    const ColorFilter.mode(Colors.red, BlendMode.srcIn),
+            PasswordFormField(
+              hint: '비밀번호 확인',
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              onCreated: (controller) {
+                _confirmPasswordTextController = controller;
+                _confirmPasswordTextController.addListener(_onTextChanged);
+              },
+            ),
+            Offstage(
+              offstage: _isPasswordValidate,
+              child: IconText(
+                icon: SvgPicture.asset(
+                  'assets/images/ic_close.svg',
+                  width: 20,
+                  height: 20,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.red, BlendMode.srcIn),
+                ),
+                label: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
               ),
-              label: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
             ),
             const SizedBox(height: defaultMarginValue),
             AppButton(

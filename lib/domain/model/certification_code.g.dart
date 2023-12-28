@@ -9,9 +9,11 @@ part of 'certification_code.dart';
 CertificationCode _$CertificationCodeFromJson(Map<String, dynamic> json) =>
     CertificationCode(
       code: json['code'] as String,
+      userId: json['id'] as int,
     );
 
 Map<String, dynamic> _$CertificationCodeToJson(CertificationCode instance) =>
     <String, dynamic>{
       'code': instance.code,
+      'id': instance.userId,
     };

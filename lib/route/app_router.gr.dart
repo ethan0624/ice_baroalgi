@@ -194,9 +194,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ResetPwCertificationRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPwCertificationRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ResetPwCertificationScreen(),
+        child: ResetPwCertificationScreen(
+          key: args.key,
+          certificationCode: args.certificationCode,
+        ),
       );
     },
     ResetPwFormRoute.name: (routeData) {
@@ -206,9 +210,16 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ResetPwUpdateRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ResetPwUpdateRouteArgs>(
+          orElse: () =>
+              ResetPwUpdateRouteArgs(userId: queryParams.optInt('userId')));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ResetPwUpdateScreen(),
+        child: ResetPwUpdateScreen(
+          key: args.key,
+          userId: args.userId,
+        ),
       );
     },
     SearchSchoolRoute.name: (routeData) {
@@ -740,16 +751,41 @@ class NotificationListRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ResetPwCertificationScreen]
-class ResetPwCertificationRoute extends PageRouteInfo<void> {
-  const ResetPwCertificationRoute({List<PageRouteInfo>? children})
-      : super(
+class ResetPwCertificationRoute
+    extends PageRouteInfo<ResetPwCertificationRouteArgs> {
+  ResetPwCertificationRoute({
+    Key? key,
+    required CertificationCode certificationCode,
+    List<PageRouteInfo>? children,
+  }) : super(
           ResetPwCertificationRoute.name,
+          args: ResetPwCertificationRouteArgs(
+            key: key,
+            certificationCode: certificationCode,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ResetPwCertificationRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ResetPwCertificationRouteArgs> page =
+      PageInfo<ResetPwCertificationRouteArgs>(name);
+}
+
+class ResetPwCertificationRouteArgs {
+  const ResetPwCertificationRouteArgs({
+    this.key,
+    required this.certificationCode,
+  });
+
+  final Key? key;
+
+  final CertificationCode certificationCode;
+
+  @override
+  String toString() {
+    return 'ResetPwCertificationRouteArgs{key: $key, certificationCode: $certificationCode}';
+  }
 }
 
 /// generated route for
@@ -768,16 +804,41 @@ class ResetPwFormRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ResetPwUpdateScreen]
-class ResetPwUpdateRoute extends PageRouteInfo<void> {
-  const ResetPwUpdateRoute({List<PageRouteInfo>? children})
-      : super(
+class ResetPwUpdateRoute extends PageRouteInfo<ResetPwUpdateRouteArgs> {
+  ResetPwUpdateRoute({
+    Key? key,
+    int? userId,
+    List<PageRouteInfo>? children,
+  }) : super(
           ResetPwUpdateRoute.name,
+          args: ResetPwUpdateRouteArgs(
+            key: key,
+            userId: userId,
+          ),
+          rawQueryParams: {'userId': userId},
           initialChildren: children,
         );
 
   static const String name = 'ResetPwUpdateRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ResetPwUpdateRouteArgs> page =
+      PageInfo<ResetPwUpdateRouteArgs>(name);
+}
+
+class ResetPwUpdateRouteArgs {
+  const ResetPwUpdateRouteArgs({
+    this.key,
+    this.userId,
+  });
+
+  final Key? key;
+
+  final int? userId;
+
+  @override
+  String toString() {
+    return 'ResetPwUpdateRouteArgs{key: $key, userId: $userId}';
+  }
 }
 
 /// generated route for

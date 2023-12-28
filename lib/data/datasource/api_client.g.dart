@@ -82,6 +82,38 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<DataResponse<CertificationCode>> sendEmailCertificationCode(
+      Map<String, dynamic> data) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<CertificationCode>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/findPw',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<CertificationCode>.fromJson(
+      _result.data!,
+      (json) => CertificationCode.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<DataResponse<User>> getUserMe() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -180,9 +212,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> updateUserPassword(
-    int id,
-    Map<String, dynamic> data,
-  ) async {
+      Map<String, dynamic> data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -196,7 +226,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/user/pw/:id',
+              '/user/pw',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -340,38 +370,6 @@ class _ApiClient implements ApiClient {
     final value = DataResponse<String>.fromJson(
       _result.data!,
       (json) => json as String,
-    );
-    return value;
-  }
-
-  @override
-  Future<DataResponse<CertificationCode>> sendEmailCertificationCode(
-      Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(data);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResponse<CertificationCode>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/user/findPw',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = DataResponse<CertificationCode>.fromJson(
-      _result.data!,
-      (json) => CertificationCode.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

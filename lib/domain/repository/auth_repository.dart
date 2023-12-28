@@ -1,5 +1,6 @@
 import 'package:incheon_knowhow/data/request/user_register_request.dart';
 import 'package:incheon_knowhow/data/response/data_response.dart';
+import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:incheon_knowhow/domain/model/find_id_result.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
@@ -23,13 +24,18 @@ abstract class AuthRepository {
     required int userId,
   });
 
-  Future<Result<DataResponse<bool>, Exception>> register({
-    required UserRegisterRequest request,
+  Future<Result<CertificationCode, Exception>> sendCertificationCode({
+    required String name,
+    required String email,
   });
 
-  Future<Result<DataResponse<bool>, Exception>> updatePassword({
+  Future<Result<bool, Exception>> updatePassword({
     required int userId,
     required String password,
+  });
+
+  Future<Result<DataResponse<bool>, Exception>> register({
+    required UserRegisterRequest request,
   });
 
   Future<Result<DataResponse<bool>, Exception>> updatePhone({
