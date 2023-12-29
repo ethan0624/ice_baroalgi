@@ -73,6 +73,12 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 
+  // 이메일 중복체크
+  @POST('/user/checkId')
+  Future<DataResponse<String>> duplicateEmail(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 회원조회
   @GET('/user/info')
   Future<DataResponse<User>> getUserMe();
@@ -80,6 +86,12 @@ abstract class ApiClient {
   // 회원 비밀번호 수정
   @PUT('/user/pw')
   Future<DataResponse<String>> updateUserPassword(
+    @Body() Map<String, dynamic> data,
+  );
+
+  // 회원가입
+  @POST('/register')
+  Future<DataResponse<String>> register(
     @Body() Map<String, dynamic> data,
   );
 
@@ -98,12 +110,6 @@ abstract class ApiClient {
   Future<DataResponse<BusinessInfo>> getBusinessInfo();
 
   /// todo:
-
-  // 회원가입
-  @POST('/register')
-  Future<DataResponse<String>> register(
-    @Body() Map<String, dynamic> data,
-  );
 
   // 회원 전화번호 수정
   @PUT('/user/phone/:id')

@@ -13,6 +13,7 @@ import 'package:incheon_knowhow/domain/repository/category_repository.dart';
 import 'package:incheon_knowhow/domain/repository/course_repository.dart';
 import 'package:incheon_knowhow/domain/repository/etc_repository.dart';
 import 'package:incheon_knowhow/domain/repository/school_repository.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/duplicate_email.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/find_user_id.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/get_user_info.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/login.dart';
@@ -74,6 +75,9 @@ class Injection {
           repository: getIt(),
         ));
     getIt.registerLazySingleton<FindUserId>(() => FindUserId(
+          repository: getIt(),
+        ));
+    getIt.registerLazySingleton<DuplicateEmail>(() => DuplicateEmail(
           repository: getIt(),
         ));
     getIt.registerLazySingleton<SendCertificationCode>(

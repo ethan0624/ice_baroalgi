@@ -32,17 +32,6 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
 
   bool _isPasswordValidate = true;
 
-  bool _isValid() {
-    if (_passwordTextController.text.isEmpty ||
-        _confirmPasswordTextController.text.isEmpty) {
-      return false;
-    }
-
-    print('>>> _passwordTextController.text : ${_passwordTextController.text}');
-
-    return _passwordTextController.text == _confirmPasswordTextController.text;
-  }
-
   _validate() {
     setState(() {
       if (_passwordTextController.text.isEmpty ||
@@ -50,9 +39,6 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
         _isPasswordValidate = true;
         return;
       }
-
-      print(
-          '>>> _passwordTextController.text : ${_passwordTextController.text}');
 
       _isPasswordValidate =
           _passwordTextController.text == _confirmPasswordTextController.text;

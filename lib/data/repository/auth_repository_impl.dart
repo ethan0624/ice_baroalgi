@@ -1,5 +1,4 @@
 // ignore: implementation_imports
-import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
@@ -8,6 +7,7 @@ import 'package:incheon_knowhow/data/response/data_response.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/domain/model/find_id_result.dart';
+import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:incheon_knowhow/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -84,6 +84,19 @@ class AuthRepositoryImpl implements AuthRepository {
       'userId': userId,
     };
     final res = await safetyCall(apiClient.updateUserPassword(data));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> duplicateEmail({
+    required String email,
+  }) async {
+    final data = {
+      'email': email,
+    };
+    final res = await safetyCall(apiClient.duplicateEmail(data));
     return res.isSuccess()
         ? const Result.success(true)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));

@@ -22,6 +22,8 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _keywordTextController = TextEditingController();
 
+  bool _hasKeyword = false;
+
   _onSearch() {
     if (_keywordTextController.text.isEmpty) {
       context.showAlert(title: '검색어 입력', message: '학교명을 입력해주세요');
@@ -32,6 +34,8 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
     if (bloc == null) return;
 
     bloc.add(SearchSchoolEvent.search(_keywordTextController.text));
+
+    _hasKeyword = _keywordTextController.text.isNotEmpty;
   }
 
   _onSelected(School school) {
@@ -82,15 +86,47 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
                 ),
               ),
             ),
-            Container(
-              height: 5,
-              color: AppColor.dividerLight,
-            ),
-            state.schools.isEmpty
-                ? const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 60),
-                    child: Center(
-                      child: Text('조회된 데이터가 없습니다'),
+            if (state.schools.isNotEmpty)
+              Container(
+                height: 5,
+                color: AppColor.dividerLight,
+              ),
+            (_hasKeyword && state.schools.isEmpty)
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 60),
+                    child: Column(
+                      children: [
+                        Text(
+                          '검색결과가 없습니다.',
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: AppTextColor.light,
+                              ),
+                              children: [
+                                const TextSpan(
+                                    text:
+                                        '검색한 학교가 없을 경우 학생 회원으로 가입하실 수 없습니다.\n'),
+                                TextSpan(
+                                  text: '일반 회원',
+                                  style: context.textTheme.bodySmall?.copyWith(
+                                    color: AppTextColor.dark,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const TextSpan(text: '으로 가입을 진행하시기 바랍니다.'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 : Expanded(

@@ -103,6 +103,24 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
           ) as _i4.Future<_i2.DataResponse<_i7.CertificationCode>>);
 
   @override
+  _i4.Future<_i2.DataResponse<String>> duplicateEmail(
+          Map<String, dynamic>? data) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #duplicateEmail,
+          [data],
+        ),
+        returnValue: _i4.Future<_i2.DataResponse<String>>.value(
+            _FakeDataResponse_0<String>(
+          this,
+          Invocation.method(
+            #duplicateEmail,
+            [data],
+          ),
+        )),
+      ) as _i4.Future<_i2.DataResponse<String>>);
+
+  @override
   _i4.Future<_i2.DataResponse<_i8.User>> getUserMe() => (super.noSuchMethod(
         Invocation.method(
           #getUserMe,

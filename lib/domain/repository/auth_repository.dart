@@ -34,6 +34,10 @@ abstract class AuthRepository {
     required String password,
   });
 
+  Future<Result<bool, Exception>> duplicateEmail({
+    required String email,
+  });
+
   Future<Result<DataResponse<bool>, Exception>> register({
     required UserRegisterRequest request,
   });

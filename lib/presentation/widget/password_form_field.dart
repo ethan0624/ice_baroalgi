@@ -5,14 +5,17 @@ import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/icon_text.dart';
 
 class PasswordFormField extends StatefulWidget {
+  final TextEditingController? controller;
   final FocusNode? focusNode;
   final TextInputAction? textInputAction;
   final String? hint;
   final EdgeInsets margin;
   final VoidCallback? onSubmitted;
   final Function(TextEditingController controller)? onCreated;
+
   const PasswordFormField({
     super.key,
+    this.controller,
     this.focusNode,
     this.textInputAction,
     this.hint,
@@ -40,6 +43,12 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       _containAlphabet = text.hasAlphabet();
       _containNumber = text.hasNumber();
       _minLength = text.length >= 8;
+
+      if (_containAlphabet && _containNumber && _minLength) {
+        widget.controller?.text = text;
+      } else {
+        widget.controller?.text = '';
+      }
     });
   }
 
