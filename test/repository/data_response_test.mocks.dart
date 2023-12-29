@@ -7,9 +7,11 @@ import 'dart:async' as _i4;
 
 import 'package:incheon_knowhow/data/datasource/api_client.dart' as _i3;
 import 'package:incheon_knowhow/data/response/data_response.dart' as _i2;
+import 'package:incheon_knowhow/domain/model/business_info.dart' as _i11;
 import 'package:incheon_knowhow/domain/model/certification_code.dart' as _i7;
 import 'package:incheon_knowhow/domain/model/course.dart' as _i9;
 import 'package:incheon_knowhow/domain/model/find_id_result.dart' as _i6;
+import 'package:incheon_knowhow/domain/model/notice_paging.dart' as _i10;
 import 'package:incheon_knowhow/domain/model/token.dart' as _i5;
 import 'package:incheon_knowhow/domain/model/user.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
@@ -117,6 +119,24 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
       ) as _i4.Future<_i2.DataResponse<_i8.User>>);
 
   @override
+  _i4.Future<_i2.DataResponse<String>> updateUserPassword(
+          Map<String, dynamic>? data) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserPassword,
+          [data],
+        ),
+        returnValue: _i4.Future<_i2.DataResponse<String>>.value(
+            _FakeDataResponse_0<String>(
+          this,
+          Invocation.method(
+            #updateUserPassword,
+            [data],
+          ),
+        )),
+      ) as _i4.Future<_i2.DataResponse<String>>);
+
+  @override
   _i4.Future<_i2.DataResponse<List<_i9.Course>>> findCourse(
           Map<String, dynamic>? data) =>
       (super.noSuchMethod(
@@ -135,6 +155,40 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
       ) as _i4.Future<_i2.DataResponse<List<_i9.Course>>>);
 
   @override
+  _i4.Future<_i2.DataResponse<_i10.NoticePaging>> findNotice() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findNotice,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.DataResponse<_i10.NoticePaging>>.value(
+            _FakeDataResponse_0<_i10.NoticePaging>(
+          this,
+          Invocation.method(
+            #findNotice,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.DataResponse<_i10.NoticePaging>>);
+
+  @override
+  _i4.Future<_i2.DataResponse<_i11.BusinessInfo>> getBusinessInfo() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getBusinessInfo,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.DataResponse<_i11.BusinessInfo>>.value(
+            _FakeDataResponse_0<_i11.BusinessInfo>(
+          this,
+          Invocation.method(
+            #getBusinessInfo,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.DataResponse<_i11.BusinessInfo>>);
+
+  @override
   _i4.Future<_i2.DataResponse<String>> register(Map<String, dynamic>? data) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -146,24 +200,6 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
           this,
           Invocation.method(
             #register,
-            [data],
-          ),
-        )),
-      ) as _i4.Future<_i2.DataResponse<String>>);
-
-  @override
-  _i4.Future<_i2.DataResponse<String>> updateUserPassword(
-          Map<String, dynamic>? data) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateUserPassword,
-          [data],
-        ),
-        returnValue: _i4.Future<_i2.DataResponse<String>>.value(
-            _FakeDataResponse_0<String>(
-          this,
-          Invocation.method(
-            #updateUserPassword,
             [data],
           ),
         )),

@@ -19,20 +19,30 @@ class _NoticeScreenState extends State<NoticeScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<NoticeBloc, NoticeBloc, NoticeState>(
-      create: (_) => NoticeBloc(),
+      create: (_) => NoticeBloc()..add(const NoticeEvent.initial()),
       appBar: AppSubAppBar(text: '공지사항'),
       builder: (context, bloc, state) {
+        if (state.isLoading) {
+          return const SizedBox();
+        } else if (state.notices.isEmpty) {
+          return Center(
+              child: Text(
+            '등록된 공지사항이 없습니다',
+            style: context.textTheme.bodyMedium,
+          ));
+        }
         return AccordianListView(
           initialExpanedIndex: 0,
-          itemCount: 10,
+          itemCount: state.notices.length,
           titleBuilder: (context, index) {
+            final notice = state.notices[index];
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '공지사항 제목',
+                    notice.title,
                     style: context.textTheme.bodyMedium,
                   ),
                   Text(
@@ -45,8 +55,9 @@ class _NoticeScreenState extends State<NoticeScreen> {
             );
           },
           contentBuilder: (context, index) {
+            final notice = state.notices[index];
             return Text(
-              'contents',
+              notice.content ?? '',
               style: context.textTheme.bodyMedium,
             );
           },

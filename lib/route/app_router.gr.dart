@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AccountScreen(),
       );
     },
+    BusinessRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BusinessScreen(),
+      );
+    },
     CertificationRoute.name: (routeData) {
       return AutoRoutePage<CertificationResult>(
         routeData: routeData,
@@ -253,6 +259,20 @@ class AccountRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AccountRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BusinessScreen]
+class BusinessRoute extends PageRouteInfo<void> {
+  const BusinessRoute({List<PageRouteInfo>? children})
+      : super(
+          BusinessRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BusinessRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

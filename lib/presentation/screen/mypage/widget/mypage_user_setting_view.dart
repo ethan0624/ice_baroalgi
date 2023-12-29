@@ -87,6 +87,14 @@ class MypageUserSettingView extends StatelessWidget {
           ),
           onPressed: () => context.router.pushNamed('/cscenter/qna'),
         ),
+        MypageSettingListItem(
+          title: '사업자정보',
+          tail: const Icon(
+            Icons.arrow_forward_ios,
+            size: 20,
+          ),
+          onPressed: () => context.router.pushNamed('/business'),
+        ),
         const SectionDivider(
           margin: EdgeInsets.symmetric(vertical: defaultMarginValue),
         ),

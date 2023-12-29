@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:incheon_knowhow/domain/model/school.dart';
 import 'package:incheon_knowhow/presentation/screen/account/account_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/business/business_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/course/info/course_info_screen.dart';
@@ -99,6 +100,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/account', page: AccountRoute.page),
         AutoRoute(path: '/language', page: LanguageRoute.page),
         AutoRoute(path: '/notice', page: NoticeRoute.page),
+        AutoRoute(path: '/business', page: BusinessRoute.page),
         AutoRoute(path: '/cscenter/qna', page: CscenterQnaRoute.page),
         AutoRoute(path: '/cscenter/inquiry', page: InquiryRoute.page),
         AutoRoute(path: '/searchSchool', page: SearchSchoolRoute.page),

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:incheon_knowhow/domain/model/business_info.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/find_id_result.dart';
+import 'package:incheon_knowhow/domain/model/notice_paging.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
@@ -75,23 +77,31 @@ abstract class ApiClient {
   @GET('/user/info')
   Future<DataResponse<User>> getUserMe();
 
+  // 회원 비밀번호 수정
+  @PUT('/user/pw')
+  Future<DataResponse<String>> updateUserPassword(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 코스 목록 조회
   @GET('/course')
   Future<DataResponse<List<Course>>> findCourse(
     @Body() Map<String, dynamic> data,
   );
 
+  // 공지사항 조회
+  @GET('/notice')
+  Future<DataResponse<NoticePaging>> findNotice();
+
+  // 사업자정보 조회
+  @GET('/client/info')
+  Future<DataResponse<BusinessInfo>> getBusinessInfo();
+
   /// todo:
 
   // 회원가입
   @POST('/register')
   Future<DataResponse<String>> register(
-    @Body() Map<String, dynamic> data,
-  );
-
-  // 회원 비밀번호 수정
-  @PUT('/user/pw')
-  Future<DataResponse<String>> updateUserPassword(
     @Body() Map<String, dynamic> data,
   );
 

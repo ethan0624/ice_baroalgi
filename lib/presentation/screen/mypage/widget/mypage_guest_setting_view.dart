@@ -49,6 +49,14 @@ class MypageGuestSettingView extends StatelessWidget {
           onPressed: () => context.router.pushNamed('/cscenter/qna'),
         ),
         MypageSettingListItem(
+          title: '사업자정보',
+          tail: const Icon(
+            Icons.arrow_forward_ios,
+            size: 20,
+          ),
+          onPressed: () => context.router.pushNamed('/business'),
+        ),
+        MypageSettingListItem(
           title: '앱 버전정보',
           tail: Text(
             '1.0.0',
