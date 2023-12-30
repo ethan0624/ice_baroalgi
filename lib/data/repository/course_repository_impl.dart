@@ -4,6 +4,7 @@ import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/topic_course.dart';
+import 'package:incheon_knowhow/domain/model/my_course.dart';
 import 'package:incheon_knowhow/domain/repository/course_repository.dart';
 
 class CourseRepositoryImpl implements CourseRepository {
@@ -57,8 +58,20 @@ class CourseRepositoryImpl implements CourseRepository {
   }
 
   @override
-  Future<Result<Course, Exception>> getCourseInfo({required int courseId}) {
-    // TODO: implement getCourseInfo
-    throw UnimplementedError();
+  Future<Result<MyCourse, Exception>> myCourse() async {
+    final res = await safetyCall<MyCourse>(apiClient.myCourse());
+    final result = res.tryGetSuccess()?.data;
+    return res.isSuccess() && result != null
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<Course, Exception>> getCourseInfo(int id) async {
+    final res = await safetyCall<Course>(apiClient.getCourseInfo(id));
+    final result = res.tryGetSuccess()?.data;
+    return res.isSuccess() && result != null
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 }

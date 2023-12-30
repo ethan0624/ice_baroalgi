@@ -22,21 +22,23 @@ class JoinCertificationScreen extends StatefulWidget {
 
 class _JoinCertificationScreenState extends State<JoinCertificationScreen> {
   _onCertificationPressed() async {
-    final ret =
-        await context.router.pushNamed<CertificationResult>('/certification');
-    if (ret == null) return;
+    context.router
+        .pushNamed<CertificationResult>('/certification')
+        .then((value) {
+      if (value == null) return;
 
-    final updateJoinData = widget.joinData.copyWith(
-      userCI: ret.ci,
-      userName: ret.name,
-      userBirthday: ret.birthDay,
-      userGender: ret.gender == CertificationResultGender.male
-          ? UserGenderType.male
-          : UserGenderType.female,
-      userPhoneNumber: ret.phoneNumber,
-    );
+      final updateJoinData = widget.joinData.copyWith(
+        userCI: value.ci,
+        userName: value.name,
+        userBirthday: value.birthDay,
+        userGender: value.gender == CertificationResultGender.male
+            ? UserGenderType.male
+            : UserGenderType.female,
+        userPhoneNumber: value.phoneNumber,
+      );
 
-    context.router.push(JoinRegistRoute(joinData: updateJoinData));
+      context.router.push(JoinRegistRoute(joinData: updateJoinData));
+    });
   }
 
   _onParentCertificationPressed() async {

@@ -15,6 +15,7 @@ import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/domain/model/topic_course.dart';
+import 'package:incheon_knowhow/domain/model/my_course.dart';
 
 part 'api_client.g.dart';
 
@@ -123,6 +124,14 @@ abstract class ApiClient {
   @GET('/course/wishlist')
   Future<DataResponse<List<Course>>> findCourseWish();
 
+  // 나의 코스 조회
+  @GET('/course/info')
+  Future<DataResponse<MyCourse>> myCourse();
+
+  // 코스 상세 정보 조회
+  @GET('/course/{id}')
+  Future<DataResponse<Course>> getCourseInfo(@Path() int id);
+
   /*
    * 기타  
    */
@@ -140,34 +149,34 @@ abstract class ApiClient {
   Future<DataResponse<List<Push>>> findPush();
 
   // 알림 읽음 처리
-  @POST('/push')
+  @POST('/push/{id}')
   Future<DataResponse<String>> updatePush(@Path() int id);
 
   /// todo:
 
   // 회원 전화번호 수정
-  @PUT('/user/phone/:id')
+  @PUT('/user/phone/{id}')
   Future<DataResponse<String>> updateUserPhone(
     @Path() int id,
     @Body() Map<String, dynamic> data,
   );
 
   // 회원 학교 수정
-  @PUT('/user/school/:id')
+  @PUT('/user/school/{id}')
   Future<DataResponse<String>> updateUserSchool(
     @Path() int id,
     @Body() Map<String, dynamic> data,
   );
 
   // 회원 학교 수정
-  @PUT('/user/jinro/:id')
+  @PUT('/user/jinro/{id}')
   Future<DataResponse<String>> updateJinroAccount(
     @Path() int id,
     @Body() Map<String, dynamic> data,
   );
 
   // 탈퇴
-  @DELETE('/user/:id')
+  @DELETE('/user/{id}')
   Future<DataResponse<String>> withdraw(
     @Path() int id,
   );

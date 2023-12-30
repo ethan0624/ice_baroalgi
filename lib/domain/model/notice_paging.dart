@@ -1,5 +1,5 @@
-import 'package:incheon_knowhow/domain/model/notice.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:incheon_knowhow/domain/model/notice.dart';
 
 part 'notice_paging.g.dart';
 

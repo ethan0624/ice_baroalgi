@@ -51,6 +51,7 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
         recommendCategories: recommandCategories,
         filterRegionCourse: _allCourses,
         filterRecommendCourse: _allCourses,
+        inProgressCourse: inProgressCourse,
         selectedRecommendCategory: firstRecommandCategory,
       ));
     });

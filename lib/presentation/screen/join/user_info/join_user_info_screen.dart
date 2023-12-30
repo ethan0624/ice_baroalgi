@@ -53,25 +53,27 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
       return;
     }
 
-    final ret =
-        await context.router.pushNamed<CertificationResult>('/certification');
-    if (ret == null) return;
+    context.router
+        .pushNamed<CertificationResult>('/certification')
+        .then((value) {
+      if (value == null) return;
 
-    final updateJoinData = widget.joinData.copyWith(
-      userName: _nameTextController.text,
-      userBirthday: _birthTextController.text.replaceAll('/', '-'),
-      userPhoneNumber: _phoneTextController.text,
-      userGender: UserGenderType.male,
-      parentCI: ret.ci,
-      parentName: ret.name,
-      parentBirthday: ret.birthDay,
-      parentGender: ret.gender == CertificationResultGender.male
-          ? UserGenderType.male
-          : UserGenderType.female,
-      parentPhoneNumber: ret.phoneNumber,
-    );
+      final updateJoinData = widget.joinData.copyWith(
+        userName: _nameTextController.text,
+        userBirthday: _birthTextController.text.replaceAll('/', '-'),
+        userPhoneNumber: _phoneTextController.text,
+        userGender: UserGenderType.male,
+        parentCI: value.ci,
+        parentName: value.name,
+        parentBirthday: value.birthDay,
+        parentGender: value.gender == CertificationResultGender.male
+            ? UserGenderType.male
+            : UserGenderType.female,
+        parentPhoneNumber: value.phoneNumber,
+      );
 
-    context.router.push(JoinRegistRoute(joinData: updateJoinData));
+      context.router.push(JoinRegistRoute(joinData: updateJoinData));
+    });
   }
 
   @override

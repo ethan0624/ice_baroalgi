@@ -1,5 +1,5 @@
-import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 
 part 'topic_course.g.dart';
 

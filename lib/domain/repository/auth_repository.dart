@@ -20,10 +20,6 @@ abstract class AuthRepository {
 
   Future<Result<User, Exception>> getUserMe();
 
-  Future<Result<DataResponse<User>, Exception>> getUserInfo({
-    required int userId,
-  });
-
   Future<Result<CertificationCode, Exception>> sendCertificationCode({
     required String name,
     required String email,

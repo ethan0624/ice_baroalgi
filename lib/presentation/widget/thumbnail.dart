@@ -24,6 +24,9 @@ class Thumbnail extends StatelessWidget {
             ? CachedNetworkImage(
                 imageUrl: imageUrl ?? '',
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) {
+                  return Container();
+                },
               )
             : null,
       ),

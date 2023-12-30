@@ -113,13 +113,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<DataResponse<User>, Exception>> getUserInfo(
-      {required int userId}) {
-    // TODO: implement getUserInfo
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Result<DataResponse<bool>, Exception>> updatePhone(
       {required int userId, required String phoneNumber}) {
     // TODO: implement updatePhone

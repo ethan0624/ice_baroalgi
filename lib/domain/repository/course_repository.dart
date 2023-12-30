@@ -1,5 +1,6 @@
-import 'package:incheon_knowhow/domain/model/topic_course.dart';
+import 'package:incheon_knowhow/domain/model/my_course.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:incheon_knowhow/domain/model/topic_course.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 
 abstract class CourseRepository {
@@ -14,5 +15,7 @@ abstract class CourseRepository {
 
   Future<Result<List<Course>, Exception>> findCourseWish();
 
-  Future<Result<Course, Exception>> getCourseInfo({required int courseId});
+  Future<Result<MyCourse, Exception>> myCourse();
+
+  Future<Result<Course, Exception>> getCourseInfo(int id);
 }

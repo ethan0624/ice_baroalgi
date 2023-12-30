@@ -25,10 +25,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<CourseInfoBloc, CourseInfoBloc,
         CourseInfoState>(
-      appBar: CourseAppBar(
-        text: '민주주의의 길',
-      ),
-      create: (_) => CourseInfoBloc(),
+      appBar: CourseAppBar(text: '민주주의의 길'),
+      create: (_) => CourseInfoBloc(courseId: widget.courseId),
       builder: (context, bloc, state) {
         return Stack(
           children: [

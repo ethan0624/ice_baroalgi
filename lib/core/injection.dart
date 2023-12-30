@@ -25,7 +25,8 @@ import 'package:incheon_knowhow/domain/usecase/category/find_region_categories.d
 import 'package:incheon_knowhow/domain/usecase/category/find_topic_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_course_in_progress.dart';
-import 'package:incheon_knowhow/domain/usecase/course/find_course_wish.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_course_favorite.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_my_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_topic_with_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/get_course_info.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_notice.dart';
@@ -119,14 +120,17 @@ class Injection {
     getIt.registerLazySingleton<FindCourseInProgress>(
       () => FindCourseInProgress(repository: getIt()),
     );
-    getIt.registerLazySingleton<FindCourseWish>(
-      () => FindCourseWish(repository: getIt()),
+    getIt.registerLazySingleton<FindCourseFavorite>(
+      () => FindCourseFavorite(repository: getIt()),
     );
     getIt.registerLazySingleton<FindCourse>(
       () => FindCourse(repository: getIt()),
     );
+    getIt.registerLazySingleton<FindMyCourse>(
+      () => FindMyCourse(repository: getIt()),
+    );
     getIt.registerLazySingleton<GetCourseInfo>(
-      () => const GetCourseInfo(),
+      () => GetCourseInfo(repository: getIt()),
     );
     getIt.registerLazySingleton<FindNotice>(
       () => FindNotice(repository: getIt()),

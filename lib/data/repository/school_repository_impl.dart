@@ -51,8 +51,7 @@ class SchoolRepositoryImpl implements SchoolRepository {
         page: pageNumber,
         rows: rows,
       ));
-    } catch (e, s) {
-      print('>>>>>> api error : $e /// $s');
+    } catch (e) {
       return Result.error(Exception(e));
     }
   }

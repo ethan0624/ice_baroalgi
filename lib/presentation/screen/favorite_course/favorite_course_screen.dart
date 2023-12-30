@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
-import 'package:incheon_knowhow/domain/model/course.dart';
+import 'package:incheon_knowhow/core/extension/int_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/favorite_course/bloc/favorite_course_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
@@ -23,7 +23,8 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
     return BaseSideEffectBlocLayout<FavoriteCourseBloc, FavoriteCourseBloc,
         FavoriteCourseState>(
       appBar: AppSubAppBar(text: '찜한코스'),
-      create: (_) => FavoriteCourseBloc(),
+      create: (_) =>
+          FavoriteCourseBloc()..add(const FavoriteCourseEvent.initial()),
       builder: (context, bloc, state) {
         return ListView(
           padding: const EdgeInsets.symmetric(
@@ -33,7 +34,7 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '총 87코스',
+                  '총 ${state.favoriteCourse.length.toNumberFormat}코스',
                   style: context.textTheme.labelMedium?.copyWith(
                       color: Colors.black, fontWeight: FontWeight.w600),
                 ),
@@ -50,12 +51,25 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
                 ),
               ],
             ),
-            ...List.generate(
-                30,
-                (index) => CourseListItem(
-                      margin: const EdgeInsets.symmetric(vertical: 6),
-                      course: Course.mock(),
-                    )),
+            if (state.favoriteCourse.isEmpty)
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 60),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    '찜한 코스가 없습니다',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ...state.favoriteCourse.map(
+              (e) => CourseListItem(
+                margin: const EdgeInsets.symmetric(vertical: 6),
+                course: e,
+              ),
+            ),
           ],
         );
       },

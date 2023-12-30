@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:incheon_knowhow/config/app_config.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:incheon_knowhow/config/app_config.dart';
 
 part 'neis_api_client.g.dart';
 
@@ -11,16 +11,6 @@ abstract class NeisApiClient {
 
     dio.options.connectTimeout =
         dio.options.receiveTimeout = AppConfig.apiTimeout;
-    // if (!isRelease) {
-    //   dio.interceptors.add(PrettyDioLogger(
-    //     requestHeader: true,
-    //     requestBody: true,
-    //     responseBody: true,
-    //     responseHeader: true,
-    //     error: true,
-    //     maxWidth: 500,
-    //   ));
-    // }
     return _NeisApiClient(dio);
   }
 

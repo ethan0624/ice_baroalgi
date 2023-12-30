@@ -143,7 +143,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     return BaseSideEffectBlocLayout<CourseMapBloc, CourseMapBloc,
         CourseMapState>(
       appBar: CourseAppBar(),
-      create: (_) => CourseMapBloc(),
+      create: (_) => CourseMapBloc(courseId: widget.courseId)
+        ..add(const CourseMapEvent.initial()),
       builder: (context, bloc, state) {
         return SizedBox(
           width: double.infinity,

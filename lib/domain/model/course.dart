@@ -1,5 +1,5 @@
-import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:incheon_knowhow/domain/model/spot.dart';
 
 part 'course.g.dart';
 

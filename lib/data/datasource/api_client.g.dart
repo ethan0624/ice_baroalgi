@@ -377,6 +377,66 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<DataResponse<MyCourse>> myCourse() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<MyCourse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/course/info',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<MyCourse>.fromJson(
+      _result.data!,
+      (json) => MyCourse.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<DataResponse<Course>> getCourseInfo(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<Course>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/course/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<Course>.fromJson(
+      _result.data!,
+      (json) => Course.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<DataResponse<NoticePaging>> findNotice() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -484,7 +544,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/push',
+              '/push/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -518,7 +578,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/user/phone/:id',
+              '/user/phone/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -552,7 +612,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/user/school/:id',
+              '/user/school/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -586,7 +646,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/user/jinro/:id',
+              '/user/jinro/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -616,7 +676,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/user/:id',
+              '/user/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

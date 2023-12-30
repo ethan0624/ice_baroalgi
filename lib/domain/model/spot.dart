@@ -11,7 +11,9 @@ class Spot {
   @JsonKey(name: 'address')
   final String address;
   @JsonKey(name: 'image')
-  final List<String> images;
+  final String? image;
+  // @JsonKey(name: 'image')
+  // final List<String> images;
   @JsonKey(name: 'summary')
   final String summary;
   @JsonKey(name: 'latitude')
@@ -31,10 +33,11 @@ class Spot {
     required this.id,
     required this.title,
     required this.address,
-    required this.images,
+    // required this.images,
     required this.summary,
     required this.latitude,
     required this.longitude,
+    this.image,
     this.description,
     this.tel,
     this.openTime,

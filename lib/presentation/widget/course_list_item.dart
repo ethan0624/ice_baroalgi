@@ -21,16 +21,16 @@ class CourseListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.router.pushNamed('/course/1/map'),
-      child: Container(
-        margin: margin,
-        padding: padding,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 1, color: AppColor.background),
-          color: Colors.white,
-        ),
+    return Container(
+      margin: margin,
+      padding: padding,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(width: 1, color: AppColor.background),
+        color: Colors.white,
+      ),
+      child: InkWell(
+        onTap: () => context.router.pushNamed('/course/1/map'),
         child: Stack(
           children: [
             Row(
