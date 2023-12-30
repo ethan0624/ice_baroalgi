@@ -8,14 +8,14 @@ import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
 
-class RegionCourse extends StatelessWidget {
+class RegionCourseListView extends StatelessWidget {
   final List<RegionCategoryType> regions;
   final RegionCategoryType selectedRegion;
   final List<Course> courseList;
   final ValueChanged<RegionCategoryType>? onRegionChanged;
   final ScrollController? scrollController;
 
-  const RegionCourse({
+  const RegionCourseListView({
     super.key,
     required this.regions,
     required this.selectedRegion,

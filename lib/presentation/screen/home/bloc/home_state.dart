@@ -1,40 +1,48 @@
 part of 'home_bloc.dart';
 
 class HomeState extends BaseState {
-  final List<Category> topicCategories;
+  final List<TopicCourse> topicCourse;
   final List<Category> recommendCategories;
   final List<Course> filterRegionCourse;
-  final Category? expandedTopicCategory;
+  final List<Course> filterRecommendCourse;
+  final List<Course> inProgressCourse;
+  final int? expandedTopicId;
   final RegionCategoryType selectedRegionCategoryType;
   final Category? selectedRecommendCategory;
 
   const HomeState({
     super.isLoading,
-    this.topicCategories = const [],
+    this.topicCourse = const [],
     this.recommendCategories = const [],
     this.filterRegionCourse = const [],
-    this.expandedTopicCategory,
+    this.filterRecommendCourse = const [],
+    this.inProgressCourse = const [],
+    this.expandedTopicId,
     this.selectedRegionCategoryType = RegionCategoryType.all,
     this.selectedRecommendCategory,
   });
 
   HomeState copyWith({
     bool? isLoading,
-    List<Category>? topicCategories,
+    List<TopicCourse>? topicCourse,
     List<Category>? regionCategories,
     List<Category>? recommendCategories,
     List<Course>? filterRegionCourse,
-    Category? expandedTopicCategory,
+    List<Course>? filterRecommendCourse,
+    List<Course>? inProgressCourse,
+    int? expandedTopicId,
     RegionCategoryType? selectedRegionCategoryType,
     Category? selectedRecommendCategory,
   }) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
-      topicCategories: topicCategories ?? this.topicCategories,
+      topicCourse: topicCourse ?? this.topicCourse,
       recommendCategories: recommendCategories ?? this.recommendCategories,
       filterRegionCourse: filterRegionCourse ?? this.filterRegionCourse,
-      expandedTopicCategory:
-          expandedTopicCategory ?? this.expandedTopicCategory,
+      filterRecommendCourse:
+          filterRecommendCourse ?? this.filterRecommendCourse,
+      inProgressCourse: inProgressCourse ?? this.inProgressCourse,
+      expandedTopicId: expandedTopicId ?? this.expandedTopicId,
       selectedRegionCategoryType:
           selectedRegionCategoryType ?? this.selectedRegionCategoryType,
       selectedRecommendCategory:
@@ -43,14 +51,16 @@ class HomeState extends BaseState {
   }
 
   HomeState expaned({
-    Category? expandedTopicCategory,
+    int? expandedTopicId,
   }) {
     return HomeState(
       isLoading: isLoading,
-      topicCategories: topicCategories,
+      topicCourse: topicCourse,
       recommendCategories: recommendCategories,
       filterRegionCourse: filterRegionCourse,
-      expandedTopicCategory: expandedTopicCategory,
+      filterRecommendCourse: filterRecommendCourse,
+      inProgressCourse: inProgressCourse,
+      expandedTopicId: expandedTopicId,
       selectedRegionCategoryType: selectedRegionCategoryType,
       selectedRecommendCategory: selectedRecommendCategory,
     );
@@ -59,10 +69,12 @@ class HomeState extends BaseState {
   @override
   List<Object?> get props => [
         isLoading,
-        topicCategories,
+        topicCourse,
         recommendCategories,
         filterRegionCourse,
-        expandedTopicCategory,
+        filterRecommendCourse,
+        inProgressCourse,
+        expandedTopicId,
         selectedRegionCategoryType,
         selectedRecommendCategory,
       ];

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
 import 'package:incheon_knowhow/presentation/base/base_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/certification/certification_result.dart';
 import 'package:incheon_knowhow/presentation/screen/join/join_data.dart';
@@ -25,7 +26,17 @@ class _JoinCertificationScreenState extends State<JoinCertificationScreen> {
         await context.router.pushNamed<CertificationResult>('/certification');
     if (ret == null) return;
 
-    context.router.push(JoinRegistRoute(joinData: widget.joinData));
+    final updateJoinData = widget.joinData.copyWith(
+      userCI: ret.ci,
+      userName: ret.name,
+      userBirthday: ret.birthDay,
+      userGender: ret.gender == CertificationResultGender.male
+          ? UserGenderType.male
+          : UserGenderType.female,
+      userPhoneNumber: ret.phoneNumber,
+    );
+
+    context.router.push(JoinRegistRoute(joinData: updateJoinData));
   }
 
   _onParentCertificationPressed() async {

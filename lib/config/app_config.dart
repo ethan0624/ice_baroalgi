@@ -10,6 +10,10 @@ class AppConfig {
   static const String apiBaseUrl = '$baseUrl/api/v1';
   static const Duration apiTimeout = Duration(seconds: 20);
 
+  // iamport(port one)
+  static const String iamportUserCode = 'imp52326373';
+  static const String iamportCompany = '인천바로알기';
+
   // open neis (나이스 교육정보 개방 포털)
   static const String openNeisApiKey = '905ffa25d86a44e689bbd3958680c6d0';
 }

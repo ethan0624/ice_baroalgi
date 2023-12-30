@@ -38,7 +38,7 @@ abstract class AuthRepository {
     required String email,
   });
 
-  Future<Result<DataResponse<bool>, Exception>> register({
+  Future<Result<bool, Exception>> register({
     required UserRegisterRequest request,
   });
 

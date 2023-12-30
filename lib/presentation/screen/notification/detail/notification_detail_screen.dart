@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/push.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/notification/detail/bloc/notification_detail_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/notification/detail/widget/notification_content_header.dart';
@@ -10,7 +11,8 @@ import 'package:incheon_knowhow/presentation/widget/section_divider.dart';
 
 @RoutePage()
 class NotificationDetailScreen extends StatefulWidget {
-  const NotificationDetailScreen({super.key});
+  final Push push;
+  const NotificationDetailScreen({super.key, required this.push});
 
   @override
   State<NotificationDetailScreen> createState() =>
@@ -22,7 +24,8 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<NotificationDetailBloc,
         NotificationDetailBloc, NotificationDetailState>(
-      create: (_) => NotificationDetailBloc(),
+      create: (_) => NotificationDetailBloc(push: widget.push)
+        ..add(const NotificationDetailEvent.initial()),
       appBar: AppSubAppBar(text: '알림'),
       builder: (context, bloc, state) {
         return ListView(

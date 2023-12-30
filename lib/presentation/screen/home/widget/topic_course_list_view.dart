@@ -1,22 +1,21 @@
-// ignore: depend_on_referenced_packages
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/extension/int_extension.dart';
-import 'package:incheon_knowhow/domain/model/category.dart';
+import 'package:incheon_knowhow/domain/model/topic_course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_topic_expansion.dart';
 
-class TopicCourse extends StatelessWidget {
-  final List<Category> categories;
-  final Category? expandedCategory;
+class TopicCourseListView extends StatelessWidget {
+  final List<TopicCourse> topicCourse;
+  final int? expandedTopicId;
   final ScrollController? scrollController;
-  final Function(Category category, bool isExpaned)? onExpaned;
-  const TopicCourse({
+  final Function(int topicId, bool isExpaned)? onExpaned;
+
+  const TopicCourseListView({
     super.key,
-    required this.categories,
-    this.expandedCategory,
+    required this.topicCourse,
+    this.expandedTopicId,
     this.scrollController,
     this.onExpaned,
   });
@@ -33,7 +32,7 @@ class TopicCourse extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '총 ${categories.length.toNumberFormat}주제',
+                '총 ${topicCourse.where((e) => e.hasCourse).length.toNumberFormat}주제',
                 style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
@@ -51,13 +50,15 @@ class TopicCourse extends StatelessWidget {
             ],
           ),
         ),
-        ...categories.mapIndexed((index, e) => CourseTopicExpansion(
-              category: e,
-              expended: e == expandedCategory,
-              onExpended: (expaned) {
-                onExpaned?.call(e, expaned);
-              },
-            )),
+        ...topicCourse
+            .where((e) => e.hasCourse)
+            .map((e) => CourseTopicExpansion(
+                  topicCourse: e,
+                  expended: e.id == expandedTopicId,
+                  onExpended: (expaned) {
+                    onExpaned?.call(e.id, expaned);
+                  },
+                )),
       ],
     );
   }

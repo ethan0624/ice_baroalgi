@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
-import 'package:incheon_knowhow/domain/model/category.dart';
-import 'package:incheon_knowhow/domain/model/course.dart';
+import 'package:incheon_knowhow/domain/model/topic_course.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class CourseTopicExpansion extends StatefulWidget {
-  final Category category;
+  final TopicCourse topicCourse;
   final bool expended;
   final ValueChanged<bool>? onExpended;
   const CourseTopicExpansion({
     super.key,
-    required this.category,
+    required this.topicCourse,
     this.expended = false,
     this.onExpended,
   });
@@ -47,7 +46,7 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
                         height: 65,
                       ),
                       Text(
-                        widget.category.name,
+                        widget.topicCourse.title,
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -79,11 +78,12 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
               color: AppColor.background,
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: Column(
-                children: List.generate(5, (index) {
-                  return CourseListItem(
-                    course: Course.mock(),
-                  );
-                }),
+                children: widget.topicCourse.courses
+                        ?.map((e) => CourseListItem(
+                              course: e,
+                            ))
+                        .toList() ??
+                    [],
               ),
             ),
           ),

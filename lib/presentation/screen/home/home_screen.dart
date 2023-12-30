@@ -7,9 +7,9 @@ import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/home/bloc/home_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/home_app_bar.dart';
-import 'package:incheon_knowhow/presentation/screen/home/widget/recommend_course.dart';
-import 'package:incheon_knowhow/presentation/screen/home/widget/region_course.dart';
-import 'package:incheon_knowhow/presentation/screen/home/widget/topic_course.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/recommend_course_list_view.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/region_course_list_view.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/topic_course_list_view.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:provider/provider.dart';
 
@@ -25,11 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _scrollController = ScrollController();
 
-  _onExpanededTopic(Category topicCategory, bool isExpaneded) {
+  _onExpanededTopic(int topicId, bool isExpaneded) {
     final bloc = _scaffoldKey.currentContext?.read<HomeBloc>();
     if (bloc == null) return;
 
-    bloc.add(HomeEvent.expanededTopic(topicCategory, isExpaneded));
+    bloc.add(HomeEvent.expanededTopic(topicId, isExpaneded));
   }
 
   _onRegionChanged(RegionCategoryType regionCategoryType) {
@@ -68,22 +68,23 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverFillRemaining(
                 child: Column(
                   children: [
-                    AppButton(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: defaultMarginValue),
-                      width: double.infinity,
-                      text: '정복중인 코스',
-                      textBold: true,
-                      centerText: false,
-                      suffixIcon: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 14,
-                        color: Colors.white,
+                    if (state.inProgressCourse.isNotEmpty)
+                      AppButton(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: defaultMarginValue),
+                        width: double.infinity,
+                        text: '정복중인 코스',
+                        textBold: true,
+                        centerText: false,
+                        suffixIcon: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 14,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // todo: push route
+                        },
                       ),
-                      onPressed: () {
-                        // todo: push route
-                      },
-                    ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 12),
                       padding: const EdgeInsets.symmetric(
@@ -127,21 +128,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          TopicCourse(
-                            categories: state.topicCategories,
-                            expandedCategory: state.expandedTopicCategory,
+                          TopicCourseListView(
+                            topicCourse: state.topicCourse,
+                            expandedTopicId: state.expandedTopicId,
                             // scrollController: _scrollController,
                             onExpaned: _onExpanededTopic,
                           ),
-                          RegionCourse(
+                          RegionCourseListView(
                             regions: RegionCategoryType.values,
                             selectedRegion: state.selectedRegionCategoryType,
                             courseList: state.filterRegionCourse,
                             // scrollController: _scrollController,
                             onRegionChanged: _onRegionChanged,
                           ),
-                          RecommendCourse(
+                          RecommendCourseListView(
                             recommends: state.recommendCategories,
+                            courseList: state.filterRecommendCourse,
                             selectedRecommend: state.selectedRecommendCategory,
                             onRecommendChanged: _onRecommendChanged,
                           ),

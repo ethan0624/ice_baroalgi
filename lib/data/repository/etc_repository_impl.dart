@@ -1,4 +1,5 @@
 // ignore: implementation_imports
+import 'package:incheon_knowhow/domain/model/push.dart';
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
@@ -25,6 +26,24 @@ class EtcRepositoryImpl implements EtcRepository {
     final result = res.tryGetSuccess()?.data;
     return res.isSuccess() && result != null
         ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<List<Push>, Exception>> findPush() async {
+    final res = await safetyCall<List<Push>>(apiClient.findPush());
+    final result = res.tryGetSuccess()?.data ?? [];
+    return res.isSuccess()
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> updatePush(int pushId) async {
+    final res = await safetyCall<String>(apiClient.updatePush(pushId));
+
+    return res.isSuccess()
+        ? const Result.success(true)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 }

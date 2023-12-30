@@ -38,8 +38,6 @@ class AuthProvider extends ChangeNotifier {
     _token = token;
     _user = user;
 
-    print('>>> loggedIn : $_token');
-
     await secureStorage.write(key: _tokenPrefsKey, value: token.serialize());
 
     notifyListeners();

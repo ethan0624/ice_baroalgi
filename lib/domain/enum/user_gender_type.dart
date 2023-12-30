@@ -16,4 +16,13 @@ extension UserGenderTypeExtension on UserGenderType {
         return '여자';
     }
   }
+
+  String get value {
+    switch (this) {
+      case UserGenderType.male:
+        return 'm';
+      case UserGenderType.female:
+        return 'f';
+    }
+  }
 }

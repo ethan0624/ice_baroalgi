@@ -7,13 +7,16 @@ import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
 
-class RecommendCourse extends StatelessWidget {
+class RecommendCourseListView extends StatelessWidget {
   final List<Category> recommends;
+  final List<Course> courseList;
   final Category? selectedRecommend;
   final ValueChanged<Category>? onRecommendChanged;
-  const RecommendCourse({
+
+  const RecommendCourseListView({
     super.key,
     required this.recommends,
+    required this.courseList,
     this.selectedRecommend,
     this.onRecommendChanged,
   });

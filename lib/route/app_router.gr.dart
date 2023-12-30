@@ -188,9 +188,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     NotificationDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<NotificationDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const NotificationDetailScreen(),
+        child: NotificationDetailScreen(
+          key: args.key,
+          push: args.push,
+        ),
       );
     },
     NotificationListRoute.name: (routeData) {
@@ -743,16 +747,41 @@ class NoticeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [NotificationDetailScreen]
-class NotificationDetailRoute extends PageRouteInfo<void> {
-  const NotificationDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class NotificationDetailRoute
+    extends PageRouteInfo<NotificationDetailRouteArgs> {
+  NotificationDetailRoute({
+    Key? key,
+    required Push push,
+    List<PageRouteInfo>? children,
+  }) : super(
           NotificationDetailRoute.name,
+          args: NotificationDetailRouteArgs(
+            key: key,
+            push: push,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NotificationDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<NotificationDetailRouteArgs> page =
+      PageInfo<NotificationDetailRouteArgs>(name);
+}
+
+class NotificationDetailRouteArgs {
+  const NotificationDetailRouteArgs({
+    this.key,
+    required this.push,
+  });
+
+  final Key? key;
+
+  final Push push;
+
+  @override
+  String toString() {
+    return 'NotificationDetailRouteArgs{key: $key, push: $push}';
+  }
 }
 
 /// generated route for

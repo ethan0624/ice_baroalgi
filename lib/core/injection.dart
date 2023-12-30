@@ -24,9 +24,14 @@ import 'package:incheon_knowhow/domain/usecase/category/find_recommend_categorie
 import 'package:incheon_knowhow/domain/usecase/category/find_region_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_topic_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_course.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_course_in_progress.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_course_wish.dart';
+import 'package:incheon_knowhow/domain/usecase/course/find_topic_with_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/get_course_info.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_notice.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/find_push.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/get_business_info.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/update_push_read.dart';
 import 'package:incheon_knowhow/domain/usecase/school/find_school.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
@@ -108,6 +113,15 @@ class Injection {
     getIt.registerLazySingleton<FindRecommendCategoreis>(
       () => FindRecommendCategoreis(repository: getIt()),
     );
+    getIt.registerLazySingleton<FindTopicWithCourse>(
+      () => FindTopicWithCourse(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindCourseInProgress>(
+      () => FindCourseInProgress(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindCourseWish>(
+      () => FindCourseWish(repository: getIt()),
+    );
     getIt.registerLazySingleton<FindCourse>(
       () => FindCourse(repository: getIt()),
     );
@@ -119,6 +133,18 @@ class Injection {
     );
     getIt.registerLazySingleton<GetBusinessInfo>(
       () => GetBusinessInfo(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindPush>(
+      () => FindPush(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<UpdatePushRead>(
+      () => UpdatePushRead(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
     );
   }
 

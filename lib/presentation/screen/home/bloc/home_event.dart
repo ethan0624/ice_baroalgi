@@ -5,8 +5,8 @@ sealed class HomeEvent extends Equatable {
 
   const factory HomeEvent.initial() = HomeOnInitial;
 
-  const factory HomeEvent.expanededTopic(
-      Category topicCategory, bool isExpanded) = HomeOnExpanededTopic;
+  const factory HomeEvent.expanededTopic(int topicId, bool isExpanded) =
+      HomeOnExpanededTopic;
   const factory HomeEvent.changeRegion(RegionCategoryType regionCategoryType) =
       HomeOnChangedRegon;
   const factory HomeEvent.changeRecommend(Category category) =
@@ -21,9 +21,9 @@ class HomeOnInitial extends HomeEvent {
 }
 
 class HomeOnExpanededTopic extends HomeEvent {
-  final Category topicCategory;
+  final int topicId;
   final bool isExpanded;
-  const HomeOnExpanededTopic(this.topicCategory, this.isExpanded);
+  const HomeOnExpanededTopic(this.topicId, this.isExpanded);
 }
 
 class HomeOnChangedRegon extends HomeEvent {

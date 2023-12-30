@@ -103,16 +103,19 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<DataResponse<User>, Exception>> getUserInfo(
-      {required int userId}) {
-    // TODO: implement getUserInfo
-    throw UnimplementedError();
+  Future<Result<bool, Exception>> register({
+    required UserRegisterRequest request,
+  }) async {
+    final res = await safetyCall(apiClient.duplicateEmail(request.toJson()));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 
   @override
-  Future<Result<DataResponse<bool>, Exception>> register(
-      {required UserRegisterRequest request}) {
-    // TODO: implement register
+  Future<Result<DataResponse<User>, Exception>> getUserInfo(
+      {required int userId}) {
+    // TODO: implement getUserInfo
     throw UnimplementedError();
   }
 

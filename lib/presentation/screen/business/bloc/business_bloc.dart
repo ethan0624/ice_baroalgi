@@ -12,9 +12,13 @@ class BusinessBloc extends BaseSideEffectBloc<BusinessEvent, BusinessState> {
   final _getBusinessInfo = getIt<GetBusinessInfo>();
   BusinessBloc() : super(const BusinessState()) {
     on<BusinessOnInitial>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
       final res = await _getBusinessInfo();
 
-      emit(state.copyWith(businessInfo: res.tryGetSuccess()));
+      emit(state.copyWith(
+        isLoading: false,
+        businessInfo: res.tryGetSuccess(),
+      ));
     });
   }
 }

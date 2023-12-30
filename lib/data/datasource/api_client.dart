@@ -1,18 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:incheon_knowhow/config/app_config.dart';
+import 'package:incheon_knowhow/config/app_info.dart';
+import 'package:incheon_knowhow/config/constrants.dart';
+import 'package:incheon_knowhow/core/provider/auth_provider.dart';
+import 'package:incheon_knowhow/data/response/data_response.dart';
 import 'package:incheon_knowhow/domain/model/business_info.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/find_id_result.dart';
 import 'package:incheon_knowhow/domain/model/notice_paging.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:incheon_knowhow/core/provider/auth_provider.dart';
-import 'package:incheon_knowhow/data/response/data_response.dart';
+import 'package:incheon_knowhow/domain/model/push.dart';
 import 'package:incheon_knowhow/domain/model/certification_code.dart';
 import 'package:incheon_knowhow/domain/model/token.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
-import 'package:incheon_knowhow/config/app_config.dart';
-import 'package:incheon_knowhow/config/app_info.dart';
-import 'package:incheon_knowhow/config/constrants.dart';
+import 'package:incheon_knowhow/domain/model/topic_course.dart';
 
 part 'api_client.g.dart';
 
@@ -33,6 +35,10 @@ abstract class ApiClient {
 
           if (authProvider.accessToken.isNotEmpty) {
             options.headers['token'] = authProvider.accessToken;
+          } else {
+            // 테스트
+            options.headers['token'] =
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJlZ1RpbWUiOiIyMDIzLTEyLTI2VDAxOjEzOjM4KzAwOjAwIiwiaWF0IjoxNzAzNTUzMjE4LCJleHAiOjE3MzU2OTQwMTh9.8exfo1N3lx98xGsGZXgm1o94_YfwgFfTEXDeigR03Ng';
           }
 
           return handler.next(options);
@@ -95,11 +101,31 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 
+  /*
+   * 코스 관련 
+   */
+
+  // 주제별 코스 조회
+  @GET('/course/category')
+  Future<DataResponse<List<TopicCourse>>> findTopicCourse();
+
   // 코스 목록 조회
   @GET('/course')
   Future<DataResponse<List<Course>>> findCourse(
     @Body() Map<String, dynamic> data,
   );
+
+  // 정복중인 코스 목록 조회
+  @GET('/course/ing')
+  Future<DataResponse<List<Course>>> findCourseInProgress();
+
+  // 찜하기한 코스 목록 조회
+  @GET('/course/wishlist')
+  Future<DataResponse<List<Course>>> findCourseWish();
+
+  /*
+   * 기타  
+   */
 
   // 공지사항 조회
   @GET('/notice')
@@ -108,6 +134,14 @@ abstract class ApiClient {
   // 사업자정보 조회
   @GET('/client/info')
   Future<DataResponse<BusinessInfo>> getBusinessInfo();
+
+  // 알림 조회
+  @GET('/push')
+  Future<DataResponse<List<Push>>> findPush();
+
+  // 알림 읽음 처리
+  @POST('/push')
+  Future<DataResponse<String>> updatePush(@Path() int id);
 
   /// todo:
 

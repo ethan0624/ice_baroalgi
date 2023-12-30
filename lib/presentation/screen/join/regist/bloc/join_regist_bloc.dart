@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
+import 'package:incheon_knowhow/data/request/user_register_request.dart';
+import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/duplicate_email.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/regist_user.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc.dart';
 import 'package:incheon_knowhow/presentation/base/base_state.dart';
 import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
@@ -12,6 +15,7 @@ part 'join_regist_state.dart';
 class JoinRegistBloc
     extends BaseSideEffectBloc<JoinRegistEvent, JoinRegistState> {
   final _duplicateEmail = getIt<DuplicateEmail>();
+  final _registUser = getIt<RegistUser>();
 
   final JoinData joinData;
   String _duplicateCheckedEmail = '';
@@ -62,7 +66,36 @@ class JoinRegistBloc
 
       emit(state.copyWith(isLoading: true));
 
+      final request = UserRegisterRequest(
+        type: joinData.type,
+        email: event.email,
+        password: event.password,
+        name: joinData.userName ?? '',
+        gender: joinData.userGender ?? UserGenderType.male,
+        birth: joinData.userBirthday ?? '',
+        phone: joinData.userPhoneNumber ?? '',
+        schoolName: event.schoolName,
+        schoolGrade: event.schoolGrade,
+        schoolClass: event.schoolClass,
+        isFourteenOver: joinData.isFourteenOver,
+        isAgreedMinor: joinData.isAgreedMinor,
+        isAgreedGps: joinData.isAgreedLocation,
+        parentName: joinData.parentName,
+        parentGender: joinData.parentGender,
+        parentBirth: joinData.parentBirthday,
+        parentPhone: joinData.parentBirthday,
+      );
+      final res = await _registUser(request);
+
       emit(state.copyWith(isLoading: false));
+
+      if (res.isError()) {
+        produceSideEffect(
+            BlocEffect.showAlert(title: '회원가입 실패', message: '회원가입처리에 실패하였습니다'));
+        return;
+      }
+
+      produceSideEffect(const SuccessEffect());
     });
   }
 }

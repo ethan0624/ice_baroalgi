@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/int_extension.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/widget/label.dart';
 import 'package:incheon_knowhow/presentation/widget/progress_bar.dart';
@@ -35,7 +36,9 @@ class CourseListItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Thumbnail(),
+                Thumbnail(
+                  imageUrl: course.image,
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -43,7 +46,7 @@ class CourseListItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        '미추홀구',
+                        course.regionName ?? '',
                         style: context.textTheme.labelMedium?.copyWith(
                           color: Colors.black,
                         ),
@@ -81,12 +84,12 @@ class CourseListItem extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 8),
                         child: Row(
                           children: [
-                            const Expanded(
-                              child: ProgressBar(value: 0.5),
+                            Expanded(
+                              child: ProgressBar(value: course.progress),
                             ),
                             const SizedBox(width: 20),
                             Text(
-                              '3/6',
+                              '${course.completedSpotCount.toNumberFormat}/${course.spotCount.toNumberFormat}',
                               style: context.textTheme.labelMedium
                                   ?.copyWith(color: AppTextColor.light),
                             ),
