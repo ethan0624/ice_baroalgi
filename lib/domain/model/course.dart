@@ -17,7 +17,7 @@ class Course {
   // final List<String> images;
   @JsonKey(name: 'image')
   final String? image;
-  @JsonKey(name: 'wishlist')
+  @JsonKey(name: 'wishList')
   final bool isLiked;
   @JsonKey(name: 'courseState')
   final bool isCompleted;
@@ -63,6 +63,28 @@ class Course {
       distance: '12',
       // images: [''],
       image: '',
+    );
+  }
+
+  copyWith({
+    bool? isLiked,
+    bool? isCompleted,
+  }) {
+    return Course(
+      id: id,
+      title: title,
+      description: description,
+      distance: distance,
+      duration: duration,
+      isLiked: isLiked ?? this.isLiked,
+      isCompleted: isCompleted ?? this.isCompleted,
+      spotCount: spotCount,
+      completedSpotCount: completedSpotCount,
+      regionId: regionId,
+      regionName: regionName,
+      summary: summary,
+      spots: spots,
+      image: image,
     );
   }
 

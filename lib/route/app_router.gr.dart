@@ -250,6 +250,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SpotDetailScreen(),
       );
     },
+    WithdrawRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WithdrawScreen(),
+      );
+    },
   };
 }
 
@@ -928,6 +934,20 @@ class SpotDetailRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SpotDetailRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WithdrawScreen]
+class WithdrawRoute extends PageRouteInfo<void> {
+  const WithdrawRoute({List<PageRouteInfo>? children})
+      : super(
+          WithdrawRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WithdrawRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

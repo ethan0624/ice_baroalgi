@@ -1,3 +1,4 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
@@ -20,15 +21,20 @@ import 'package:incheon_knowhow/domain/usecase/auth/login.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/regist_user.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/send_certification_code.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_password.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/withdraw.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_recommend_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_region_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_topic_categories.dart';
+import 'package:incheon_knowhow/domain/usecase/course/cancel_course.dart';
+import 'package:incheon_knowhow/domain/usecase/course/complete_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_course_in_progress.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_course_favorite.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_my_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/find_topic_with_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/get_course_info.dart';
+import 'package:incheon_knowhow/domain/usecase/course/start_course.dart';
+import 'package:incheon_knowhow/domain/usecase/course/update_favorite.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_notice.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_push.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/get_business_info.dart';
@@ -58,6 +64,7 @@ class Injection {
     getIt.registerSingleton<AuthProvider>(authProvider);
     getIt.registerSingleton<ApiClient>(ApiClient(getIt()));
     getIt.registerSingleton<NeisApiClient>(NeisApiClient());
+    getIt.registerSingleton<EventBus>(EventBus());
 
     // regist repository
     getIt.registerSingleton<SchoolRepository>(SchoolRepositoryImpl(
@@ -104,6 +111,12 @@ class Injection {
     getIt.registerLazySingleton<RegistUser>(
       () => RegistUser(repository: getIt()),
     );
+    getIt.registerLazySingleton<Withdraw>(
+      () => Withdraw(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
 
     getIt.registerLazySingleton<FindTopicCategoreis>(
       () => FindTopicCategoreis(repository: getIt()),
@@ -131,6 +144,30 @@ class Injection {
     );
     getIt.registerLazySingleton<GetCourseInfo>(
       () => GetCourseInfo(repository: getIt()),
+    );
+    getIt.registerLazySingleton<UpdateFavorite>(
+      () => UpdateFavorite(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<StartCourse>(
+      () => StartCourse(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<CompleteCourse>(
+      () => CompleteCourse(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<CancelCourse>(
+      () => CancelCourse(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
     );
     getIt.registerLazySingleton<FindNotice>(
       () => FindNotice(repository: getIt()),

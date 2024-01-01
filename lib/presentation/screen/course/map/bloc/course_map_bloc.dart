@@ -10,6 +10,7 @@ part 'course_map_state.dart';
 
 class CourseMapBloc extends BaseSideEffectBloc<CourseMapEvent, CourseMapState> {
   final _getCourseInfo = getIt<GetCourseInfo>();
+
   final int courseId;
   CourseMapBloc({required this.courseId}) : super(const CourseMapState()) {
     on<CourseMapOnInitial>((event, emit) async {
@@ -22,5 +23,11 @@ class CourseMapBloc extends BaseSideEffectBloc<CourseMapEvent, CourseMapState> {
         course: res.tryGetSuccess(),
       ));
     });
+
+    on<CourseMapOnStart>((event, emit) async {});
+
+    on<CourseMapOnComplete>((event, emit) async {});
+
+    on<CourseMapOnCancel>((event, emit) async {});
   }
 }

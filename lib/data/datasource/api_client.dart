@@ -132,6 +132,22 @@ abstract class ApiClient {
   @GET('/course/{id}')
   Future<DataResponse<Course>> getCourseInfo(@Path() int id);
 
+  // 코스 찜하기
+  @POST('/course/wishlist/{id}')
+  Future<DataResponse<String>> updagteFavorite(@Path() int id);
+
+  // 코스 시작하기(정복하기)
+  @POST('/course/start/{id}')
+  Future<DataResponse<String>> startCourse(@Path() int id);
+
+  // 코스 종료하기
+  @POST('/course/end/{id}')
+  Future<DataResponse<String>> completedCourse(@Path() int id);
+
+  // 코스 진행 중단하기
+  @POST('/course/stop/{id}')
+  Future<DataResponse<String>> cancelCourse(@Path() int id);
+
   /*
    * 기타  
    */
@@ -176,8 +192,6 @@ abstract class ApiClient {
   );
 
   // 탈퇴
-  @DELETE('/user/{id}')
-  Future<DataResponse<String>> withdraw(
-    @Path() int id,
-  );
+  @DELETE('/user')
+  Future<DataResponse<String>> withdraw();
 }

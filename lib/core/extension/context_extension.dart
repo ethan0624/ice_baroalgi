@@ -77,6 +77,7 @@ extension BuildContextExtension on BuildContext {
   Future<bool?> showConfirm({
     required String title,
     String? message,
+    String? positiveButtonText,
   }) {
     return showDialog<bool>(
       context: this,
@@ -112,7 +113,7 @@ extension BuildContextExtension on BuildContext {
             TextButton(
               onPressed: () => context.router.pop(true),
               child: Text(
-                '확인',
+                positiveButtonText ?? '확인',
                 style: textTheme.bodyMedium?.copyWith(
                   color: Colors.blue,
                   fontWeight: FontWeight.w600,

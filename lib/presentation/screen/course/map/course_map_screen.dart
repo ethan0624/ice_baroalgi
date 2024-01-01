@@ -78,24 +78,17 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   _onMarkerPressed(NMarker marker) async {
     if (marker == _selectedMarker) return;
 
-    if (_selectedMarker != null) {
-      final normalMarker = await NOverlayImage.fromWidget(
-        widget: CustomMapMarker(
-          type: CustomMapMarkerType.normal,
-        ),
-        size: Size(36, 44),
-        context: context,
-      );
-      _selectedMarker?.setIcon(normalMarker);
-    }
-    final markerIcon = await NOverlayImage.fromWidget(
+    final customMarker = await NOverlayImage.fromWidget(
       widget: CustomMapMarker(
-        type: CustomMapMarkerType.focus,
+        type: (_selectedMarker != null)
+            ? CustomMapMarkerType.normal
+            : CustomMapMarkerType.focus,
       ),
-      size: Size(36, 44),
+      size: const Size(36, 44),
       context: context,
     );
-    marker.setIcon(markerIcon);
+
+    marker.setIcon(customMarker);
 
     setState(() {
       _selectedMarker = marker;
@@ -130,6 +123,10 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
 
     return true;
   }
+
+  _startCourse() {}
+
+  _completeCourse() {}
 
   @override
   void dispose() {

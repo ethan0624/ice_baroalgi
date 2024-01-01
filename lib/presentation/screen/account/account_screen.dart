@@ -37,7 +37,9 @@ class _AccountScreenState extends State<AccountScreen> {
     bloc.add(const AccountEvent.logout());
   }
 
-  _onWithdrawPressed() {}
+  _onWithdrawPressed() {
+    context.router.pushNamed('/withdraw');
+  }
 
   _handleEffect(BlocEffect effect) {
     if (effect is SuccessEffect) {

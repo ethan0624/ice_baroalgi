@@ -50,7 +50,5 @@ abstract class AuthRepository {
     required int group,
   });
 
-  Future<Result<DataResponse<bool>, Exception>> withdraw({
-    required int userId,
-  });
+  Future<Result<bool, Exception>> withdraw();
 }

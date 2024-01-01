@@ -18,4 +18,12 @@ abstract class CourseRepository {
   Future<Result<MyCourse, Exception>> myCourse();
 
   Future<Result<Course, Exception>> getCourseInfo(int id);
+
+  Future<Result<bool, Exception>> updateFavorite(int id);
+
+  Future<Result<bool, Exception>> start(int id);
+
+  Future<Result<bool, Exception>> completed(int id);
+
+  Future<Result<bool, Exception>> cancel(int id);
 }

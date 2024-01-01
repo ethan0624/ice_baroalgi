@@ -74,4 +74,36 @@ class CourseRepositoryImpl implements CourseRepository {
         ? Result.success(result)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
+
+  @override
+  Future<Result<bool, Exception>> updateFavorite(int id) async {
+    final res = await safetyCall<String>(apiClient.updagteFavorite(id));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> start(int id) async {
+    final res = await safetyCall<String>(apiClient.startCourse(id));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> completed(int id) async {
+    final res = await safetyCall<String>(apiClient.completedCourse(id));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> cancel(int id) async {
+    final res = await safetyCall<String>(apiClient.cancelCourse(id));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
 }

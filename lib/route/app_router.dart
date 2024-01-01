@@ -36,6 +36,7 @@ import 'package:incheon_knowhow/presentation/screen/reset_pw/update/reset_pw_upd
 import 'package:incheon_knowhow/presentation/screen/search_school/search_school_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/splash/splash_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/spot_detail_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/withdraw/withdraw_screen.dart';
 import 'package:incheon_knowhow/route/auth_guard.dart';
 
 part 'app_router.gr.dart';
@@ -106,5 +107,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/cscenter/inquiry', page: InquiryRoute.page),
         AutoRoute(path: '/searchSchool', page: SearchSchoolRoute.page),
         AutoRoute(path: '/jinroAccount', page: JinroAccountRoute.page),
+        AutoRoute(path: '/withdraw', page: WithdrawRoute.page),
       ];
 }

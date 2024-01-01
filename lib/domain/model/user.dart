@@ -25,6 +25,8 @@ class User {
   final int? group;
   @JsonKey(name: 'jinroEmail')
   final String? jinroAccountEmail;
+  // @JsonKey(name: 'pushState')
+  // final bool? isPushNotification;
 
   const User({
     required this.id,
@@ -37,6 +39,7 @@ class User {
     this.grade,
     this.group,
     this.jinroAccountEmail,
+    // this.isPushNotification,
   });
 
   factory User.tester() {

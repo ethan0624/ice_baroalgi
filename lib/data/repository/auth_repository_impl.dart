@@ -130,9 +130,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<DataResponse<bool>, Exception>> withdraw(
-      {required int userId}) {
-    // TODO: implement withdraw
-    throw UnimplementedError();
+  Future<Result<bool, Exception>> withdraw() async {
+    final res = await safetyCall(apiClient.withdraw());
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 }
