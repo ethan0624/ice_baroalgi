@@ -9,10 +9,9 @@ part 'verify_pw_state.dart';
 class VerifyPwBloc extends BaseSideEffectBloc<VerifyPwEvent, VerifyPwState> {
   VerifyPwBloc() : super(const VerifyPwState()) {
     on<VerifyPwOnConfirm>((event, emit) async {
-      // TODO: implement event handler
-
       emit(state.copyWith(isLoading: true));
 
+      // todo : check api
       await Future.delayed(const Duration(seconds: 1));
 
       produceSideEffect(const SuccessEffect());

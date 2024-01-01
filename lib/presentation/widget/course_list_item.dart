@@ -62,6 +62,9 @@ class _CourseListItemState extends State<CourseListItem>
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
     super.initState();
     _changedSubscription = _eventBus.on<CourseChangedEvent>().listen((event) {
@@ -85,6 +88,7 @@ class _CourseListItemState extends State<CourseListItem>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       key: ValueKey('course-list-item-${widget.course.id}'),
       margin: widget.margin,
@@ -187,7 +191,4 @@ class _CourseListItemState extends State<CourseListItem>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

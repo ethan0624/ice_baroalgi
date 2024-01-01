@@ -28,8 +28,8 @@ class _JoinCompleteScreenState extends State<JoinCompleteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future(() => false),
+    return PopScope(
+      canPop: false,
       child: BaseLayout(
         child: Container(
           margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
