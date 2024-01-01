@@ -224,7 +224,7 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<ResetPwUpdateRouteArgs>(
           orElse: () =>
               ResetPwUpdateRouteArgs(userId: queryParams.optInt('userId')));
-      return AutoRoutePage<dynamic>(
+      return AutoRoutePage<bool>(
         routeData: routeData,
         child: ResetPwUpdateScreen(
           key: args.key,
@@ -248,6 +248,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SpotDetailScreen(),
+      );
+    },
+    VerifyPwRoute.name: (routeData) {
+      return AutoRoutePage<bool>(
+        routeData: routeData,
+        child: const VerifyPwScreen(),
       );
     },
     WithdrawRoute.name: (routeData) {
@@ -934,6 +940,20 @@ class SpotDetailRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SpotDetailRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [VerifyPwScreen]
+class VerifyPwRoute extends PageRouteInfo<void> {
+  const VerifyPwRoute({List<PageRouteInfo>? children})
+      : super(
+          VerifyPwRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyPwRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

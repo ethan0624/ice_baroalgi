@@ -13,7 +13,7 @@ import 'package:incheon_knowhow/presentation/widget/icon_text.dart';
 import 'package:incheon_knowhow/presentation/widget/password_form_field.dart';
 import 'package:provider/provider.dart';
 
-@RoutePage()
+@RoutePage<bool>()
 class ResetPwUpdateScreen extends StatefulWidget {
   final int? userId;
   const ResetPwUpdateScreen({
@@ -73,9 +73,10 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
 
   _onSuccess() {
     // todo : show toast
-    context.router.popUntil((route) {
-      return !(route.data?.path.contains('resetPw') ?? false);
-    });
+    context.router.pop(true);
+    // context.router.popUntil((route) {
+    //   return !(route.data?.path.contains('resetPw') ?? false);
+    // });
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/route/app_router.dart';
@@ -123,6 +124,13 @@ extension BuildContextExtension on BuildContext {
           ],
         );
       },
+    );
+  }
+
+  Future<void> showToast({required String message}) {
+    return EasyLoading.showToast(
+      message,
+      toastPosition: EasyLoadingToastPosition.bottom,
     );
   }
 

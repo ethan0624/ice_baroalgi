@@ -16,7 +16,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       type: json['type'] as String?,
       schoolName: json['school'] as String?,
       grade: json['grade'] as int?,
-      group: json['class'] as int?,
+      group: json['class'] as String?,
       jinroAccountEmail: json['jinroEmail'] as String?,
     );
 

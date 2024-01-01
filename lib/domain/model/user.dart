@@ -22,7 +22,7 @@ class User {
   @JsonKey(name: 'grade')
   final int? grade;
   @JsonKey(name: 'class')
-  final int? group;
+  final String? group;
   @JsonKey(name: 'jinroEmail')
   final String? jinroAccountEmail;
   // @JsonKey(name: 'pushState')

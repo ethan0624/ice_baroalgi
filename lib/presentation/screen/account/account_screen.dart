@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
+import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 import 'package:incheon_knowhow/presentation/screen/account/bloc/account_bloc.dart';
@@ -23,6 +25,28 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  _onPasswordChangePressed(User user) async {
+    final isVerify = await context.router.pushNamed<bool>('/verify/pw');
+    if (isVerify == null || !isVerify) return;
+
+    // 딜레이를 주지 않을경우 핀번호 검증화면이 남아있게 되는 문제 있음(추후 update 화면을 추가 하는걸 고려)
+    Future.delayed(const Duration(milliseconds: 18), () {
+      _onPasswordUpdate(user.id);
+    });
+  }
+
+  _onPasswordUpdate(int id) async {
+    final ret = await context.router.pushNamed('/resetPw/update?userId=$id');
+    if (ret == null || ret == false) return;
+
+    context.showToast(message: '비밀번호가 변경되었습니다. 다시 로그인 해주세요').then((value) {
+      final bloc = _scaffoldKey.currentContext?.read<AccountBloc>();
+      if (bloc == null) return;
+
+      bloc.add(const AccountEvent.logout());
+    });
+  }
 
   _onLogoutPressed() async {
     final ret = await context.showConfirm(
@@ -78,7 +102,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     label: '비밀번호',
                     value: List.generate(8, (index) => '*').join(''),
                     showDivider: false,
-                    onTap: () {},
+                    onTap: state.user != null
+                        ? () => _onPasswordChangePressed(state.user!)
+                        : null,
                   ),
                 ],
               ),

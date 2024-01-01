@@ -58,7 +58,7 @@ class _ResetPwFormScreenState extends State<ResetPwFormScreen> {
   _handleEffect(BlocEffect effect) {
     if (effect is SuccessEffect) {
       context.router
-          .push(ResetPwCertificationRoute(certificationCode: effect.data));
+          .replace(ResetPwCertificationRoute(certificationCode: effect.data));
     }
   }
 

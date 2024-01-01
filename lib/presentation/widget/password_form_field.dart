@@ -10,6 +10,7 @@ class PasswordFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final String? hint;
   final EdgeInsets margin;
+  final bool? autoFocus;
   final VoidCallback? onSubmitted;
   final Function(TextEditingController controller)? onCreated;
 
@@ -20,6 +21,7 @@ class PasswordFormField extends StatefulWidget {
     this.textInputAction,
     this.hint,
     this.margin = const EdgeInsets.symmetric(vertical: 14),
+    this.autoFocus,
     this.onSubmitted,
     this.onCreated,
   });
@@ -92,6 +94,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                 margin: EdgeInsets.zero,
                 isObscureText: !_showPassword,
                 onSubmitted: widget.onSubmitted,
+                autoFocus: widget.autoFocus ?? false,
               ),
               Positioned(
                 top: 0,

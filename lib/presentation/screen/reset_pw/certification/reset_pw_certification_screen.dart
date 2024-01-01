@@ -86,8 +86,8 @@ class _ResetPwCertificationScreenState
   }
 
   _onNext() {
-    context.router
-        .pushNamed('/resetPw/update?userId=${widget.certificationCode.userId}');
+    context.router.replaceNamed(
+        '/resetPw/update?userId=${widget.certificationCode.userId}');
   }
 
   _handleCodeChanged() {
