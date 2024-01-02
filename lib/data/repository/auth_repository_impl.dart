@@ -113,19 +113,26 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<DataResponse<bool>, Exception>> updatePhone(
-      {required int userId, required String phoneNumber}) {
-    // TODO: implement updatePhone
-    throw UnimplementedError();
+  Future<Result<bool, Exception>> updateSchool({
+    required String school,
+    required int grade,
+    required int group,
+  }) async {
+    final data = {
+      'school': school,
+      'grade': grade,
+      'class': group,
+    };
+    final res = await safetyCall(apiClient.updateUserSchool(data));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
 
   @override
-  Future<Result<DataResponse<bool>, Exception>> updateSchool(
-      {required int userId,
-      required String school,
-      required int grade,
-      required int group}) {
-    // TODO: implement updateSchool
+  Future<Result<DataResponse<bool>, Exception>> updatePhone(
+      {required int userId, required String phoneNumber}) {
+    // TODO: implement updatePhone
     throw UnimplementedError();
   }
 

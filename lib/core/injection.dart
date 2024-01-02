@@ -21,6 +21,7 @@ import 'package:incheon_knowhow/domain/usecase/auth/login.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/regist_user.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/send_certification_code.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_password.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/update_school.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/withdraw.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_recommend_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_region_categories.dart';
@@ -113,6 +114,12 @@ class Injection {
     );
     getIt.registerLazySingleton<Withdraw>(
       () => Withdraw(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<UpdateSchool>(
+      () => UpdateSchool(
         authProvider: getIt(),
         repository: getIt(),
       ),

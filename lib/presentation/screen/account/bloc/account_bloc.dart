@@ -20,10 +20,19 @@ class AccountBloc extends BaseSideEffectBloc<AccountEvent, AccountState> {
         user: _authProvider.userMe,
       ));
 
+      add(const AccountEvent.refresh());
+    });
+
+    on<AccountOnRefresh>((event, emit) async {
       final res = await _getUserInfo();
+      final userMe = res.tryGetSuccess();
+
+      if (res.isSuccess() && userMe != null) {
+        _authProvider.updateUser(user: userMe);
+      }
 
       emit(state.copyWith(
-        user: res.tryGetSuccess(),
+        user: userMe,
       ));
     });
 

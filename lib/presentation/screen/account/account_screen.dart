@@ -48,6 +48,16 @@ class _AccountScreenState extends State<AccountScreen> {
     });
   }
 
+  _onSchoolChangePressed() async {
+    final ret = await context.router.pushNamed('/update/school');
+    if (ret == null || ret == false) return;
+
+    final bloc = _scaffoldKey.currentContext?.read<AccountBloc>();
+    if (bloc == null) return;
+
+    bloc.add(const AccountEvent.refresh());
+  }
+
   _onLogoutPressed() async {
     final ret = await context.showConfirm(
       title: '로그아웃',
@@ -139,9 +149,9 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   AcountItemView(
                     label: '학교',
-                    value: state.user?.schoolName ?? '',
+                    value: state.user?.schoolInfo ?? '',
                     showDivider: false,
-                    onTap: () {},
+                    onTap: _onSchoolChangePressed,
                   ),
                 ],
               ),

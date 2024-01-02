@@ -250,6 +250,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SpotDetailScreen(),
       );
     },
+    UpdateSchoolRoute.name: (routeData) {
+      return AutoRoutePage<bool>(
+        routeData: routeData,
+        child: const UpdateSchoolScreen(),
+      );
+    },
     VerifyPwRoute.name: (routeData) {
       return AutoRoutePage<bool>(
         routeData: routeData,
@@ -940,6 +946,20 @@ class SpotDetailRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SpotDetailRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UpdateSchoolScreen]
+class UpdateSchoolRoute extends PageRouteInfo<void> {
+  const UpdateSchoolRoute({List<PageRouteInfo>? children})
+      : super(
+          UpdateSchoolRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpdateSchoolRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

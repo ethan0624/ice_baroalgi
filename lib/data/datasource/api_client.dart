@@ -96,6 +96,12 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 
+  // 회원 학교 수정
+  @PUT('/user/school')
+  Future<DataResponse<String>> updateUserSchool(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 회원가입
   @POST('/register')
   Future<DataResponse<String>> register(
@@ -173,13 +179,6 @@ abstract class ApiClient {
   // 회원 전화번호 수정
   @PUT('/user/phone/{id}')
   Future<DataResponse<String>> updateUserPhone(
-    @Path() int id,
-    @Body() Map<String, dynamic> data,
-  );
-
-  // 회원 학교 수정
-  @PUT('/user/school/{id}')
-  Future<DataResponse<String>> updateUserSchool(
     @Path() int id,
     @Body() Map<String, dynamic> data,
   );

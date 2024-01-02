@@ -38,16 +38,15 @@ abstract class AuthRepository {
     required UserRegisterRequest request,
   });
 
-  Future<Result<DataResponse<bool>, Exception>> updatePhone({
-    required int userId,
-    required String phoneNumber,
-  });
-
-  Future<Result<DataResponse<bool>, Exception>> updateSchool({
-    required int userId,
+  Future<Result<bool, Exception>> updateSchool({
     required String school,
     required int grade,
     required int group,
+  });
+
+  Future<Result<DataResponse<bool>, Exception>> updatePhone({
+    required int userId,
+    required String phoneNumber,
   });
 
   Future<Result<bool, Exception>> withdraw();

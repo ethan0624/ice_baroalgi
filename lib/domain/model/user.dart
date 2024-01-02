@@ -57,3 +57,13 @@ class User {
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
+
+extension UserExtension on User {
+  String get schoolInfo {
+    if (schoolName?.isNotEmpty == true && grade != null && group != null) {
+      return '$schoolName $grade학년 $group반';
+    } else {
+      return '';
+    }
+  }
+}

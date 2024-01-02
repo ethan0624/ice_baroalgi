@@ -4,6 +4,7 @@ sealed class AccountEvent extends Equatable {
   const AccountEvent();
 
   const factory AccountEvent.initial() = AccountOnInitial;
+  const factory AccountEvent.refresh() = AccountOnRefresh;
   const factory AccountEvent.logout() = AccountOnLogout;
 
   @override
@@ -12,6 +13,10 @@ sealed class AccountEvent extends Equatable {
 
 class AccountOnInitial extends AccountEvent {
   const AccountOnInitial();
+}
+
+class AccountOnRefresh extends AccountEvent {
+  const AccountOnRefresh();
 }
 
 class AccountOnLogout extends AccountEvent {
