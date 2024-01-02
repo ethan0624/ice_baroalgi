@@ -7,6 +7,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/app.dart';
 import 'package:incheon_knowhow/config/app_config.dart';
+import 'package:incheon_knowhow/config/app_info.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/data/my_http_override.dart';
@@ -33,6 +34,7 @@ void main() async {
       statusBarColor: Colors.transparent,
     ));
 
+    await AppInfo.initialize();
     await Injection.initialize();
 
     runApp(

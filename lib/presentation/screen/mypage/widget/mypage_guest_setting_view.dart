@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/config/app_info.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/screen/mypage/widget/mypage_setting_list_item.dart';
@@ -59,7 +60,7 @@ class MypageGuestSettingView extends StatelessWidget {
         MypageSettingListItem(
           title: '앱 버전정보',
           tail: Text(
-            '1.0.0',
+            AppInfo().appVersion,
             style: context.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
