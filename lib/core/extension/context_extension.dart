@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
@@ -33,6 +34,11 @@ extension BuildContextExtension on BuildContext {
         Locale('en', 'EN'),
         Locale('zh', 'CN'),
       ];
+
+  Future<void> share({required String title}) async {
+    final storeUrl = 'https://store.com/todo';
+    await Share.share('$title $storeUrl', subject: title);
+  }
 
   Future<bool?> showAlert({
     required String title,

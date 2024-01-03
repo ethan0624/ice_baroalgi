@@ -207,13 +207,13 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                       children: [
                         const AppTitleText(text: '포함하는 코스'),
                         const SizedBox(height: 6),
-                        ...List.generate(
-                          3,
-                          (index) => CourseListItem(
-                            margin: const EdgeInsets.symmetric(vertical: 6),
-                            course: Course.mock(),
-                          ),
-                        ),
+                        // ...List.generate(
+                        //   3,
+                        //   (index) => CourseListItem(
+                        //     margin: const EdgeInsets.symmetric(vertical: 6),
+                        //     course: Course.mock(),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

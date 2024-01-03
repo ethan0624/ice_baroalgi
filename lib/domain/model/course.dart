@@ -15,8 +15,8 @@ class Course {
   final String? distance; //  km
   // @JsonKey(name: 'image')
   // final List<String> images;
-  @JsonKey(name: 'image')
-  final String? image;
+  // @JsonKey(name: 'image')
+  // final String? image;
   @JsonKey(name: 'wishList')
   final bool isLiked;
   @JsonKey(name: 'courseState')
@@ -43,7 +43,7 @@ class Course {
     required this.title,
     this.duration,
     this.distance,
-    this.image,
+    // this.image,
     this.isLiked = false,
     this.isCompleted = false,
     this.spotCount = 0,
@@ -54,17 +54,6 @@ class Course {
     this.description,
     this.spots,
   });
-
-  factory Course.mock() {
-    return const Course(
-      id: 1,
-      title: '지붕없는 박물관, 강화',
-      duration: '270',
-      distance: '12',
-      // images: [''],
-      image: '',
-    );
-  }
 
   copyWith({
     bool? isLiked,
@@ -84,7 +73,7 @@ class Course {
       regionName: regionName,
       summary: summary,
       spots: spots,
-      image: image,
+      // image: image,
     );
   }
 
@@ -99,8 +88,7 @@ class Course {
         title: '지붕없는 박물관, 강화',
         duration: '270',
         distance: '12',
-        image:
-            'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
+        // image: 'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // images: [
         //   'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // ],
@@ -110,8 +98,7 @@ class Course {
         title: '지붕없는 박물관, 강화',
         duration: '210',
         distance: '8.5',
-        image:
-            'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
+        // image:'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // images: [
         //   'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // ],
@@ -121,8 +108,7 @@ class Course {
         title: '지붕없는 박물관, 강화',
         duration: '410',
         distance: '31.5',
-        image:
-            'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
+        // image: 'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // images: [
         //   'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // ],
@@ -132,8 +118,7 @@ class Course {
         title: '지붕없는 박물관, 강화',
         duration: '180',
         distance: '7',
-        image:
-            'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
+        // image: 'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // images: [
         //   'https://lh5.googleusercontent.com/p/AF1QipNYtzCdlIQWnkvUhkV9MEb0yV0KKrpIMxtfNGwa=w426-h240-k-no',
         // ],

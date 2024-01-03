@@ -4,6 +4,7 @@ sealed class CourseInfoEvent extends Equatable {
   const CourseInfoEvent();
 
   const factory CourseInfoEvent.initial() = CourseInfoOnInitial;
+  const factory CourseInfoEvent.toggleFavorite() = CourseInfoOnFavorite;
 
   @override
   List<Object> get props => [];
@@ -11,4 +12,8 @@ sealed class CourseInfoEvent extends Equatable {
 
 class CourseInfoOnInitial extends CourseInfoEvent {
   const CourseInfoOnInitial();
+}
+
+class CourseInfoOnFavorite extends CourseInfoEvent {
+  const CourseInfoOnFavorite();
 }

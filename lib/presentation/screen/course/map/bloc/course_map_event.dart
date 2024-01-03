@@ -4,6 +4,7 @@ sealed class CourseMapEvent extends Equatable {
   const CourseMapEvent();
 
   const factory CourseMapEvent.initial() = CourseMapOnInitial;
+  const factory CourseMapEvent.toggleFavorite() = CourseMapOnFavorite;
   const factory CourseMapEvent.start() = CourseMapOnStart;
   const factory CourseMapEvent.complete() = CourseMapOnComplete;
   const factory CourseMapEvent.cancel() = CourseMapOnCancel;
@@ -14,6 +15,10 @@ sealed class CourseMapEvent extends Equatable {
 
 class CourseMapOnInitial extends CourseMapEvent {
   const CourseMapOnInitial();
+}
+
+class CourseMapOnFavorite extends CourseMapEvent {
+  const CourseMapOnFavorite();
 }
 
 class CourseMapOnStart extends CourseMapEvent {

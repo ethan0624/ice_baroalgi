@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
+import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/course/map/bloc/course_map_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
@@ -10,6 +11,7 @@ import 'package:incheon_knowhow/presentation/widget/course_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/course_header.dart';
 import 'package:incheon_knowhow/presentation/widget/custom_map_marker.dart';
 import 'package:incheon_knowhow/presentation/widget/spot_card_view.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class CourseMapScreen extends StatefulWidget {
@@ -21,9 +23,36 @@ class CourseMapScreen extends StatefulWidget {
 }
 
 class _CourseMapScreenState extends State<CourseMapScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
   late NaverMapController _mapController;
   NMarker? _selectedMarker;
+
+  String _title = '';
+  bool _isFavorite = false;
+
+  _onFavoritePressed() {
+    final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+    if (bloc == null) return;
+
+    bloc.add(const CourseMapEvent.toggleFavorite());
+  }
+
+  _onSharedPressed() async {
+    if (_title.isNotEmpty) {
+      context.share(title: _title);
+    }
+  }
+
+  _handleStateChanged(CourseMapState state) {
+    final course = state.course;
+    if (course != null) {
+      setState(() {
+        _title = course.title;
+        _isFavorite = course.isLiked;
+      });
+    }
+  }
 
   Future<NLatLng?> _getCurrentLocation() async {
     final hasPermission = await _handlePermission();
@@ -139,9 +168,17 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<CourseMapBloc, CourseMapBloc,
         CourseMapState>(
-      appBar: CourseAppBar(),
+      scaffoldKey: _scaffoldKey,
+      appBar: CourseAppBar(
+        isFavorited: _isFavorite,
+        onFavoritePressed: _onFavoritePressed,
+        onSharedPressed: _onSharedPressed,
+      ),
       create: (_) => CourseMapBloc(courseId: widget.courseId)
         ..add(const CourseMapEvent.initial()),
+      stateChanged: (context, state) {
+        _handleStateChanged(state);
+      },
       builder: (context, bloc, state) {
         return SizedBox(
           width: double.infinity,
@@ -160,12 +197,12 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                   },
                 ),
               ),
-              const Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: CourseHeader(),
-              ),
+              // const Positioned(
+              //   top: 0,
+              //   left: 0,
+              //   right: 0,
+              //   child: CourseHeader(),
+              // ),
               Positioned(
                 bottom: 0,
                 left: 0,
