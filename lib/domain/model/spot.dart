@@ -15,11 +15,11 @@ class Spot {
   // @JsonKey(name: 'image')
   // final List<String> images;
   @JsonKey(name: 'summary')
-  final String summary;
-  @JsonKey(name: 'latitude')
-  final double latitude;
-  @JsonKey(name: 'longitude')
-  final double longitude;
+  final String? summary;
+  // @JsonKey(name: 'latitude')
+  // final double? latitude;
+  // @JsonKey(name: 'longitude')
+  // final double? longitude;
   @JsonKey(name: 'descript')
   final String? description;
   @JsonKey(name: 'tel')
@@ -34,9 +34,9 @@ class Spot {
     required this.title,
     required this.address,
     // required this.images,
-    required this.summary,
-    required this.latitude,
-    required this.longitude,
+    this.summary,
+    // this.latitude,
+    // this.longitude,
     this.image,
     this.description,
     this.tel,
@@ -47,4 +47,8 @@ class Spot {
   factory Spot.fromJson(Map<String, dynamic> json) => _$SpotFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpotToJson(this);
+}
+
+extension SpotExtension on Spot {
+  String get detailRoutePath => '/spot/$id';
 }

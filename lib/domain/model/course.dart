@@ -190,4 +190,6 @@ extension CourseExtension on Course {
     final value = completedSpotCount / spotCount;
     return value.isNaN ? 0 : value;
   }
+
+  String get detailRoutePath => '/course/$id/info';
 }

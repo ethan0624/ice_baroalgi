@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,10 +7,28 @@ import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.d
 import 'package:incheon_knowhow/presentation/screen/search/bloc/search_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/search/widget/recently_keyword_view.dart';
 import 'package:incheon_knowhow/presentation/screen/search/widget/related_result_view.dart';
+import 'package:incheon_knowhow/presentation/screen/search/widget/search_result_all_view.dart';
 import 'package:incheon_knowhow/presentation/widget/app_back_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
+import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
+import 'package:incheon_knowhow/presentation/widget/spot_list_item.dart';
 import 'package:provider/provider.dart';
+
+enum SearchResultType { all, course, spot }
+
+extension SearchResultTypeExtension on SearchResultType {
+  String get title {
+    switch (this) {
+      case SearchResultType.all:
+        return '전체';
+      case SearchResultType.course:
+        return '코스';
+      case SearchResultType.spot:
+        return '스팟';
+    }
+  }
+}
 
 @RoutePage()
 class SearchScreen extends StatefulWidget {
@@ -30,8 +47,9 @@ class _SearchScreenState extends State<SearchScreen> {
   String _keyword = '';
   bool _visibleSearchResult = false;
 
+  SearchResultType _selsectedSearchResultType = SearchResultType.all;
+
   _showResult() {
-    print('>>>> _showResult : $_keyword');
     setState(() {
       _visibleSearchResult = true;
     });
@@ -42,6 +60,12 @@ class _SearchScreenState extends State<SearchScreen> {
     if (bloc == null) return;
 
     bloc.add(SearchEvent.search(_keyword));
+  }
+
+  _onSearchResultType(SearchResultType resultType) {
+    setState(() {
+      _selsectedSearchResultType = resultType;
+    });
   }
 
   _searchWithThrottle(String keyword) {
@@ -112,49 +136,69 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Positioned.fill(
               top: 12,
-              left: 24,
-              right: 24,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      OutlineButton(
-                        onPressed: () {},
-                        backgroundColor: AppColor.primary,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        text: '전체',
-                        textColor: Colors.white,
+              left: 0,
+              right: 0,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                      child: Wrap(
+                        spacing: 8,
+                        children: SearchResultType.values
+                            .map((e) => OutlineButton(
+                                  onPressed: () => _onSearchResultType(e),
+                                  backgroundColor:
+                                      e == _selsectedSearchResultType
+                                          ? AppColor.primary
+                                          : Colors.transparent,
+                                  borderColor: e == _selsectedSearchResultType
+                                      ? AppColor.primary
+                                      : AppColor.dividerMedium,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  text: e.title,
+                                  textColor: e == _selsectedSearchResultType
+                                      ? Colors.white
+                                      : null,
+                                ))
+                            .toList(),
                       ),
-                      OutlineButton(
-                        onPressed: () {},
-                        // backgroundColor: AppColor.primary,
-                        borderColor: AppColor.dividerMedium,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        text: '코스',
-                        // textColor: Colors.white,
+                    ),
+                    if (_selsectedSearchResultType == SearchResultType.all)
+                      SearchResultAllView(
+                        courses: state.searchCourses,
+                        spots: state.searchSpots,
+                        onCourseMorePressed: () =>
+                            _onSearchResultType(SearchResultType.course),
+                        onSpotMorePressed: () =>
+                            _onSearchResultType(SearchResultType.spot),
                       ),
-                      OutlineButton(
-                        onPressed: () {},
-                        // backgroundColor: AppColor.primary,
-                        borderColor: AppColor.dividerMedium,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        text: '스팟',
-                        // textColor: Colors.white,
+                    if (_selsectedSearchResultType == SearchResultType.course)
+                      Column(
+                        children: [
+                          const SizedBox(height: 12),
+                          ...state.searchCourses
+                              .map((e) => CourseListItem(course: e)),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
+                    if (_selsectedSearchResultType == SearchResultType.spot)
+                      Column(
+                        children: [
+                          const SizedBox(height: 12),
+                          ...state.searchSpots.map((e) => const SpotListItem()),
+                        ],
+                      )
+                  ],
+                ),
               ),
             ),
-            if (_keyword.isEmpty) RecentlyKeywordView(),
+            if (_keyword.isEmpty) const RecentlyKeywordView(),
             if (!_visibleSearchResult && _keyword.isNotEmpty)
               RelatedResultView(
                 keyword: _keyword,
+                results: state.relateResults,
                 onSearch: _showResult,
               ),
           ],

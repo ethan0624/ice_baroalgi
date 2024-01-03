@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/relate_result.dart';
 
 class RelatedResultView extends StatelessWidget {
   final String keyword;
-  final List<String> results;
-  final ValueChanged<int>? onTap;
+  final List<RelateResult> results;
   final VoidCallback? onSearch;
   const RelatedResultView({
     super.key,
     required this.keyword,
     this.results = const [],
-    this.onTap,
     this.onSearch,
   });
 
@@ -35,14 +36,14 @@ class RelatedResultView extends StatelessWidget {
           ),
           ...results.mapIndexed(
             (index, e) => InkWell(
-              onTap: () => onTap?.call(index),
+              onTap: () => context.router.pushNamed(e.path),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextHighlight(
-                      text: '$keyword역 뒷역',
+                      text: e.keyword,
                       words: {
                         keyword: HighlightedWord(
                           textStyle: context.textTheme.bodyMedium

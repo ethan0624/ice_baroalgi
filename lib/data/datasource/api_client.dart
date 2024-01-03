@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:incheon_knowhow/domain/model/search_result.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:incheon_knowhow/config/app_config.dart';
@@ -173,6 +174,11 @@ abstract class ApiClient {
   // 알림 읽음 처리
   @POST('/push/{id}')
   Future<DataResponse<String>> updatePush(@Path() int id);
+
+  @GET('/search')
+  Future<DataResponse<SearchResult>> search(
+    @Body() Map<String, dynamic> data,
+  );
 
   /// todo:
 
