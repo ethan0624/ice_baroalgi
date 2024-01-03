@@ -6,6 +6,7 @@ class OutlineButton extends StatelessWidget {
   final String text;
   final Color? textColor;
   final Color? backgroundColor;
+  final Color? borderColor;
   final EdgeInsets? margin;
   final EdgeInsets padding;
   final VoidCallback? onPressed;
@@ -15,6 +16,7 @@ class OutlineButton extends StatelessWidget {
     required this.text,
     this.textColor,
     this.backgroundColor,
+    this.borderColor,
     this.margin,
     this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
     this.onPressed,
@@ -30,7 +32,8 @@ class OutlineButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor ?? Colors.white,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColor.secondary, width: 1),
+          border:
+              Border.all(color: borderColor ?? AppColor.secondary, width: 1),
         ),
         child: Text(
           text,

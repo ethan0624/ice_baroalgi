@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (_) => HomeBloc()..add(const HomeEvent.initial()),
       appBar: HomeAppBar(
         onSearchPressed: () {
-          // todo: push search screen
+          context.router.pushNamed('/search');
         },
         onNotificationPressed: () {
           context.router.pushNamed('/notification');
