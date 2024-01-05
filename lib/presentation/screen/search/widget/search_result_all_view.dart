@@ -72,7 +72,9 @@ class SearchResultAllView extends StatelessWidget {
                       child: AppTitleText(text: '스팟'),
                     ),
                     const SizedBox(height: 12),
-                    ...spots.take(3).map((e) => SpotListItem()),
+                    ...spots.take(3).map((e) => SpotListItem(
+                          spot: e,
+                        )),
                     if (spots.length > 3)
                       Center(
                         child: Padding(

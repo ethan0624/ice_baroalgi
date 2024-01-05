@@ -589,6 +589,36 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<DataResponse<Spot>> getSpotInfo(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DataResponse<Spot>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/spot/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<Spot>.fromJson(
+      _result.data!,
+      (json) => Spot.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<DataResponse<NoticePaging>> findNotice() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

@@ -10,12 +10,14 @@ import 'package:incheon_knowhow/data/repository/course_repository_impl.dart';
 import 'package:incheon_knowhow/data/repository/etc_repository_impl.dart';
 import 'package:incheon_knowhow/data/repository/school_repository_impl.dart';
 import 'package:incheon_knowhow/data/repository/search_repository_impl.dart';
+import 'package:incheon_knowhow/data/repository/spot_repository_impl.dart';
 import 'package:incheon_knowhow/domain/repository/auth_repository.dart';
 import 'package:incheon_knowhow/domain/repository/category_repository.dart';
 import 'package:incheon_knowhow/domain/repository/course_repository.dart';
 import 'package:incheon_knowhow/domain/repository/etc_repository.dart';
 import 'package:incheon_knowhow/domain/repository/school_repository.dart';
 import 'package:incheon_knowhow/domain/repository/search_repository.dart';
+import 'package:incheon_knowhow/domain/repository/spot_repository.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/duplicate_email.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/find_user_id.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/get_user_info.dart';
@@ -44,6 +46,7 @@ import 'package:incheon_knowhow/domain/usecase/etc/get_business_info.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/update_push_read.dart';
 import 'package:incheon_knowhow/domain/usecase/school/find_school.dart';
 import 'package:incheon_knowhow/domain/usecase/search/find_search.dart';
+import 'package:incheon_knowhow/domain/usecase/spot/get_spot_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -81,6 +84,9 @@ class Injection {
       apiClient: getIt(),
     ));
     getIt.registerSingleton<CourseRepository>(CourseRepositoryImpl(
+      apiClient: getIt(),
+    ));
+    getIt.registerSingleton<SpotRepository>(SpotRepositoryImpl(
       apiClient: getIt(),
     ));
     getIt.registerSingleton<EtcRepository>(EtcRepositoryImpl(
@@ -182,6 +188,11 @@ class Injection {
         repository: getIt(),
       ),
     );
+
+    getIt.registerLazySingleton<GetSpotInfo>(
+      () => GetSpotInfo(repository: getIt()),
+    );
+
     getIt.registerLazySingleton<FindNotice>(
       () => FindNotice(repository: getIt()),
     );

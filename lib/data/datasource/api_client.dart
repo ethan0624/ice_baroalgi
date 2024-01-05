@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:incheon_knowhow/domain/model/search_result.dart';
+import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:incheon_knowhow/config/app_config.dart';
@@ -154,6 +155,13 @@ abstract class ApiClient {
   // 코스 진행 중단하기
   @POST('/course/stop/{id}')
   Future<DataResponse<String>> cancelCourse(@Path() int id);
+
+  /*
+   * 스팟 
+   */
+  // 코스 상세 정보 조회
+  @GET('/spot/{id}')
+  Future<DataResponse<Spot>> getSpotInfo(@Path() int id);
 
   /*
    * 기타  

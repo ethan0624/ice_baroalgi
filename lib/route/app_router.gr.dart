@@ -251,9 +251,16 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SpotDetailRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<SpotDetailRouteArgs>(
+          orElse: () =>
+              SpotDetailRouteArgs(spotId: pathParams.getInt('spotId')));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SpotDetailScreen(),
+        child: SpotDetailScreen(
+          key: args.key,
+          spotId: args.spotId,
+        ),
       );
     },
     UpdateSchoolRoute.name: (routeData) {
@@ -958,16 +965,41 @@ class SplashRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SpotDetailScreen]
-class SpotDetailRoute extends PageRouteInfo<void> {
-  const SpotDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class SpotDetailRoute extends PageRouteInfo<SpotDetailRouteArgs> {
+  SpotDetailRoute({
+    Key? key,
+    required int spotId,
+    List<PageRouteInfo>? children,
+  }) : super(
           SpotDetailRoute.name,
+          args: SpotDetailRouteArgs(
+            key: key,
+            spotId: spotId,
+          ),
+          rawPathParams: {'spotId': spotId},
           initialChildren: children,
         );
 
   static const String name = 'SpotDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<SpotDetailRouteArgs> page =
+      PageInfo<SpotDetailRouteArgs>(name);
+}
+
+class SpotDetailRouteArgs {
+  const SpotDetailRouteArgs({
+    this.key,
+    required this.spotId,
+  });
+
+  final Key? key;
+
+  final int spotId;
+
+  @override
+  String toString() {
+    return 'SpotDetailRouteArgs{key: $key, spotId: $spotId}';
+  }
 }
 
 /// generated route for

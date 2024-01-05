@@ -187,7 +187,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       Column(
                         children: [
                           const SizedBox(height: 12),
-                          ...state.searchSpots.map((e) => const SpotListItem()),
+                          ...state.searchSpots
+                              .map((e) => SpotListItem(spot: e)),
                         ],
                       )
                   ],

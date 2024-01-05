@@ -13,10 +13,10 @@ class Course {
   final String? duration; //  분
   @JsonKey(name: 'distance')
   final String? distance; //  km
-  // @JsonKey(name: 'image')
-  // final List<String> images;
-  // @JsonKey(name: 'image')
-  // final String? image;
+  @JsonKey(name: 'image')
+  final String? image;
+  @JsonKey(name: 'images')
+  final List<String>? images;
   @JsonKey(name: 'wishList')
   final bool isLiked;
   @JsonKey(name: 'courseState')
@@ -29,6 +29,8 @@ class Course {
   final int? regionId;
   @JsonKey(name: 'region')
   final String? regionName;
+  @JsonKey(name: 'categoryId')
+  final int? recommendCategoryId;
 
   // 상세정보
   @JsonKey(name: 'summary')
@@ -43,13 +45,15 @@ class Course {
     required this.title,
     this.duration,
     this.distance,
-    // this.image,
+    this.image,
+    this.images,
     this.isLiked = false,
     this.isCompleted = false,
     this.spotCount = 0,
     this.completedSpotCount = 0,
     this.regionId,
     this.regionName,
+    this.recommendCategoryId,
     this.summary,
     this.description,
     this.spots,
@@ -71,9 +75,11 @@ class Course {
       completedSpotCount: completedSpotCount,
       regionId: regionId,
       regionName: regionName,
+      recommendCategoryId: recommendCategoryId,
       summary: summary,
       spots: spots,
-      // image: image,
+      image: image,
+      images: images,
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
+import 'package:incheon_knowhow/domain/enum/user_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
@@ -15,8 +16,10 @@ class User {
   final String phone;
   @JsonKey(name: 'gender', unknownEnumValue: UserGenderType.male)
   final UserGenderType genderType;
-  @JsonKey(name: 'type')
-  final String? type;
+  @JsonKey(name: 'type', unknownEnumValue: UserType.other)
+  final UserType? type;
+  @JsonKey(name: 'birth')
+  final String? birth;
   @JsonKey(name: 'school')
   final String? schoolName;
   @JsonKey(name: 'grade')
@@ -25,8 +28,8 @@ class User {
   final String? group;
   @JsonKey(name: 'jinroEmail')
   final String? jinroAccountEmail;
-  // @JsonKey(name: 'pushState')
-  // final bool? isPushNotification;
+  @JsonKey(name: 'pushState')
+  final bool? isPushNotification;
 
   const User({
     required this.id,
@@ -35,11 +38,12 @@ class User {
     required this.phone,
     required this.genderType,
     this.type,
+    this.birth,
     this.schoolName,
     this.grade,
     this.group,
     this.jinroAccountEmail,
-    // this.isPushNotification,
+    this.isPushNotification,
   });
 
   factory User.tester() {
@@ -48,7 +52,6 @@ class User {
       name: 'tester',
       email: 'test@test.co.kr',
       phone: '010-1234-5678',
-      type: '일반인',
       genderType: UserGenderType.male,
     );
   }

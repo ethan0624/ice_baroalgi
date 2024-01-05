@@ -78,10 +78,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                         CourseHeader(
                           course: state.course!,
                         ),
-                        const ImageSlider(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: defaultMarginValue),
-                        ),
+                        if (state.course?.images?.isNotEmpty == true)
+                          ImageSlider(
+                            images: state.course?.images ?? [],
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: defaultMarginValue),
+                          ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: defaultMarginValue, vertical: 12),
@@ -121,8 +123,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                           child: AppTitleText(text: '스팟 리스트'),
                         ),
                         const SizedBox(height: 6),
-                        ...(state.course?.spots ?? [])
-                            .map((e) => const SpotListItem()),
+                        ...(state.course?.spots ?? []).map((e) => SpotListItem(
+                              spot: e,
+                            )),
                       ],
                     ),
                   ),

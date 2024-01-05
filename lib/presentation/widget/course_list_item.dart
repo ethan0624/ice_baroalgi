@@ -107,8 +107,8 @@ class _CourseListItemState extends State<CourseListItem>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Thumbnail(
-                    // imageUrl: widget.course.image,
-                    ),
+                  imageUrl: widget.course.image,
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(

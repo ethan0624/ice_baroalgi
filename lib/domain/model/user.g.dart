@@ -13,11 +13,14 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       phone: json['phone'] as String,
       genderType: $enumDecode(_$UserGenderTypeEnumMap, json['gender'],
           unknownValue: UserGenderType.male),
-      type: json['type'] as String?,
+      type: $enumDecodeNullable(_$UserTypeEnumMap, json['type'],
+          unknownValue: UserType.other),
+      birth: json['birth'] as String?,
       schoolName: json['school'] as String?,
       grade: json['grade'] as int?,
       group: json['class'] as String?,
       jinroAccountEmail: json['jinroEmail'] as String?,
+      isPushNotification: json['pushState'] as bool?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -26,14 +29,21 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'email': instance.email,
       'phone': instance.phone,
       'gender': _$UserGenderTypeEnumMap[instance.genderType]!,
-      'type': instance.type,
+      'type': _$UserTypeEnumMap[instance.type],
+      'birth': instance.birth,
       'school': instance.schoolName,
       'grade': instance.grade,
       'class': instance.group,
       'jinroEmail': instance.jinroAccountEmail,
+      'pushState': instance.isPushNotification,
     };
 
 const _$UserGenderTypeEnumMap = {
   UserGenderType.male: 'm',
   UserGenderType.female: 'f',
+};
+
+const _$UserTypeEnumMap = {
+  UserType.student: '학생',
+  UserType.other: '일반인',
 };
