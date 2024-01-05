@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
+import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/cscenter/qna/bloc/cscenter_qna_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/accordian_list_view.dart';
@@ -18,14 +19,15 @@ class CscenterQnaScreen extends StatefulWidget {
 }
 
 class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<CscenterQnaBloc, CscenterQnaBloc,
         CscenterQnaState>(
-      appBar: AppSubAppBar(
-        text: 'QnA',
-      ),
-      create: (_) => CscenterQnaBloc(),
+      scaffoldKey: _scaffoldKey,
+      appBar: AppSubAppBar(text: 'QnA'),
+      create: (_) => CscenterQnaBloc()..add(const CscenterQnaEvent.initial()),
       builder: (context, bloc, state) {
         return Stack(
           children: [
@@ -57,17 +59,35 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Expanded(
-                    child: AccordianListView(
-                      itemCount: 30,
-                      titleBuilder: (context, index) {
-                        return const Text('자주묻는 질문 제목이 작성됩니다.');
-                      },
-                      contentBuilder: (context, index) {
-                        return const Text('자주묻는 질문 내용이 작성됩니다.');
-                      },
-                    ),
-                  ),
+                  if (!state.isLoading)
+                    (state.faqList.isEmpty)
+                        ? Center(
+                            child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 60),
+                            child: Text(
+                              '등록된 자주묻는 질문이 없습니다',
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ))
+                        : Expanded(
+                            child: AccordianListView(
+                              itemCount: state.faqList.length,
+                              titleBuilder: (context, index) {
+                                final faq = state.faqList[index];
+                                return Text(
+                                  faq.question,
+                                  style: context.textTheme.bodyMedium,
+                                );
+                              },
+                              contentBuilder: (context, index) {
+                                final faq = state.faqList[index];
+                                return Text(
+                                  faq.answer,
+                                  style: context.textTheme.bodyMedium,
+                                );
+                              },
+                            ),
+                          ),
                 ],
               ),
             ),

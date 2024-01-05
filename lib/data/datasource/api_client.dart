@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:incheon_knowhow/domain/model/faq_paging.dart';
 import 'package:incheon_knowhow/domain/model/search_result.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:retrofit/retrofit.dart';
@@ -170,6 +171,10 @@ abstract class ApiClient {
   // 공지사항 조회
   @GET('/notice')
   Future<DataResponse<NoticePaging>> findNotice();
+
+  // 자주묻는 질문 조회
+  @GET('/faq')
+  Future<DataResponse<FaqPaging>> findFaq();
 
   // 사업자정보 조회
   @GET('/client/info')

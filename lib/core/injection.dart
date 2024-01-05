@@ -40,6 +40,7 @@ import 'package:incheon_knowhow/domain/usecase/course/find_topic_with_course.dar
 import 'package:incheon_knowhow/domain/usecase/course/get_course_info.dart';
 import 'package:incheon_knowhow/domain/usecase/course/start_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/update_favorite.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/find_faq.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_notice.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_push.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/get_business_info.dart';
@@ -195,6 +196,9 @@ class Injection {
 
     getIt.registerLazySingleton<FindNotice>(
       () => FindNotice(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindFaq>(
+      () => FindFaq(repository: getIt()),
     );
     getIt.registerLazySingleton<GetBusinessInfo>(
       () => GetBusinessInfo(repository: getIt()),
