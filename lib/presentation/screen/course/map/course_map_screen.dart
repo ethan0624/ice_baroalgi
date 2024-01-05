@@ -197,12 +197,15 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                   },
                 ),
               ),
-              // const Positioned(
-              //   top: 0,
-              //   left: 0,
-              //   right: 0,
-              //   child: CourseHeader(),
-              // ),
+              if (state.course != null)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: CourseHeader(
+                    course: state.course!,
+                  ),
+                ),
               Positioned(
                 bottom: 0,
                 left: 0,

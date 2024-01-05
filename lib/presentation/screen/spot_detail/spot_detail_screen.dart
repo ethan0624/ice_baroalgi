@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
-import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/bloc/spot_detail_bloc.dart';
+import 'package:incheon_knowhow/presentation/screen/spot_detail/widget/info_item_view.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
@@ -111,10 +111,13 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                 margin:
                                     const EdgeInsets.symmetric(vertical: 12),
                                 height: 175,
-                                child: NaverMap(
-                                  options: const NaverMapViewOptions(),
-                                  onMapReady: (controller) {},
-                                  onMapTapped: (point, latlng) {},
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: NaverMap(
+                                    options: const NaverMapViewOptions(),
+                                    onMapReady: (controller) {},
+                                    onMapTapped: (point, latlng) {},
+                                  ),
                                 ),
                               ),
                               Container(
@@ -125,96 +128,25 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Column(
                                   children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 88,
-                                          child: Text(
-                                            '주소',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            '${state.spot?.address ?? ''} ${state.spot?.detailAddress ?? ''}',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    InfoItemView(
+                                      label: '주소',
+                                      value:
+                                          '${state.spot?.address ?? ''} ${state.spot?.detailAddress ?? ''}',
                                     ),
                                     const SizedBox(height: 12),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 88,
-                                          child: Text(
-                                            '전화번호',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            state.spot?.tel ?? '',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    InfoItemView(
+                                      label: '전화번호',
+                                      value: state.spot?.tel ?? '',
                                     ),
                                     const SizedBox(height: 12),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 88,
-                                          child: Text(
-                                            '운영시간',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            state.spot?.openTime ?? '',
-                                            style: context.textTheme.labelLarge,
-                                          ),
-                                        ),
-                                      ],
+                                    InfoItemView(
+                                      label: '운영시간',
+                                      value: state.spot?.openTime ?? '',
                                     ),
                                     const SizedBox(height: 12),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 88,
-                                          child: Text(
-                                            '휴무일',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            state.spot?.dayOff ?? '',
-                                            style: context.textTheme.labelLarge,
-                                          ),
-                                        ),
-                                      ],
+                                    InfoItemView(
+                                      label: '휴무일',
+                                      value: state.spot?.dayOff ?? '',
                                     ),
                                   ],
                                 ),
