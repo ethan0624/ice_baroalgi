@@ -679,6 +679,36 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<DataResponse<QnaPaging>> findQna() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<QnaPaging>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/qna',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<QnaPaging>.fromJson(
+      _result.data!,
+      (json) => QnaPaging.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<DataResponse<BusinessInfo>> getBusinessInfo() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

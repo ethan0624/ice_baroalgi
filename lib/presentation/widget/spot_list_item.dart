@@ -33,7 +33,8 @@ class SpotListItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Thumbnail(
+            Thumbnail(
+              imageUrl: spot.image ?? '',
               width: 50,
               height: 50,
             ),

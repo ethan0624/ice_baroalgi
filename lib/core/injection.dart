@@ -1,6 +1,7 @@
-import 'package:event_bus/event_bus.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:event_bus/event_bus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
 import 'package:incheon_knowhow/data/datasource/neis_api_client.dart';
@@ -43,13 +44,12 @@ import 'package:incheon_knowhow/domain/usecase/course/update_favorite.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_faq.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_notice.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/find_push.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/find_qna.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/get_business_info.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/update_push_read.dart';
 import 'package:incheon_knowhow/domain/usecase/school/find_school.dart';
 import 'package:incheon_knowhow/domain/usecase/search/find_search.dart';
 import 'package:incheon_knowhow/domain/usecase/spot/get_spot_info.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 
@@ -199,6 +199,9 @@ class Injection {
     );
     getIt.registerLazySingleton<FindFaq>(
       () => FindFaq(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindQna>(
+      () => FindQna(repository: getIt()),
     );
     getIt.registerLazySingleton<GetBusinessInfo>(
       () => GetBusinessInfo(repository: getIt()),

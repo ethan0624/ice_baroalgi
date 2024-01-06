@@ -186,6 +186,27 @@ class _CourseListItemState extends State<CourseListItem>
                 ),
               ),
             ),
+            if (widget.course.isCompleted)
+              Positioned(
+                top: 0,
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  color: Colors.white38,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset(
+                      'assets/images/course_complete_badge.png',
+                      width: 70,
+                      height: 70,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

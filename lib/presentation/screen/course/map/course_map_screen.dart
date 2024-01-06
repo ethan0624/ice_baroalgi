@@ -245,46 +245,60 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                     if (_selectedMarker != null) const SpotCardView(),
 
                     // bottom
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: defaultMarginValue),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
-                            offset: const Offset(0, -6),
-                            blurRadius: 6,
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: AppButton(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              text: '상세설명',
-                              textBold: true,
-                              background: Colors.white,
-                              textColor: Colors.black,
-                              borderColor: AppColor.secondary,
-                              onPressed: () =>
-                                  context.router.pushNamed('/course/1/info'),
+                    if (state.course != null)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: defaultMarginValue),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.15),
+                              offset: const Offset(0, -6),
+                              blurRadius: 6,
+                            )
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: AppButton(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                text: '상세설명',
+                                textBold: true,
+                                background: Colors.white,
+                                textColor: Colors.black,
+                                borderColor: AppColor.secondary,
+                                onPressed: () =>
+                                    context.router.pushNamed('/course/1/info'),
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            flex: 4,
-                            child: AppButton(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              text: '코스 시작하기',
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
+                            const SizedBox(width: 16),
+                            if (state.course?.isCompleted == false)
+                              Expanded(
+                                flex: 4,
+                                child: AppButton(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  text: '코스 시작하기',
+                                  onPressed: () {},
+                                ),
+                              ),
+                            if (state.course?.isCompleted == true)
+                              Expanded(
+                                flex: 4,
+                                child: AppButton(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  text: '정복완료',
+                                  onPressed: () {},
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),

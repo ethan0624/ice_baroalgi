@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
-import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/bloc/spot_detail_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/widget/info_item_view.dart';
@@ -67,9 +66,12 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               AppTitleText(text: state.spot?.title ?? ''),
-                              // const ImageSlider(
-                              //   padding: EdgeInsets.symmetric(vertical: 12),
-                              // ),
+                              if (state.spot?.images?.isNotEmpty == true)
+                                ImageSlider(
+                                  images: state.spot?.images ?? [],
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                ),
                               Text(
                                 state.spot?.description ?? '',
                                 style: context.textTheme.bodySmall,
@@ -130,8 +132,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                   children: [
                                     InfoItemView(
                                       label: '주소',
-                                      value:
-                                          '${state.spot?.address ?? ''} ${state.spot?.detailAddress ?? ''}',
+                                      value: state.spot?.address ?? '',
                                     ),
                                     const SizedBox(height: 12),
                                     InfoItemView(
@@ -154,30 +155,31 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: defaultMarginValue),
-                          height: 6,
-                          color: AppColor.dividerLight,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: defaultMarginValue),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const AppTitleText(text: '포함하는 코스'),
-                              const SizedBox(height: 6),
-                              // ...List.generate(
-                              //   3,
-                              //   (index) => CourseListItem(
-                              //     margin: const EdgeInsets.symmetric(vertical: 6),
-                              //     course: Course.mock(),
-                              //   ),
-                              // ),
-                            ],
+                        if (state.includeCourse.isNotEmpty)
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: defaultMarginValue),
+                            height: 6,
+                            color: AppColor.dividerLight,
                           ),
-                        ),
+                        if (state.includeCourse.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: defaultMarginValue),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const AppTitleText(text: '포함하는 코스'),
+                                const SizedBox(height: 6),
+                                ...state.includeCourse
+                                    .map((e) => CourseListItem(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 6),
+                                          course: e,
+                                        )),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),

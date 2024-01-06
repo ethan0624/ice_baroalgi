@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/domain/usecase/spot/get_spot_info.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc.dart';

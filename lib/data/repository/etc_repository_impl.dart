@@ -1,4 +1,5 @@
 // ignore: implementation_imports
+import 'package:incheon_knowhow/domain/model/qna_paging.dart';
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
@@ -24,6 +25,15 @@ class EtcRepositoryImpl implements EtcRepository {
   @override
   Future<Result<FaqPaging, Exception>> findFaq() async {
     final res = await safetyCall<FaqPaging>(apiClient.findFaq());
+    final result = res.tryGetSuccess()?.data;
+    return res.isSuccess() && result != null
+        ? Result.success(result)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<QnaPaging, Exception>> findQna() async {
+    final res = await safetyCall<QnaPaging>(apiClient.findQna());
     final result = res.tryGetSuccess()?.data;
     return res.isSuccess() && result != null
         ? Result.success(result)

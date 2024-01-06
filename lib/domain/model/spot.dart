@@ -10,12 +10,10 @@ class Spot {
   final String title;
   @JsonKey(name: 'address')
   final String? address;
-  @JsonKey(name: 'detailAddress')
-  final String? detailAddress;
-  // @JsonKey(name: 'image')
-  // final String? image;
-  // @JsonKey(name: 'image')
-  // final List<String> images;
+  @JsonKey(name: 'image')
+  final String? image;
+  @JsonKey(name: 'images')
+  final List<String>? images;
   @JsonKey(name: 'summary')
   final String? summary;
   @JsonKey(name: 'latitude')
@@ -35,12 +33,11 @@ class Spot {
     required this.id,
     required this.title,
     this.address,
-    this.detailAddress,
     this.summary,
     this.latitude,
     this.longitude,
-    // this.image,
-    // this.images,
+    this.image,
+    this.images,
     this.description,
     this.tel,
     this.openTime,
