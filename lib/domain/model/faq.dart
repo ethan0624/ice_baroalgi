@@ -9,7 +9,7 @@ class Faq {
   @JsonKey(name: 'fcategoryId')
   final int categoryId;
   @JsonKey(name: 'fcategoryName')
-  final int categoryName;
+  final String categoryName;
   @JsonKey(name: 'question')
   final String question;
   @JsonKey(name: 'answer')

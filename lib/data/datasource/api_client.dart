@@ -40,10 +40,6 @@ abstract class ApiClient {
 
           if (authProvider.accessToken.isNotEmpty) {
             options.headers['token'] = authProvider.accessToken;
-          } else {
-            // 테스트
-            options.headers['token'] =
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJlZ1RpbWUiOiIyMDIzLTEyLTI2VDAxOjEzOjM4KzAwOjAwIiwiaWF0IjoxNzAzNTUzMjE4LCJleHAiOjE3MzU2OTQwMTh9.8exfo1N3lx98xGsGZXgm1o94_YfwgFfTEXDeigR03Ng';
           }
 
           return handler.next(options);

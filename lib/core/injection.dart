@@ -151,7 +151,10 @@ class Injection {
       () => FindTopicWithCourse(repository: getIt()),
     );
     getIt.registerLazySingleton<FindCourseInProgress>(
-      () => FindCourseInProgress(repository: getIt()),
+      () => FindCourseInProgress(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
     );
     getIt.registerLazySingleton<FindCourseFavorite>(
       () => FindCourseFavorite(repository: getIt()),

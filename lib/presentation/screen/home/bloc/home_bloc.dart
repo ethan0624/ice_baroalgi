@@ -36,9 +36,10 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
           futures[0].tryGetSuccess() as List<TopicCourse>? ?? [];
       final courses = futures[1].tryGetSuccess() as List<Course>;
       final recommandCategories = futures[2].tryGetSuccess() as List<Category>;
-      final inProgressCourse = futures[3].tryGetSuccess() as List<Course>;
-
+      final inProgressCourse = futures[3].tryGetSuccess() as List<Course>?;
       final firstRecommandCategory = recommandCategories.first;
+
+      emit(state.copyWith(isLoading: false));
 
       _allCourses.clear();
       _allCourses.addAll(courses);
