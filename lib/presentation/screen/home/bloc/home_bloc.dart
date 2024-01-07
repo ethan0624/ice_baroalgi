@@ -38,8 +38,6 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
       final recommandCategories = futures[2].tryGetSuccess() as List<Category>;
       final inProgressCourse = futures[3].tryGetSuccess() as List<Course>;
 
-      print('>>>> inProgressCourse : $inProgressCourse');
-
       final firstRecommandCategory = recommandCategories.first;
 
       _allCourses.clear();

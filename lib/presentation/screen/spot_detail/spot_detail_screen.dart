@@ -10,6 +10,7 @@ import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
+import 'package:incheon_knowhow/presentation/widget/custom_map_marker.dart';
 import 'package:incheon_knowhow/presentation/widget/image_slider.dart';
 
 @RoutePage()
@@ -117,8 +118,37 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                   child: NaverMap(
                                     options: const NaverMapViewOptions(),
-                                    onMapReady: (controller) {},
-                                    onMapTapped: (point, latlng) {},
+                                    onMapReady: (controller) async {
+                                      if (state.spot!.latitude == null ||
+                                          state.spot!.longitude == null) return;
+
+                                      final position = NLatLng(
+                                          state.spot!.latitude!,
+                                          state.spot!.longitude!);
+
+                                      final markerIcon =
+                                          await NOverlayImage.fromWidget(
+                                        widget: const CustomMapMarker(
+                                          type: CustomMapMarkerType.focus,
+                                        ),
+                                        size: const Size(36, 44),
+                                        context: context,
+                                      );
+
+                                      final marker = NMarker(
+                                        id: 'maker-spot-${state.spot?.id}',
+                                        position: NLatLng(state.spot!.latitude!,
+                                            state.spot!.longitude!),
+                                        icon: markerIcon,
+                                        size: const Size(36, 44),
+                                      );
+
+                                      await controller.addOverlayAll({marker});
+
+                                      controller.updateCamera(
+                                          NCameraUpdate.withParams(
+                                              target: position));
+                                    },
                                   ),
                                 ),
                               ),
@@ -142,12 +172,16 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                     const SizedBox(height: 12),
                                     InfoItemView(
                                       label: '운영시간',
-                                      value: state.spot?.openTime ?? '',
+                                      value: state.spot?.openTime
+                                              ?.replaceAll('/n', '\n') ??
+                                          '',
                                     ),
                                     const SizedBox(height: 12),
                                     InfoItemView(
                                       label: '휴무일',
-                                      value: state.spot?.dayOff ?? '',
+                                      value: state.spot?.dayOff
+                                              ?.replaceAll('/n', '\n') ??
+                                          '',
                                     ),
                                   ],
                                 ),
