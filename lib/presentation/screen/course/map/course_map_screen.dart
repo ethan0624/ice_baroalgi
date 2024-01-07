@@ -37,10 +37,12 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   bool _isFavorite = false;
 
   _onFavoritePressed() {
-    final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
-    if (bloc == null) return;
+    context.checkLoginOrRequestLogin(onLoggedIn: () {
+      final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+      if (bloc == null) return;
 
-    bloc.add(const CourseMapEvent.toggleFavorite());
+      bloc.add(const CourseMapEvent.toggleFavorite());
+    });
   }
 
   _onSharedPressed() async {

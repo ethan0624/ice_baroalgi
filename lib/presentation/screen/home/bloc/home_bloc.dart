@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
+import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/domain/enum/region_category_type.dart';
 import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
@@ -15,6 +16,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
+  final _authProvider = getIt<AuthProvider>();
   final _findTopicWithCourse = getIt<FindTopicWithCourse>();
   final _findCourse = getIt<FindCourse>();
   final _findRecommnedCategories = getIt<FindRecommendCategoreis>();
@@ -23,8 +25,14 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
   final List<Course> _allCourses = [];
   HomeBloc() : super(const HomeState()) {
     on<HomeOnInitial>((event, emit) async {
+      _authProvider.addListener(_onRefresh);
+
       emit(state.copyWith(isLoading: true));
 
+      add(const HomeEvent.refresh());
+    });
+
+    on<HomeOnRefresh>((event, emit) async {
       final futures = await Future.wait([
         _findTopicWithCourse(),
         _findCourse(),
@@ -39,8 +47,6 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
       final inProgressCourse = futures[3].tryGetSuccess() as List<Course>?;
       final firstRecommandCategory = recommandCategories.first;
 
-      emit(state.copyWith(isLoading: false));
-
       _allCourses.clear();
       _allCourses.addAll(courses);
 
@@ -54,7 +60,7 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
         recommendCategories: recommandCategories,
         filterRegionCourse: _allCourses,
         filterRecommendCourse: filterRecommendCourse,
-        inProgressCourse: inProgressCourse,
+        inProgressCourse: inProgressCourse ?? [],
         selectedRecommendCategory: firstRecommandCategory,
       ));
     });
@@ -92,5 +98,15 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
         filterRecommendCourse: filterRecommendCourse,
       ));
     });
+  }
+
+  _onRefresh() {
+    add(const HomeEvent.refresh());
+  }
+
+  @override
+  Future<void> close() {
+    _authProvider.removeListener(_onRefresh);
+    return super.close();
   }
 }

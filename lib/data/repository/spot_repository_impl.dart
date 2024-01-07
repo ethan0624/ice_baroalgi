@@ -16,4 +16,12 @@ class SpotRepositoryImpl implements SpotRepository {
         ? Result.success(result)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));
   }
+
+  @override
+  Future<Result<bool, Exception>> setSpotFlag(int id) async {
+    final res = await safetyCall<String>(apiClient.setSpotFlag(id));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
 }

@@ -28,10 +28,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
   bool _isFavorite = false;
 
   _onFavoritePressed() {
-    final bloc = _scaffoldKey.currentContext?.read<CourseInfoBloc>();
-    if (bloc == null) return;
+    context.checkLoginOrRequestLogin(onLoggedIn: () {
+      final bloc = _scaffoldKey.currentContext?.read<CourseInfoBloc>();
+      if (bloc == null) return;
 
-    bloc.add(const CourseInfoEvent.toggleFavorite());
+      bloc.add(const CourseInfoEvent.toggleFavorite());
+    });
   }
 
   _onSharedPressed() async {

@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:incheon_knowhow/domain/usecase/spot/set_spot_flag.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
@@ -195,6 +196,12 @@ class Injection {
 
     getIt.registerLazySingleton<GetSpotInfo>(
       () => GetSpotInfo(repository: getIt()),
+    );
+    getIt.registerLazySingleton<SetSpotFlag>(
+      () => SetSpotFlag(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
     );
 
     getIt.registerLazySingleton<FindNotice>(

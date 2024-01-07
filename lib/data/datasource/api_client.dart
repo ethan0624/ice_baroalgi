@@ -157,9 +157,13 @@ abstract class ApiClient {
   /*
    * 스팟 
    */
-  // 코스 상세 정보 조회
+  // 스팟 상세 정보 조회
   @GET('/spot/{id}')
   Future<DataResponse<Spot>> getSpotInfo(@Path() int id);
+
+  // 스팟 깃발 등록하기
+  @GET('/spot/flag/{id}')
+  Future<DataResponse<String>> setSpotFlag(@Path() int id);
 
   /*
    * 기타  

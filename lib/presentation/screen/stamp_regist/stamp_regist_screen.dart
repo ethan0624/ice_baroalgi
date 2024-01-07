@@ -22,7 +22,6 @@ class StampRegistScreen extends StatefulWidget {
 
 class _StampRegistScreenState extends State<StampRegistScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _scrollController = ScrollController();
 
   bool _isNext = false;
 

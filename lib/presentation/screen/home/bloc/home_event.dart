@@ -4,7 +4,7 @@ sealed class HomeEvent extends Equatable {
   const HomeEvent();
 
   const factory HomeEvent.initial() = HomeOnInitial;
-
+  const factory HomeEvent.refresh() = HomeOnRefresh;
   const factory HomeEvent.expanededTopic(int topicId, bool isExpanded) =
       HomeOnExpanededTopic;
   const factory HomeEvent.changeRegion(RegionCategoryType regionCategoryType) =
@@ -18,6 +18,10 @@ sealed class HomeEvent extends Equatable {
 
 class HomeOnInitial extends HomeEvent {
   const HomeOnInitial();
+}
+
+class HomeOnRefresh extends HomeEvent {
+  const HomeOnRefresh();
 }
 
 class HomeOnExpanededTopic extends HomeEvent {
