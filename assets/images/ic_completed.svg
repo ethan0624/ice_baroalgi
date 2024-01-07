@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
+    <g data-name="그룹 19951">
+        <g data-name="타원 69" style="stroke-width:8px;stroke:#cdcdcd;fill:none">
+            <circle cx="70" cy="70" r="70" style="stroke:none"/>
+            <circle cx="70" cy="70" r="66" style="fill:none"/>
+        </g>
+        <g data-name="타원 89" transform="translate(10 10)" style="stroke-width:2px;stroke:#cdcdcd;fill:none">
+            <circle cx="60" cy="60" r="60" style="stroke:none"/>
+            <circle cx="60" cy="60" r="59" style="fill:none"/>
+        </g>
+        <g data-name="그룹 19941">
+            <path data-name="패스 8016" d="M18.012 0S10.541 1.6 6.038 5.529 0 15.721 0 15.721" transform="rotate(39 -47.67 165.54)" style="stroke-linecap:round;stroke-width:6px;stroke:#cdcdcd;fill:none"/>
+            <path data-name="패스 8018" d="M29.306 0C22.049 10.75 11.754 13.631 6.432 12.963S-1.313 6.561.71 4.112c1.646-1.993 6.49-1.773 9.233 3.26s1.45 10.7-4.812 17.937" transform="rotate(19 -85.132 259.347)" style="stroke-linecap:round;stroke-width:6px;stroke:#cdcdcd;fill:none"/>
+            <path data-name="패스 8017" d="M0 22s8.27-1.2 13.27-6.7S20 0 20 0" transform="rotate(-48 71.843 -28.796)" style="stroke-linecap:round;stroke-width:6px;stroke:#cdcdcd;fill:none"/>
+            <g data-name="그룹 19940">
+                <g data-name="패스 8019" style="fill:none">
+                    <path d="m-9093.979-16267.146 16.482-45.218c.021-.056.041-.108.062-.159a1.322 1.322 0 0 1 .365-.808c1.948-1.92 10.817 3.691 19.808 12.532 8.891 8.746 14.568 17.376 12.8 19.417.009.086-.066.078-.066.078l-.015.006a1.452 1.452 0 0 1-.929.352l-45.173 17.084a2.669 2.669 0 0 1-.893.155 2.58 2.58 0 0 1-2.441-3.439z" style="stroke:none" transform="translate(9126.138 16375.645)"/>
+                    <path d="m-9085.782-16272.114 34.087-12.89c-1.71-2.639-4.845-6.666-9.775-11.516-5.09-5.005-9.282-8.127-11.855-9.768l-12.457 34.174m-5.752 8.408c-1.707 0-3.08-1.694-2.445-3.44l16.482-45.217c.02-.056.04-.109.061-.16.042-.336.163-.608.366-.807 1.946-1.913 10.816 3.691 19.807 12.532 8.89 8.746 14.569 17.376 12.804 19.417.01.085-.066.078-.066.078l-.015.006c-.225.211-.538.326-.929.352l-45.173 17.084a2.67 2.67 0 0 1-.892.155z" style="fill:#cdcdcd;stroke:none" transform="translate(9126.138 16375.645)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

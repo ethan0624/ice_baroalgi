@@ -6,6 +6,8 @@ import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
+import 'package:incheon_knowhow/presentation/dialog/course_stamp_completed_dialog.dart';
+import 'package:incheon_knowhow/presentation/dialog/course_stamp_dialog.dart';
 import 'package:incheon_knowhow/presentation/screen/course/map/bloc/course_map_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/course_app_bar.dart';
@@ -169,14 +171,23 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     return true;
   }
 
-  _startCourse() {
+  _startCourse() async {
+    // await CourseStampDialog.show(context, onButtonPressed: () {});
+    await CourseStampCompletedDialog.show(context, onButtonPressed: () {
+      print('>>>> onpress');
+    });
+    // final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+    // if (bloc == null) return;
+
+    // bloc.add(const CourseMapEvent.start());
+  }
+
+  _completeCourse() {
     final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
     if (bloc == null) return;
 
-    bloc.add(const CourseMapEvent.start());
+    bloc.add(const CourseMapEvent.complete());
   }
-
-  _completeCourse() {}
 
   @override
   void dispose() {
