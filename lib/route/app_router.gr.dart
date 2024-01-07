@@ -263,6 +263,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    StampRegistRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const StampRegistScreen(),
+      );
+    },
     UpdateSchoolRoute.name: (routeData) {
       return AutoRoutePage<bool>(
         routeData: routeData,
@@ -1000,6 +1006,20 @@ class SpotDetailRouteArgs {
   String toString() {
     return 'SpotDetailRouteArgs{key: $key, spotId: $spotId}';
   }
+}
+
+/// generated route for
+/// [StampRegistScreen]
+class StampRegistRoute extends PageRouteInfo<void> {
+  const StampRegistRoute({List<PageRouteInfo>? children})
+      : super(
+          StampRegistRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'StampRegistRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -38,6 +38,7 @@ import 'package:incheon_knowhow/presentation/screen/search/search_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/search_school/search_school_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/splash/splash_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/spot_detail/spot_detail_screen.dart';
+import 'package:incheon_knowhow/presentation/screen/stamp_regist/stamp_regist_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/update_school/update_school_screen.dart';
 import 'package:incheon_knowhow/presentation/screen/withdraw/withdraw_screen.dart';
 import 'package:incheon_knowhow/route/auth_guard.dart';
@@ -92,6 +93,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/course/:courseId/info', page: CourseInfoRoute.page),
 
         AutoRoute(path: '/spot/:spotId', page: SpotDetailRoute.page),
+
+        AutoRoute(path: '/stamp/regist', page: StampRegistRoute.page),
 
         AutoRoute(path: '/search', page: SearchRoute.page),
 
