@@ -7,10 +7,10 @@ import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/home/bloc/home_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/home_app_bar.dart';
+import 'package:incheon_knowhow/presentation/screen/home/widget/inprogress_expansion.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/recommend_course_list_view.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/region_course_list_view.dart';
 import 'package:incheon_knowhow/presentation/screen/home/widget/topic_course_list_view.dart';
-import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -69,21 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     if (state.inProgressCourse.isNotEmpty)
-                      AppButton(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: defaultMarginValue),
-                        width: double.infinity,
-                        text: '정복중인 코스',
-                        textBold: true,
-                        centerText: false,
-                        suffixIcon: const Icon(
-                          Icons.arrow_forward_ios,
-                          size: 14,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          // todo: push route
-                        },
+                      InprogressExpantion(
+                        courseList: state.inProgressCourse,
                       ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 12),
