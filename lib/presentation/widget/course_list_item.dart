@@ -175,9 +175,9 @@ class _CourseListItemState extends State<CourseListItem>
             Positioned(
               top: 0,
               right: 0,
-              child: IconButton(
-                onPressed: _onFavoritePressed,
-                icon: Icon(
+              child: InkWell(
+                onTap: _onFavoritePressed,
+                child: Icon(
                   _isFavorite
                       ? Icons.favorite_outlined
                       : Icons.favorite_outline,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/int_extension.dart';
 import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
@@ -53,7 +54,7 @@ class RecommendCourseListView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '총 87코스',
+                '총 ${courseList.length.toNumberFormat}코스',
                 style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
@@ -75,7 +76,7 @@ class RecommendCourseListView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           color: AppColor.background,
           child: Column(
-              children: Course.mocks()
+              children: courseList
                   .map((e) => CourseListItem(
                         course: e,
                       ))

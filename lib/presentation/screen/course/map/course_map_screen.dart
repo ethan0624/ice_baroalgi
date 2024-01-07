@@ -4,6 +4,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/screen/course/map/bloc/course_map_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
@@ -29,6 +30,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   NMarker? _selectedMarker;
 
   String _title = '';
+  bool _initMakers = false;
   bool _isFavorite = false;
 
   _onFavoritePressed() {
@@ -47,6 +49,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   _handleStateChanged(CourseMapState state) {
     final course = state.course;
     if (course != null) {
+      _addSpotMarkers(course.spots ?? []);
+
       setState(() {
         _title = course.title;
         _isFavorite = course.isLiked;
@@ -64,64 +68,76 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     return NLatLng(position.latitude, position.longitude);
   }
 
-  _addMarker() async {
-    // final current = await _getCurrentLocation();
-    // if (current == null) return;
-
-    final current = await _mapController.getCameraPosition();
-
-    print('>>> current : $current');
+  _addSpotMarkers(List<Spot> spots) async {
+    if (_initMakers) return;
     final markerIcon = await NOverlayImage.fromWidget(
-      widget: CustomMapMarker(),
-      size: Size(36, 44),
+      widget: const CustomMapMarker(),
+      size: const Size(36, 44),
       context: context,
     );
+    final makers =
+        spots.where((e) => e.latitude != null && e.longitude != null).map((e) {
+      final marker = NMarker(
+        id: 'maker-spot-${e.id}',
+        position: NLatLng(e.latitude!, e.longitude!),
+        icon: markerIcon,
+        size: const Size(36, 44),
+      );
+      marker.setOnTapListener(_onMarkerPressed);
+      return marker;
+    }).toSet();
 
-    final marker = NMarker(
-      id: 'test',
-      position: current.target.offsetByMeter(northMeter: 100),
-      icon: markerIcon,
-      size: const Size(36, 44),
-    );
+    await _mapController.addOverlayAll(makers);
 
-    final marker2 = NMarker(
-      id: 'test2',
-      position: current.target.offsetByMeter(northMeter: 100, eastMeter: 100),
-      icon: markerIcon,
-      size: const Size(36, 44),
-    );
+    _initMakers = true;
+  }
 
-    final marker3 = NMarker(
-      id: 'test3',
-      position: current.target.offsetByMeter(northMeter: -100, eastMeter: -100),
-      icon: markerIcon,
-      size: const Size(36, 44),
-    );
-    marker.setOnTapListener(_onMarkerPressed);
-    marker2.setOnTapListener(_onMarkerPressed);
-    marker3.setOnTapListener(_onMarkerPressed);
+  _focusClearMaker() async {
+    if (_selectedMarker != null) {
+      final customMarker = await NOverlayImage.fromWidget(
+        widget: const CustomMapMarker(type: CustomMapMarkerType.normal),
+        size: const Size(36, 44),
+        context: context,
+      );
 
-    await _mapController.addOverlayAll({marker, marker2, marker3});
+      _selectedMarker?.setIcon(customMarker);
+      setState(() {
+        _selectedMarker = null;
+      });
+    }
   }
 
   _onMarkerPressed(NMarker marker) async {
-    if (marker == _selectedMarker) return;
+    if (_selectedMarker != null) {
+      final customMarker = await NOverlayImage.fromWidget(
+        widget: const CustomMapMarker(type: CustomMapMarkerType.normal),
+        size: const Size(36, 44),
+        context: context,
+      );
+
+      _selectedMarker?.setIcon(customMarker);
+      _selectedMarker = null;
+    }
 
     final customMarker = await NOverlayImage.fromWidget(
       widget: CustomMapMarker(
-        type: (_selectedMarker != null)
-            ? CustomMapMarkerType.normal
-            : CustomMapMarkerType.focus,
+        type: CustomMapMarkerType.focus,
       ),
       size: const Size(36, 44),
       context: context,
     );
-
-    marker.setIcon(customMarker);
+    _selectedMarker = marker;
+    _selectedMarker?.setIcon(customMarker);
 
     setState(() {
       _selectedMarker = marker;
     });
+
+    final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+    if (bloc == null) return;
+
+    final spotId = marker.info.id.split('-').last;
+    bloc.add(CourseMapEvent.selected(int.parse(spotId)));
   }
 
   Future<bool> _handlePermission() async {
@@ -153,7 +169,12 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     return true;
   }
 
-  _startCourse() {}
+  _startCourse() {
+    final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+    if (bloc == null) return;
+
+    bloc.add(const CourseMapEvent.start());
+  }
 
   _completeCourse() {}
 
@@ -189,11 +210,9 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                   options: const NaverMapViewOptions(),
                   onMapReady: (controller) {
                     _mapController = controller;
-
-                    _addMarker();
                   },
                   onMapTapped: (point, latlng) {
-                    print('>>>>>> onMapTapped : $point // $latlng');
+                    _focusClearMaker();
                   },
                 ),
               ),
@@ -242,7 +261,10 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                       ),
                     ),
 
-                    if (_selectedMarker != null) const SpotCardView(),
+                    if (_selectedMarker != null && state.selectedSpot != null)
+                      SpotCardView(
+                        spot: state.selectedSpot!,
+                      ),
 
                     // bottom
                     if (state.course != null)
@@ -283,7 +305,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   text: '코스 시작하기',
-                                  onPressed: () {},
+                                  onPressed: _startCourse,
                                 ),
                               ),
                             if (state.course?.isCompleted == true)

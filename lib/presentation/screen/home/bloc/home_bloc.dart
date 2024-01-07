@@ -38,19 +38,23 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
       final recommandCategories = futures[2].tryGetSuccess() as List<Category>;
       final inProgressCourse = futures[3].tryGetSuccess() as List<Course>;
 
+      print('>>>> inProgressCourse : $inProgressCourse');
+
       final firstRecommandCategory = recommandCategories.first;
 
       _allCourses.clear();
       _allCourses.addAll(courses);
 
-      // todo : filter first recommand category find
+      final filterRecommendCourse = _allCourses
+          .where((e) => e.recommendCategoryId == firstRecommandCategory.id)
+          .toList();
 
       emit(state.copyWith(
         isLoading: false,
         topicCourse: topicCourse,
         recommendCategories: recommandCategories,
         filterRegionCourse: _allCourses,
-        filterRecommendCourse: _allCourses,
+        filterRecommendCourse: filterRecommendCourse,
         inProgressCourse: inProgressCourse,
         selectedRecommendCategory: firstRecommandCategory,
       ));
@@ -80,9 +84,14 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
     });
 
     on<HomeOnChangedRecommend>((event, emit) async {
-      emit(state.copyWith(selectedRecommendCategory: event.category));
+      final filterRecommendCourse = _allCourses
+          .where((e) => e.recommendCategoryId == event.category.id)
+          .toList();
 
-      // todo : fetch recommand by course
+      emit(state.copyWith(
+        selectedRecommendCategory: event.category,
+        filterRecommendCourse: filterRecommendCourse,
+      ));
     });
   }
 }

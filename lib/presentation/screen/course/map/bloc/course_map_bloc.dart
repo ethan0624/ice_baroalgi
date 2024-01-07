@@ -3,7 +3,10 @@ import 'package:event_bus/event_bus.dart';
 import 'package:incheon_knowhow/config/app_event.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
+import 'package:incheon_knowhow/domain/model/spot.dart';
+import 'package:incheon_knowhow/domain/usecase/course/complete_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/get_course_info.dart';
+import 'package:incheon_knowhow/domain/usecase/course/start_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/update_favorite.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc.dart';
 import 'package:incheon_knowhow/presentation/base/base_state.dart';
@@ -15,6 +18,8 @@ class CourseMapBloc extends BaseSideEffectBloc<CourseMapEvent, CourseMapState> {
   final _eventBus = getIt<EventBus>();
   final _getCourseInfo = getIt<GetCourseInfo>();
   final _updateFavorite = getIt<UpdateFavorite>();
+  final _startCourse = getIt<StartCourse>();
+  final _completeCourse = getIt<CompleteCourse>();
 
   final int courseId;
   Course? _course;
@@ -30,6 +35,13 @@ class CourseMapBloc extends BaseSideEffectBloc<CourseMapEvent, CourseMapState> {
         isLoading: false,
         course: res.tryGetSuccess(),
       ));
+    });
+
+    on<CourseMapOnSelectedSpot>((event, emit) async {
+      if (_course == null) return;
+      final spot =
+          (_course?.spots ?? []).firstWhere((e) => e.id == event.spotId);
+      emit(state.copyWith(selectedSpot: spot));
     });
 
     on<CourseMapOnFavorite>((event, emit) async {
@@ -48,9 +60,21 @@ class CourseMapBloc extends BaseSideEffectBloc<CourseMapEvent, CourseMapState> {
       }
     });
 
-    on<CourseMapOnStart>((event, emit) async {});
+    on<CourseMapOnStart>((event, emit) async {
+      if (state.isLoading || _course == null) return;
 
-    on<CourseMapOnComplete>((event, emit) async {});
+      final res = await _startCourse(_course!.id);
+
+      // todo:
+    });
+
+    on<CourseMapOnComplete>((event, emit) async {
+      if (state.isLoading || _course == null) return;
+
+      final res = await _completeCourse(_course!.id);
+
+      // todo:
+    });
 
     on<CourseMapOnCancel>((event, emit) async {});
   }
