@@ -18,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
   final Color? borderColor;
   final Color? focusBorderColor;
   final Color backgroundColor;
+  final EdgeInsets contentPadding;
   final bool isObscureText;
   final bool readOnly;
   final EdgeInsets margin;
@@ -49,6 +50,8 @@ class AppTextFormField extends StatelessWidget {
     this.borderColor = const Color(0xFFDBDBDB),
     this.focusBorderColor = const Color(0xFFE65185),
     this.backgroundColor = Colors.white,
+    this.contentPadding =
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
     this.isObscureText = false,
     this.readOnly = false,
     this.margin = const EdgeInsets.symmetric(vertical: 12),
@@ -135,8 +138,7 @@ class AppTextFormField extends StatelessWidget {
                     : BorderSide.none,
               ),
               isDense: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+              contentPadding: contentPadding,
               filled: true,
               fillColor: enabled ? backgroundColor : AppColor.dividerDark,
               suffix: suffix,

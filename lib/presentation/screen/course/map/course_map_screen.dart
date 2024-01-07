@@ -29,6 +29,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
   late NaverMapController _mapController;
+
   NMarker? _selectedMarker;
 
   String _title = '';
@@ -90,6 +91,9 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     }).toSet();
 
     await _mapController.addOverlayAll(makers);
+
+    final position = NLatLng(spots.first.latitude!, spots.first.longitude!);
+    _mapController.updateCamera(NCameraUpdate.withParams(target: position));
 
     _initMakers = true;
   }
@@ -173,9 +177,10 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
 
   _startCourse() async {
     // await CourseStampDialog.show(context, onButtonPressed: () {});
-    await CourseStampCompletedDialog.show(context, onButtonPressed: () {
-      print('>>>> onpress');
-    });
+    // await CourseStampCompletedDialog.show(context, onButtonPressed: () {
+    //   print('>>>> onpress');
+    // });
+    context.router.pushNamed('/stamp/regist');
     // final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
     // if (bloc == null) return;
 
@@ -187,6 +192,11 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     if (bloc == null) return;
 
     bloc.add(const CourseMapEvent.complete());
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
