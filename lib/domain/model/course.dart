@@ -1,3 +1,4 @@
+import 'package:incheon_knowhow/domain/enum/course_state_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 
@@ -21,6 +22,7 @@ class Course {
   final bool isLiked;
   @JsonKey(name: 'courseState')
   final bool isCompleted;
+
   @JsonKey(name: 'spotCount')
   final int spotCount;
   @JsonKey(name: 'completeSpot')
@@ -39,6 +41,8 @@ class Course {
   final String? description;
   @JsonKey(name: 'spots')
   final List<Spot>? spots;
+  @JsonKey(name: 'courseIng')
+  final bool? isProgress;
 
   const Course({
     required this.id,
@@ -57,6 +61,7 @@ class Course {
     this.summary,
     this.description,
     this.spots,
+    this.isProgress = false,
   });
 
   copyWith({
@@ -108,6 +113,20 @@ extension CourseExtension on Course {
   double get progress {
     final value = completedSpotCount / spotCount;
     return value.isNaN ? 0 : value;
+  }
+
+  CourseStateType get state {
+    if (isCompleted) {
+      return CourseStateType.completed;
+    }
+
+    if (isProgress == false) {
+      return CourseStateType.ready;
+    }
+
+    return (spotCount == completedSpotCount)
+        ? CourseStateType.stampReady
+        : CourseStateType.inProgress;
   }
 
   String get detailRoutePath => '/course/$id/info';

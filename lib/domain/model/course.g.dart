@@ -26,6 +26,7 @@ Course _$CourseFromJson(Map<String, dynamic> json) => Course(
       spots: (json['spots'] as List<dynamic>?)
           ?.map((e) => Spot.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isProgress: json['courseIng'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
@@ -45,4 +46,5 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'summary': instance.summary,
       'descript': instance.description,
       'spots': instance.spots,
+      'courseIng': instance.isProgress,
     };

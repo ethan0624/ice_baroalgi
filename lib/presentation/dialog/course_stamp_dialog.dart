@@ -1,19 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 
 class CourseStampDialog extends StatelessWidget {
-  final VoidCallback? onButtonPressed;
-  const CourseStampDialog({super.key, this.onButtonPressed});
+  const CourseStampDialog({super.key});
 
-  static show(BuildContext context, {VoidCallback? onButtonPressed}) {
-    return showDialog(
+  static Future<bool?> show(BuildContext context) {
+    return showDialog<bool>(
       context: context,
       builder: (context) {
-        return CourseStampDialog(
-          onButtonPressed: onButtonPressed,
-        );
+        return const CourseStampDialog();
       },
     );
   }
@@ -43,7 +41,7 @@ class CourseStampDialog extends StatelessWidget {
             ),
           ),
           OutlineButton(
-            onPressed: onButtonPressed,
+            onPressed: () => context.router.pop(true),
             borderWidth: 2,
             borderRadius: 30,
             text: '정복 스탬프 발행하러 가기',

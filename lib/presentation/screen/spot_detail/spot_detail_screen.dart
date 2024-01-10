@@ -129,7 +129,8 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                       final markerIcon =
                                           await NOverlayImage.fromWidget(
                                         widget: const CustomMapMarker(
-                                          type: CustomMapMarkerType.focus,
+                                          type: CustomMapMarkerType.normal,
+                                          isFocus: true,
                                         ),
                                         size: const Size(36, 44),
                                         context: context,

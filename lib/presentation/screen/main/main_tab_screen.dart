@@ -40,7 +40,22 @@ class _MainTabScreenState extends State<MainTabScreen> {
       ),
       NOverlayImage.fromWidget(
         widget: const CustomMapMarker(
-          type: CustomMapMarkerType.focus,
+          isFocus: true,
+        ),
+        size: const Size(36, 44),
+        context: context,
+      ),
+      NOverlayImage.fromWidget(
+        widget: const CustomMapMarker(
+          type: CustomMapMarkerType.completed,
+        ),
+        size: const Size(36, 44),
+        context: context,
+      ),
+      NOverlayImage.fromWidget(
+        widget: const CustomMapMarker(
+          type: CustomMapMarkerType.completed,
+          isFocus: true,
         ),
         size: const Size(36, 44),
         context: context,

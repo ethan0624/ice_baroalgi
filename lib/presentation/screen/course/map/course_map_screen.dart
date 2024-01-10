@@ -4,6 +4,8 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/enum/course_state_type.dart';
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/dialog/course_stamp_completed_dialog.dart';
@@ -80,12 +82,19 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
       size: const Size(36, 44),
       context: context,
     );
+    final completeSpotIcon = await NOverlayImage.fromWidget(
+      widget: const CustomMapMarker(type: CustomMapMarkerType.completed),
+      size: const Size(36, 44),
+      context: context,
+    );
     final makers =
         spots.where((e) => e.latitude != null && e.longitude != null).map((e) {
       final marker = NMarker(
-        id: 'maker-spot-${e.id}',
+        id: e.isFlag
+            ? 'maker-spot-complete-${e.id}'
+            : 'maker-spot-normal-${e.id}',
         position: NLatLng(e.latitude!, e.longitude!),
-        icon: markerIcon,
+        icon: e.isFlag ? completeSpotIcon : markerIcon,
         size: const Size(36, 44),
       );
       marker.setOnTapListener(_onMarkerPressed);
@@ -117,8 +126,13 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
 
   _onMarkerPressed(NMarker marker) async {
     if (_selectedMarker != null) {
+      final isCompleteType =
+          _selectedMarker?.info.id.contains('complete') ?? false;
       final customMarker = await NOverlayImage.fromWidget(
-        widget: const CustomMapMarker(type: CustomMapMarkerType.normal),
+        widget: CustomMapMarker(
+            type: isCompleteType
+                ? CustomMapMarkerType.completed
+                : CustomMapMarkerType.normal),
         size: const Size(36, 44),
         context: context,
       );
@@ -127,9 +141,13 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
       _selectedMarker = null;
     }
 
+    final isCompleteType = marker.info.id.contains('complete');
     final customMarker = await NOverlayImage.fromWidget(
       widget: CustomMapMarker(
-        type: CustomMapMarkerType.focus,
+        type: isCompleteType
+            ? CustomMapMarkerType.completed
+            : CustomMapMarkerType.normal,
+        isFocus: true,
       ),
       size: const Size(36, 44),
       context: context,
@@ -177,23 +195,40 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     return true;
   }
 
-  _startCourse() async {
-    // await CourseStampDialog.show(context, onButtonPressed: () {});
-    // await CourseStampCompletedDialog.show(context, onButtonPressed: () {
-    //   print('>>>> onpress');
-    // });
-    context.router.pushNamed('/stamp/regist');
-    // final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
-    // if (bloc == null) return;
+  _startCourse() {
+    context.checkLoginOrRequestLogin(onLoggedIn: () {
+      final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+      if (bloc == null) return;
 
-    // bloc.add(const CourseMapEvent.start());
+      bloc.add(const CourseMapEvent.start());
+    });
   }
 
-  _completeCourse() {
-    final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
-    if (bloc == null) return;
+  _cancelCourse() {
+    context.checkLoginOrRequestLogin(onLoggedIn: () async {
+      final ret = await context.showConfirm(
+          title: '정복을 중단하시겠습니까?',
+          message: '중단하기 선택시, 진행중인 코스 리스트에서\n삭제되어집니다 진행하시겠습니까?');
+      if (ret == null || ret == false) return;
 
-    bloc.add(const CourseMapEvent.complete());
+      final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+      if (bloc == null) return;
+
+      bloc.add(const CourseMapEvent.cancel());
+    });
+  }
+
+  _requestStamp() async {
+    context.checkLoginOrRequestLogin(onLoggedIn: () async {
+      final ret = await CourseStampDialog.show(context);
+      if (ret == null || ret == false) return;
+
+      _showStampPoll();
+    });
+  }
+
+  _showStampPoll() async {
+    final ret = await context.router.pushNamed('/stamp/regist');
   }
 
   @override
@@ -321,7 +356,38 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                               ),
                             ),
                             const SizedBox(width: 16),
-                            if (state.course?.isCompleted == false)
+                            if (state.course?.state ==
+                                CourseStateType.completed)
+                              const Expanded(
+                                flex: 4,
+                                child: AppButton(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  text: '정복완료',
+                                ),
+                              ),
+                            if (state.course?.state ==
+                                CourseStateType.stampReady)
+                              Expanded(
+                                flex: 4,
+                                child: AppButton(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  text: '정복완료',
+                                  onPressed: _requestStamp,
+                                ),
+                              ),
+                            if (state.course?.state ==
+                                CourseStateType.inProgress)
+                              Expanded(
+                                flex: 4,
+                                child: AppButton(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  text: '••• 정복중',
+                                  onPressed: _cancelCourse,
+                                ),
+                              ),
+                            if (state.course?.state == CourseStateType.ready)
                               Expanded(
                                 flex: 4,
                                 child: AppButton(
@@ -329,16 +395,6 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                       const EdgeInsets.symmetric(vertical: 10),
                                   text: '코스 시작하기',
                                   onPressed: _startCourse,
-                                ),
-                              ),
-                            if (state.course?.isCompleted == true)
-                              Expanded(
-                                flex: 4,
-                                child: AppButton(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  text: '정복완료',
-                                  onPressed: () {},
                                 ),
                               ),
                           ],

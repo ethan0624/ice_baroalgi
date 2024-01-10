@@ -19,9 +19,12 @@ class SpotDetailBloc
 
       final res = await _getSpotInfo(spotId);
 
+      final spot = res.tryGetSuccess();
+
       emit(state.copyWith(
         isLoading: false,
-        spot: res.tryGetSuccess(),
+        spot: spot,
+        includeCourse: spot?.includeCourse,
       ));
     });
   }

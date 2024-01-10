@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:incheon_knowhow/config/app_event.dart';
+import 'package:incheon_knowhow/core/extension/extension.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
@@ -10,6 +11,7 @@ import 'package:incheon_knowhow/domain/usecase/course/start_course.dart';
 import 'package:incheon_knowhow/domain/usecase/course/update_favorite.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc.dart';
 import 'package:incheon_knowhow/presentation/base/base_state.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 
 part 'course_map_event.dart';
 part 'course_map_state.dart';
@@ -65,7 +67,10 @@ class CourseMapBloc extends BaseSideEffectBloc<CourseMapEvent, CourseMapState> {
 
       final res = await _startCourse(_course!.id);
 
-      // todo:
+      if (res.isError()) {
+        produceSideEffect(BlocEffect.showAlert(
+            title: res.tryGetError()?.message ?? 'unknow error'));
+      }
     });
 
     on<CourseMapOnComplete>((event, emit) async {

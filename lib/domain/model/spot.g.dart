@@ -20,6 +20,10 @@ Spot _$SpotFromJson(Map<String, dynamic> json) => Spot(
       tel: json['tel'] as String?,
       openTime: json['openTime'] as String?,
       dayOff: json['dayOff'] as String?,
+      includeCourse: (json['SpotToCourses'] as List<dynamic>?)
+          ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      falg: json['flag'] as bool?,
     );
 
 Map<String, dynamic> _$SpotToJson(Spot instance) => <String, dynamic>{
@@ -35,4 +39,6 @@ Map<String, dynamic> _$SpotToJson(Spot instance) => <String, dynamic>{
       'tel': instance.tel,
       'openTime': instance.openTime,
       'dayOff': instance.dayOff,
+      'SpotToCourses': instance.includeCourse,
+      'flag': instance.falg,
     };

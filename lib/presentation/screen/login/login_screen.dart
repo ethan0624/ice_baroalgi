@@ -102,99 +102,82 @@ class _LoginScreenState extends State<LoginScreen> {
         _handlerEffect(effect);
       },
       builder: (context, bloc, state) {
-        return Stack(
+        return ListView(
+          padding: const EdgeInsets.all(defaultMarginValue),
           children: [
-            Positioned.fill(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-              child: ListView(
-                padding: const EdgeInsets.all(defaultMarginValue),
-                children: [
-                  Text(
-                    '서비스 이용을 위해\n로그인해주세요.',
-                    style: context.textTheme.titleSmall,
-                  ),
-                  const SizedBox(height: 50),
-                  Text(
-                    '아이디',
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  AppTextFormField(
-                    controller: _emailTextController,
-                    hintText: '이메일 주소 입력',
-                    keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
-                    onSubmitted: () {
-                      final value = _emailTextController.text;
-                      if (value.isNotEmpty && value.isValidEmail()) {
-                        _passwordFocusNode.requestFocus();
-                      }
-                    },
-                  ),
-                  const SizedBox(height: defaultMarginValue),
-                  Text(
-                    '비밀번호',
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  PasswordFormField(
-                    focusNode: _passwordFocusNode,
-                    onCreated: (controller) {
-                      _passwordTextController = controller;
-                    },
-                    onSubmitted: _onLoginPressed,
-                  ),
-                  AppButton(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: defaultMarginValue),
-                    text: '로그인',
-                    textBold: true,
-                    onPressed: _onLoginPressed,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: UnderlineTextButton(
-                      text: '아이디 찾기',
-                      margin: EdgeInsets.zero,
-                      onPressed: _onFindIdPressed,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: UnderlineTextButton(
-                      text: '비밀번호 재설정',
-                      margin: const EdgeInsets.symmetric(vertical: 12),
-                      onPressed: _onFindPasswordPressed,
-                    ),
-                  ),
-                ],
+            Text(
+              '서비스 이용을 위해\n로그인해주세요.',
+              style: context.textTheme.titleSmall,
+            ),
+            const SizedBox(height: 50),
+            Text(
+              '아이디',
+              style: context.textTheme.bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w500),
+            ),
+            AppTextFormField(
+              controller: _emailTextController,
+              hintText: '이메일 주소 입력',
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              onSubmitted: () {
+                final value = _emailTextController.text;
+                if (value.isNotEmpty && value.isValidEmail()) {
+                  _passwordFocusNode.requestFocus();
+                }
+              },
+            ),
+            const SizedBox(height: defaultMarginValue),
+            Text(
+              '비밀번호',
+              style: context.textTheme.bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w500),
+            ),
+            PasswordFormField(
+              focusNode: _passwordFocusNode,
+              onCreated: (controller) {
+                _passwordTextController = controller;
+              },
+              onSubmitted: _onLoginPressed,
+            ),
+            AppButton(
+              margin: const EdgeInsets.symmetric(vertical: defaultMarginValue),
+              text: '로그인',
+              textBold: true,
+              onPressed: _onLoginPressed,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: UnderlineTextButton(
+                text: '아이디 찾기',
+                margin: EdgeInsets.zero,
+                onPressed: _onFindIdPressed,
               ),
             ),
-            Positioned(
-              bottom: 35,
-              left: 24,
-              right: 24,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Text(
-                      '회원이 아니신가요?',
-                      style: context.textTheme.bodyMedium
-                          ?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  AppButton(
-                    text: '회원가입',
-                    textStyle: context.textTheme.bodyMedium,
-                    textColor: Colors.black,
-                    background: Colors.white,
-                    borderColor: AppColor.secondary,
-                    onPressed: _onJoinPressed,
-                  ),
-                ],
+            Align(
+              alignment: Alignment.centerLeft,
+              child: UnderlineTextButton(
+                text: '비밀번호 재설정',
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                onPressed: _onFindPasswordPressed,
               ),
+            ),
+            const SizedBox(height: 80),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                '회원이 아니신가요?',
+                style: context.textTheme.bodyMedium
+                    ?.copyWith(fontWeight: FontWeight.w500),
+              ),
+            ),
+            AppButton(
+              text: '회원가입',
+              textStyle: context.textTheme.bodyMedium,
+              textColor: Colors.black,
+              background: Colors.white,
+              borderColor: AppColor.secondary,
+              onPressed: _onJoinPressed,
             ),
           ],
         );

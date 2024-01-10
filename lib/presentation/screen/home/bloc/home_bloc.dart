@@ -42,16 +42,19 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
 
       final topicCourse =
           futures[0].tryGetSuccess() as List<TopicCourse>? ?? [];
-      final courses = futures[1].tryGetSuccess() as List<Course>;
-      final recommandCategories = futures[2].tryGetSuccess() as List<Category>;
-      final inProgressCourse = futures[3].tryGetSuccess() as List<Course>?;
-      final firstRecommandCategory = recommandCategories.first;
+      final courses = futures[1].tryGetSuccess() as List<Course>? ?? [];
+      final recommandCategories =
+          futures[2].tryGetSuccess() as List<Category>? ?? [];
+      final inProgressCourse =
+          futures[3].tryGetSuccess() as List<Course>? ?? [];
+
+      final firstRecommandCategory = recommandCategories.firstOrNull;
 
       _allCourses.clear();
       _allCourses.addAll(courses);
 
       final filterRecommendCourse = _allCourses
-          .where((e) => e.recommendCategoryId == firstRecommandCategory.id)
+          .where((e) => e.recommendCategoryId == firstRecommandCategory?.id)
           .toList();
 
       emit(state.copyWith(
@@ -60,7 +63,7 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
         recommendCategories: recommandCategories,
         filterRegionCourse: _allCourses,
         filterRecommendCourse: filterRecommendCourse,
-        inProgressCourse: inProgressCourse ?? [],
+        inProgressCourse: inProgressCourse,
         selectedRecommendCategory: firstRecommandCategory,
       ));
     });

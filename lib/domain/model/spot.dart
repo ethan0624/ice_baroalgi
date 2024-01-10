@@ -1,3 +1,4 @@
+import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'spot.g.dart';
@@ -28,6 +29,10 @@ class Spot {
   final String? openTime;
   @JsonKey(name: 'dayOff')
   final String? dayOff;
+  @JsonKey(name: 'SpotToCourses')
+  final List<Course>? includeCourse;
+  @JsonKey(name: 'flag')
+  final bool? falg;
 
   const Spot({
     required this.id,
@@ -42,6 +47,8 @@ class Spot {
     this.tel,
     this.openTime,
     this.dayOff,
+    this.includeCourse,
+    this.falg,
   });
 
   factory Spot.fromJson(Map<String, dynamic> json) => _$SpotFromJson(json);
@@ -50,5 +57,7 @@ class Spot {
 }
 
 extension SpotExtension on Spot {
+  bool get isFlag => falg == true;
+
   String get detailRoutePath => '/spot/$id';
 }
