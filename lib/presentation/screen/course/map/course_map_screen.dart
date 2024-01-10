@@ -1,5 +1,7 @@
-import 'package:auto_route/auto_route.dart';
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -8,8 +10,11 @@ import 'package:incheon_knowhow/domain/enum/course_state_type.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 import 'package:incheon_knowhow/presentation/dialog/course_stamp_completed_dialog.dart';
 import 'package:incheon_knowhow/presentation/dialog/course_stamp_dialog.dart';
+import 'package:incheon_knowhow/presentation/dialog/spot_flag_completed_dialog.dart';
+import 'package:incheon_knowhow/presentation/dialog/spot_flag_dialog.dart';
 import 'package:incheon_knowhow/presentation/screen/course/map/bloc/course_map_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/course_app_bar.dart';
@@ -35,8 +40,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   NMarker? _selectedMarker;
 
   String _title = '';
-  bool _initMakers = false;
   bool _isFavorite = false;
+  final List<Spot> _visibleMarkerSpots = [];
 
   _onFavoritePressed() {
     context.checkLoginOrRequestLogin(onLoggedIn: () {
@@ -56,12 +61,14 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   _handleStateChanged(CourseMapState state) {
     final course = state.course;
     if (course != null) {
-      _addSpotMarkers(course.spots ?? []);
-
       setState(() {
         _title = course.title;
         _isFavorite = course.isLiked;
       });
+    }
+
+    if (state.spots.isNotEmpty && !_visibleMarkerSpots.equals(state.spots)) {
+      _addSpotMarkers(state.spots);
     }
   }
 
@@ -76,7 +83,6 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   }
 
   _addSpotMarkers(List<Spot> spots) async {
-    if (_initMakers) return;
     final markerIcon = await NOverlayImage.fromWidget(
       widget: const CustomMapMarker(),
       size: const Size(36, 44),
@@ -101,12 +107,15 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
       return marker;
     }).toSet();
 
+    await _mapController.clearOverlays();
     await _mapController.addOverlayAll(makers);
 
-    final position = NLatLng(spots.first.latitude!, spots.first.longitude!);
-    _mapController.updateCamera(NCameraUpdate.withParams(target: position));
-
-    _initMakers = true;
+    if (_visibleMarkerSpots.isEmpty) {
+      final position = NLatLng(spots.first.latitude!, spots.first.longitude!);
+      _mapController.updateCamera(NCameraUpdate.withParams(target: position));
+    }
+    _visibleMarkerSpots.clear();
+    _visibleMarkerSpots.addAll(spots);
   }
 
   _focusClearMaker() async {
@@ -207,8 +216,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   _cancelCourse() {
     context.checkLoginOrRequestLogin(onLoggedIn: () async {
       final ret = await context.showConfirm(
-          title: '정복을 중단하시겠습니까?',
-          message: '중단하기 선택시, 진행중인 코스 리스트에서\n삭제되어집니다 진행하시겠습니까?');
+          title: '정복을 중단하시겠습니까?', message: '진행중인 코스 리스트에서\n삭제되어집니다 진행하시겠습니까?');
       if (ret == null || ret == false) return;
 
       final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
@@ -229,6 +237,18 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
 
   _showStampPoll() async {
     final ret = await context.router.pushNamed('/stamp/regist');
+  }
+
+  _onSpotFlagRegist(Spot spot) {
+    context.checkLoginOrRequestLogin(onLoggedIn: () async {
+      final ret = await SpotFlagDialog.show(context, spotName: spot.title);
+      if (ret == null || ret == false) return;
+
+      final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
+      if (bloc == null) return;
+
+      bloc.add(CourseMapEvent.registFlag(spot.id));
+    });
   }
 
   @override
@@ -257,6 +277,12 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
         ..add(const CourseMapEvent.initial()),
       stateChanged: (context, state) {
         _handleStateChanged(state);
+      },
+      effectChanged: (context, effect) {
+        if (effect is SuccessEffect) {
+          _focusClearMaker();
+          SpotFlagCompletedDialog.show(context);
+        }
       },
       builder: (context, bloc, state) {
         return SizedBox(
@@ -322,6 +348,9 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                     if (_selectedMarker != null && state.selectedSpot != null)
                       SpotCardView(
                         spot: state.selectedSpot!,
+                        enabledRegistButton:
+                            state.course?.state == CourseStateType.inProgress,
+                        onRegistPressed: _onSpotFlagRegist,
                       ),
 
                     // bottom

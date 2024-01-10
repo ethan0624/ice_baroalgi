@@ -3,11 +3,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
+import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class SpotCardView extends StatelessWidget {
   final Spot spot;
-  const SpotCardView({super.key, required this.spot});
+  final bool enabledRegistButton;
+  final Function(Spot spot)? onRegistPressed;
+  const SpotCardView({
+    super.key,
+    required this.spot,
+    this.enabledRegistButton = false,
+    this.onRegistPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +68,21 @@ class SpotCardView extends StatelessWidget {
                     style: context.textTheme.labelSmall?.copyWith(
                       color: AppTextColor.medium,
                     ),
-                    maxLines: 3,
+                    maxLines: enabledRegistButton ? 1 : 3,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  if (enabledRegistButton)
+                    OutlineButton(
+                      margin: const EdgeInsets.only(top: 6),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 14),
+                      text: '깃발등록하기',
+                      textColor: Colors.white,
+                      borderRadius: 30,
+                      borderWidth: 0,
+                      backgroundColor: AppColor.secondary,
+                      onPressed: () => onRegistPressed?.call(spot),
+                    ),
                 ],
               ),
             ),

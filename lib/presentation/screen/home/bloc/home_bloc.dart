@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'package:equatable/equatable.dart';
+import 'package:event_bus/event_bus.dart';
+import 'package:incheon_knowhow/config/app_event.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
 import 'package:incheon_knowhow/domain/enum/region_category_type.dart';
@@ -16,6 +19,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
+  final _eventBus = getIt<EventBus>();
   final _authProvider = getIt<AuthProvider>();
   final _findTopicWithCourse = getIt<FindTopicWithCourse>();
   final _findCourse = getIt<FindCourse>();
@@ -23,8 +27,15 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
   final _findCourseInProgress = getIt<FindCourseInProgress>();
 
   final List<Course> _allCourses = [];
+  StreamSubscription? _courseChangedSubscription;
+
   HomeBloc() : super(const HomeState()) {
     on<HomeOnInitial>((event, emit) async {
+      _courseChangedSubscription =
+          _eventBus.on<CourseChangedEvent>().listen((event) {
+        add(const HomeEvent.refresh());
+      });
+
       _authProvider.addListener(_onRefresh);
 
       emit(state.copyWith(isLoading: true));
@@ -109,6 +120,7 @@ class HomeBloc extends BaseSideEffectBloc<HomeEvent, HomeState> {
 
   @override
   Future<void> close() {
+    _courseChangedSubscription?.cancel();
     _authProvider.removeListener(_onRefresh);
     return super.close();
   }

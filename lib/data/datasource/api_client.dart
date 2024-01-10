@@ -162,7 +162,7 @@ abstract class ApiClient {
   Future<DataResponse<Spot>> getSpotInfo(@Path() int id);
 
   // 스팟 깃발 등록하기
-  @GET('/spot/flag/{id}')
+  @POST('/spot/flag/{id}')
   Future<DataResponse<String>> setSpotFlag(@Path() int id);
 
   /*

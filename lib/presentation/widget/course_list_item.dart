@@ -34,6 +34,8 @@ class _CourseListItemState extends State<CourseListItem>
   final _eventBus = getIt<EventBus>();
   final _updateFavorite = getIt<UpdateFavorite>();
   bool _isFavorite = false;
+  double _progressValue = 0;
+  int _completedSpotCount = 0;
 
   StreamSubscription? _changedSubscription;
 
@@ -54,10 +56,18 @@ class _CourseListItemState extends State<CourseListItem>
   }
 
   _onUpdated(Course updatedCourse) {
-    if (_isFavorite == updatedCourse.isLiked) return;
-
     setState(() {
-      _isFavorite = updatedCourse.isLiked;
+      if (_isFavorite != updatedCourse.isLiked) {
+        _isFavorite = updatedCourse.isLiked;
+      }
+
+      if (_progressValue != updatedCourse.progress) {
+        _progressValue = updatedCourse.progress;
+      }
+
+      if (_completedSpotCount != updatedCourse.completedSpotCount) {
+        _completedSpotCount = updatedCourse.completedSpotCount;
+      }
     });
   }
 
@@ -76,6 +86,8 @@ class _CourseListItemState extends State<CourseListItem>
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
         _isFavorite = widget.course.isLiked;
+        _progressValue = widget.course.progress;
+        _completedSpotCount = widget.course.completedSpotCount;
       });
     });
   }
@@ -156,11 +168,11 @@ class _CourseListItemState extends State<CourseListItem>
                         child: Row(
                           children: [
                             Expanded(
-                              child: ProgressBar(value: widget.course.progress),
+                              child: ProgressBar(value: _progressValue),
                             ),
                             const SizedBox(width: 20),
                             Text(
-                              '${widget.course.completedSpotCount.toNumberFormat}/${widget.course.spotCount.toNumberFormat}',
+                              '${_completedSpotCount.toNumberFormat}/${widget.course.spotCount.toNumberFormat}',
                               style: context.textTheme.labelMedium
                                   ?.copyWith(color: AppTextColor.light),
                             ),

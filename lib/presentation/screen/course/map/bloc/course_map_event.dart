@@ -9,6 +9,8 @@ sealed class CourseMapEvent extends Equatable {
   const factory CourseMapEvent.start() = CourseMapOnStart;
   const factory CourseMapEvent.complete() = CourseMapOnComplete;
   const factory CourseMapEvent.cancel() = CourseMapOnCancel;
+  const factory CourseMapEvent.registFlag(int spotId) =
+      CourseMapOnRegistSpotFlag;
 
   @override
   List<Object> get props => [];
@@ -37,4 +39,9 @@ class CourseMapOnComplete extends CourseMapEvent {
 
 class CourseMapOnCancel extends CourseMapEvent {
   const CourseMapOnCancel();
+}
+
+class CourseMapOnRegistSpotFlag extends CourseMapEvent {
+  final int spotId;
+  const CourseMapOnRegistSpotFlag(this.spotId);
 }

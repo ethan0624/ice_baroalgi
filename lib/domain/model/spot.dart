@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'spot.g.dart';
 
 @JsonSerializable()
-class Spot {
+class Spot extends Equatable {
   @JsonKey(name: 'id')
   final int id;
   @JsonKey(name: 'title')
@@ -32,7 +33,7 @@ class Spot {
   @JsonKey(name: 'SpotToCourses')
   final List<Course>? includeCourse;
   @JsonKey(name: 'flag')
-  final bool? falg;
+  final bool? flag;
 
   const Spot({
     required this.id,
@@ -48,16 +49,40 @@ class Spot {
     this.openTime,
     this.dayOff,
     this.includeCourse,
-    this.falg,
+    this.flag,
   });
+
+  copyWith({
+    bool? flag,
+  }) {
+    return Spot(
+      id: id,
+      title: title,
+      address: address,
+      summary: summary,
+      latitude: latitude,
+      longitude: longitude,
+      image: image,
+      images: images,
+      description: description,
+      tel: tel,
+      openTime: openTime,
+      dayOff: dayOff,
+      includeCourse: includeCourse,
+      flag: flag ?? this.flag,
+    );
+  }
 
   factory Spot.fromJson(Map<String, dynamic> json) => _$SpotFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpotToJson(this);
+
+  @override
+  List<Object?> get props => [id, title, address, latitude, longitude, flag];
 }
 
 extension SpotExtension on Spot {
-  bool get isFlag => falg == true;
+  bool get isFlag => flag == true;
 
   String get detailRoutePath => '/spot/$id';
 }

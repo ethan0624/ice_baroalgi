@@ -93,5 +93,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/ic_flag.png
+    - assets/images/ic_flag_completed.png
     - assets/images/course_complete_badge.png
     - assets/translations/

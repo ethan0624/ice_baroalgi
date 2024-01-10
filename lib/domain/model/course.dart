@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/domain/enum/course_state_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
@@ -5,7 +6,7 @@ import 'package:incheon_knowhow/domain/model/spot.dart';
 part 'course.g.dart';
 
 @JsonSerializable()
-class Course {
+class Course extends Equatable {
   @JsonKey(name: 'id')
   final int id;
   @JsonKey(name: 'title')
@@ -67,6 +68,9 @@ class Course {
   copyWith({
     bool? isLiked,
     bool? isCompleted,
+    bool? isProgress,
+    int? spotCount,
+    int? completedSpotCount,
   }) {
     return Course(
       id: id,
@@ -76,8 +80,8 @@ class Course {
       duration: duration,
       isLiked: isLiked ?? this.isLiked,
       isCompleted: isCompleted ?? this.isCompleted,
-      spotCount: spotCount,
-      completedSpotCount: completedSpotCount,
+      spotCount: spotCount ?? this.spotCount,
+      completedSpotCount: completedSpotCount ?? this.completedSpotCount,
       regionId: regionId,
       regionName: regionName,
       recommendCategoryId: recommendCategoryId,
@@ -85,12 +89,24 @@ class Course {
       spots: spots,
       image: image,
       images: images,
+      isProgress: isProgress ?? this.isProgress,
     );
   }
 
   factory Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CourseToJson(this);
+
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        isLiked,
+        isCompleted,
+        isProgress,
+        spotCount,
+        completedSpotCount,
+      ];
 }
 
 extension CourseExtension on Course {
@@ -124,7 +140,11 @@ extension CourseExtension on Course {
       return CourseStateType.ready;
     }
 
-    return (spotCount == completedSpotCount)
+    final spotList = spots ?? [];
+    final includeSpotCount = spotList.length;
+    final flagCompletedSpotCount = spotList.where((e) => e.isFlag).length;
+
+    return (includeSpotCount == flagCompletedSpotCount)
         ? CourseStateType.stampReady
         : CourseStateType.inProgress;
   }
