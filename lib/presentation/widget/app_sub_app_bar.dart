@@ -4,6 +4,7 @@ import 'package:incheon_knowhow/presentation/widget/app_back_button.dart';
 
 class AppSubAppBar extends AppBar {
   final String? text;
+  final bool showBackButton;
   final VoidCallback? onBackPressed;
 
   AppSubAppBar({
@@ -11,6 +12,7 @@ class AppSubAppBar extends AppBar {
     super.actions,
     super.elevation = 3,
     super.centerTitle = true,
+    this.showBackButton = true,
     this.text,
     this.onBackPressed,
   }) : super(
@@ -22,7 +24,9 @@ class AppSubAppBar extends AppBar {
             ),
           ),
           automaticallyImplyLeading: true,
-          leading: AppBackButton(onBackPressed: onBackPressed),
+          leading: showBackButton
+              ? AppBackButton(onBackPressed: onBackPressed)
+              : Container(),
           surfaceTintColor: Colors.transparent,
         );
 }

@@ -5,6 +5,7 @@ import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/enum/user_gender_type.dart';
+import 'package:incheon_knowhow/domain/enum/user_type.dart';
 import 'package:incheon_knowhow/domain/model/user.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
@@ -13,6 +14,7 @@ import 'package:incheon_knowhow/presentation/screen/account/widget/account_item_
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
+import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -145,17 +147,67 @@ class _AccountScreenState extends State<AccountScreen> {
                   AcountItemView(
                     label: '휴대폰번호',
                     value: state.user?.phone ?? '',
+                    showDivider: state.user?.type != UserType.other,
                     onTap: () {},
                   ),
-                  AcountItemView(
-                    label: '학교',
-                    value: state.user?.schoolInfo ?? '',
-                    showDivider: false,
-                    onTap: _onSchoolChangePressed,
-                  ),
+                  if (state.user?.type == UserType.student)
+                    AcountItemView(
+                      label: '학교',
+                      value: state.user?.schoolInfo ?? '',
+                      showDivider: false,
+                      onTap: _onSchoolChangePressed,
+                    ),
                 ],
               ),
             ),
+            if (state.user?.type == UserType.other)
+              Column(
+                children: [
+                  Container(
+                    height: 6,
+                    color: AppColor.dividerLight,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '인천사이버진로교육원 연동',
+                                style: context.textTheme.bodyMedium,
+                              ),
+                              Text(
+                                state.user?.jinroAccountEmail ??
+                                    '연결된 계정이 없습니다.',
+                                style: context.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (state.user?.jinroAccountEmail == null ||
+                            state.user?.jinroAccountEmail?.isEmpty == true)
+                          OutlineButton(
+                            onPressed: () =>
+                                context.router.pushNamed('/jinroAccount'),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 12),
+                            borderRadius: 6,
+                            borderColor: AppColor.primary,
+                            backgroundColor: AppColor.primary,
+                            text: '연동하기',
+                            textColor: Colors.white,
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             Container(
               height: 6,
               color: AppColor.dividerLight,

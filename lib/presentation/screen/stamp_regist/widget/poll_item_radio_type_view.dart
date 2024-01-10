@@ -72,7 +72,7 @@ class PollItemRadioTypeView extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    RadioBox(isChecked: false),
+                    const RadioBox(isChecked: false),
                     Padding(
                       padding: const EdgeInsets.only(left: 6, right: 20),
                       child: Text(

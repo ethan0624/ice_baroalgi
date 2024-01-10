@@ -36,7 +36,8 @@ extension BuildContextExtension on BuildContext {
       ];
 
   Future<void> share({required String title}) async {
-    final storeUrl = 'https://store.com/todo';
+    // todo : 스토어 링크로 변경
+    const storeUrl = 'https://store.com/todo';
     await Share.share('$title $storeUrl', subject: title);
   }
 

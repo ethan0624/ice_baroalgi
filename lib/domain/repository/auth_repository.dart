@@ -44,6 +44,8 @@ abstract class AuthRepository {
     required int group,
   });
 
+  Future<Result<bool, Exception>> updateJinro({required String email});
+
   Future<Result<DataResponse<bool>, Exception>> updatePhone({
     required int userId,
     required String phoneNumber,

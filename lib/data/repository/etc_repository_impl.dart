@@ -1,5 +1,4 @@
 // ignore: implementation_imports
-import 'package:incheon_knowhow/domain/model/qna_paging.dart';
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
@@ -7,6 +6,7 @@ import 'package:incheon_knowhow/domain/model/push.dart';
 import 'package:incheon_knowhow/domain/model/business_info.dart';
 import 'package:incheon_knowhow/domain/model/notice_paging.dart';
 import 'package:incheon_knowhow/domain/model/faq_paging.dart';
+import 'package:incheon_knowhow/domain/model/qna_paging.dart';
 import 'package:incheon_knowhow/domain/repository/etc_repository.dart';
 
 class EtcRepositoryImpl implements EtcRepository {

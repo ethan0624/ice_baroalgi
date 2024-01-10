@@ -45,13 +45,13 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  PollItemInputTypeView(
+                  const PollItemInputTypeView(
                     number: 1,
                     question: '여러분의 활동은 어디에서 이루어졌나요?',
                     hintText: '학교 밖 활동 (마을학교, 진로센터, 현장담방 등)',
                     isRequired: true,
                   ),
-                  PollItemRadioTypeView(
+                  const PollItemRadioTypeView(
                     number: 2,
                     question: '여러분의 체험은 어떤 종류와 연결되나요?',
                     description:
@@ -65,19 +65,19 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       '자신의 관심, 흥미에 따른 활동',
                     ],
                   ),
-                  PollItemInputTypeView(
+                  const PollItemInputTypeView(
                     number: 3,
                     question: '여러분이 경험한 체험의 제목을 붙여주세요.',
                     hintText: '코스명',
                     isRequired: true,
                   ),
-                  PollItemInputTypeView(
+                  const PollItemInputTypeView(
                     number: 4,
                     question: '여러분의 체험은 언제였나요?',
                     hintText: '코스명',
                     isRequired: true,
                   ),
-                  PollItemRadioTypeView(
+                  const PollItemRadioTypeView(
                     number: 5,
                     question: '체험의 규모는 어떠했나요?',
                     isRequired: true,
@@ -88,7 +88,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       '대규모 체험 (31명 이상)',
                     ],
                   ),
-                  PollItemMultipleChoiceTypeView(
+                  const PollItemMultipleChoiceTypeView(
                     number: 6,
                     question: '{코스명} 코스와 관련된 직업 중 관심있는 직업을 선택하세요.',
                     options: ['관련직업', '관련직업1', '관련직업2'],
@@ -155,7 +155,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColor.secondary.withOpacity(0.3),
                     ),
-                    child: AppTextFormField(
+                    child: const AppTextFormField(
                       margin: EdgeInsets.zero,
                       borderColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
@@ -187,7 +187,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColor.secondary.withOpacity(0.3),
                     ),
-                    child: AppTextFormField(
+                    child: const AppTextFormField(
                       margin: EdgeInsets.zero,
                       borderColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
@@ -218,7 +218,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColor.secondary.withOpacity(0.3),
                     ),
-                    child: AppTextFormField(
+                    child: const AppTextFormField(
                       margin: EdgeInsets.zero,
                       borderColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
@@ -249,7 +249,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColor.secondary.withOpacity(0.3),
                     ),
-                    child: AppTextFormField(
+                    child: const AppTextFormField(
                       margin: EdgeInsets.zero,
                       borderColor: Colors.transparent,
                       backgroundColor: Colors.transparent,

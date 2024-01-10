@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/extension/string_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 import 'package:incheon_knowhow/presentation/screen/jinro_account/bloc/jinro_account_bloc.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
@@ -10,6 +12,7 @@ import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
 import 'package:incheon_knowhow/presentation/widget/underline_text_button.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class JinroAccountScreen extends StatefulWidget {
@@ -20,20 +23,56 @@ class JinroAccountScreen extends StatefulWidget {
 }
 
 class _JinroAccountScreenState extends State<JinroAccountScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _emailTextController = TextEditingController();
+
   _onAuthPressed() {
-    context.router.pop();
+    final email = _emailTextController.text;
+    if (email.isEmpty) {
+      context.showAlert(title: '이메일 오류', message: '이메일을 입력해주세요');
+      return;
+    }
+
+    if (!email.isValidEmail()) {
+      context.showAlert(title: '이메일 오류', message: '올바른 이메일 형식을 입력해주세요');
+      return;
+    }
+
+    final bloc = _scaffoldKey.currentContext?.read<JinroAccountBloc>();
+    if (bloc == null) return;
+
+    bloc.add(JinroAccountEvent.regist(email));
   }
 
   _onSkipPressed() {
-    context.router.pop();
+    final bloc = _scaffoldKey.currentContext?.read<JinroAccountBloc>();
+    if (bloc == null) return;
+
+    bloc.add(const JinroAccountEvent.skip());
+  }
+
+  @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<JinroAccountBloc, JinroAccountBloc,
         JinroAccountState>(
-      appBar: AppSubAppBar(text: '계정인증하기', elevation: 0),
+      scaffoldKey: _scaffoldKey,
+      appBar: AppSubAppBar(
+        text: '계정인증하기',
+        elevation: 0,
+        showBackButton: false,
+      ),
       create: (_) => JinroAccountBloc(),
+      effectChanged: (context, effect) {
+        if (effect is SuccessEffect) {
+          context.router.pop();
+        }
+      },
       builder: (context, bloc, state) {
         return Padding(
           padding: const EdgeInsets.all(defaultMarginValue),
@@ -88,17 +127,9 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                       style: context.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w500),
                     ),
-                    const AppTextFormField(
+                    AppTextFormField(
+                      controller: _emailTextController,
                       hintText: '이메일 주소 입력',
-                    ),
-                    const SizedBox(height: 26),
-                    Text(
-                      '비밀번호',
-                      style: context.textTheme.bodyMedium
-                          ?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    const AppTextFormField(
-                      hintText: '비밀번호 입력',
                     ),
                   ],
                 ),

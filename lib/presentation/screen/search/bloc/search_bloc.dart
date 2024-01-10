@@ -17,9 +17,6 @@ class SearchBloc extends BaseSideEffectBloc<SearchEvent, SearchState> {
       final res = await _findSearch(event.keyword);
       final result = res.tryGetSuccess();
 
-      print('>>> res : $res');
-      print('>>> result : $result');
-
       final searchCourses = result?.courses ?? [];
       final searchSpots = result?.spots ?? [];
 
@@ -33,9 +30,6 @@ class SearchBloc extends BaseSideEffectBloc<SearchEvent, SearchState> {
       relateResults.addAll(relateCourses);
       relateResults.addAll(relateSpots);
       relateResults.sort((a, b) => a.keyword.compareTo(b.keyword));
-
-      print('>>> searchCourses : $searchCourses');
-      print('>>> searchSpots : $searchSpots');
 
       emit(state.copyWith(
         searchCourses: searchCourses,

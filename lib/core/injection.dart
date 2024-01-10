@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/update_jinro_account.dart';
 import 'package:incheon_knowhow/domain/usecase/spot/set_spot_flag.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -69,7 +70,10 @@ class Injection {
       secureStorage: secureStorage,
     );
 
-    final authProvider = AuthProvider(secureStorage: secureStorage)..initial();
+    final authProvider = AuthProvider(
+      secureStorage: secureStorage,
+      sharedPreferences: sharedPreference,
+    )..initial();
     getIt.registerSingleton<AuthProvider>(authProvider);
     getIt.registerSingleton<ApiClient>(ApiClient(getIt()));
     getIt.registerSingleton<NeisApiClient>(NeisApiClient());
@@ -134,6 +138,12 @@ class Injection {
     );
     getIt.registerLazySingleton<UpdateSchool>(
       () => UpdateSchool(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<UpdateJinroAccount>(
+      () => UpdateJinroAccount(
         authProvider: getIt(),
         repository: getIt(),
       ),

@@ -130,6 +130,15 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Result<bool, Exception>> updateJinro({required String email}) async {
+    final data = {'email': email};
+    final res = await safetyCall(apiClient.updateJinroAccount(data));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
   Future<Result<DataResponse<bool>, Exception>> updatePhone(
       {required int userId, required String phoneNumber}) {
     // TODO: implement updatePhone
