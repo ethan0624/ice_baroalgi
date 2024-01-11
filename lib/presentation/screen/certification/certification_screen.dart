@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:iamport_flutter/Iamport_certification.dart';
@@ -14,7 +15,7 @@ class CertificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      appBar: AppSubAppBar(text: '본인인증'),
+      appBar: AppSubAppBar(text: '본인인증'.tr()),
       child: Center(
         child: TextButton(
           onPressed: () {
@@ -34,11 +35,11 @@ class CertificationScreen extends StatelessWidget {
       ),
     );
     // return IamportCertification(
-    //     appBar: AppSubAppBar(text: '본인인증'),
-    //     initialChild: const Center(
+    //     appBar: AppSubAppBar(text: '본인인증'.tr()),
+    //     initialChild: Center(
     //       child: Text(
-    //         '잠시만 기다려주세요...',
-    //         style: TextStyle(fontSize: 20),
+    //         '잠시만 기다려주세요'.tr(),
+    //         style: const TextStyle(fontSize: 20),
     //       ),
     //     ),
     //     userCode: AppConfig.iamportUserCode,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/model/find_id_result.dart';
@@ -25,7 +26,7 @@ class FindIdBloc extends BaseSideEffectBloc<FindIdEvent, FindIdState> {
       final result = res.tryGetSuccess();
       if (res.isError() || result == null) {
         produceSideEffect(BlocEffect.showAlert(
-            title: '아이디찾기 실패', message: '일치하는 회원을 찾을 수 없습니다'));
+            title: '아이디찾기 실패'.tr(), message: '일치하는 회원을 찾을 수 없습니다'.tr()));
         return;
       }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -75,7 +76,7 @@ class _ResetPwCertificationScreenState
     final code = _codeTextController.text;
 
     if (code.length < 6) {
-      context.showAlert(title: '입력오류', message: '인증번호를 정확하게 입력해주세요');
+      context.showAlert(title: '입력오류'.tr(), message: '인증번호를 정확하게 입력해주세요'.tr());
       return;
     }
 
@@ -119,7 +120,7 @@ class _ResetPwCertificationScreenState
     return BaseSideEffectBlocLayout<ResetPwCertificationBloc,
         ResetPwCertificationBloc, ResetPwCertificationState>(
       scaffoldKey: _scaffoldKey,
-      appBar: AppSubAppBar(text: '비밀번호 재설정'),
+      appBar: AppSubAppBar(text: '비밀번호 재설정'.tr()),
       create: (_) => ResetPwCertificationBloc(
         certificationCode: widget.certificationCode,
       ),
@@ -127,12 +128,12 @@ class _ResetPwCertificationScreenState
         return ListView(
           padding: const EdgeInsets.all(defaultMarginValue),
           children: [
-            const AppTitleText(
-              text: '인증번호를 발송했습니다.',
+            AppTitleText(
+              text: '인증번호를 발송했습니다'.tr(),
             ),
             const SizedBox(height: 50),
             Text(
-              '인증번호',
+              '인증번호'.tr(),
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
@@ -140,7 +141,7 @@ class _ResetPwCertificationScreenState
               children: [
                 AppTextFormField(
                   controller: _codeTextController,
-                  hintText: '인증번호 6자리 입력',
+                  hintText: '인증번호 6자리 입력'.tr(),
                   maxLength: 6,
                   keyboardType: TextInputType.number,
                   autoFocus: true,
@@ -178,7 +179,7 @@ class _ResetPwCertificationScreenState
                             colorFilter: const ColorFilter.mode(
                                 Colors.red, BlendMode.srcIn),
                           ),
-                          label: '인증번호가 다릅니다.',
+                          label: '인증번호가 다릅니다'.tr(),
                         ),
                       if (state.isCertificationCodeSuccess)
                         IconText(
@@ -189,13 +190,13 @@ class _ResetPwCertificationScreenState
                             colorFilter: const ColorFilter.mode(
                                 Colors.green, BlendMode.srcIn),
                           ),
-                          label: '인증되었습니다!',
+                          label: '인증되었습니다'.tr(),
                         ),
                     ],
                   ),
                 ),
                 UnderlineTextButton(
-                  text: '인증번호 재발송',
+                  text: '인증번호 재발송'.tr(),
                   margin: EdgeInsets.zero,
                   onPressed: _onResendPressed,
                 ),
@@ -203,7 +204,7 @@ class _ResetPwCertificationScreenState
             ),
             const SizedBox(height: 78),
             AppButton(
-              text: '다음',
+              text: '다음'.tr(),
               onPressed: state.isCertificationCodeSuccess ? _onNext : null,
               background: state.isCertificationCodeSuccess
                   ? AppColor.primary

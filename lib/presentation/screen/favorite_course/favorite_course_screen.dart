@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -22,7 +23,7 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<FavoriteCourseBloc, FavoriteCourseBloc,
         FavoriteCourseState>(
-      appBar: AppSubAppBar(text: '찜한코스'),
+      appBar: AppSubAppBar(text: '찜한코스'.tr()),
       create: (_) =>
           FavoriteCourseBloc()..add(const FavoriteCourseEvent.initial()),
       builder: (context, bloc, state) {
@@ -34,7 +35,9 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '총 ${state.favoriteCourse.length.toNumberFormat}코스',
+                  '총 코스'.tr(namedArgs: {
+                    'total': state.favoriteCourse.length.toNumberFormat
+                  }),
                   style: context.textTheme.labelMedium?.copyWith(
                       color: Colors.black, fontWeight: FontWeight.w600),
                 ),
@@ -43,7 +46,7 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
                   children: [
                     const AppCheckbox(),
                     Text(
-                      '완료코스 숨김',
+                      '완료코스 숨김'.tr(),
                       style: context.textTheme.labelMedium?.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600),
                     )
@@ -57,7 +60,7 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    '찜한 코스가 없습니다',
+                    '찜한 코스가 없습니다'.tr(),
                     style: context.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),

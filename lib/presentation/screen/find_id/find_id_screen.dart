@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
@@ -42,19 +43,20 @@ class _FindIdScreenState extends State<FindIdScreen> {
     final phone = _phoneTextController.text;
 
     if (name.isEmpty) {
-      await context.showAlert(title: '입력오류', message: '이름을 입력해주세요');
+      await context.showAlert(title: '입력오류'.tr(), message: '이름을 입력해주세요'.tr());
       _nameFocus.requestFocus();
       return;
     }
 
     if (birth.isEmpty) {
-      await context.showAlert(title: '입력오류', message: '생년월일을 입력해주세요');
+      await context.showAlert(title: '입력오류'.tr(), message: '생년월일을 입력해주세요'.tr());
       _birthFocus.requestFocus();
       return;
     }
 
     if (phone.isEmpty) {
-      await context.showAlert(title: '입력오류', message: '휴대폰번호를 입력해주세요');
+      await context.showAlert(
+          title: '입력오류'.tr(), message: '휴대폰번호를 입력해주세요'.tr());
       _phoneFocus.requestFocus();
       return;
     }
@@ -79,7 +81,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
       scaffoldKey: _scaffoldKey,
       create: (_) => FindIdBloc(),
       appBar: AppSubAppBar(
-        text: '아이디 찾기',
+        text: '아이디 찾기'.tr(),
       ),
       effectChanged: (context, effect) {
         _handleEffectChanged(effect);
@@ -97,23 +99,23 @@ class _FindIdScreenState extends State<FindIdScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '아이디가 생각나지 않으세요?',
+                    '아이디가 생각나지 않으세요'.tr(),
                     style: context.textTheme.titleSmall,
                   ),
                   Text(
-                    '* 가입자 정보를 입력해주세요.',
+                    '가입자 정보를 입력해주세요'.tr(),
                     style: context.textTheme.bodySmall,
                   ),
                   const SizedBox(height: 50),
                   Text(
-                    '이름',
+                    '이름'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
                   AppTextFormField(
                     controller: _nameTextController,
                     focusNode: _nameFocus,
-                    hintText: '이름을 입력하세요',
+                    hintText: '이름을 입력해주세요'.tr(),
                     textInputAction: TextInputAction.next,
                     onSubmitted: () {
                       if (_nameTextController.text.isNotEmpty) {
@@ -123,7 +125,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   ),
                   const SizedBox(height: defaultMarginValue),
                   Text(
-                    '생년월일',
+                    '생년월일'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
@@ -142,14 +144,14 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   ),
                   const SizedBox(height: defaultMarginValue),
                   Text(
-                    '휴대폰 번호',
+                    '휴대폰 번호'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
                   AppTextFormField(
                     controller: _phoneTextController,
                     focusNode: _phoneFocus,
-                    hintText: '가입자의 휴대폰 번호를 입력하세요',
+                    hintText: '가입자의 휴대폰 번호를 입력하세요'.tr(),
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
                     inputFormatters: [NumberFormatter()],
@@ -162,7 +164,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   const SizedBox(height: 56),
                   AppButton(
                     margin: const EdgeInsets.symmetric(vertical: 12),
-                    text: '아이디 찾기',
+                    text: '아이디 찾기'.tr(),
                     textBold: true,
                     onPressed: _onFindPressed,
                   ),
@@ -172,7 +174,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '아이디 찾기를 완료하였습니다.',
+                    '아이디 찾기를 완료하였습니다'.tr(),
                     style: context.textTheme.titleSmall,
                   ),
                   const SizedBox(height: 50),
@@ -188,7 +190,7 @@ class _FindIdScreenState extends State<FindIdScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '아이디',
+                          '아이디'.tr(),
                           style: context.textTheme.bodyMedium
                               ?.copyWith(color: AppTextColor.light),
                         ),
@@ -204,13 +206,13 @@ class _FindIdScreenState extends State<FindIdScreen> {
                   const SizedBox(height: defaultMarginValue),
                   AppButton(
                     margin: EdgeInsets.zero,
-                    text: '로그인 하기',
+                    text: '로그인 하기'.tr(),
                     textBold: true,
                     onPressed: () => context.router.pop(),
                   ),
                   Center(
                     child: UnderlineTextButton(
-                      text: '비밀번호가 생각나지 않으세요?',
+                      text: '비밀번호가 생각나지 않으세요?'.tr(),
                       onPressed: () {},
                     ),
                   ),

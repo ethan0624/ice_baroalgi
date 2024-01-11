@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -36,9 +37,9 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(defaultMarginValue),
-                    child: AppTitleText(text: '자주묻는질문'),
+                  Padding(
+                    padding: const EdgeInsets.all(defaultMarginValue),
+                    child: AppTitleText(text: '자주묻는질문'.tr()),
                   ),
                   SizedBox(
                     height: 30,
@@ -65,7 +66,7 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
                             child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 60),
                             child: Text(
-                              '등록된 자주묻는 질문이 없습니다',
+                              '등록된 자주묻는 질문이 없습니다'.tr(),
                               style: context.textTheme.bodyMedium,
                             ),
                           ))
@@ -96,7 +97,7 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
               left: defaultMarginValue,
               right: defaultMarginValue,
               child: AppButton(
-                text: '문의작성하기',
+                text: '문의작성하기'.tr(),
                 onPressed: () => context.router.pushNamed('/cscenter/inquiry'),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -29,12 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _onLoginPressed() {
     if (!_emailTextController.text.isValidEmail()) {
-      context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
+      context.showAlert(title: '입력오류'.tr(), message: '이메일을 정확하게 입력해주세요'.tr());
       return;
     }
 
     if (!_passwordTextController.text.isValidPassword()) {
-      context.showAlert(title: '입력오류', message: '비밀번호를 정확하게 입력해주세요');
+      context.showAlert(title: '입력오류'.tr(), message: '비밀번호를 정확하게 입력해주세요'.tr());
       return;
     }
 
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
       scaffoldKey: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       appBar: AppSubAppBar(
-        text: '로그인',
+        text: '로그인'.tr(),
         onBackPressed: _cancel,
       ),
       create: (_) => LoginBloc(),
@@ -106,18 +107,18 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(defaultMarginValue),
           children: [
             Text(
-              '서비스 이용을 위해\n로그인해주세요.',
+              '서비스 이용을 위해 로그인해주세요'.tr(),
               style: context.textTheme.titleSmall,
             ),
             const SizedBox(height: 50),
             Text(
-              '아이디',
+              '아이디'.tr(),
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
             AppTextFormField(
               controller: _emailTextController,
-              hintText: '이메일 주소 입력',
+              hintText: '이메일 주소 입력'.tr(),
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               onSubmitted: () {
@@ -129,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: defaultMarginValue),
             Text(
-              '비밀번호',
+              '비밀번호'.tr(),
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
@@ -142,14 +143,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             AppButton(
               margin: const EdgeInsets.symmetric(vertical: defaultMarginValue),
-              text: '로그인',
+              text: '로그인'.tr(),
               textBold: true,
               onPressed: _onLoginPressed,
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: UnderlineTextButton(
-                text: '아이디 찾기',
+                text: '아이디 찾기'.tr(),
                 margin: EdgeInsets.zero,
                 onPressed: _onFindIdPressed,
               ),
@@ -157,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: UnderlineTextButton(
-                text: '비밀번호 재설정',
+                text: '비밀번호 재설정'.tr(),
                 margin: const EdgeInsets.symmetric(vertical: 12),
                 onPressed: _onFindPasswordPressed,
               ),
@@ -166,13 +167,13 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                '회원이 아니신가요?',
+                '회원이 아니신가요'.tr(),
                 style: context.textTheme.bodyMedium
                     ?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             AppButton(
-              text: '회원가입',
+              text: '회원가입'.tr(),
               textStyle: context.textTheme.bodyMedium,
               textColor: Colors.black,
               background: Colors.white,

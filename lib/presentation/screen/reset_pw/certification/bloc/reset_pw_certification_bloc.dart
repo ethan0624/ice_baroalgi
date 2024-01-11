@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/model/certification_code.dart';
@@ -19,7 +20,8 @@ class ResetPwCertificationBloc extends BaseSideEffectBloc<
       if (state.isLoading) return;
 
       if (!certificationCode.canResend) {
-        produceSideEffect(BlocEffect.showAlert(title: '인증번호를 재발송할 수 없습니다'));
+        produceSideEffect(
+            BlocEffect.showAlert(title: '인증번호를 재발송할 수 없습니다'.tr()));
         return;
       }
 
@@ -36,7 +38,8 @@ class ResetPwCertificationBloc extends BaseSideEffectBloc<
 
       final certification = res.tryGetSuccess();
       if (res.isError() || certification == null) {
-        produceSideEffect(BlocEffect.showAlert(title: '인증번호를 재발송을 실패했습니다'));
+        produceSideEffect(
+            BlocEffect.showAlert(title: '인증번호를 재발송을 실패했습니다'.tr()));
         return;
       }
       certificationCode = certification;

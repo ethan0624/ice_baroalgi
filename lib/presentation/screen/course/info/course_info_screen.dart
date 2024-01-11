@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -107,7 +108,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                               ),
                               onPressed: () {},
                               child: Text(
-                                '번역보기',
+                                '번역보기'.tr(),
                                 style: context.textTheme.labelLarge,
                               ),
                             ),
@@ -119,10 +120,10 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                           height: 6,
                           color: AppColor.dividerLight,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: defaultMarginValue),
-                          child: AppTitleText(text: '스팟 리스트'),
+                          child: AppTitleText(text: '스팟 리스트'.tr()),
                         ),
                         const SizedBox(height: 6),
                         ...(state.course?.spots ?? []).map((e) => SpotListItem(
@@ -149,7 +150,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                         ],
                       ),
                       child: AppButton(
-                        text: '코스 시작하기',
+                        text: '코스 시작하기'.tr(),
                         textBold: true,
                         padding: const EdgeInsets.all(10),
                         onPressed: () {},

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/login.dart';
@@ -23,7 +24,7 @@ class LoginBloc extends BaseSideEffectBloc<LoginEvent, LoginState> {
 
       if (res.isError() || user == null) {
         produceSideEffect(BlocEffect.showAlert(
-            title: '로그인 실패', message: '이메일 또는 비밀번호가 일치하지 않습니다'));
+            title: '로그인 실패'.tr(), message: '이메일 또는 비밀번호가 일치하지 않습니다'.tr()));
         return;
       }
 

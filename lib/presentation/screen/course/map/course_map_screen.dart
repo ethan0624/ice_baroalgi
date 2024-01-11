@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
@@ -216,7 +217,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
   _cancelCourse() {
     context.checkLoginOrRequestLogin(onLoggedIn: () async {
       final ret = await context.showConfirm(
-          title: '정복을 중단하시겠습니까?', message: '진행중인 코스 리스트에서\n삭제되어집니다 진행하시겠습니까?');
+          title: '정복을 중단하시겠습니까'.tr(),
+          message: '진행중인 코스 리스트에서 삭제되어집니다 진행하시겠습니까'.tr());
       if (ret == null || ret == false) return;
 
       final bloc = _scaffoldKey.currentContext?.read<CourseMapBloc>();
@@ -375,7 +377,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                               child: AppButton(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                text: '상세설명',
+                                text: '상세설명'.tr(),
                                 textBold: true,
                                 background: Colors.white,
                                 textColor: Colors.black,
@@ -387,11 +389,12 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                             const SizedBox(width: 16),
                             if (state.course?.state ==
                                 CourseStateType.completed)
-                              const Expanded(
+                              Expanded(
                                 flex: 4,
                                 child: AppButton(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  text: '정복완료',
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  text: '정복완료'.tr(),
                                 ),
                               ),
                             if (state.course?.state ==
@@ -401,7 +404,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                 child: AppButton(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
-                                  text: '정복완료',
+                                  text: '정복완료'.tr(),
                                   onPressed: _requestStamp,
                                 ),
                               ),
@@ -412,7 +415,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                 child: AppButton(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
-                                  text: '••• 정복중',
+                                  text: '정복중'.tr(),
                                   onPressed: _cancelCourse,
                                 ),
                               ),
@@ -422,7 +425,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                 child: AppButton(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
-                                  text: '코스 시작하기',
+                                  text: '코스 시작하기'.tr(),
                                   onPressed: _startCourse,
                                 ),
                               ),

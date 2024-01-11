@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
@@ -42,7 +43,7 @@ class _AccountScreenState extends State<AccountScreen> {
     final ret = await context.router.pushNamed('/resetPw/update?userId=$id');
     if (ret == null || ret == false) return;
 
-    context.showToast(message: '비밀번호가 변경되었습니다. 다시 로그인 해주세요').then((value) {
+    context.showToast(message: '비밀번호가 변경되었습니다 다시 로그인 해주세요'.tr()).then((value) {
       final bloc = _scaffoldKey.currentContext?.read<AccountBloc>();
       if (bloc == null) return;
 
@@ -62,8 +63,8 @@ class _AccountScreenState extends State<AccountScreen> {
 
   _onLogoutPressed() async {
     final ret = await context.showConfirm(
-      title: '로그아웃',
-      message: '로그아웃 하시겠습니까?\n메인화면으로 이동합니다.',
+      title: '로그아웃'.tr(),
+      message: '로그아웃 하시겠습니까 메인화면으로 이동합니다'.tr(),
     );
     if (ret != true) return;
 
@@ -90,7 +91,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return BaseSideEffectBlocLayout<AccountBloc, AccountBloc, AccountState>(
       scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(
-        text: '계정',
+        text: '계정'.tr(),
       ),
       create: (_) => AccountBloc()..add(const AccountEvent.initial()),
       effectChanged: (context, effect) {
@@ -104,14 +105,14 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppTitleText(text: '계정정보'),
+                  AppTitleText(text: '계정정보'.tr()),
                   const SizedBox(height: 6),
                   AcountItemView(
-                    label: '이메일',
+                    label: '이메일'.tr(),
                     value: state.user?.email ?? '',
                   ),
                   AcountItemView(
-                    label: '비밀번호',
+                    label: '비밀번호'.tr(),
                     value: List.generate(8, (index) => '*').join(''),
                     showDivider: false,
                     onTap: state.user != null
@@ -130,29 +131,29 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppTitleText(text: '상세정보'),
+                  AppTitleText(text: '상세정보'.tr()),
                   const SizedBox(height: 6),
                   AcountItemView(
-                    label: '이름',
+                    label: '이름'.tr(),
                     value: state.user?.name ?? '',
                   ),
-                  const AcountItemView(
-                    label: '생년월일',
+                  AcountItemView(
+                    label: '생년월일'.tr(),
                     value: '',
                   ),
                   AcountItemView(
-                    label: '성별',
+                    label: '성별'.tr(),
                     value: state.user?.genderType.title ?? '',
                   ),
                   AcountItemView(
-                    label: '휴대폰번호',
+                    label: '휴대폰번호'.tr(),
                     value: state.user?.phone ?? '',
                     showDivider: state.user?.type != UserType.other,
                     onTap: () {},
                   ),
                   if (state.user?.type == UserType.student)
                     AcountItemView(
-                      label: '학교',
+                      label: '학교'.tr(),
                       value: state.user?.schoolInfo ?? '',
                       showDivider: false,
                       onTap: _onSchoolChangePressed,
@@ -177,12 +178,12 @@ class _AccountScreenState extends State<AccountScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '인천사이버진로교육원 연동',
+                                '인천사이버진로교육원 연동'.tr(),
                                 style: context.textTheme.bodyMedium,
                               ),
                               Text(
                                 state.user?.jinroAccountEmail ??
-                                    '연결된 계정이 없습니다.',
+                                    '연결된 계정이 없습니다'.tr(),
                                 style: context.textTheme.bodyMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -200,7 +201,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             borderRadius: 6,
                             borderColor: AppColor.primary,
                             backgroundColor: AppColor.primary,
-                            text: '연동하기',
+                            text: '연동하기'.tr(),
                             textColor: Colors.white,
                           ),
                       ],
@@ -217,12 +218,12 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppTitleText(text: '계정관리'),
+                  AppTitleText(text: '계정관리'.tr()),
                   AppButton(
                     width: 200,
                     padding: EdgeInsets.zero,
                     margin: const EdgeInsets.symmetric(vertical: 12),
-                    text: '로그아웃',
+                    text: '로그아웃'.tr(),
                     textStyle: context.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -234,7 +235,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     width: 200,
                     padding: EdgeInsets.zero,
                     margin: const EdgeInsets.symmetric(vertical: 12),
-                    text: '회원탈퇴',
+                    text: '회원탈퇴'.tr(),
                     textStyle: context.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w300,
                     ),

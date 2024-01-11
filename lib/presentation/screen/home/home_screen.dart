@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         labelColor: Colors.black,
                         labelStyle: context.textTheme.bodyMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
-                        tabs: ['주제별 코스', '권역별 코스', '추천 코스']
+                        tabs: ['주제별 코스'.tr(), '권역별 코스'.tr(), '추천 코스'.tr()]
                             .map(
                               (e) => Padding(
                                 padding:

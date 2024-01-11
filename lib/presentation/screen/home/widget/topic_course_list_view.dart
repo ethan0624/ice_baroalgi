@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -41,7 +42,7 @@ class TopicCourseListView extends StatelessWidget {
                 children: [
                   const AppCheckbox(),
                   Text(
-                    '완료코스 숨김',
+                    '완료코스 숨김'.tr(),
                     style: context.textTheme.labelMedium?.copyWith(
                         color: Colors.black, fontWeight: FontWeight.w600),
                   ),

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
@@ -53,7 +54,7 @@ class _InprogressExpantionState extends State<InprogressExpantion> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '정복중인 코드',
+                    '정복중인 코스'.tr(),
                     style: context.textTheme.bodyLarge?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -129,7 +130,7 @@ class _InprogressExpantionState extends State<InprogressExpantion> {
                         spacing: 4,
                         children: [
                           Text(
-                            '더보기',
+                            '더보기'.tr(),
                             style: context.textTheme.labelMedium
                                 ?.copyWith(color: AppTextColor.medium),
                           ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -18,23 +19,23 @@ class _InquiryFormState extends State<InquiryForm> {
       padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
       children: [
         Text(
-          '문의제목',
+          '문의제목'.tr(),
           style: context.textTheme.bodyMedium
               ?.copyWith(fontWeight: FontWeight.w500),
         ),
-        const AppTextFormField(
-          hintText: '문의제목을 입력하세요. (80자 이내)',
+        AppTextFormField(
+          hintText: '문의제목을 입력하세요 80자 이내'.tr(),
           maxLength: 80,
           keyboardType: TextInputType.text,
         ),
         const SizedBox(height: 12),
         Text(
-          '문의내용',
+          '문의내용'.tr(),
           style: context.textTheme.bodyMedium
               ?.copyWith(fontWeight: FontWeight.w500),
         ),
-        const AppTextFormField(
-          hintText: '문의내용을 입력하세요. (2,000자 이내)',
+        AppTextFormField(
+          hintText: '문의내용을 입력하세요  2,000자 이내'.tr(),
           maxLength: 2000,
           maxLines: 10,
           minLines: 5,
@@ -46,12 +47,12 @@ class _InquiryFormState extends State<InquiryForm> {
           crossAxisAlignment: WrapCrossAlignment.end,
           children: [
             Text(
-              '파일첨부(선택)',
+              '파일첨부 선택'.tr(),
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
             Text(
-              '최대 5개, 30MB까지 등록가능',
+              '최대 5개, 30MB까지 등록가능'.tr(),
               style: context.textTheme.labelLarge
                   ?.copyWith(color: AppTextColor.medium),
             ),
@@ -109,7 +110,7 @@ class _InquiryFormState extends State<InquiryForm> {
         ),
         AppButton(
           margin: const EdgeInsets.symmetric(vertical: defaultMarginValue),
-          text: '문의남기기',
+          text: '문의남기기'.tr(),
           onPressed: () {},
         ),
       ],

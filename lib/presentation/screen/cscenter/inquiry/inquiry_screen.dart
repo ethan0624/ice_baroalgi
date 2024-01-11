@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -20,7 +21,7 @@ class _InquiryScreenState extends State<InquiryScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<InquiryBloc, InquiryBloc, InquiryState>(
-      appBar: AppSubAppBar(text: '1:1문의'),
+      appBar: AppSubAppBar(text: '1:1문의'.tr()),
       create: (_) => InquiryBloc(),
       builder: (context, bloc, state) {
         return DefaultTabController(
@@ -41,9 +42,9 @@ class _InquiryScreenState extends State<InquiryScreen> {
                 unselectedLabelColor: AppTextColor.medium,
                 unselectedLabelStyle: context.textTheme.bodyMedium,
                 dividerHeight: 0,
-                tabs: const [
-                  Tab(text: '문의하기'),
-                  Tab(text: '문의내역'),
+                tabs: [
+                  Tab(text: '문의하기'.tr()),
+                  Tab(text: '문의내역'.tr()),
                 ],
               ),
               const Expanded(
