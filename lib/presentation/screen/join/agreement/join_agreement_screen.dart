@@ -23,8 +23,38 @@ class JoinAgreementScreen extends StatefulWidget {
 
 class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
   List<TermsAgreementType> _agreements = [];
+  final _checkedAgreementMap = <TermsAgreementType, bool>{};
+
+  bool get _isAllAgreed {
+    return _agreements
+        .every((agreement) => _checkedAgreementMap[agreement] == true);
+  }
+
+  bool get _isRequiredAgreed => _agreements
+      .where((a) => a.isRequired)
+      .every((a) => _checkedAgreementMap[a] == true);
+
+  _onAllAgreements() {
+    setState(() {
+      for (final agreement in _agreements) {
+        _checkedAgreementMap[agreement] = true;
+      }
+    });
+  }
+
+  _onToggleTermsAgreement(TermsAgreementType agreement) {
+    setState(() {
+      _checkedAgreementMap[agreement] =
+          !(_checkedAgreementMap[agreement] ?? false);
+    });
+  }
 
   _onNextPressed() {
+    if (!_isRequiredAgreed) {
+      context.showAlert(title: '약관에 동의해주세요');
+      return;
+    }
+
     if (widget.joinData.isFourteenOver) {
       context.router.push(JoinCertificationRoute(joinData: widget.joinData));
     } else {
@@ -62,34 +92,42 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
             ),
             const SizedBox(height: 50),
             CheckBoxText(
+              isChecked: _isAllAgreed,
               title: '전체선택'.tr(),
               titleStyle: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.bold),
+              onChanged: (checked) => _onAllAgreements(),
             ),
             const Divider(),
             ..._agreements.map(
-              (e) => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const AppCheckbox(),
-                  Expanded(
-                    child: Text(
-                      '${e.title} (${e.isRequired ? '필수'.tr() : '선택'.tr()})',
-                      style: context.textTheme.bodyMedium,
+              (e) => InkWell(
+                onTap: () => _onToggleTermsAgreement(e),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppCheckbox(
+                      isChecked: _checkedAgreementMap[e] == true,
                     ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                  ),
-                ],
+                    Expanded(
+                      child: Text(
+                        '${e.title} (${e.isRequired ? '필수'.tr() : '선택'.tr()})',
+                        style: context.textTheme.bodyMedium,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 18,
+                    ),
+                  ],
+                ),
               ),
             ),
             const Spacer(),
             AppButton(
               text: '동의하고 진행하기'.tr(),
               textBold: true,
-              onPressed: _onNextPressed,
+              background: _isRequiredAgreed ? AppColor.primary : Colors.grey,
+              onPressed: _isRequiredAgreed ? _onNextPressed : null,
             ),
           ],
         ),
