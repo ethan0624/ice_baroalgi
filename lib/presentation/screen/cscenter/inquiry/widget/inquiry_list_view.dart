@@ -1,11 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/domain/model/qna.dart';
 import 'package:incheon_knowhow/presentation/widget/accordian_list_view.dart';
 
 class InquiryListView extends StatefulWidget {
-  const InquiryListView({super.key});
+  final List<Qna> items;
+  const InquiryListView({super.key, this.items = const []});
 
   @override
   State<InquiryListView> createState() => _InquiryListViewState();
@@ -15,17 +16,18 @@ class _InquiryListViewState extends State<InquiryListView> {
   @override
   Widget build(BuildContext context) {
     return AccordianListView(
-      itemCount: 20,
+      itemCount: widget.items.length,
       titleBuilder: (context, index) {
+        final qna = widget.items[index];
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '문의 제목이 작성됩니다.',
+              qna.qustionTitle,
               style: context.textTheme.bodyMedium,
             ),
             Text(
-              '2023.12.04',
+              qna.createdAt,
               style: context.textTheme.labelMedium?.copyWith(
                 color: AppTextColor.medium,
               ),
@@ -34,11 +36,12 @@ class _InquiryListViewState extends State<InquiryListView> {
         );
       },
       contentBuilder: (context, index) {
+        final qna = widget.items[index];
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '문의내용이 작성됩니다.',
+              qna.questionContent,
               style: context.textTheme.bodyMedium,
             ),
             Container(
@@ -46,10 +49,11 @@ class _InquiryListViewState extends State<InquiryListView> {
               margin: const EdgeInsets.symmetric(vertical: 12),
               color: AppColor.dividerDark,
             ),
-            Text(
-              '답변내용이 작성됩니다.',
-              style: context.textTheme.bodyMedium,
-            ),
+            if (qna.isAnswer)
+              Text(
+                qna.answerContent ?? '',
+                style: context.textTheme.bodyMedium,
+              ),
           ],
         );
       },

@@ -8,7 +8,6 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/app.dart';
 import 'package:incheon_knowhow/config/app_config.dart';
 import 'package:incheon_knowhow/config/app_info.dart';
-import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/data/my_http_override.dart';
 
@@ -18,10 +17,8 @@ void main() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     await EasyLocalization.ensureInitialized();
 
-    if (!isRelease) {
-      // ignore HandshakeException
-      HttpOverrides.global = MyHttpOverride();
-    }
+    // ignore HandshakeException
+    HttpOverrides.global = MyHttpOverride();
 
     await NaverMapSdk.instance.initialize(
       clientId: AppConfig.naverMapClientId,

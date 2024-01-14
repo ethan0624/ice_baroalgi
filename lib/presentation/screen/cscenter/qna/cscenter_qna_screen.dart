@@ -60,7 +60,7 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
                         final category = state.categories[index];
                         return FilterButton(
                           text: category.name,
-                          isSelected: index == state.selectedCategoryId,
+                          isSelected: category.id == state.selectedCategoryId,
                           onPressed: () => _onCategoryChanged(category.id),
                         );
                       },

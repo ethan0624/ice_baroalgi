@@ -22,7 +22,7 @@ class _InquiryScreenState extends State<InquiryScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<InquiryBloc, InquiryBloc, InquiryState>(
       appBar: AppSubAppBar(text: '1:1문의'.tr()),
-      create: (_) => InquiryBloc(),
+      create: (_) => InquiryBloc()..add(const InquiryEvent.initial()),
       builder: (context, bloc, state) {
         return DefaultTabController(
           length: 2,
@@ -34,7 +34,6 @@ class _InquiryScreenState extends State<InquiryScreen> {
                 // indicator: const BoxDecoration(
                 //   color: Color(0xffffedf3),
                 // ),
-
                 labelColor: AppColor.primary,
                 labelStyle: context.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
@@ -47,11 +46,13 @@ class _InquiryScreenState extends State<InquiryScreen> {
                   Tab(text: '문의내역'.tr()),
                 ],
               ),
-              const Expanded(
+              Expanded(
                 child: TabBarView(
                   children: [
-                    InquiryForm(),
-                    InquiryListView(),
+                    const InquiryForm(),
+                    InquiryListView(
+                      items: state.qnaItems,
+                    ),
                   ],
                 ),
               ),
