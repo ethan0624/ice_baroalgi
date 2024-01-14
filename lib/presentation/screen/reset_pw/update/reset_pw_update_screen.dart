@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -51,17 +52,18 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
 
   _onUpdatePressed() {
     if (_passwordTextController.text.isEmpty) {
-      context.showAlert(title: '입력오류', message: '비밀번호를 입력해주세요');
+      context.showAlert(title: '입력오류'.tr(), message: '비밀번호를 입력해주세요'.tr());
       return;
     }
 
     if (_confirmPasswordTextController.text.isEmpty) {
-      context.showAlert(title: '입력오류', message: '비밀번호 확인을 입력해주세요');
+      context.showAlert(title: '입력오류'.tr(), message: '비밀번호 확인을 입력해주세요'.tr());
       return;
     }
 
     if (_confirmPasswordTextController.text != _passwordTextController.text) {
-      context.showAlert(title: '입력오류', message: '비밀번호와 비밀번호 확인이 일치하지 않습니다');
+      context.showAlert(
+          title: '입력오류'.tr(), message: '비밀번호와 비밀번호 확인이 일치하지 않습니다'.tr());
       return;
     }
 
@@ -91,7 +93,7 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
     return BaseSideEffectBlocLayout<ResetPwUpdateBloc, ResetPwUpdateBloc,
         ResetPwUpdateState>(
       scaffoldKey: _scaffoldKey,
-      appBar: AppSubAppBar(text: '비밀번호 재설정'),
+      appBar: AppSubAppBar(text: '비밀번호 재설정'.tr()),
       create: (_) => ResetPwUpdateBloc(userId: widget.userId ?? 0),
       effectChanged: (context, effect) {
         if (effect is SuccessEffect) {
@@ -102,12 +104,12 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
         return ListView(
           padding: const EdgeInsets.all(defaultMarginValue),
           children: [
-            const AppTitleText(
-              text: '새로운 비밀번호를 입력해주세요',
+            AppTitleText(
+              text: '새로운 비밀번호를 입력해주세요'.tr(),
             ),
             const SizedBox(height: 50),
             Text(
-              '비밀번호',
+              '비밀번호'.tr(),
               style: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w500),
             ),
@@ -118,7 +120,7 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
               },
             ),
             PasswordFormField(
-              hint: '비밀번호 확인',
+              hint: '비밀번호 확인'.tr(),
               margin: const EdgeInsets.symmetric(vertical: 8),
               onCreated: (controller) {
                 _confirmPasswordTextController = controller;
@@ -135,12 +137,12 @@ class _ResetPwUpdateScreenState extends State<ResetPwUpdateScreen> {
                   colorFilter:
                       const ColorFilter.mode(Colors.red, BlendMode.srcIn),
                 ),
-                label: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+                label: '비밀번호와 비밀번호 확인이 일치하지 않습니다'.tr(),
               ),
             ),
             const SizedBox(height: defaultMarginValue),
             AppButton(
-              text: '비밀번호 변경완료',
+              text: '비밀번호 변경완료'.tr(),
               onPressed: _onUpdatePressed,
             ),
           ],

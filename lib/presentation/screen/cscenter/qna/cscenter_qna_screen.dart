@@ -10,6 +10,7 @@ import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_title_text.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class CscenterQnaScreen extends StatefulWidget {
@@ -21,6 +22,13 @@ class CscenterQnaScreen extends StatefulWidget {
 
 class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  _onCategoryChanged(int categoryId) {
+    final bloc = _scaffoldKey.currentContext?.read<CscenterQnaBloc>();
+    if (bloc == null) return;
+
+    bloc.add(CscenterQnaEvent.changeCategory(categoryId));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +55,13 @@ class _CscenterQnaScreenState extends State<CscenterQnaScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: defaultMarginValue),
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10,
+                      itemCount: state.categories.length,
                       itemBuilder: (context, index) {
+                        final category = state.categories[index];
                         return FilterButton(
-                          text: '카테고리 $index',
-                          isSelected: index == 0,
+                          text: category.name,
+                          isSelected: index == state.selectedCategoryId,
+                          onPressed: () => _onCategoryChanged(category.id),
                         );
                       },
                       separatorBuilder: (context, index) {

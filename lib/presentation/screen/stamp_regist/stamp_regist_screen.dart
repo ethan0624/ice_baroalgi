@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
@@ -31,7 +32,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
         StampRegistState>(
       scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(
-        text: '정복 스탬프 발행하기',
+        text: '정복 스탬프 발행하기'.tr(),
         centerTitle: false,
       ),
       create: (context) => StampRegistBloc(),

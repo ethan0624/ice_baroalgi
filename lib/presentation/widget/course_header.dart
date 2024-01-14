@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -41,10 +42,13 @@ class CourseHeader extends StatelessWidget {
               ),
               Label(
                 text: (course.hour > 0 && course.min > 0)
-                    ? '${course.hour}시간 ${course.min}분 소요'
+                    ? '시간 분 소요'.tr(namedArgs: {
+                        'hour': '${course.hour}',
+                        'min': '${course.min}'
+                      })
                     : (course.hour > 0)
-                        ? '${course.hour}시간 소요'
-                        : '${course.min}분 소요',
+                        ? '시간 소요'.tr(namedArgs: {'hour': '${course.hour}'})
+                        : '분 소요'.tr(namedArgs: {'min': '${course.min}'}),
                 borderColor: AppColor.lineBlue,
               )
             ],

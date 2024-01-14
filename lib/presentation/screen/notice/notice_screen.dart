@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -20,14 +21,14 @@ class _NoticeScreenState extends State<NoticeScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<NoticeBloc, NoticeBloc, NoticeState>(
       create: (_) => NoticeBloc()..add(const NoticeEvent.initial()),
-      appBar: AppSubAppBar(text: '공지사항'),
+      appBar: AppSubAppBar(text: '공지사항'.tr()),
       builder: (context, bloc, state) {
         if (state.isLoading) {
           return const SizedBox();
         } else if (state.notices.isEmpty) {
           return Center(
               child: Text(
-            '등록된 공지사항이 없습니다',
+            '등록된 공지사항이 없습니다'.tr(),
             style: context.textTheme.bodyMedium,
           ));
         }

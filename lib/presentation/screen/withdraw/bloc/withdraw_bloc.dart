@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/withdraw.dart';
@@ -18,8 +19,8 @@ class WithdrawBloc extends BaseSideEffectBloc<WithdrawEvent, WithdrawState> {
 
       if (res.isSuccess()) {
         produceSideEffect(BlocEffect.showAlert(
-          title: '로그아웃',
-          message: '그동안 서비스를 이용해주셔서 감사합니다.\n보다 나은 서비스로 다시 찾아뵙겠습니다.',
+          title: '로그아웃'.tr(),
+          message: '그동안 서비스를 이용해주셔서 감사합니다 보다 나은 서비스로 다시 찾아뵙겠습니다'.tr(),
         ));
       }
     });

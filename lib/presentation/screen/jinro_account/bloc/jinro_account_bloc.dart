@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
@@ -36,7 +37,7 @@ class JinroAccountBloc
 
       if (res.isError()) {
         produceSideEffect(BlocEffect.showAlert(
-            title: '연동실패', message: '일치하는 회원정보를 찾을 수 없습니다'));
+            title: '연동실패'.tr(), message: '일치하는 회원정보를 찾을 수 없습니다'.tr()));
       }
     });
   }

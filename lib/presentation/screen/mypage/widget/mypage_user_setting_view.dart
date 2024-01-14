@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_info.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -28,9 +29,9 @@ class MypageUserSettingView extends StatelessWidget {
         const SectionDivider(
           margin: EdgeInsets.symmetric(vertical: defaultMarginValue),
         ),
-        const MypageSettingSectionTitle(title: '사용자설정'),
+        MypageSettingSectionTitle(title: '사용자설정'.tr()),
         MypageSettingListItem(
-          title: '계정',
+          title: '계정'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
@@ -38,7 +39,7 @@ class MypageUserSettingView extends StatelessWidget {
           onPressed: () => context.router.pushNamed('/account'),
         ),
         MypageSettingListItem(
-          title: '언어',
+          title: '언어'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
@@ -48,9 +49,9 @@ class MypageUserSettingView extends StatelessWidget {
         const SectionDivider(
           margin: EdgeInsets.symmetric(vertical: 26),
         ),
-        const MypageSettingSectionTitle(title: '알림설정'),
-        const MypageSettingListItem(
-          title: '푸시알림',
+        MypageSettingSectionTitle(title: '알림설정'.tr()),
+        MypageSettingListItem(
+          title: '푸시알림'.tr(),
         ),
         Container(
           color: AppColor.background,
@@ -58,13 +59,14 @@ class MypageUserSettingView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
               horizontal: defaultMarginValue, vertical: 12),
           child: Text(
-            '알림 받기 활성화 시 마케팅 수신 동의로 간주됩니다.\n\n정보성 푸시 알림은 위 설정 여부와 무관하게 받을 수 있습니다.\n기기의 알림 설정은 휴대폰 설정에서 변경할 수 있습니다.',
+            '알림 받기 활성화 시 마케팅 수신 동의로 간주됩니다 정보성 푸시 알림은 위 설정 여부와 무관하게 받을 수 있습니다 기기의 알림 설정은 휴대폰 설정에서 변경할 수 있습니다'
+                .tr(),
             style: context.textTheme.labelMedium,
           ),
         ),
-        const MypageSettingSectionTitle(title: '고객지원'),
+        MypageSettingSectionTitle(title: '고객지원'.tr()),
         MypageSettingListItem(
-          title: '앱 버전정보',
+          title: '앱 버전정보'.tr(),
           tail: Text(
             AppInfo().appVersion,
             style: context.textTheme.bodyMedium?.copyWith(
@@ -73,7 +75,7 @@ class MypageUserSettingView extends StatelessWidget {
           ),
         ),
         MypageSettingListItem(
-          title: '공지사항',
+          title: '공지사항'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
@@ -81,7 +83,7 @@ class MypageUserSettingView extends StatelessWidget {
           onPressed: () => context.router.pushNamed('/notice'),
         ),
         MypageSettingListItem(
-          title: '고객센터',
+          title: '고객센터'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
@@ -89,7 +91,7 @@ class MypageUserSettingView extends StatelessWidget {
           onPressed: () => context.router.pushNamed('/cscenter/qna'),
         ),
         MypageSettingListItem(
-          title: '사업자정보',
+          title: '사업자정보'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
@@ -101,7 +103,7 @@ class MypageUserSettingView extends StatelessWidget {
         ),
         const MypageSettingSectionTitle(title: '서비스약관'),
         MypageSettingListItem(
-          title: '이용약관',
+          title: '이용약관'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,
@@ -111,7 +113,7 @@ class MypageUserSettingView extends StatelessWidget {
           },
         ),
         MypageSettingListItem(
-          title: '개인정보처리방침',
+          title: '개인정보처리방침'.tr(),
           tail: const Icon(
             Icons.arrow_forward_ios,
             size: 20,

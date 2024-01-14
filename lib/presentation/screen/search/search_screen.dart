@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -21,11 +22,11 @@ extension SearchResultTypeExtension on SearchResultType {
   String get title {
     switch (this) {
       case SearchResultType.all:
-        return '전체';
+        return '전체'.tr();
       case SearchResultType.course:
-        return '코스';
+        return '코스'.tr();
       case SearchResultType.spot:
-        return '스팟';
+        return '스팟'.tr();
     }
   }
 }
@@ -115,7 +116,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             AppTextFormField(
               controller: _keywordController,
-              hintText: '코스명, 스팟명을 검색하세요.',
+              hintText: '코스명 스팟명을 검색하세요'.tr(),
               textInputAction: TextInputAction.search,
             ),
             Positioned(

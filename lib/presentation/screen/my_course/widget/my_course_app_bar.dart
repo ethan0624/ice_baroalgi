@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 
@@ -9,7 +10,7 @@ class MyCourseAppBar extends AppBar {
   }) : super(
           leading: Center(
             child: Text(
-              '나의코스',
+              '나의코스'.tr(),
               style: AppTheme.defaultTextTheme.bodyLarge?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,

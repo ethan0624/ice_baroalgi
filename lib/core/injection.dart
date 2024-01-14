@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_jinro_account.dart';
+import 'package:incheon_knowhow/domain/usecase/category/find_qna_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/spot/set_spot_flag.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -157,6 +158,9 @@ class Injection {
     );
     getIt.registerLazySingleton<FindRecommendCategoreis>(
       () => FindRecommendCategoreis(repository: getIt()),
+    );
+    getIt.registerLazySingleton<FindQnaCategoreis>(
+      () => FindQnaCategoreis(repository: getIt()),
     );
     getIt.registerLazySingleton<FindTopicWithCourse>(
       () => FindTopicWithCourse(repository: getIt()),

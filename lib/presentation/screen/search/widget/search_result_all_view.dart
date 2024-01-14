@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -26,7 +27,7 @@ class SearchResultAllView extends StatelessWidget {
         ? Container(
             margin: const EdgeInsets.symmetric(vertical: 50),
             child: Text(
-              '검색결과가 없습니다.',
+              '검색결과가 없습니다'.tr(),
               style: context.textTheme.bodyMedium,
             ),
           )
@@ -45,7 +46,7 @@ class SearchResultAllView extends StatelessWidget {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           Text(
-                            '더보기',
+                            '더보기'.tr(),
                             style: context.textTheme.bodyMedium,
                           ),
                           const Icon(
@@ -67,9 +68,9 @@ class SearchResultAllView extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(vertical: 24),
                         color: AppColor.dividerLight,
                       ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: AppTitleText(text: '스팟'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: AppTitleText(text: '스팟'.tr()),
                     ),
                     const SizedBox(height: 12),
                     ...spots.take(3).map((e) => SpotListItem(
@@ -85,7 +86,7 @@ class SearchResultAllView extends StatelessWidget {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Text(
-                                  '더보기',
+                                  '더보기'.tr(),
                                   style: context.textTheme.bodyMedium,
                                 ),
                                 const Icon(

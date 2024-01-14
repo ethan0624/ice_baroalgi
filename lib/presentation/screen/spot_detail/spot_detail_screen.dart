@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -89,7 +90,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                   ),
                                   onPressed: () {},
                                   child: Text(
-                                    '번역보기',
+                                    '번역보기'.tr(),
                                     style: context.textTheme.labelLarge,
                                   ),
                                 ),
@@ -109,7 +110,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const AppTitleText(text: '기본정보'),
+                              AppTitleText(text: '기본정보'.tr()),
                               Container(
                                 margin:
                                     const EdgeInsets.symmetric(vertical: 12),
@@ -162,24 +163,24 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                                 child: Column(
                                   children: [
                                     InfoItemView(
-                                      label: '주소',
+                                      label: '주소'.tr(),
                                       value: state.spot?.address ?? '',
                                     ),
                                     const SizedBox(height: 12),
                                     InfoItemView(
-                                      label: '전화번호',
+                                      label: '전화번호'.tr(),
                                       value: state.spot?.tel ?? '',
                                     ),
                                     const SizedBox(height: 12),
                                     InfoItemView(
-                                      label: '운영시간',
+                                      label: '운영시간'.tr(),
                                       value: state.spot?.openTime
                                               ?.replaceAll('/n', '\n') ??
                                           '',
                                     ),
                                     const SizedBox(height: 12),
                                     InfoItemView(
-                                      label: '휴무일',
+                                      label: '휴무일'.tr(),
                                       value: state.spot?.dayOff
                                               ?.replaceAll('/n', '\n') ??
                                           '',
@@ -204,7 +205,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const AppTitleText(text: '포함하는 코스'),
+                                AppTitleText(text: '포함하는 코스'.tr()),
                                 const SizedBox(height: 6),
                                 ...state.includeCourse
                                     .map((e) => CourseListItem(
@@ -235,7 +236,7 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> {
                         ],
                       ),
                       child: AppButton(
-                        text: '깃발 등록하기',
+                        text: '깃발 등록하기'.tr(),
                         textBold: true,
                         padding: const EdgeInsets.all(10),
                         onPressed: () {},

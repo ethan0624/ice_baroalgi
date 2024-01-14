@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -48,28 +49,28 @@ class _JoinCertificationScreenState extends State<JoinCertificationScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      appBar: AppSubAppBar(text: '회원가입'),
+      appBar: AppSubAppBar(text: '회원가입'.tr()),
       child: ListView(
         padding: const EdgeInsets.all(defaultMarginValue),
         children: [
           Text(
-            '본인인증을 진행해주세요.',
+            '본인인증을 진행해주세요'.tr(),
             style: context.textTheme.titleSmall,
           ),
           const SizedBox(height: 4),
           Text(
-            '본인 휴대폰이 없는 경우\n보호자 휴대폰으로 인증하세요.',
+            '본인 휴대폰이 없는 경우 보호자 휴대폰으로 인증하세요'.tr(),
             style: context.textTheme.bodySmall,
           ),
           const SizedBox(height: defaultMarginValue),
           VerificationButton(
-            label: '휴대폰 인증하기',
+            label: '휴대폰 인증하기'.tr(),
             iconPath: 'assets/images/img_phone_on.png',
             onPressed: _onCertificationPressed,
           ),
           const SizedBox(height: 12),
           VerificationButton(
-            label: '보호자 휴대폰 인증하기',
+            label: '보호자 휴대폰 인증하기'.tr(),
             iconPath: 'assets/images/img_person_on.png',
             onPressed: _onParentCertificationPressed,
           ),

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/util/number_formatter.dart';
@@ -28,17 +29,17 @@ class _UpdateSchoolScreenState extends State<UpdateSchoolScreen> {
 
   _onSavePressed() {
     if (_schoolNameTextController.text.isEmpty) {
-      context.showAlert(title: '학교명 입력', message: '학교명을 입력해주세요');
+      context.showAlert(title: '학교명 입력'.tr(), message: '학교명을 입력해주세요'.tr());
       return;
     }
 
     if (_schoolGradeTextController.text.isEmpty) {
-      context.showAlert(title: '학년 입력', message: '학년을 입력해주세요');
+      context.showAlert(title: '학년 입력'.tr(), message: '학년을 입력해주세요'.tr());
       return;
     }
 
     if (_schoolClassTextController.text.isEmpty) {
-      context.showAlert(title: '반 입력', message: '반을 입력해주세요');
+      context.showAlert(title: '반 입력'.tr(), message: '반을 입력해주세요'.tr());
       return;
     }
 
@@ -62,7 +63,7 @@ class _UpdateSchoolScreenState extends State<UpdateSchoolScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<UpdateSchoolBloc, UpdateSchoolBloc,
         UpdateSchoolState>(
-      appBar: AppSubAppBar(text: '학교정보수정'),
+      appBar: AppSubAppBar(text: '학교정보수정'.tr()),
       scaffoldKey: _scaffoldKey,
       create: (context) => UpdateSchoolBloc(),
       effectChanged: (context, effect) {
@@ -78,10 +79,10 @@ class _UpdateSchoolScreenState extends State<UpdateSchoolScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 26, vertical: 26),
                 children: [
-                  const AppTitleText(text: '학교정보를 입력해 주세요.'),
+                  AppTitleText(text: '학교정보를 입력해 주세요'.tr()),
                   const SizedBox(height: 50),
                   Text(
-                    '학교',
+                    '학교'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
@@ -93,7 +94,7 @@ class _UpdateSchoolScreenState extends State<UpdateSchoolScreen> {
                       Expanded(
                         child: AppTextFormField(
                           controller: _schoolGradeTextController,
-                          hintText: '학년 입력',
+                          hintText: '학년 입력'.tr(),
                           margin: EdgeInsets.zero,
                           keyboardType: TextInputType.number,
                           inputFormatters: [NumberFormatter()],
@@ -103,7 +104,7 @@ class _UpdateSchoolScreenState extends State<UpdateSchoolScreen> {
                       Expanded(
                         child: AppTextFormField(
                           controller: _schoolClassTextController,
-                          hintText: '반 입력',
+                          hintText: '반 입력'.tr(),
                           margin: EdgeInsets.zero,
                           keyboardType: TextInputType.number,
                           inputFormatters: [NumberFormatter()],
@@ -119,7 +120,7 @@ class _UpdateSchoolScreenState extends State<UpdateSchoolScreen> {
               left: 26,
               right: 26,
               child: AppButton(
-                text: '수정',
+                text: '수정'.tr(),
                 onPressed: _onSavePressed,
               ),
             ),

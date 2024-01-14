@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -26,7 +27,7 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
         NotificationDetailBloc, NotificationDetailState>(
       create: (_) => NotificationDetailBloc(push: widget.push)
         ..add(const NotificationDetailEvent.initial()),
-      appBar: AppSubAppBar(text: '알림'),
+      appBar: AppSubAppBar(text: '알림'.tr()),
       builder: (context, bloc, state) {
         return ListView(
           padding: const EdgeInsets.symmetric(vertical: defaultMarginValue),
@@ -41,7 +42,7 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      '번역보기',
+                      '번역보기'.tr(),
                       style: context.textTheme.labelLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -57,14 +58,14 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '정복코스추가하기',
+                            '정복코스추가하기'.tr(),
                             style: context.textTheme.bodyMedium?.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            '새로운 코스를 찾아보세요.',
+                            '새로운 코스를 찾아보세요.'.tr(),
                             style: context.textTheme.bodySmall?.copyWith(
                               color: AppTextColor.medium,
                             ),
@@ -76,7 +77,7 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                 ),
               ),
             ),
-            const AppTitleText(text: '정복중인 코스'),
+            AppTitleText(text: '정복중인 코스'.tr()),
             const SizedBox(height: 6),
             if (state.inProgressCourse.isEmpty)
               Container(
@@ -84,7 +85,7 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    '진행중인 코스가 없습니다',
+                    '진행중인 코스가 없습니다'.tr(),
                     style: context.textTheme.bodyMedium,
                   ),
                 ),
@@ -96,7 +97,7 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
               ),
             ),
             const SizedBox(height: defaultMarginValue),
-            const AppTitleText(text: '완료코스'),
+            AppTitleText(text: '완료코스'.tr()),
             const SizedBox(height: 6),
             if (state.completedCourse.isEmpty)
               Container(
@@ -104,7 +105,7 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    '완료된 코스가 없습니다',
+                    '완료된 코스가 없습니다'.tr(),
                     style: context.textTheme.bodyMedium,
                   ),
                 ),

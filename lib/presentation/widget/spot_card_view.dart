@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -76,7 +77,7 @@ class SpotCardView extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 6),
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 14),
-                      text: '깃발등록하기',
+                      text: '깃발등록하기'.tr(),
                       textColor: Colors.white,
                       borderRadius: 30,
                       borderWidth: 0,

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,7 +27,7 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
 
   _onSearch() {
     if (_keywordTextController.text.isEmpty) {
-      context.showAlert(title: '검색어 입력', message: '학교명을 입력해주세요');
+      context.showAlert(title: '검색어 입력'.tr(), message: '학교명을 입력해주세요'.tr());
       return;
     }
 
@@ -47,7 +48,7 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
     return BaseSideEffectBlocLayout<SearchSchoolBloc, SearchSchoolBloc,
         SearchSchoolState>(
       scaffoldKey: _scaffoldKey,
-      appBar: AppSubAppBar(text: '학교검색', elevation: 0),
+      appBar: AppSubAppBar(text: '학교검색'.tr(), elevation: 0),
       backgroundColor: Colors.white,
       create: (_) => SearchSchoolBloc(),
       builder: (context, bloc, state) {
@@ -59,7 +60,8 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
                   horizontal: defaultMarginValue,
                   vertical: defaultMarginValue / 2),
               child: Text(
-                '학교 분류 또는 학교명 클릭 시 선택된 학교가 자동으로 입력됩니다.\n\n검색한 학교가 없을 경우 학생 회원으로 가입하실 수 없습니다.\n일반 회원으로 가입을 진행하시기 바랍니다.',
+                '학교 분류 또는 학교명 클릭 시 선택된 학교가 자동으로 입력됩니다 검색한 학교가 없을 경우 학생 회원으로 가입하실 수 없습니다 일반 회원으로 가입을 진행하시기 바랍니다.'
+                    .tr(),
                 style: context.textTheme.labelMedium,
               ),
             ),
@@ -68,7 +70,7 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
               margin: const EdgeInsets.symmetric(
                   horizontal: defaultMarginValue,
                   vertical: defaultMarginValue / 2),
-              hintText: '학교명을 검색하세요',
+              hintText: '학교명을 검색하세요'.tr(),
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.search,
               onSubmitted: () => _onSearch,
@@ -97,7 +99,7 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
                     child: Column(
                       children: [
                         Text(
-                          '검색결과가 없습니다.',
+                          '검색결과가 없습니다.'.tr(),
                           style: context.textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -111,17 +113,17 @@ class _SearchSchoolScreenState extends State<SearchSchoolScreen> {
                                 color: AppTextColor.light,
                               ),
                               children: [
-                                const TextSpan(
-                                    text:
-                                        '검색한 학교가 없을 경우 학생 회원으로 가입하실 수 없습니다.\n'),
                                 TextSpan(
-                                  text: '일반 회원',
+                                    text: '검색한 학교가 없을 경우 학생 회원으로 가입하실 수 없습니다'
+                                        .tr()),
+                                TextSpan(
+                                  text: '일반 회원'.tr(),
                                   style: context.textTheme.bodySmall?.copyWith(
                                     color: AppTextColor.dark,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                const TextSpan(text: '으로 가입을 진행하시기 바랍니다.'),
+                                TextSpan(text: '으로 가입을 진행하시기 바랍니다'.tr()),
                               ],
                             ),
                           ),

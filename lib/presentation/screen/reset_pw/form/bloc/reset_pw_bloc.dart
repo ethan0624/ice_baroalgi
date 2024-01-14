@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/model/certification_code.dart';
@@ -25,7 +26,7 @@ class ResetPwBloc extends BaseSideEffectBloc<ResetPwEvent, ResetPwState> {
 
       if (res.isError()) {
         produceSideEffect(BlocEffect.showAlert(
-            title: '회원정보 조회 실패', message: '일치하는 회원정보가 없습니다'));
+            title: '회원정보 조회 실패'.tr(), message: '일치하는 회원정보가 없습니다'.tr()));
         return;
       }
 

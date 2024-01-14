@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:highlight_text/highlight_text.dart';
@@ -72,7 +73,9 @@ class RelatedResultView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextHighlight(
-                    text: '$keyword을 포함한 검색어 결과 노출',
+                    text: '을 포함한 검색어 결과 노출'.tr(
+                      namedArgs: {'keyword': keyword},
+                    ),
                     words: {
                       keyword: HighlightedWord(
                         textStyle: context.textTheme.bodyMedium

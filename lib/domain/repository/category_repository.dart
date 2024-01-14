@@ -7,4 +7,6 @@ abstract class CategoryRepository {
   Future<Result<List<Category>, Exception>> findRegionCategories();
 
   Future<Result<List<Category>, Exception>> findRecommendCategories();
+
+  Future<Result<List<Category>, Exception>> findQnACategories();
 }

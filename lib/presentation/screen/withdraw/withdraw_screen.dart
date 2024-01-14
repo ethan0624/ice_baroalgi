@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +22,8 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
 
   _withdrawOnPressed() async {
     final ret = await context.showConfirm(
-      title: '회원탈퇴',
-      message: '탈퇴 시 모든 데이터가 삭제되며 복구가\n불가능합니다. 탈퇴 하시겠습니까?',
+      title: '회원탈퇴'.tr(),
+      message: '탈퇴 시 모든 데이터가 삭제되며 복구가 불가능합니다 탈퇴 하시겠습니까'.tr(),
       positiveButtonText: '탈퇴',
     );
     if (ret == null || !ret) return;
@@ -37,7 +38,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<WithdrawBloc, WithdrawBloc, WithdrawState>(
       scaffoldKey: _scaffoldKey,
-      appBar: AppSubAppBar(text: '회원탈퇴'),
+      appBar: AppSubAppBar(text: '회원탈퇴'.tr()),
       create: (context) => WithdrawBloc(),
       builder: (context, bloc, state) {
         return Stack(
@@ -49,7 +50,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               bottom: 85,
               child: SingleChildScrollView(
                 child: Text(
-                  '약관',
+                  '약관'.tr(),
                   style: context.textTheme.bodyMedium,
                 ),
               ),
@@ -79,7 +80,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                           const AppCheckbox(),
                           Expanded(
                             child: Text(
-                              '탈퇴 유의사항을 모두 숙지하였으며, 회원 탈퇴를 신청합니다.',
+                              '탈퇴 유의사항을 모두 숙지하였으며 회원 탈퇴를 신청합니다'.tr(),
                               style: context.textTheme.bodySmall
                                   ?.copyWith(fontWeight: FontWeight.w500),
                             ),
@@ -88,7 +89,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       ),
                     ),
                     AppButton(
-                      text: '회원탈퇴',
+                      text: '회원탈퇴'.tr(),
                       onPressed: _withdrawOnPressed,
                     ),
                   ],

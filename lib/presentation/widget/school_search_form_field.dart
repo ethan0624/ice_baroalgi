@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/domain/model/school.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
@@ -26,7 +27,7 @@ class _SchoolSearchFormFieldState extends State<SchoolSearchFormField> {
   Widget build(BuildContext context) {
     return AppTextFormField(
       controller: widget.controller,
-      hintText: '학교명 입력',
+      hintText: '학교명 입력'.tr(),
       readOnly: true,
       onTap: _onSearch,
     );

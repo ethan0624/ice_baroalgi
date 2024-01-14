@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
 
   _onDulicateEmailPressed() {
     if (!_isEmailVaild) {
-      context.showAlert(title: '입력오류', message: '이메일을 정확하게 입력해주세요');
+      context.showAlert(title: '입력오류'.tr(), message: '이메일을 정확하게 입력해주세요'.tr());
       return;
     }
 
@@ -87,17 +88,17 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
   _onJoinPressed() {
     if (widget.joinData.type == UserType.student) {
       if (_schoolNameTextController.text.isEmpty) {
-        context.showAlert(title: '입력오류', message: '학교명을 입력해주세요');
+        context.showAlert(title: '입력오류'.tr(), message: '학교명을 입력해주세요'.tr());
         return;
       }
 
       if (_schoolGradeTextController.text.isEmpty) {
-        context.showAlert(title: '입력오류', message: '학년을 입력해주세요');
+        context.showAlert(title: '입력오류'.tr(), message: '학년을 입력해주세요'.tr());
         return;
       }
 
       if (_schoolClassTextController.text.isEmpty) {
-        context.showAlert(title: '입력오류', message: '반을 입력해주세요');
+        context.showAlert(title: '입력오류'.tr(), message: '반을 입력해주세요'.tr());
         return;
       }
     }
@@ -134,7 +135,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
     return BaseSideEffectBlocLayout<JoinRegistBloc, JoinRegistBloc,
         JoinRegistState>(
       scaffoldKey: _scaffoldKey,
-      appBar: AppSubAppBar(text: '회원가입'),
+      appBar: AppSubAppBar(text: '회원가입'.tr()),
       create: (_) => JoinRegistBloc(joinData: widget.joinData),
       effectChanged: (context, effect) {
         if (effect is SuccessEffect) {
@@ -150,12 +151,12 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '서비스이용을 위해\n아래정보를 입력해주세요.',
+                  '서비스이용을 위해 아래정보를 입력해주세요'.tr(),
                   style: context.textTheme.titleSmall,
                 ),
                 const SizedBox(height: 50),
                 Text(
-                  '이메일(아이디)',
+                  '이메일(아이디)'.tr(),
                   style: context.textTheme.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
@@ -164,13 +165,13 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                     Expanded(
                       child: AppTextFormField(
                         controller: _emailTextController,
-                        hintText: '이메일 입력',
+                        hintText: '이메일 입력'.tr(),
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
                     const SizedBox(width: 8),
                     OutlineButton(
-                      text: '중복확인',
+                      text: '중복확인'.tr(),
                       backgroundColor: AppColor.secondaryBackground,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 12),
@@ -187,7 +188,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                       colorFilter:
                           const ColorFilter.mode(Colors.red, BlendMode.srcIn),
                     ),
-                    label: '이메일 형식이 잘못되었습니다.',
+                    label: '이메일 형식이 잘못되었습니다'.tr(),
                   ),
                 if (_isEmailVaild &&
                     state.isDuplicateRequest &&
@@ -200,11 +201,11 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                       colorFilter:
                           const ColorFilter.mode(Colors.red, BlendMode.srcIn),
                     ),
-                    label: '이미 가입된 이메일입니다.',
+                    label: '이미 가입된 이메일입니다'.tr(),
                   ),
                 const SizedBox(height: defaultMarginValue),
                 Text(
-                  '비밀번호',
+                  '비밀번호'.tr(),
                   style: context.textTheme.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
@@ -215,7 +216,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                   },
                 ),
                 PasswordFormField(
-                  hint: '비밀번호 확인',
+                  hint: '비밀번호 확인'.tr(),
                   margin: const EdgeInsets.symmetric(vertical: 4),
                   onCreated: (controller) {
                     _confirmPasswordTextController = controller;
@@ -233,7 +234,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                       colorFilter:
                           const ColorFilter.mode(Colors.red, BlendMode.srcIn),
                     ),
-                    label: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+                    label: '비밀번호와 비밀번호 확인이 일치하지 않습니다'.tr(),
                   ),
                 ),
                 if (widget.joinData.type == UserType.student)
@@ -242,7 +243,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                     children: [
                       const SizedBox(height: defaultMarginValue),
                       Text(
-                        '학교',
+                        '학교'.tr(),
                         style: context.textTheme.bodyMedium
                             ?.copyWith(fontWeight: FontWeight.w500),
                       ),
@@ -253,7 +254,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                           Expanded(
                             child: AppTextFormField(
                               controller: _schoolGradeTextController,
-                              hintText: '학년 입력',
+                              hintText: '학년 입력'.tr(),
                               margin: EdgeInsets.zero,
                             ),
                           ),
@@ -261,7 +262,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                           Expanded(
                             child: AppTextFormField(
                               controller: _schoolClassTextController,
-                              hintText: '반 입력',
+                              hintText: '반 입력'.tr(),
                               margin: EdgeInsets.zero,
                               keyboardType: TextInputType.number,
                             ),
@@ -272,7 +273,7 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
                   ),
                 const SizedBox(height: 50),
                 AppButton(
-                  text: '가입완료',
+                  text: '가입완료'.tr(),
                   textBold: true,
                   background: (_isEmailVaild &&
                           state.canUseEmail &&

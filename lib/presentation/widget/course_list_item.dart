@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_event.dart';
@@ -154,10 +155,17 @@ class _CourseListItemState extends State<CourseListItem>
                             Label(
                               text: (widget.course.hour > 0 &&
                                       widget.course.min > 0)
-                                  ? '${widget.course.hour}시간 ${widget.course.min}분 소요'
+                                  ? '시간 분 소요'.tr(namedArgs: {
+                                      'hour': '${widget.course.hour}',
+                                      'min': '${widget.course.min}'
+                                    })
                                   : (widget.course.hour > 0)
-                                      ? '${widget.course.hour}시간 소요'
-                                      : '${widget.course.min}분 소요',
+                                      ? '시간 소요'.tr(namedArgs: {
+                                          'hour': '${widget.course.hour}'
+                                        })
+                                      : '분 소요'.tr(namedArgs: {
+                                          'min': '${widget.course.min}'
+                                        }),
                               borderColor: AppColor.lineBlue,
                             ),
                           ],

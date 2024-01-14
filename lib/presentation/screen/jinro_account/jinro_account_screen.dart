@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -63,7 +64,7 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
         JinroAccountState>(
       scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(
-        text: '계정인증하기',
+        text: '계정인증하기'.tr(),
         elevation: 0,
         showBackButton: false,
       ),
@@ -82,7 +83,7 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AppTitleText(text: '인천사이버진로교육원 회원이신가요?'),
+                    AppTitleText(text: '인천사이버진로교육원 회원이신가요'.tr()),
                     Container(
                       margin: const EdgeInsets.symmetric(
                           vertical: defaultMarginValue),
@@ -102,14 +103,14 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                           Expanded(
                             child: RichText(
                               text: TextSpan(
-                                  text: '인천사이버진로교육원',
+                                  text: '인천사이버진로교육원'.tr(),
                                   style: context.textTheme.bodySmall?.copyWith(
                                     color: AppColor.primary,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   children: [
                                     TextSpan(
-                                      text: ' 회원 인증 시 \n체험이력이 자동으로 업로드 됩니다.',
+                                      text: '회원 인증 시 체험이력이 자동으로 업로드 됩니다'.tr(),
                                       style:
                                           context.textTheme.bodySmall?.copyWith(
                                         color: Colors.black,
@@ -123,13 +124,13 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                       ),
                     ),
                     Text(
-                      '이메일(아이디)',
+                      '이메일(아이디)'.tr(),
                       style: context.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w500),
                     ),
                     AppTextFormField(
                       controller: _emailTextController,
-                      hintText: '이메일 주소 입력',
+                      hintText: '이메일 주소 입력'.tr(),
                     ),
                   ],
                 ),
@@ -141,13 +142,13 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
                 child: Column(
                   children: [
                     AppButton(
-                      text: '인증하기',
+                      text: '인증하기'.tr(),
                       onPressed: _onAuthPressed,
                     ),
                     Center(
                       child: UnderlineTextButton(
                         margin: const EdgeInsets.symmetric(vertical: 8),
-                        text: '건너뛰기',
+                        text: '건너뛰기'.tr(),
                         onPressed: _onSkipPressed,
                       ),
                     ),

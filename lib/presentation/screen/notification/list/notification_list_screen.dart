@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -22,7 +23,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
         NotificationListState>(
       create: (_) =>
           NotificationListBloc()..add(const NotificationListEvent.initial()),
-      appBar: AppSubAppBar(text: '알림'),
+      appBar: AppSubAppBar(text: '알림'.tr()),
       builder: (context, bloc, state) {
         return (!state.isLoading && state.pushMessges.isEmpty)
             ? Container(
@@ -30,7 +31,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    '새로운 알림이 없습니다',
+                    '새로운 알림이 없습니다'.tr(),
                     style: context.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),

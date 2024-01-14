@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_password.dart';
@@ -18,8 +19,8 @@ class ResetPwUpdateBloc
       if (state.isLoading) return;
 
       if (userId < 1) {
-        produceSideEffect(
-            BlocEffect.showAlert(title: '입력오류', message: '회원정보를 찾을 수 없습니다'));
+        produceSideEffect(BlocEffect.showAlert(
+            title: '입력오류'.tr(), message: '회원정보를 찾을 수 없습니다'.tr()));
         return;
       }
 
@@ -32,7 +33,7 @@ class ResetPwUpdateBloc
 
       if (res.isError()) {
         produceSideEffect(BlocEffect.showAlert(
-            title: '비밀번호 변경 실패', message: '비밀번호를 변경할 수 없습니다'));
+            title: '비밀번호 변경 실패'.tr(), message: '비밀번호를 변경할 수 없습니다'.tr()));
         return;
       }
 

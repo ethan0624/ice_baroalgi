@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:incheon_knowhow/domain/model/category.dart';
 import 'package:incheon_knowhow/domain/model/faq_paging.dart';
 import 'package:incheon_knowhow/domain/model/qna_paging.dart';
 import 'package:incheon_knowhow/domain/model/search_result.dart';
@@ -182,6 +183,10 @@ abstract class ApiClient {
   // 자주묻는 질문 조회
   @GET('/faq')
   Future<DataResponse<FaqPaging>> findFaq();
+
+  // 1:1 문의 조회
+  @GET('/category/qna')
+  Future<DataResponse<List<Category>>> findQnaCategory();
 
   // 1:1 문의 조회
   @GET('/qna')

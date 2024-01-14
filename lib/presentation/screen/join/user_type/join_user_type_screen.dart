@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -35,17 +36,17 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      appBar: AppSubAppBar(text: '회원가입'),
+      appBar: AppSubAppBar(text: '회원가입'.tr()),
       child: ListView(
         padding: const EdgeInsets.all(defaultMarginValue),
         children: [
           Text(
-            '회원유형을 선택해주세요.',
+            '회원유형을 선택해주세요.'.tr(),
             style: context.textTheme.titleSmall,
           ),
           const SizedBox(height: 62),
           Text(
-            '학생',
+            '학생'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w600),
           ),
@@ -58,7 +59,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                       type: UserType.student, isFourteenOver: false),
                   child: Center(
                     child: Text(
-                      '14세 미만\n가입하기',
+                      '14세 미만 가입하기'.tr(),
                       style: context.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w600),
                       textAlign: TextAlign.center,
@@ -73,7 +74,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                       type: UserType.student, isFourteenOver: true),
                   borderColor: AppColor.primary,
                   child: Text(
-                    '14세 이상\n가입하기',
+                    '14세 이상 가입하기'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
@@ -84,7 +85,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
           ),
           const SizedBox(height: 26),
           Text(
-            '일반',
+            '일반'.tr(),
             style: context.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w600,
               color: AppTextColor.dark,
@@ -92,7 +93,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            '* 학교 밖 청소년',
+            '학교 밖 청소년'.tr(),
             style: context.textTheme.labelLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: AppTextColor.dark,
@@ -106,7 +107,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                   onPressed: () => _onUserTypePressed(
                       type: UserType.other, isFourteenOver: false),
                   child: Text(
-                    '14세 미만\n가입하기',
+                    '14세 미만 가입하기'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
@@ -120,7 +121,7 @@ class _JoinUserTypeScreenState extends State<JoinUserTypeScreen> {
                       type: UserType.other, isFourteenOver: true),
                   borderColor: AppColor.primary,
                   child: Text(
-                    '14세 이상\n가입하기',
+                    '14세 이상 가입하기'.tr(),
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -18,20 +19,20 @@ class RecentlyKeywordView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '최근검색어',
+                '최근검색어'.tr(),
                 style: context.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               UnderlineTextButton(
-                text: '전체삭제',
+                text: '전체삭제'.tr(),
                 onPressed: () {},
               ),
             ],
           ),
           const SizedBox(height: 24),
           Text(
-            '최근검색어가 없습니다.',
+            '최근검색어가 없습니다'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(color: AppTextColor.medium),
           ),

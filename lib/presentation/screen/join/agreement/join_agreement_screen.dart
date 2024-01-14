@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -49,19 +50,19 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      appBar: AppSubAppBar(text: '회원가입'),
+      appBar: AppSubAppBar(text: '회원가입'.tr()),
       child: Padding(
         padding: const EdgeInsets.all(defaultMarginValue),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '서비스 이용을 위해\n약관에 동의해주세요.',
+              '서비스 이용을 위해 약관에 동의해주세요'.tr(),
               style: context.textTheme.titleSmall,
             ),
             const SizedBox(height: 50),
             CheckBoxText(
-              title: '전체선택',
+              title: '전체선택'.tr(),
               titleStyle: context.textTheme.bodyMedium
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
@@ -73,7 +74,7 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
                   const AppCheckbox(),
                   Expanded(
                     child: Text(
-                      '${e.title} (${e.isRequired ? '필수' : '선택'})',
+                      '${e.title} (${e.isRequired ? '필수'.tr() : '선택'.tr()})',
                       style: context.textTheme.bodyMedium,
                     ),
                   ),
@@ -86,7 +87,7 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
             ),
             const Spacer(),
             AppButton(
-              text: '동의하고 진행하기',
+              text: '동의하고 진행하기'.tr(),
               textBold: true,
               onPressed: _onNextPressed,
             ),

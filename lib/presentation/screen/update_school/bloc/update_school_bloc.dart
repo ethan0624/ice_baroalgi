@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_school.dart';
@@ -27,7 +28,7 @@ class UpdateSchoolBloc
 
       produceSideEffect(res.isSuccess()
           ? const SuccessEffect()
-          : BlocEffect.showAlert(title: '학교정보 수정을 실피하였습니다'));
+          : BlocEffect.showAlert(title: '학교정보 수정을 실패하였습니다'.tr()));
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -36,19 +37,20 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
     final phone = _phoneTextController.text;
 
     if (name.isEmpty) {
-      await context.showAlert(title: '입력오류', message: '이름을 입력해주세요');
+      await context.showAlert(title: '입력오류'.tr(), message: '이름을 입력해주세요'.tr());
       _nameFocus.requestFocus();
       return;
     }
 
     if (birth.isEmpty) {
-      await context.showAlert(title: '입력오류', message: '생년월일을 입력해주세요');
+      await context.showAlert(title: '입력오류'.tr(), message: '생년월일을 입력해주세요'.tr());
       _birthFocus.requestFocus();
       return;
     }
 
     if (phone.isEmpty) {
-      await context.showAlert(title: '입력오류', message: '휴대폰번호를 입력해주세요');
+      await context.showAlert(
+          title: '입력오류'.tr(), message: '휴대폰번호를 입력해주세요'.tr());
       _phoneFocus.requestFocus();
       return;
     }
@@ -79,33 +81,33 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      appBar: AppSubAppBar(text: '회원가입'),
+      appBar: AppSubAppBar(text: '회원가입'.tr()),
       child: ListView(
         padding: const EdgeInsets.all(defaultMarginValue),
         children: [
           Text(
-            '보호자 휴대폰으로 인증하기',
+            '보호자 휴대폰으로 인증하기'.tr(),
             style: context.textTheme.titleSmall,
           ),
           const SizedBox(height: 5),
           Text(
-            '* 가입자 정보를 입력해주세요.',
+            '* 가입자 정보를 입력해주세요.'.tr(),
             style: context.textTheme.bodySmall,
           ),
           const SizedBox(height: 50),
           Text(
-            '이름',
+            '이름'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
           AppTextFormField(
             controller: _nameTextController,
             focusNode: _nameFocus,
-            hintText: '이름을 입력하세요',
+            hintText: '이름을 입력하세요'.tr(),
           ),
           const SizedBox(height: defaultMarginValue),
           Text(
-            '생년월일',
+            '생년월일'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
@@ -119,33 +121,33 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
           ),
           const SizedBox(height: defaultMarginValue),
           Text(
-            '성별',
+            '성별'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: defaultMarginValue),
           Text(
-            '휴대폰 번호',
+            '휴대폰 번호'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
           AppTextFormField(
             controller: _phoneTextController,
             focusNode: _phoneFocus,
-            hintText: '가입자의 휴대폰 번호를 입력하세요',
+            hintText: '가입자의 휴대폰 번호를 입력하세요'.tr(),
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.done,
             inputFormatters: [NumberFormatter()],
           ),
           const SizedBox(height: defaultMarginValue),
           Text(
-            '보호자 인증',
+            '보호자 인증'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
           AppButton(
             margin: const EdgeInsets.symmetric(vertical: 12),
-            text: '보호자 휴대폰 인증하기',
+            text: '보호자 휴대폰 인증하기'.tr(),
             textBold: true,
             onPressed: _onCertificationPressed,
           ),

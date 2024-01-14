@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 enum UserGenderType {
@@ -11,9 +12,9 @@ extension UserGenderTypeExtension on UserGenderType {
   String get title {
     switch (this) {
       case UserGenderType.male:
-        return '남자';
+        return '남자'.tr();
       case UserGenderType.female:
-        return '여자';
+        return '여자'.tr();
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/core/extension/string_extension.dart';
@@ -87,7 +88,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               AppTextFormField(
                 controller: _textController,
                 focusNode: widget.focusNode,
-                hintText: widget.hint ?? '비밀번호 입력',
+                hintText: widget.hint ?? '비밀번호 입력'.tr(),
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: widget.textInputAction ?? TextInputAction.done,
                 maxLength: 40,
@@ -127,7 +128,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                       _containAlphabet ? Colors.green : Colors.red,
                       BlendMode.srcIn),
                 ),
-                label: '영문포함',
+                label: '영문포함'.tr(),
               ),
               IconText(
                 icon: SvgPicture.asset(
@@ -138,7 +139,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                       _containNumber ? Colors.green : Colors.red,
                       BlendMode.srcIn),
                 ),
-                label: '숫자포함',
+                label: '숫자포함'.tr(),
               ),
               IconText(
                 icon: SvgPicture.asset(
@@ -148,7 +149,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                   colorFilter: ColorFilter.mode(
                       _minLength ? Colors.green : Colors.red, BlendMode.srcIn),
                 ),
-                label: '8자 이상',
+                label: '8자 이상'.tr(),
               ),
             ],
           ),
