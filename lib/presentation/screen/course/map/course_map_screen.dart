@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -83,7 +84,16 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     return NLatLng(position.latitude, position.longitude);
   }
 
+  _searchingCurrentLocation() async {
+    final location = await _getCurrentLocation();
+    if (location == null) return;
+
+    _mapController.updateCamera(NCameraUpdate.withParams(target: location));
+  }
+
   _addSpotMarkers(List<Spot> spots) async {
+    final current = await _getCurrentLocation();
+
     final markerIcon = await NOverlayImage.fromWidget(
       widget: const CustomMapMarker(),
       size: const Size(36, 44),
@@ -96,23 +106,25 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     );
     final makers =
         spots.where((e) => e.latitude != null && e.longitude != null).map((e) {
+      final latlng = NLatLng(e.latitude!, e.longitude!);
       final marker = NMarker(
         id: e.isFlag
             ? 'maker-spot-complete-${e.id}'
             : 'maker-spot-normal-${e.id}',
-        position: NLatLng(e.latitude!, e.longitude!),
+        position: latlng,
         icon: e.isFlag ? completeSpotIcon : markerIcon,
         size: const Size(36, 44),
       );
       marker.setOnTapListener(_onMarkerPressed);
       return marker;
-    }).toSet();
+    });
 
     await _mapController.clearOverlays();
-    await _mapController.addOverlayAll(makers);
+    await _mapController.addOverlayAll(makers.toSet());
 
     if (_visibleMarkerSpots.isEmpty) {
-      final position = NLatLng(spots.first.latitude!, spots.first.longitude!);
+      final position =
+          current ?? NLatLng(spots.first.latitude!, spots.first.longitude!);
       _mapController.updateCamera(NCameraUpdate.withParams(target: position));
     }
     _visibleMarkerSpots.clear();
@@ -121,8 +133,13 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
 
   _focusClearMaker() async {
     if (_selectedMarker != null) {
+      final isCompleteType =
+          _selectedMarker?.info.id.contains('complete') ?? false;
       final customMarker = await NOverlayImage.fromWidget(
-        widget: const CustomMapMarker(type: CustomMapMarkerType.normal),
+        widget: CustomMapMarker(
+            type: isCompleteType
+                ? CustomMapMarkerType.completed
+                : CustomMapMarkerType.normal),
         size: const Size(36, 44),
         context: context,
       );
@@ -183,7 +200,6 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     // Test if location services are enabled.
     serviceEnabled = await _geolocatorPlatform.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // todo : show permission alert
       return false;
     }
 
@@ -191,14 +207,11 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     if (permission == LocationPermission.denied) {
       permission = await _geolocatorPlatform.requestPermission();
       if (permission == LocationPermission.denied) {
-        // todo : show permission alert
         return false;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // todo : show permission alert
-
       return false;
     }
 
@@ -296,6 +309,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                   options: const NaverMapViewOptions(),
                   onMapReady: (controller) {
                     _mapController = controller;
+                    _mapController.setLocationTrackingMode(
+                        NLocationTrackingMode.noFollow);
                   },
                   onMapTapped: (point, latlng) {
                     _focusClearMaker();
@@ -325,7 +340,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: _searchingCurrentLocation,
                           child: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(

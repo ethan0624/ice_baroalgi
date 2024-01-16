@@ -38,8 +38,27 @@ class SpotCardView extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Thumbnail(
-              imageUrl: spot.image ?? '',
+            Stack(
+              children: [
+                Thumbnail(
+                  imageUrl: spot.image ?? '',
+                ),
+                if (spot.isFlag)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white54,
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Image.asset('assets/images/ic_flag_completed.png'),
+                    ),
+                  ),
+              ],
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -72,7 +91,7 @@ class SpotCardView extends StatelessWidget {
                     maxLines: enabledRegistButton ? 1 : 3,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (enabledRegistButton)
+                  if (enabledRegistButton && !spot.isFlag)
                     OutlineButton(
                       margin: const EdgeInsets.only(top: 6),
                       padding: const EdgeInsets.symmetric(
