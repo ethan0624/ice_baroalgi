@@ -397,8 +397,8 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                 background: Colors.white,
                                 textColor: Colors.black,
                                 borderColor: AppColor.secondary,
-                                onPressed: () =>
-                                    context.router.pushNamed('/course/1/info'),
+                                onPressed: () => context.router.pushNamed(
+                                    '/course/${widget.courseId}/info'),
                               ),
                             ),
                             const SizedBox(width: 16),
