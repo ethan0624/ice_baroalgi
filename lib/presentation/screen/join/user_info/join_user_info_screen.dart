@@ -12,6 +12,7 @@ import 'package:incheon_knowhow/presentation/screen/join/join_data.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/app_text_form_field.dart';
+import 'package:incheon_knowhow/presentation/widget/radio_box.dart';
 import 'package:incheon_knowhow/route/app_router.dart';
 
 @RoutePage()
@@ -30,6 +31,14 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
   final _nameFocus = FocusNode();
   final _birthFocus = FocusNode();
   final _phoneFocus = FocusNode();
+
+  UserGenderType _genderType = UserGenderType.male;
+
+  _onGenderChanged(UserGenderType genderType) {
+    setState(() {
+      _genderType = genderType;
+    });
+  }
 
   _onCertificationPressed() async {
     final name = _nameTextController.text;
@@ -64,7 +73,7 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
         userName: _nameTextController.text,
         userBirthday: _birthTextController.text.replaceAll('/', '-'),
         userPhoneNumber: _phoneTextController.text,
-        userGender: UserGenderType.male,
+        userGender: _genderType,
         parentCI: value.ci,
         parentName: value.name,
         parentBirthday: value.birthDay,
@@ -124,6 +133,42 @@ class _JoinUserInfoScreenState extends State<JoinUserInfoScreen> {
             '성별'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w500),
+          ),
+          const SizedBox(height: defaultMarginValue / 2),
+          Wrap(
+            spacing: 12,
+            children: [
+              ...UserGenderType.values.map(
+                (e) => InkWell(
+                  onTap: () => _onGenderChanged(e),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          width: 1,
+                          color: e == _genderType
+                              ? AppColor.primary
+                              : AppColor.dividerDark),
+                      color: e == _genderType
+                          ? AppColor.secondary.withOpacity(0.2)
+                          : null,
+                    ),
+                    child: Wrap(
+                      spacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        RadioBox(
+                          isChecked: e == _genderType,
+                        ),
+                        Text(e.title),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: defaultMarginValue),
           Text(

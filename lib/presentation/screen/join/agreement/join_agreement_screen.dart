@@ -9,7 +9,6 @@ import 'package:incheon_knowhow/presentation/screen/join/join_data.dart';
 import 'package:incheon_knowhow/presentation/widget/app_button.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
-import 'package:incheon_knowhow/presentation/widget/checkbox_text.dart';
 import 'package:incheon_knowhow/route/app_router.dart';
 
 @RoutePage()
@@ -91,12 +90,18 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
               style: context.textTheme.titleSmall,
             ),
             const SizedBox(height: 50),
-            CheckBoxText(
-              isChecked: _isAllAgreed,
-              title: '전체선택'.tr(),
-              titleStyle: context.textTheme.bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
-              onChanged: (checked) => _onAllAgreements(),
+            InkWell(
+              onTap: _onAllAgreements,
+              child: Row(
+                children: [
+                  AppCheckbox(isChecked: _isAllAgreed),
+                  Text(
+                    '전체선택'.tr(),
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             const Divider(),
             ..._agreements.map(
@@ -107,6 +112,9 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
                   children: [
                     AppCheckbox(
                       isChecked: _checkedAgreementMap[e] == true,
+                      onCheckChanged: (value) {
+                        _onToggleTermsAgreement(e);
+                      },
                     ),
                     Expanded(
                       child: Text(
