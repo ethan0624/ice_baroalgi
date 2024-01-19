@@ -90,6 +90,29 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
+  _onRecentKeywordPressed(String keyword) {
+    _keywordController.text = keyword;
+    _searchWithThrottle(keyword);
+    setState(() {
+      _keyword = keyword;
+      _visibleSearchResult = false;
+    });
+  }
+
+  _onRecentKeywordDeletePressed(String keyword) {
+    final bloc = _scaffoldKey.currentContext?.read<SearchBloc>();
+    if (bloc == null) return;
+
+    bloc.add(SearchEvent.deleteRecentKeyword(keyword));
+  }
+
+  _onRecentKeywordClearPressed() {
+    final bloc = _scaffoldKey.currentContext?.read<SearchBloc>();
+    if (bloc == null) return;
+
+    bloc.add(const SearchEvent.clearRecentKeyword());
+  }
+
   @override
   void initState() {
     super.initState();
@@ -131,7 +154,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ],
         ),
       ),
-      create: (context) => SearchBloc(),
+      create: (context) => SearchBloc()..add(const SearchEvent.initial()),
       builder: (context, bloc, state) {
         return Stack(
           children: [
@@ -196,7 +219,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            if (_keyword.isEmpty) const RecentlyKeywordView(),
+            if (_keyword.isEmpty)
+              RecentlyKeywordView(
+                keywords: state.recentKeywords.map((e) => e.keyword).toList(),
+                onKeywordPressed: _onRecentKeywordPressed,
+                onDeletePressed: _onRecentKeywordDeletePressed,
+                onClearPressed: _onRecentKeywordClearPressed,
+              ),
             if (!_visibleSearchResult && _keyword.isNotEmpty)
               RelatedResultView(
                 keyword: _keyword,

@@ -5,7 +5,17 @@ import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/underline_text_button.dart';
 
 class RecentlyKeywordView extends StatelessWidget {
-  const RecentlyKeywordView({super.key});
+  final List<String> keywords;
+  final ValueChanged<String>? onKeywordPressed;
+  final VoidCallback? onClearPressed;
+  final ValueChanged<String>? onDeletePressed;
+  const RecentlyKeywordView({
+    super.key,
+    this.keywords = const [],
+    this.onKeywordPressed,
+    this.onClearPressed,
+    this.onDeletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,43 +34,42 @@ class RecentlyKeywordView extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              UnderlineTextButton(
-                text: '전체삭제'.tr(),
-                onPressed: () {},
-              ),
+              if (keywords.isNotEmpty)
+                UnderlineTextButton(
+                  text: '전체삭제'.tr(),
+                  onPressed: onClearPressed,
+                ),
             ],
           ),
           const SizedBox(height: 24),
-          Text(
-            '최근검색어가 없습니다'.tr(),
-            style: context.textTheme.bodyMedium
-                ?.copyWith(color: AppTextColor.medium),
-          ),
-          ...List.generate(
-            4,
-            (index) {
-              return InkWell(
-                onTap: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '민주주의',
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        color: AppTextColor.dark,
-                      ),
+          if (keywords.isEmpty)
+            Text(
+              '최근검색어가 없습니다'.tr(),
+              style: context.textTheme.bodyMedium
+                  ?.copyWith(color: AppTextColor.medium),
+            ),
+          ...keywords.map(
+            (e) => InkWell(
+              onTap: () => onKeywordPressed?.call(e),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    e,
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: AppTextColor.dark,
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.close,
-                        size: 18,
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
+                  ),
+                  IconButton(
+                    onPressed: () => onDeletePressed?.call(e),
+                    icon: const Icon(
+                      Icons.close,
+                      size: 18,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),

@@ -2,6 +2,10 @@ import 'package:get_it/get_it.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_jinro_account.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_qna_categories.dart';
+import 'package:incheon_knowhow/domain/usecase/search/clear_recent_keyword.dart';
+import 'package:incheon_knowhow/domain/usecase/search/delete_recent_keyword.dart';
+import 'package:incheon_knowhow/domain/usecase/search/find_recent_keyword.dart';
+import 'package:incheon_knowhow/domain/usecase/search/update_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/spot/set_spot_flag.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -101,6 +105,7 @@ class Injection {
     ));
     getIt.registerSingleton<SearchRepository>(SearchRepositoryImpl(
       apiClient: getIt(),
+      sharedPreferences: sharedPreference,
     ));
 
     // regist usecase
@@ -244,6 +249,26 @@ class Injection {
     );
     getIt.registerLazySingleton<FindSearch>(
       () => FindSearch(
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<FindRecentKeyword>(
+      () => FindRecentKeyword(
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<UpdateRecentKeyword>(
+      () => UpdateRecentKeyword(
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<DeleteRecentKeyword>(
+      () => DeleteRecentKeyword(
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<ClearRecentKeyword>(
+      () => ClearRecentKeyword(
         repository: getIt(),
       ),
     );
