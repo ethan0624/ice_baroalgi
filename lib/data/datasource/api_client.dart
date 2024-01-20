@@ -115,6 +115,10 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 
+  // 탈퇴
+  @DELETE('/user')
+  Future<DataResponse<String>> withdraw();
+
   /*
    * 코스 관련 
    */
@@ -160,6 +164,13 @@ abstract class ApiClient {
   // 코스 진행 중단하기
   @POST('/course/stop/{id}')
   Future<DataResponse<String>> cancelCourse(@Path() int id);
+
+  // 코스 스탬프 발행하기
+  @POST('/course/stamp/{id}')
+  Future<DataResponse<String>> saveStamp(
+    @Path() int id,
+    @Body() Map<String, dynamic> data,
+  );
 
   /*
    * 스팟 
@@ -217,8 +228,4 @@ abstract class ApiClient {
     @Path() int id,
     @Body() Map<String, dynamic> data,
   );
-
-  // 탈퇴
-  @DELETE('/user')
-  Future<DataResponse<String>> withdraw();
 }

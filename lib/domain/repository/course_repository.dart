@@ -1,3 +1,4 @@
+import 'package:incheon_knowhow/data/request/course_stamp_request.dart';
 import 'package:incheon_knowhow/domain/model/my_course.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:incheon_knowhow/domain/model/topic_course.dart';
@@ -26,4 +27,7 @@ abstract class CourseRepository {
   Future<Result<bool, Exception>> completed(int id);
 
   Future<Result<bool, Exception>> cancel(int id);
+
+  Future<Result<bool, Exception>> stamp(
+      int id, CourseStampRequest stampRequest);
 }

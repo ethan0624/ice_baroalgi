@@ -103,7 +103,8 @@ class _CourseListItemState extends State<CourseListItem>
   Widget build(BuildContext context) {
     super.build(context);
     return Container(
-      key: ValueKey('course-list-item-${widget.course.id}'),
+      key: ValueKey(
+          'course-list-item-${widget.course.id}-${widget.course.isLiked}'),
       margin: widget.margin,
       padding: widget.padding,
       decoration: BoxDecoration(

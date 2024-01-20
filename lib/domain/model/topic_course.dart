@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 
 part 'topic_course.g.dart';
 
 @JsonSerializable()
-class TopicCourse {
+class TopicCourse extends Equatable {
   @JsonKey(name: 'id')
   final int id;
   @JsonKey(name: 'title')
@@ -22,6 +23,9 @@ class TopicCourse {
       _$TopicCourseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicCourseToJson(this);
+
+  @override
+  List<Object?> get props => [id, title, courses];
 }
 
 extension TopicCourseExtension on TopicCourse {

@@ -1,11 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/enum/course_state_type.dart';
@@ -13,7 +14,6 @@ import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
 import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
-import 'package:incheon_knowhow/presentation/dialog/course_stamp_completed_dialog.dart';
 import 'package:incheon_knowhow/presentation/dialog/course_stamp_dialog.dart';
 import 'package:incheon_knowhow/presentation/dialog/spot_flag_completed_dialog.dart';
 import 'package:incheon_knowhow/presentation/dialog/spot_flag_dialog.dart';
@@ -23,7 +23,6 @@ import 'package:incheon_knowhow/presentation/widget/course_app_bar.dart';
 import 'package:incheon_knowhow/presentation/widget/course_header.dart';
 import 'package:incheon_knowhow/presentation/widget/custom_map_marker.dart';
 import 'package:incheon_knowhow/presentation/widget/spot_card_view.dart';
-import 'package:provider/provider.dart';
 
 @RoutePage()
 class CourseMapScreen extends StatefulWidget {
@@ -123,8 +122,9 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     await _mapController.addOverlayAll(makers.toSet());
 
     if (_visibleMarkerSpots.isEmpty) {
-      final position =
-          current ?? NLatLng(spots.first.latitude!, spots.first.longitude!);
+      // final position =
+      //     current ?? NLatLng(spots.first.latitude!, spots.first.longitude!);
+      final position = NLatLng(spots.first.latitude!, spots.first.longitude!);
       _mapController.updateCamera(NCameraUpdate.withParams(target: position));
     }
     _visibleMarkerSpots.clear();
@@ -252,6 +252,9 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
 
   _showStampPoll() async {
     final ret = await context.router.pushNamed('/stamp/regist');
+    if (ret == null || ret == false) return;
+
+    context.router.navigateNamed('/main/home');
   }
 
   _onSpotFlagRegist(Spot spot) {

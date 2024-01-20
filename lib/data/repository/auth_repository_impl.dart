@@ -106,7 +106,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Result<bool, Exception>> register({
     required UserRegisterRequest request,
   }) async {
-    final res = await safetyCall(apiClient.duplicateEmail(request.toJson()));
+    final res = await safetyCall(apiClient.register(request.toJson()));
     return res.isSuccess()
         ? const Result.success(true)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));

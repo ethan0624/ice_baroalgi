@@ -20,7 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       grade: json['grade'] as int?,
       group: json['class'] as String?,
       jinroAccountEmail: json['jinroEmail'] as String?,
-      isPushNotification: json['pushState'] as int?,
+      isPushNotification: json['pushState'] as bool?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

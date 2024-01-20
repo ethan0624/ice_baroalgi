@@ -29,7 +29,7 @@ class User {
   @JsonKey(name: 'jinroEmail')
   final String? jinroAccountEmail;
   @JsonKey(name: 'pushState')
-  final int? isPushNotification;
+  final bool? isPushNotification;
 
   const User({
     required this.id,

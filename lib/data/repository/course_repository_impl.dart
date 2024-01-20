@@ -2,6 +2,7 @@
 import 'package:multiple_result/src/result.dart';
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
+import 'package:incheon_knowhow/data/request/course_stamp_request.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
 import 'package:incheon_knowhow/domain/model/topic_course.dart';
 import 'package:incheon_knowhow/domain/model/my_course.dart';
@@ -102,6 +103,16 @@ class CourseRepositoryImpl implements CourseRepository {
   @override
   Future<Result<bool, Exception>> cancel(int id) async {
     final res = await safetyCall<String>(apiClient.cancelCourse(id));
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> stamp(
+      int id, CourseStampRequest stampRequest) async {
+    final res = await safetyCall<String>(
+        apiClient.saveStamp(id, stampRequest.toJson()));
     return res.isSuccess()
         ? const Result.success(true)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));

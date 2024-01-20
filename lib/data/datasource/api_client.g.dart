@@ -302,6 +302,36 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<DataResponse<String>> withdraw() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<String>>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<String>.fromJson(
+      _result.data!,
+      (json) => json as String,
+    );
+    return value;
+  }
+
+  @override
   Future<DataResponse<List<TopicCourse>>> findTopicCourse() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -605,6 +635,40 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/course/stop/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResponse<String>.fromJson(
+      _result.data!,
+      (json) => json as String,
+    );
+    return value;
+  }
+
+  @override
+  Future<DataResponse<String>> saveStamp(
+    int id,
+    Map<String, dynamic> data,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResponse<String>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/course/stamp/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -949,36 +1013,6 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/user/phone/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = DataResponse<String>.fromJson(
-      _result.data!,
-      (json) => json as String,
-    );
-    return value;
-  }
-
-  @override
-  Future<DataResponse<String>> withdraw() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResponse<String>>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/user',
               queryParameters: queryParameters,
               data: _data,
             )
