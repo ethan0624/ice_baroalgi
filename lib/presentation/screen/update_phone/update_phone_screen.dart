@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/core/util/number_formatter.dart';
@@ -23,7 +24,19 @@ class _UpdatePhoneScreenState extends State<UpdatePhoneScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _phoneTextController = TextEditingController();
 
-  _onUpdatePressed() async {}
+  _onUpdatePressed() async {
+    final phoneNumber = _phoneTextController.text;
+
+    if (phoneNumber.isEmpty) {
+      context.showAlert(title: '입력오류'.tr(), message: '휴대폰 번호를 입력하세요'.tr());
+      return;
+    }
+
+    final bloc = _scaffoldKey.currentContext?.read<UpdatePhoneBloc>();
+    if (bloc == null) return;
+
+    bloc.add(UpdatePhoneEvent.save(phoneNumber));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +68,7 @@ class _UpdatePhoneScreenState extends State<UpdatePhoneScreen> {
             const SizedBox(height: defaultMarginValue),
             AppButton(
               text: '변경완료'.tr(),
-              // onPressed: _onUpdatePressed,
+              onPressed: _onUpdatePressed,
             ),
           ],
         );
