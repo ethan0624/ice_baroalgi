@@ -34,6 +34,10 @@ abstract class AuthRepository {
     required String email,
   });
 
+  Future<Result<bool, Exception>> checkPassword({
+    required String password,
+  });
+
   Future<Result<bool, Exception>> register({
     required UserRegisterRequest request,
   });
@@ -46,8 +50,7 @@ abstract class AuthRepository {
 
   Future<Result<bool, Exception>> updateJinro({required String email});
 
-  Future<Result<DataResponse<bool>, Exception>> updatePhone({
-    required int userId,
+  Future<Result<bool, Exception>> updatePhone({
     required String phoneNumber,
   });
 

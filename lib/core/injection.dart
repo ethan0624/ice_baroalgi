@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_jinro_account.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/update_phone.dart';
+import 'package:incheon_knowhow/domain/usecase/auth/verify_password.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_qna_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/search/clear_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/delete_recent_keyword.dart';
@@ -118,6 +120,9 @@ class Injection {
     getIt.registerLazySingleton<DuplicateEmail>(() => DuplicateEmail(
           repository: getIt(),
         ));
+    getIt.registerLazySingleton<VerifyPassword>(() => VerifyPassword(
+          repository: getIt(),
+        ));
     getIt.registerLazySingleton<SendCertificationCode>(
         () => SendCertificationCode(repository: getIt()));
     getIt.registerLazySingleton<UpdatePassword>(
@@ -150,6 +155,12 @@ class Injection {
     );
     getIt.registerLazySingleton<UpdateJinroAccount>(
       () => UpdateJinroAccount(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<UpdatePhone>(
+      () => UpdatePhone(
         authProvider: getIt(),
         repository: getIt(),
       ),

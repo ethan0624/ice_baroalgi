@@ -30,7 +30,9 @@ class _CertificationScreenState extends State<CertificationScreen> {
         'imp_secret': AppConfig.iamportApiSecret,
       });
       _accessToken = res.data['response']['access_token'];
-    } catch (e) {}
+    } catch (e) {
+      // no impl
+    }
   }
 
   _getCerificationResult(String uid) async {
@@ -65,7 +67,9 @@ class _CertificationScreenState extends State<CertificationScreen> {
               : CertificationResultGender.female,
         ),
       );
-    } catch (e) {}
+    } catch (e) {
+      // no impl
+    }
   }
 
   @override

@@ -29,9 +29,16 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _onPasswordChangePressed(User user) async {
+  Future<bool> _verityPassword() async {
     final isVerify = await context.router.pushNamed<bool>('/verify/pw');
-    if (isVerify == null || !isVerify) return;
+    if (isVerify == null || !isVerify) return false;
+
+    return true;
+  }
+
+  _onPasswordChangePressed(User user) async {
+    final isVerify = await _verityPassword();
+    if (!isVerify) return;
 
     // 딜레이를 주지 않을경우 핀번호 검증화면이 남아있게 되는 문제 있음(추후 update 화면을 추가 하는걸 고려)
     Future.delayed(const Duration(milliseconds: 18), () {
@@ -48,6 +55,20 @@ class _AccountScreenState extends State<AccountScreen> {
       if (bloc == null) return;
 
       bloc.add(const AccountEvent.logout());
+    });
+  }
+
+  _onPhoneUpdate() async {
+    final isVerify = await _verityPassword();
+    if (!isVerify) return;
+
+    // 딜레이를 주지 않을경우 핀번호 검증화면이 남아있게 되는 문제 있음(추후 update 화면을 추가 하는걸 고려)
+    Future.delayed(const Duration(milliseconds: 18), () async {
+      await context.router.pushNamed('/update/phone');
+      final bloc = _scaffoldKey.currentContext?.read<AccountBloc>();
+      if (bloc == null) return;
+
+      bloc.add(const AccountEvent.refresh());
     });
   }
 
@@ -139,17 +160,18 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   AcountItemView(
                     label: '생년월일'.tr(),
-                    value: '',
+                    value: state.user?.birth ?? '',
                   ),
                   AcountItemView(
                     label: '성별'.tr(),
+                    showDivider: state.user?.type != UserType.other,
                     value: state.user?.genderType.title ?? '',
                   ),
                   AcountItemView(
                     label: '휴대폰번호'.tr(),
                     value: state.user?.phone ?? '',
                     showDivider: state.user?.type != UserType.other,
-                    onTap: () {},
+                    onTap: _onPhoneUpdate,
                   ),
                   if (state.user?.type == UserType.student)
                     AcountItemView(

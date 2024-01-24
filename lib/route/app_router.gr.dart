@@ -269,6 +269,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const StampRegistScreen(),
       );
     },
+    UpdatePhoneRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const UpdatePhoneScreen(),
+      );
+    },
     UpdateSchoolRoute.name: (routeData) {
       return AutoRoutePage<bool>(
         routeData: routeData,
@@ -1018,6 +1024,20 @@ class StampRegistRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'StampRegistRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UpdatePhoneScreen]
+class UpdatePhoneRoute extends PageRouteInfo<void> {
+  const UpdatePhoneRoute({List<PageRouteInfo>? children})
+      : super(
+          UpdatePhoneRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpdatePhoneRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

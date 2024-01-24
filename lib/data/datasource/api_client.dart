@@ -87,6 +87,12 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 
+  // 비밀번호 체크
+  @POST('/user/checkPw')
+  Future<DataResponse<String>> checkPassword(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 회원조회
   @GET('/user/info')
   Future<DataResponse<User>> getUserMe();
@@ -94,6 +100,12 @@ abstract class ApiClient {
   // 회원 비밀번호 수정
   @PUT('/user/pw')
   Future<DataResponse<String>> updateUserPassword(
+    @Body() Map<String, dynamic> data,
+  );
+
+  // 회원 전화번호 수정
+  @PUT('/user/phone')
+  Future<DataResponse<String>> updateUserPhone(
     @Body() Map<String, dynamic> data,
   );
 
@@ -215,17 +227,9 @@ abstract class ApiClient {
   @POST('/push/{id}')
   Future<DataResponse<String>> updatePush(@Path() int id);
 
+  // 검색
   @GET('/search')
   Future<DataResponse<SearchResult>> search(
-    @Body() Map<String, dynamic> data,
-  );
-
-  /// todo:
-
-  // 회원 전화번호 수정
-  @PUT('/user/phone/{id}')
-  Future<DataResponse<String>> updateUserPhone(
-    @Path() int id,
     @Body() Map<String, dynamic> data,
   );
 }

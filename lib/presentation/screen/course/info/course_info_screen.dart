@@ -1,6 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/enum/course_state_type.dart';
@@ -15,7 +17,6 @@ import 'package:incheon_knowhow/presentation/widget/course_header.dart';
 import 'package:incheon_knowhow/presentation/widget/image_slider.dart';
 import 'package:incheon_knowhow/presentation/widget/spot_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/translate_text_view.dart';
-import 'package:provider/provider.dart';
 
 @RoutePage()
 class CourseInfoScreen extends StatefulWidget {
@@ -91,6 +92,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
 
   _showStampPoll() async {
     final ret = await context.router.pushNamed('/stamp/regist');
+    if (ret == null || ret == false) return;
+
+    context.router.navigateNamed('/main/home');
   }
 
   @override

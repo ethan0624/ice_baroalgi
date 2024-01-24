@@ -36,10 +36,18 @@ class _VerifyPwScreenState extends State<VerifyPwScreen> {
       return;
     }
 
+    FocusManager.instance.primaryFocus?.unfocus();
+
     final bloc = _scaffoldKey.currentContext?.read<VerifyPwBloc>();
     if (bloc == null) return;
 
     bloc.add(VerifyPwEvent.confrim(_passwordTextController.text));
+  }
+
+  @override
+  void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    super.dispose();
   }
 
   @override
