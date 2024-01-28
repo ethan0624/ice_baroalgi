@@ -23,8 +23,46 @@ class StampRegistScreen extends StatefulWidget {
 
 class _StampRegistScreenState extends State<StampRegistScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _answerMap = {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    71: '',
+    72: '',
+    73: '',
+    74: '',
+  };
 
   bool _isNext = false;
+
+  _onNextPressed() {
+    // todo : impl validate
+
+    for (var i = 1; i <= 6; i++) {
+      // 2번 항목은 선택항목
+      if (i == 2) continue;
+
+      final answerValue = _answerMap[i];
+      print('>>>>> answerValue $i : $answerValue');
+      if (answerValue == null || answerValue.isEmpty == true) {
+        context.showAlert(title: '입력오류'.tr(), message: '설문 항목을 입력해주세요');
+        return;
+      }
+    }
+
+    setState(() {
+      _isNext = true;
+    });
+  }
+
+  _onStampRegistPressed() {
+    // todo : impl validate
+
+    // todo : send data
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +84,14 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  const PollItemInputTypeView(
+                  PollItemInputTypeView(
                     number: 1,
                     question: '여러분의 활동은 어디에서 이루어졌나요?',
                     hintText: '학교 밖 활동 (마을학교, 진로센터, 현장담방 등)',
                     isRequired: true,
+                    onTextChanged: (value) {
+                      _answerMap[1] = value;
+                    },
                   ),
                   const PollItemRadioTypeView(
                     number: 2,
@@ -66,17 +107,23 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       '자신의 관심, 흥미에 따른 활동',
                     ],
                   ),
-                  const PollItemInputTypeView(
+                  PollItemInputTypeView(
                     number: 3,
                     question: '여러분이 경험한 체험의 제목을 붙여주세요.',
                     hintText: '코스명',
                     isRequired: true,
+                    onTextChanged: (value) {
+                      _answerMap[3] = value;
+                    },
                   ),
-                  const PollItemInputTypeView(
+                  PollItemInputTypeView(
                     number: 4,
                     question: '여러분의 체험은 언제였나요?',
                     hintText: '코스명',
                     isRequired: true,
+                    onTextChanged: (value) {
+                      _answerMap[4] = value;
+                    },
                   ),
                   const PollItemRadioTypeView(
                     number: 5,
@@ -97,11 +144,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                   ),
                   AppButton(
                     text: '다음',
-                    onPressed: () {
-                      setState(() {
-                        _isNext = true;
-                      });
-                    },
+                    onPressed: _onNextPressed,
                   ),
                 ],
               ),

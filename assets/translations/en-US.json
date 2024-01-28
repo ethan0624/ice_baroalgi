@@ -218,10 +218,17 @@
     "숫자포함": "Includes numbers",
     "8자 이상": "8 characters or more",
     "깃발등록하기": "Register flag",
-    "탈퇴 유의사항": "탈퇴 유의사항",
-    "탈퇴 유의사항을 체크해주세요": "탈퇴 유의사항을 체크해주세요",
-    "휴대폰번호변경": "휴대폰번호변경",
-    "휴대폰 번호를 입력하세요": "휴대폰 번호를 입력하세요",
-    "변경완료": "변경완료",
-    "휴대폰번호 수정을 실패하였습니다": "휴대폰번호 수정을 실패하였습니다"
+    "탈퇴 유의사항": "Notes on withdrawal",
+    "탈퇴 유의사항을 체크해주세요": "Please check the withdrawal notice",
+    "휴대폰번호변경": "Change mobile phone number",
+    "휴대폰 번호를 입력하세요": "Please enter your mobile phone number",
+    "변경완료": "Change completed",
+    "휴대폰번호 수정을 실패하였습니다": "Failed to edit mobile phone number",
+    "정복 스탬프 발행하러 가기": "Go to issue a conquest stamp",
+    "코스의 모든 깃발을 등록했습니다!": "All flags for course {courseName} have been registered!",
+    "설문 항목을 입력해주세요": "Please enter the survey items",
+    "확인": "Ok",
+    "취소": "Cancel",
+    "로그인 하시겠습니까?": "Would you like to log in?",
+    "해당 서비스를 이용하시려면 로그인을 해야 합니다": "You must log in to use this service."
 }

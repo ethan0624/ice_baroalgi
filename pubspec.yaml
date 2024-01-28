@@ -1,6 +1,6 @@
 name: incheon_knowhow
 description: incheon knowhow Flutter project
-version: 0.0.4+4
+version: 0.0.5+5
 
 environment:
   sdk: ">=3.1.2 <4.0.0"
@@ -96,4 +96,7 @@ flutter:
     - assets/images/ic_flag.png
     - assets/images/ic_flag_completed.png
     - assets/images/course_complete_badge.png
+    - assets/images/thumb_culture.png
+    - assets/images/thumb_history.png
+    - assets/images/thumb_location.png
     - assets/translations/

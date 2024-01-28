@@ -241,9 +241,10 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
     });
   }
 
-  _requestStamp() async {
+  _requestStamp(Course course) async {
     context.checkLoginOrRequestLogin(onLoggedIn: () async {
-      final ret = await CourseStampDialog.show(context);
+      final ret =
+          await CourseStampDialog.show(context, courseName: course.title);
       if (ret == null || ret == false) return;
 
       _showStampPoll();
@@ -423,7 +424,7 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   text: '정복완료'.tr(),
-                                  onPressed: _requestStamp,
+                                  onPressed: () => _requestStamp(state.course!),
                                 ),
                               ),
                             if (state.course?.state ==

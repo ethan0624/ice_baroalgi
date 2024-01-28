@@ -4,6 +4,7 @@ import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/domain/model/topic_course.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
+import 'package:incheon_knowhow/presentation/widget/dummy_thumbnail.dart';
 import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 
 class CourseTopicExpansion extends StatefulWidget {
@@ -41,9 +42,18 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
                     spacing: 12,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      const Thumbnail(
+                      DummyThumbnail(
+                        assetPath: widget.topicCourse.thumbnail,
                         width: 65,
                         height: 65,
+                      ),
+                      // todo : 주제별 코스 썸네일 정보 추가서 처리 예정
+                      const Offstage(
+                        offstage: true,
+                        child: Thumbnail(
+                          width: 65,
+                          height: 65,
+                        ),
                       ),
                       Text(
                         widget.topicCourse.title,

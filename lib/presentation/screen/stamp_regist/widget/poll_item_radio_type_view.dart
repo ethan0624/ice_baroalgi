@@ -12,6 +12,7 @@ class PollItemRadioTypeView extends StatelessWidget {
   final List<String> options;
   final String? description;
   final String? value;
+  final ValueChanged<String>? onValueChanged;
   const PollItemRadioTypeView({
     super.key,
     required this.number,
@@ -20,6 +21,7 @@ class PollItemRadioTypeView extends StatelessWidget {
     this.isRequired = false,
     this.description,
     this.value,
+    this.onValueChanged,
   });
 
   @override

@@ -30,4 +30,17 @@ class TopicCourse extends Equatable {
 
 extension TopicCourseExtension on TopicCourse {
   bool get hasCourse => courses?.isNotEmpty == true;
+
+  String get thumbnail {
+    switch (title) {
+      case '역사':
+        return 'assets/images/thumb_history.png';
+      case '문화':
+        return 'assets/images/thumb_culture.png';
+      case '지리':
+        return 'assets/images/thumb_location.png';
+      default:
+        return '';
+    }
+  }
 }

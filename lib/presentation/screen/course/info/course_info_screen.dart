@@ -81,9 +81,10 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
     });
   }
 
-  _requestStamp() async {
+  _requestStamp(Course course) async {
     context.checkLoginOrRequestLogin(onLoggedIn: () async {
-      final ret = await CourseStampDialog.show(context);
+      final ret =
+          await CourseStampDialog.show(context, courseName: course.title);
       if (ret == null || ret == false) return;
 
       _showStampPoll();
@@ -182,7 +183,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen> {
                               text: '정복완료'.tr(),
                               textBold: true,
                               padding: const EdgeInsets.all(10),
-                              onPressed: _requestStamp,
+                              onPressed: () => _requestStamp(state.course!),
                             ),
                           if (state.course?.state == CourseStateType.inProgress)
                             AppButton(

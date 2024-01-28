@@ -1,17 +1,25 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 
 class CourseStampDialog extends StatelessWidget {
-  const CourseStampDialog({super.key});
+  final String courseName;
+  const CourseStampDialog({
+    super.key,
+    required this.courseName,
+  });
 
-  static Future<bool?> show(BuildContext context) {
+  static Future<bool?> show(
+    BuildContext context, {
+    required String courseName,
+  }) {
     return showDialog<bool>(
       context: context,
       builder: (context) {
-        return const CourseStampDialog();
+        return CourseStampDialog(courseName: courseName);
       },
     );
   }
@@ -27,7 +35,9 @@ class CourseStampDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '{코스명} 코스의 모든 깃발을\n등록했습니다!',
+            '코스의 모든 깃발을 등록했습니다!'.tr(
+              namedArgs: {'courseName': courseName},
+            ),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
@@ -44,7 +54,7 @@ class CourseStampDialog extends StatelessWidget {
             onPressed: () => context.router.pop(true),
             borderWidth: 2,
             borderRadius: 30,
-            text: '정복 스탬프 발행하러 가기',
+            text: '정복 스탬프 발행하러 가기'.tr(),
             textStyle: context.textTheme.bodyMedium?.copyWith(
               color: Colors.black,
               fontWeight: FontWeight.bold,

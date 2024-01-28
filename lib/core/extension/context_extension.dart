@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -69,7 +70,7 @@ extension BuildContextExtension on BuildContext {
             TextButton(
               onPressed: () => context.router.pop(true),
               child: Text(
-                '확인',
+                '확인'.tr(),
                 style: textTheme.bodySmall?.copyWith(
                   color: Colors.blue,
                   fontWeight: FontWeight.w600,
@@ -111,7 +112,7 @@ extension BuildContextExtension on BuildContext {
             TextButton(
               onPressed: () => context.router.pop(false),
               child: Text(
-                '취소',
+                '취소'.tr(),
                 style: textTheme.bodyMedium?.copyWith(
                   color: Colors.grey,
                   fontWeight: FontWeight.w600,
@@ -121,7 +122,7 @@ extension BuildContextExtension on BuildContext {
             TextButton(
               onPressed: () => context.router.pop(true),
               child: Text(
-                positiveButtonText ?? '확인',
+                positiveButtonText ?? '확인'.tr(),
                 style: textTheme.bodyMedium?.copyWith(
                   color: Colors.blue,
                   fontWeight: FontWeight.w600,
@@ -149,7 +150,7 @@ extension BuildContextExtension on BuildContext {
     }
 
     final ret = await showConfirm(
-        title: '로그인 하시겠습니까?', message: '해당 서비스를 이용하시려면 로그인을 해야 합니다');
+        title: '로그인 하시겠습니까?'.tr(), message: '해당 서비스를 이용하시려면 로그인을 해야 합니다'.tr());
     if (ret == null || ret == false) {
       return;
     }
