@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
@@ -5,14 +6,21 @@ import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 
 class CourseStampCompletedDialog extends StatelessWidget {
+  final String courseName;
   final VoidCallback? onButtonPressed;
-  const CourseStampCompletedDialog({super.key, this.onButtonPressed});
+  const CourseStampCompletedDialog({
+    super.key,
+    required this.courseName,
+    this.onButtonPressed,
+  });
 
-  static show(BuildContext context, {VoidCallback? onButtonPressed}) {
+  static show(BuildContext context,
+      {required String courseName, VoidCallback? onButtonPressed}) {
     return showDialog(
       context: context,
       builder: (context) {
         return CourseStampCompletedDialog(
+          courseName: courseName,
           onButtonPressed: onButtonPressed,
         );
       },
@@ -30,7 +38,9 @@ class CourseStampCompletedDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '{코스명} 코스 정복 스탬프가\n발행되었습니다!',
+            '코스 정복 스탬프가 발행되었습니다'.tr(namedArgs: {
+              'courseName': courseName,
+            }),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
@@ -50,7 +60,7 @@ class CourseStampCompletedDialog extends StatelessWidget {
             borderRadius: 30,
             backgroundColor: AppColor.secondary,
             padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 10),
-            text: '메인으로 돌아가기',
+            text: '메인으로 돌아가기'.tr(),
             textStyle: context.textTheme.bodyMedium?.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,

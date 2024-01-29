@@ -95,7 +95,7 @@ class AppRouter extends _$AppRouter {
 
         AutoRoute(path: '/spot/:spotId', page: SpotDetailRoute.page),
 
-        AutoRoute(path: '/stamp/regist', page: StampRegistRoute.page),
+        AutoRoute(path: '/stamp/regist/:courseId', page: StampRegistRoute.page),
 
         AutoRoute(path: '/search', page: SearchRoute.page),
 

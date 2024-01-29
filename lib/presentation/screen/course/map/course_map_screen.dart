@@ -247,12 +247,13 @@ class _CourseMapScreenState extends State<CourseMapScreen> {
           await CourseStampDialog.show(context, courseName: course.title);
       if (ret == null || ret == false) return;
 
-      _showStampPoll();
+      _showStampPoll(course);
     });
   }
 
-  _showStampPoll() async {
-    final ret = await context.router.pushNamed('/stamp/regist');
+  _showStampPoll(Course course) async {
+    final ret = await context.router.pushNamed(
+        '/stamp/regist/${widget.courseId}?courseName=${course.title}');
     if (ret == null || ret == false) return;
 
     context.router.navigateNamed('/main/home');

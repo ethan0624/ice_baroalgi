@@ -264,9 +264,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     StampRegistRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<StampRegistRouteArgs>(
+          orElse: () => StampRegistRouteArgs(
+                courseId: pathParams.getInt('courseId'),
+                courseName: queryParams.optString('courseName'),
+              ));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const StampRegistScreen(),
+        child: StampRegistScreen(
+          key: args.key,
+          courseId: args.courseId,
+          courseName: args.courseName,
+        ),
       );
     },
     UpdatePhoneRoute.name: (routeData) {
@@ -1016,16 +1027,47 @@ class SpotDetailRouteArgs {
 
 /// generated route for
 /// [StampRegistScreen]
-class StampRegistRoute extends PageRouteInfo<void> {
-  const StampRegistRoute({List<PageRouteInfo>? children})
-      : super(
+class StampRegistRoute extends PageRouteInfo<StampRegistRouteArgs> {
+  StampRegistRoute({
+    Key? key,
+    required int courseId,
+    String? courseName,
+    List<PageRouteInfo>? children,
+  }) : super(
           StampRegistRoute.name,
+          args: StampRegistRouteArgs(
+            key: key,
+            courseId: courseId,
+            courseName: courseName,
+          ),
+          rawPathParams: {'courseId': courseId},
+          rawQueryParams: {'courseName': courseName},
           initialChildren: children,
         );
 
   static const String name = 'StampRegistRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<StampRegistRouteArgs> page =
+      PageInfo<StampRegistRouteArgs>(name);
+}
+
+class StampRegistRouteArgs {
+  const StampRegistRouteArgs({
+    this.key,
+    required this.courseId,
+    this.courseName,
+  });
+
+  final Key? key;
+
+  final int courseId;
+
+  final String? courseName;
+
+  @override
+  String toString() {
+    return 'StampRegistRouteArgs{key: $key, courseId: $courseId, courseName: $courseName}';
+  }
 }
 
 /// generated route for

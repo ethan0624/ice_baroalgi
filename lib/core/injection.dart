@@ -4,6 +4,7 @@ import 'package:incheon_knowhow/domain/usecase/auth/update_jinro_account.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_phone.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/verify_password.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_qna_categories.dart';
+import 'package:incheon_knowhow/domain/usecase/course/request_stamp.dart';
 import 'package:incheon_knowhow/domain/usecase/search/clear_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/delete_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/find_recent_keyword.dart';
@@ -219,6 +220,12 @@ class Injection {
     );
     getIt.registerLazySingleton<CancelCourse>(
       () => CancelCourse(
+        authProvider: getIt(),
+        repository: getIt(),
+      ),
+    );
+    getIt.registerLazySingleton<RequestStamp>(
+      () => RequestStamp(
         authProvider: getIt(),
         repository: getIt(),
       ),

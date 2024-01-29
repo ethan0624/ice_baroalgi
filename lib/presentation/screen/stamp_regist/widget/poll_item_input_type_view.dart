@@ -7,6 +7,7 @@ class PollItemInputTypeView extends StatefulWidget {
   final String question;
   final String hintText;
   final bool isRequired;
+  final String initialValue;
   final String? description;
   final ValueChanged<String>? onTextChanged;
   const PollItemInputTypeView({
@@ -15,6 +16,7 @@ class PollItemInputTypeView extends StatefulWidget {
     required this.question,
     required this.hintText,
     this.isRequired = false,
+    this.initialValue = '',
     this.description,
     this.onTextChanged,
   });
@@ -33,7 +35,12 @@ class _PollItemInputTypeViewState extends State<PollItemInputTypeView> {
   @override
   void initState() {
     super.initState();
+
     _textController.addListener(_onTextChanged);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _textController.text = widget.initialValue;
+    });
   }
 
   @override

@@ -29,7 +29,7 @@ class AppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final VoidCallback? onSubmitted;
   final VoidCallback? onTap;
-  final VoidCallback? onChange;
+  final ValueChanged<String>? onChanged;
   final bool enabled;
   final bool autoFocus;
   final List<TextInputFormatter>? inputFormatters;
@@ -61,7 +61,7 @@ class AppTextFormField extends StatelessWidget {
     this.validator,
     this.onSubmitted,
     this.onTap,
-    this.onChange,
+    this.onChanged,
     this.enabled = true,
     this.autoFocus = false,
     this.suffix,
@@ -158,7 +158,7 @@ class AppTextFormField extends StatelessWidget {
               controller?.text = value ?? '';
             },
             onChanged: (value) {
-              onChange?.call();
+              onChanged?.call(value);
             },
             onTap: onTap,
             enabled: enabled,

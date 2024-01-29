@@ -145,7 +145,7 @@ class _ResetPwCertificationScreenState
                   maxLength: 6,
                   keyboardType: TextInputType.number,
                   autoFocus: true,
-                  onChange: () {
+                  onChanged: (value) {
                     final code = _codeTextController.text;
                     if (code.length == 6) {
                       _onCodeSubmit();
