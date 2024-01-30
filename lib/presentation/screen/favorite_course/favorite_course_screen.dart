@@ -19,6 +19,14 @@ class FavoriteCourseScreen extends StatefulWidget {
 }
 
 class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
+  bool _isHideCompletedCourse = false;
+
+  _onToggleHideCompleteCourse() {
+    setState(() {
+      _isHideCompletedCourse = !_isHideCompletedCourse;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<FavoriteCourseBloc, FavoriteCourseBloc,
@@ -27,54 +35,75 @@ class _FavoriteCourseScreenState extends State<FavoriteCourseScreen> {
       create: (_) =>
           FavoriteCourseBloc()..add(const FavoriteCourseEvent.initial()),
       builder: (context, bloc, state) {
-        return ListView(
-          padding: const EdgeInsets.symmetric(
-              horizontal: defaultMarginValue, vertical: 12),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '총 코스'.tr(namedArgs: {
-                    'total': state.favoriteCourse.length.toNumberFormat
-                  }),
-                  style: context.textTheme.labelMedium?.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.w600),
-                ),
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    const AppCheckbox(),
-                    Text(
-                      '완료코스 숨김'.tr(),
-                      style: context.textTheme.labelMedium?.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            if (state.favoriteCourse.isEmpty)
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 60),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    '찜한 코스가 없습니다'.tr(),
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+        return (state.isLoading)
+            ? Container()
+            : ListView(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: defaultMarginValue, vertical: 12),
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '총 코스'.tr(namedArgs: {
+                          'total': state.favoriteCourse
+                              .where((e) => (_isHideCompletedCourse)
+                                  ? !e.isCompleted
+                                  : true)
+                              .length
+                              .toNumberFormat
+                        }),
+                        style: context.textTheme.labelMedium?.copyWith(
+                            color: Colors.black, fontWeight: FontWeight.w600),
+                      ),
+                      InkWell(
+                        onTap: _onToggleHideCompleteCourse,
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            AppCheckbox(
+                              isChecked: _isHideCompletedCourse,
+                              onCheckChanged: (value) =>
+                                  _onToggleHideCompleteCourse(),
+                            ),
+                            Text(
+                              '완료코스 숨김'.tr(),
+                              style: context.textTheme.labelMedium?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ...state.favoriteCourse.map(
-              (e) => CourseListItem(
-                margin: const EdgeInsets.symmetric(vertical: 6),
-                course: e,
-              ),
-            ),
-          ],
-        );
+                  if (state.favoriteCourse
+                      .where((e) =>
+                          (_isHideCompletedCourse) ? !e.isCompleted : true)
+                      .isEmpty)
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 60),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Text(
+                          '찜한 코스가 없습니다'.tr(),
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ...state.favoriteCourse
+                      .where((e) =>
+                          (_isHideCompletedCourse) ? !e.isCompleted : true)
+                      .map(
+                        (e) => CourseListItem(
+                          margin: const EdgeInsets.symmetric(vertical: 6),
+                          course: e,
+                        ),
+                      ),
+                ],
+              );
       },
     );
   }
