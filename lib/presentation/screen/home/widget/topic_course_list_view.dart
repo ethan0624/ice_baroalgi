@@ -7,7 +7,7 @@ import 'package:incheon_knowhow/domain/model/topic_course.dart';
 import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_topic_expansion.dart';
 
-class TopicCourseListView extends StatelessWidget {
+class TopicCourseListView extends StatefulWidget {
   final List<TopicCourse> topicCourse;
   final int? expandedTopicId;
   final ScrollController? scrollController;
@@ -22,10 +22,23 @@ class TopicCourseListView extends StatelessWidget {
   });
 
   @override
+  State<TopicCourseListView> createState() => _TopicCourseListViewState();
+}
+
+class _TopicCourseListViewState extends State<TopicCourseListView> {
+  bool _isHideCompletedCourse = false;
+
+  _onToggleHideCompleteCourse() {
+    setState(() {
+      _isHideCompletedCourse = !_isHideCompletedCourse;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView(
       key: const PageStorageKey('home-topic-list'),
-      controller: scrollController,
+      controller: widget.scrollController,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
@@ -33,31 +46,43 @@ class TopicCourseListView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '총 ${topicCourse.where((e) => e.hasCourse).length.toNumberFormat}주제',
+                '총 주제'.tr(namedArgs: {
+                  'topicCount': widget.topicCourse
+                      .where((e) => e.hasCourse)
+                      .length
+                      .toNumberFormat
+                }),
                 style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  const AppCheckbox(),
-                  Text(
-                    '완료코스 숨김'.tr(),
-                    style: context.textTheme.labelMedium?.copyWith(
-                        color: Colors.black, fontWeight: FontWeight.w600),
-                  ),
-                ],
+              InkWell(
+                onTap: _onToggleHideCompleteCourse,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    AppCheckbox(
+                      isChecked: _isHideCompletedCourse,
+                      onCheckChanged: (value) => _onToggleHideCompleteCourse(),
+                    ),
+                    Text(
+                      '완료코스 숨김'.tr(),
+                      style: context.textTheme.labelMedium?.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-        ...topicCourse
+        ...widget.topicCourse
             .where((e) => e.hasCourse)
             .map((e) => CourseTopicExpansion(
                   topicCourse: e,
-                  expended: e.id == expandedTopicId,
+                  expended: e.id == widget.expandedTopicId,
+                  visibleCompletedCourse: !_isHideCompletedCourse,
                   onExpended: (expaned) {
-                    onExpaned?.call(e.id, expaned);
+                    widget.onExpaned?.call(e.id, expaned);
                   },
                 )),
       ],

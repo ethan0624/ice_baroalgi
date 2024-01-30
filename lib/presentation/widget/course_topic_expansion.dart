@@ -10,11 +10,13 @@ import 'package:incheon_knowhow/presentation/widget/thumbnail.dart';
 class CourseTopicExpansion extends StatefulWidget {
   final TopicCourse topicCourse;
   final bool expended;
+  final bool visibleCompletedCourse;
   final ValueChanged<bool>? onExpended;
   const CourseTopicExpansion({
     super.key,
     required this.topicCourse,
     this.expended = false,
+    this.visibleCompletedCourse = true,
     this.onExpended,
   });
 
@@ -89,7 +91,10 @@ class _CourseTopicExpansionState extends State<CourseTopicExpansion> {
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: Column(
                 children: widget.topicCourse.courses
-                        ?.map((e) => CourseListItem(
+                        ?.where((e) => (widget.visibleCompletedCourse)
+                            ? true
+                            : !e.isCompleted)
+                        .map((e) => CourseListItem(
                               course: e,
                             ))
                         .toList() ??

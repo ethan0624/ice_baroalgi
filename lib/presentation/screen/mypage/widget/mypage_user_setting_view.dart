@@ -101,7 +101,7 @@ class MypageUserSettingView extends StatelessWidget {
         const SectionDivider(
           margin: EdgeInsets.symmetric(vertical: defaultMarginValue),
         ),
-        const MypageSettingSectionTitle(title: '서비스약관'),
+        MypageSettingSectionTitle(title: '서비스약관'.tr()),
         MypageSettingListItem(
           title: '이용약관'.tr(),
           tail: const Icon(

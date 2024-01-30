@@ -9,7 +9,7 @@ import 'package:incheon_knowhow/presentation/widget/app_checkbox.dart';
 import 'package:incheon_knowhow/presentation/widget/course_list_item.dart';
 import 'package:incheon_knowhow/presentation/widget/filter_button.dart';
 
-class RegionCourseListView extends StatelessWidget {
+class RegionCourseListView extends StatefulWidget {
   final List<RegionCategoryType> regions;
   final RegionCategoryType selectedRegion;
   final List<Course> courseList;
@@ -26,10 +26,23 @@ class RegionCourseListView extends StatelessWidget {
   });
 
   @override
+  State<RegionCourseListView> createState() => _RegionCourseListViewState();
+}
+
+class _RegionCourseListViewState extends State<RegionCourseListView> {
+  bool _isHideCompletedCourse = false;
+
+  _onToggleHideCompleteCourse() {
+    setState(() {
+      _isHideCompletedCourse = !_isHideCompletedCourse;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView(
       key: const PageStorageKey('home-region-list'),
-      controller: scrollController,
+      controller: widget.scrollController,
       children: [
         Container(
           margin: const EdgeInsets.symmetric(vertical: 12),
@@ -38,13 +51,13 @@ class RegionCourseListView extends StatelessWidget {
             key: const PageStorageKey('home-region-category-list'),
             padding: const EdgeInsets.symmetric(horizontal: defaultMarginValue),
             scrollDirection: Axis.horizontal,
-            itemCount: regions.length,
+            itemCount: widget.regions.length,
             itemBuilder: (context, index) {
-              final region = regions[index];
+              final region = widget.regions[index];
               return FilterButton(
                 text: region.title,
-                isSelected: region == selectedRegion,
-                onPressed: () => onRegionChanged?.call(region),
+                isSelected: region == widget.selectedRegion,
+                onPressed: () => widget.onRegionChanged?.call(region),
               );
             },
             separatorBuilder: (context, index) {
@@ -59,21 +72,27 @@ class RegionCourseListView extends StatelessWidget {
             children: [
               Text(
                 '총 코스'.tr(namedArgs: {
-                  'total': courseList.length.toNumberFormat,
+                  'total': widget.courseList.length.toNumberFormat,
                 }),
                 style: context.textTheme.labelMedium?.copyWith(
                     color: Colors.black, fontWeight: FontWeight.w600),
               ),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  const AppCheckbox(),
-                  Text(
-                    '완료코스 숨김'.tr(),
-                    style: context.textTheme.labelMedium?.copyWith(
-                        color: Colors.black, fontWeight: FontWeight.w600),
-                  )
-                ],
+              InkWell(
+                onTap: _onToggleHideCompleteCourse,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    AppCheckbox(
+                      isChecked: _isHideCompletedCourse,
+                      onCheckChanged: (value) => _onToggleHideCompleteCourse(),
+                    ),
+                    Text(
+                      '완료코스 숨김'.tr(),
+                      style: context.textTheme.labelMedium?.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -82,7 +101,8 @@ class RegionCourseListView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           color: AppColor.background,
           child: Column(
-            children: courseList
+            children: widget.courseList
+                .where((e) => (_isHideCompletedCourse) ? !e.isCompleted : true)
                 .map((e) => CourseListItem(
                       course: e,
                     ))

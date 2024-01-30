@@ -119,14 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           TopicCourseListView(
                             topicCourse: state.topicCourse,
                             expandedTopicId: state.expandedTopicId,
-                            // scrollController: _scrollController,
                             onExpaned: _onExpanededTopic,
                           ),
                           RegionCourseListView(
                             regions: RegionCategoryType.values,
                             selectedRegion: state.selectedRegionCategoryType,
                             courseList: state.filterRegionCourse,
-                            // scrollController: _scrollController,
                             onRegionChanged: _onRegionChanged,
                           ),
                           RecommendCourseListView(
