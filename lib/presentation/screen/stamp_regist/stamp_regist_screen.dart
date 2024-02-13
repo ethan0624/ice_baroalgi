@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:incheon_knowhow/presentation/screen/stamp_regist/widget/poll_item_date_type_view.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -71,19 +72,19 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
   }
 
   void _onStampRegistPressed() {
-    final isValid = _answerMap.entries
+    final validCount = _answerMap.entries
         .where((e) => e.key != 2)
-        .any((e) => e.value.isNotEmpty);
-    print('>>>> isValid : $isValid');
-    if (!isValid) {
+        .where((e) => e.value.isNotEmpty)
+        .length;
+    if (validCount < 9) {
       context.showAlert(title: '입력오류'.tr(), message: '설문 항목을 입력해주세요'.tr());
       return;
     }
 
-    // final bloc = _scaffoldKey.currentContext?.read<StampRegistBloc>();
-    // if (bloc == null) return;
+    final bloc = _scaffoldKey.currentContext?.read<StampRegistBloc>();
+    if (bloc == null) return;
 
-    // bloc.add(StampRegistEvent.save(_answerMap));
+    bloc.add(StampRegistEvent.save(_answerMap));
   }
 
   void _onSuccess() async {
@@ -142,6 +143,9 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       '각종 어학점수를 얻기 위한 활동'.tr(),
                       '자신의 관심 흥미에 따른 활동'.tr(),
                     ],
+                    onValueChanged: (value) {
+                      _answerMap[2] = value;
+                    },
                   ),
                   PollItemInputTypeView(
                     number: 3,
@@ -154,7 +158,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                     },
                   ),
                   // todo: 년도, 월
-                  PollItemInputTypeView(
+                  PollItemDateTypeView(
                     number: 4,
                     question: '여러분의 체험은 언제였나요'.tr(),
                     hintText: '년도, 월',
@@ -173,6 +177,9 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                       '중규모 체험 16 30명'.tr(),
                       '대규모 체험 31명 이상'.tr(),
                     ],
+                    onValueChanged: (value) {
+                      _answerMap[5] = value;
+                    },
                   ),
                   PollItemMultipleChoiceTypeView(
                     number: 6,
@@ -181,6 +188,9 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                     }),
                     options: const ['관련직업', '관련직업1', '관련직업2'],
                     isRequired: true,
+                    onValueChanged: (value) {
+                      _answerMap[6] = value;
+                    },
                   ),
                   AppButton(
                     text: '다음'.tr(),

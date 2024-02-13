@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,21 +8,17 @@ import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
 
 class CourseStampCompletedDialog extends StatelessWidget {
   final String courseName;
-  final VoidCallback? onButtonPressed;
   const CourseStampCompletedDialog({
     super.key,
     required this.courseName,
-    this.onButtonPressed,
   });
 
-  static show(BuildContext context,
-      {required String courseName, VoidCallback? onButtonPressed}) {
+  static show(BuildContext context, {required String courseName}) {
     return showDialog(
       context: context,
       builder: (context) {
         return CourseStampCompletedDialog(
           courseName: courseName,
-          onButtonPressed: onButtonPressed,
         );
       },
     );
@@ -55,7 +52,7 @@ class CourseStampCompletedDialog extends StatelessWidget {
             ),
           ),
           OutlineButton(
-            onPressed: onButtonPressed,
+            onPressed: () => context.router.pop(),
             borderWidth: 2,
             borderRadius: 30,
             backgroundColor: AppColor.secondary,
