@@ -215,6 +215,7 @@ abstract class ApiClient {
   @GET('/qna')
   Future<DataResponse<QnaPaging>> findQna();
 
+  @MultiPart()
   @POST('/qna')
   Future<DataResponse<String>> saveQna(
     @Body() Map<String, dynamic> data,

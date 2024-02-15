@@ -7,6 +7,7 @@ import 'package:incheon_knowhow/domain/usecase/auth/verify_password.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_qna_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/course/request_stamp.dart';
 import 'package:incheon_knowhow/domain/usecase/etc/get_translate_text.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/insert_qna.dart';
 import 'package:incheon_knowhow/domain/usecase/search/clear_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/delete_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/find_recent_keyword.dart';
@@ -253,6 +254,9 @@ class Injection {
     );
     getIt.registerLazySingleton<FindQna>(
       () => FindQna(repository: getIt()),
+    );
+    getIt.registerLazySingleton<InsertQna>(
+      () => InsertQna(repository: getIt()),
     );
     getIt.registerLazySingleton<GetBusinessInfo>(
       () => GetBusinessInfo(repository: getIt()),

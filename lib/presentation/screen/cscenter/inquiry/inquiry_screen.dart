@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/base/base_side_effect_bloc_layout.dart';
+import 'package:incheon_knowhow/presentation/base/bloc_effect.dart';
 import 'package:incheon_knowhow/presentation/screen/cscenter/inquiry/bloc/inquiry_bloc.dart';
 import 'package:incheon_knowhow/presentation/screen/cscenter/inquiry/widget/inquiry_form.dart';
 import 'package:incheon_knowhow/presentation/screen/cscenter/inquiry/widget/inquiry_list_view.dart';
 import 'package:incheon_knowhow/presentation/widget/app_sub_app_bar.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class InquiryScreen extends StatefulWidget {
@@ -18,11 +20,30 @@ class InquiryScreen extends StatefulWidget {
 }
 
 class _InquiryScreenState extends State<InquiryScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  _onInquirySubmit(InqueryFormData data) {
+    final bloc = _scaffoldKey.currentContext?.read<InquiryBloc>();
+    if (bloc == null) return;
+
+    bloc.add(InquiryEvent.request(
+      title: data.title,
+      content: data.question,
+      files: data.files ?? [],
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<InquiryBloc, InquiryBloc, InquiryState>(
+      scaffoldKey: _scaffoldKey,
       appBar: AppSubAppBar(text: '1:1문의'.tr()),
       create: (_) => InquiryBloc()..add(const InquiryEvent.initial()),
+      effectChanged: (context, effect) {
+        if (effect is SuccessEffect) {
+          context.showAlert(title: '정상적으로 처리되었습니다');
+        }
+      },
       builder: (context, bloc, state) {
         return DefaultTabController(
           length: 2,
@@ -49,7 +70,9 @@ class _InquiryScreenState extends State<InquiryScreen> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    const InquiryForm(),
+                    InquiryForm(
+                      onSubmit: _onInquirySubmit,
+                    ),
                     InquiryListView(
                       items: state.qnaItems,
                     ),

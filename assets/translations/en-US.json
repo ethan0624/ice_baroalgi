@@ -77,7 +77,7 @@
     "문의제목": "Inquiry title",
     "문의제목을 입력하세요 80자 이내": "Please enter the inquiry title. (Within 80 characters)",
     "문의내용": "Inquiry content",
-    "문의내용을 입력하세요. 2,000자 이내": "Please enter the inquiry content. (Within 2,000 characters)",
+    "문의내용을 입력하세요 2000자 이내": "Please enter the inquiry content. (Within 2,000 characters)",
     "파일첨부 선택": "File attachment (optional)",
     "최대 5개, 30MB까지 등록가능": "Up to 5 files, maximum size 30MB each can be registered",
     "문의남기기": "Submit inquiry",

@@ -944,6 +944,7 @@ class _ApiClient implements ApiClient {
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
             .compose(
               _dio.options,

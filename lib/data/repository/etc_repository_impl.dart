@@ -81,6 +81,8 @@ class EtcRepositoryImpl implements EtcRepository {
   ) async {
     final data = {
       'title': title,
+      'question': question,
+      'fileUrl': files,
     };
     final res = await safetyCall<String>(apiClient.saveQna(data));
 
