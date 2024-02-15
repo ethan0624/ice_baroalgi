@@ -19,10 +19,15 @@ class InquiryScreen extends StatefulWidget {
   State<InquiryScreen> createState() => _InquiryScreenState();
 }
 
-class _InquiryScreenState extends State<InquiryScreen> {
+class _InquiryScreenState extends State<InquiryScreen>
+    with SingleTickerProviderStateMixin {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _inquiryFormKey = GlobalKey<InquiryFormState>();
+  late TabController _tabController;
 
   _onInquirySubmit(InqueryFormData data) {
+    FocusManager.instance.primaryFocus?.unfocus();
+
     final bloc = _scaffoldKey.currentContext?.read<InquiryBloc>();
     if (bloc == null) return;
 
@@ -33,6 +38,31 @@ class _InquiryScreenState extends State<InquiryScreen> {
     ));
   }
 
+  _onInquirySuccess() {
+    context.showAlert(title: '정상적으로 처리되었습니다');
+    final bloc = _scaffoldKey.currentContext?.read<InquiryBloc>();
+    if (bloc == null) return;
+
+    _inquiryFormKey.currentState?.onClear();
+
+    bloc.add(const InquiryEvent.refresh());
+
+    _tabController.animateTo(1);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseSideEffectBlocLayout<InquiryBloc, InquiryBloc, InquiryState>(
@@ -41,46 +71,43 @@ class _InquiryScreenState extends State<InquiryScreen> {
       create: (_) => InquiryBloc()..add(const InquiryEvent.initial()),
       effectChanged: (context, effect) {
         if (effect is SuccessEffect) {
-          context.showAlert(title: '정상적으로 처리되었습니다');
+          _onInquirySuccess();
         }
       },
       builder: (context, bloc, state) {
-        return DefaultTabController(
-          length: 2,
-          child: Column(
-            children: [
-              TabBar(
-                padding: const EdgeInsets.all(defaultMarginValue),
-                splashFactory: NoSplash.splashFactory,
-                // indicator: const BoxDecoration(
-                //   color: Color(0xffffedf3),
-                // ),
-                labelColor: AppColor.primary,
-                labelStyle: context.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                unselectedLabelColor: AppTextColor.medium,
-                unselectedLabelStyle: context.textTheme.bodyMedium,
-                dividerHeight: 0,
-                tabs: [
-                  Tab(text: '문의하기'.tr()),
-                  Tab(text: '문의내역'.tr()),
+        return Column(
+          children: [
+            TabBar(
+              controller: _tabController,
+              padding: const EdgeInsets.all(defaultMarginValue),
+              splashFactory: NoSplash.splashFactory,
+              labelColor: AppColor.primary,
+              labelStyle: context.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+              unselectedLabelColor: AppTextColor.medium,
+              unselectedLabelStyle: context.textTheme.bodyMedium,
+              dividerHeight: 0,
+              tabs: [
+                Tab(text: '문의하기'.tr()),
+                Tab(text: '문의내역'.tr()),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  InquiryForm(
+                    key: _inquiryFormKey,
+                    onSubmit: _onInquirySubmit,
+                  ),
+                  InquiryListView(
+                    items: state.qnaItems,
+                  ),
                 ],
               ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    InquiryForm(
-                      onSubmit: _onInquirySubmit,
-                    ),
-                    InquiryListView(
-                      items: state.qnaItems,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

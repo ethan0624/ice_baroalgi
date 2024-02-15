@@ -1,15 +1,19 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:incheon_knowhow/domain/model/category.dart';
-import 'package:incheon_knowhow/domain/model/faq_paging.dart';
-import 'package:incheon_knowhow/domain/model/qna_paging.dart';
-import 'package:incheon_knowhow/domain/model/search_result.dart';
-import 'package:incheon_knowhow/domain/model/spot.dart';
+import 'package:retrofit/http.dart';
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:incheon_knowhow/config/app_config.dart';
 import 'package:incheon_knowhow/config/app_info.dart';
 import 'package:incheon_knowhow/config/constrants.dart';
 import 'package:incheon_knowhow/core/provider/auth_provider.dart';
+import 'package:incheon_knowhow/domain/model/category.dart';
+import 'package:incheon_knowhow/domain/model/faq_paging.dart';
+import 'package:incheon_knowhow/domain/model/qna_paging.dart';
+import 'package:incheon_knowhow/domain/model/search_result.dart';
+import 'package:incheon_knowhow/domain/model/spot.dart';
 import 'package:incheon_knowhow/data/response/data_response.dart';
 import 'package:incheon_knowhow/domain/model/business_info.dart';
 import 'package:incheon_knowhow/domain/model/course.dart';
@@ -217,9 +221,12 @@ abstract class ApiClient {
 
   @MultiPart()
   @POST('/qna')
-  Future<DataResponse<String>> saveQna(
-    @Body() Map<String, dynamic> data,
-  );
+  Future<DataResponse<String>> saveQna({
+    @Part(name: 'title') required String title,
+    @Part(name: 'question') required String question,
+    @Part(name: 'fileUrl', contentType: 'image/jpeg')
+    required List<File> fileUrl,
+  });
 
   // 사업자정보 조회
   @GET('/client/info')

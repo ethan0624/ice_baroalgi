@@ -4,6 +4,7 @@ sealed class InquiryEvent extends Equatable {
   const InquiryEvent();
 
   const factory InquiryEvent.initial() = InquiryOnInitial;
+  const factory InquiryEvent.refresh() = InquiryOnRefresh;
   const factory InquiryEvent.request({
     required String title,
     required String content,
@@ -16,6 +17,10 @@ sealed class InquiryEvent extends Equatable {
 
 class InquiryOnInitial extends InquiryEvent {
   const InquiryOnInitial();
+}
+
+class InquiryOnRefresh extends InquiryEvent {
+  const InquiryOnRefresh();
 }
 
 class InquiryOnRequest extends InquiryEvent {

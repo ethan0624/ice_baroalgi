@@ -26,6 +26,16 @@ class InquiryBloc extends BaseSideEffectBloc<InquiryEvent, InquiryState> {
       ));
     });
 
+    on<InquiryOnRefresh>((event, emit) async {
+      final res = await _findQna.call();
+      final qnas = res.tryGetSuccess()?.rows ?? [];
+
+      emit(state.copyWith(
+        isLoading: false,
+        qnaItems: qnas,
+      ));
+    });
+
     on<InquiryOnRequest>((event, emit) async {
       if (state.isLoading) return;
 

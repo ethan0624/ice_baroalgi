@@ -933,12 +933,30 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<DataResponse<String>> saveQna(Map<String, dynamic> data) async {
+  Future<DataResponse<String>> saveQna({
+    required String title,
+    required String question,
+    required List<File> fileUrl,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(data);
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'title',
+      title,
+    ));
+    _data.fields.add(MapEntry(
+      'question',
+      question,
+    ));
+    _data.files.addAll(fileUrl.map((i) => MapEntry(
+        'fileUrl',
+        MultipartFile.fromFileSync(
+          i.path,
+          filename: i.path.split(Platform.pathSeparator).last,
+          contentType: MediaType.parse('image/jpeg'),
+        ))));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',

@@ -283,5 +283,10 @@
     "회원가입 실패": "Đăng ký thành viên không thành công",
     "회원가입처리에 실패하였습니다": "Xử lý đăng ký thành viên không thành công.",
     "비밀번호가 일치하지 않습니다": "Mật khẩu không phù hợp",
-    "년도 월": "Năm tháng"
+    "년도 월": "Năm tháng",
+    "문의내용을 입력해주세요": "Vui lòng nhập chi tiết yêu cầu của bạn",
+    "파일은 최대 5장까지만 업로드 가능합니다": "Có thể tải lên tối đa 5 tập tin.",
+    "첨부한 파일을 삭제하시겠습니까": "Bạn có muốn xóa tập tin đính kèm?",
+    "앨범에서 사진 선택": "Chọn ảnh từ album",
+    "카메라 촬영": "chụp ảnh"
 }

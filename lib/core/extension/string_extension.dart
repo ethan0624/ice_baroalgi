@@ -1,3 +1,6 @@
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as p;
+
 extension StringExtension on String {
   // 5~50자의 영문 대/소문자, 숫자, 특수문자(_,-)만 사용 가능
   bool isValidId() {
@@ -32,5 +35,9 @@ extension StringExtension on String {
   bool hasNumber() {
     final regex = RegExp(r'\d');
     return regex.hasMatch(this);
+  }
+
+  String ext() {
+    return p.extension(this).toLowerCase();
   }
 }
