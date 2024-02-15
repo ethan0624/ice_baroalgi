@@ -161,7 +161,7 @@ class _StampRegistScreenState extends State<StampRegistScreen> {
                   PollItemDateTypeView(
                     number: 4,
                     question: '여러분의 체험은 언제였나요'.tr(),
-                    hintText: '년도, 월',
+                    hintText: '년도 월'.tr(),
                     isRequired: true,
                     onTextChanged: (value) {
                       _answerMap[4] = value;

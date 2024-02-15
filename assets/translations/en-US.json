@@ -63,6 +63,7 @@
     "본인인증": "Identity verification",
     "잠시만 기다려주세요": "Please wait a moment...",
     "번역보기": "View translation",
+    "원본보기": "View original",
     "스팟 리스트": "Spot list",
     "코스 시작하기": "Start the course",
     "정복을 중단하시겠습니까": "Would you like to stop conquering?",
@@ -271,5 +272,16 @@
     "작성해주세요": "please write",
     "기타": "etc",
     "년도": "year",
-    "월": "month"
+    "월": "month",
+    "깃발을 등록했습니다": "Your flag has been registered!",
+    "등록완료": "Finished appointment",
+    "에 도착했나요": "Have you arrived at {spotName}?",
+    "본인인증 실패": "Identity verification failed",
+    "본인인인증을 실패하였습니다": "Identity authentication failed.",
+    "이메일 오류": "email error",
+    "이메일 중복확인을 해주세요": "Please check for duplicate emails.",
+    "회원가입 실패": "Membership registration failed",
+    "회원가입처리에 실패하였습니다": "Membership registration processing failed.",
+    "비밀번호가 일치하지 않습니다": "Passwords do not match",
+    "년도 월": "Year, Month"
 }

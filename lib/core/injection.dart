@@ -1,10 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:incheon_knowhow/data/datasource/papago_api_client.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_jinro_account.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/update_phone.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/verify_password.dart';
 import 'package:incheon_knowhow/domain/usecase/category/find_qna_categories.dart';
 import 'package:incheon_knowhow/domain/usecase/course/request_stamp.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/get_translate_text.dart';
 import 'package:incheon_knowhow/domain/usecase/search/clear_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/delete_recent_keyword.dart';
 import 'package:incheon_knowhow/domain/usecase/search/find_recent_keyword.dart';
@@ -85,6 +87,7 @@ class Injection {
     getIt.registerSingleton<AuthProvider>(authProvider);
     getIt.registerSingleton<ApiClient>(ApiClient(getIt()));
     getIt.registerSingleton<NeisApiClient>(NeisApiClient());
+    getIt.registerSingleton<PapagoApiClient>(PapagoApiClient());
     getIt.registerSingleton<EventBus>(EventBus());
 
     // regist repository
@@ -105,6 +108,7 @@ class Injection {
     ));
     getIt.registerSingleton<EtcRepository>(EtcRepositoryImpl(
       apiClient: getIt(),
+      papagoApiClient: getIt(),
     ));
     getIt.registerSingleton<SearchRepository>(SearchRepositoryImpl(
       apiClient: getIt(),
@@ -287,6 +291,12 @@ class Injection {
     );
     getIt.registerLazySingleton<ClearRecentKeyword>(
       () => ClearRecentKeyword(
+        repository: getIt(),
+      ),
+    );
+
+    getIt.registerLazySingleton<GetTranslateText>(
+      () => GetTranslateText(
         repository: getIt(),
       ),
     );

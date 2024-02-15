@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
+import 'package:incheon_knowhow/core/injection.dart';
+import 'package:incheon_knowhow/domain/usecase/etc/get_translate_text.dart';
 
 class TranslateTextView extends StatefulWidget {
   final String text;
@@ -12,15 +14,27 @@ class TranslateTextView extends StatefulWidget {
 }
 
 class _TranslateTextViewState extends State<TranslateTextView> {
+  final _getTranslateText = getIt<GetTranslateText>();
   bool _showTranslateText = false;
   String _tanslateText = '';
 
-  _toggleTranslate() {
-    // todo: papago translate logic
-    setState(() {
-      _showTranslateText = !_showTranslateText;
-      _tanslateText = widget.text;
-    });
+  _toggleTranslate() async {
+    if (_tanslateText.isNotEmpty) {
+      setState(() {
+        _showTranslateText = !_showTranslateText;
+      });
+      return;
+    }
+
+    final res = await _getTranslateText(
+        targetLocale: context.locale.languageCode, text: widget.text);
+    final translateText = res.tryGetSuccess()?.text ?? '';
+    if (res.isSuccess() && translateText.isNotEmpty) {
+      setState(() {
+        _showTranslateText = !_showTranslateText;
+        _tanslateText = translateText;
+      });
+    }
   }
 
   @override
@@ -48,7 +62,7 @@ class _TranslateTextViewState extends State<TranslateTextView> {
                   splashFactory: NoSplash.splashFactory),
               onPressed: _toggleTranslate,
               child: Text(
-                _showTranslateText ? '번역보기'.tr() : '원본보기'.tr(),
+                _showTranslateText ? '원본보기'.tr() : '번역보기'.tr(),
                 style: context.textTheme.labelLarge,
               ),
             ),

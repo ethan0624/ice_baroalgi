@@ -30,12 +30,13 @@ class _JinroAccountScreenState extends State<JinroAccountScreen> {
   _onAuthPressed() {
     final email = _emailTextController.text;
     if (email.isEmpty) {
-      context.showAlert(title: '이메일 오류', message: '이메일을 입력해주세요');
+      context.showAlert(title: '이메일 오류'.tr(), message: '이메일을 입력해주세요'.tr());
       return;
     }
 
     if (!email.isValidEmail()) {
-      context.showAlert(title: '이메일 오류', message: '올바른 이메일 형식을 입력해주세요');
+      context.showAlert(
+          title: '이메일 오류'.tr(), message: '올바른 이메일 형식을 입력해주세요'.tr());
       return;
     }
 

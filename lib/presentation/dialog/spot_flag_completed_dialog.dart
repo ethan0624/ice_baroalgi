@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -27,7 +28,7 @@ class SpotFlagCompletedDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '깃발을 등록했습니다!',
+            '깃발을 등록했습니다'.tr(),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
@@ -46,7 +47,7 @@ class SpotFlagCompletedDialog extends StatelessWidget {
             borderRadius: 30,
             backgroundColor: AppColor.secondary,
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            text: '등록완료',
+            text: '등록완료'.tr(),
             textStyle: context.textTheme.bodyMedium?.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,

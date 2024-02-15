@@ -63,6 +63,7 @@
     "본인인증": "Xác minh danh tính",
     "잠시만 기다려주세요": "vui lòng đợi trong giây lát...",
     "번역보기": "Xem phiên dịch",
+    "원본보기": "Xem bản gốc",
     "스팟 리스트": "Danh sách tại chỗ",
     "코스 시작하기": "Bắt đầu khóa học",
     "정복을 중단하시겠습니까": "Bạn có muốn ngừng chinh phục?",
@@ -271,5 +272,16 @@
     "작성해주세요": "làm ơn hãy viết",
     "기타": "vân vân",
     "년도": "năm",
-    "월": "tháng"
+    "월": "tháng",
+    "깃발을 등록했습니다": "Cờ của bạn đã được đăng ký!",
+    "등록완료": "Đã kết thúc cuộc hẹn",
+    "에 도착했나요": "Bạn đã đến {spotName} chưa?",
+    "본인인증 실패": "Xác minh danh tính không thành công",
+    "본인인인증을 실패하였습니다": "Xác thực danh tính không thành công.",
+    "이메일 오류": "lỗi email",
+    "이메일 중복확인을 해주세요": "Vui lòng kiểm tra các email trùng lặp.",
+    "회원가입 실패": "Đăng ký thành viên không thành công",
+    "회원가입처리에 실패하였습니다": "Xử lý đăng ký thành viên không thành công.",
+    "비밀번호가 일치하지 않습니다": "Mật khẩu không phù hợp",
+    "년도 월": "Năm tháng"
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/config/app_theme.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
@@ -33,7 +34,7 @@ class PollItemQuestion extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
-                  '$question ${isRequired ? '' : ' (선택)'}',
+                  '$question ${isRequired ? '' : ' (${'선택'.tr()})'}',
                   style: context.textTheme.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.w600),
                 ),

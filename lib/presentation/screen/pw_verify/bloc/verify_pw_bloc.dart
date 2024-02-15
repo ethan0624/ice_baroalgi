@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/domain/usecase/auth/verify_password.dart';
@@ -22,8 +23,8 @@ class VerifyPwBloc extends BaseSideEffectBloc<VerifyPwEvent, VerifyPwState> {
         return;
       }
 
-      produceSideEffect(
-          BlocEffect.showAlert(title: '비밀번호 확인', message: '비밀번호가 일치하지 않습니다'));
+      produceSideEffect(BlocEffect.showAlert(
+          title: '비밀번호 확인'.tr(), message: '비밀번호가 일치하지 않습니다'.tr()));
     });
   }
 }

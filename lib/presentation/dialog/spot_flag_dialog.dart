@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:incheon_knowhow/core/extension/context_extension.dart';
 import 'package:incheon_knowhow/presentation/widget/outline_button.dart';
@@ -30,7 +31,7 @@ class SpotFlagDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '$spotName에 도착했나요?',
+            '에 도착했나요'.tr(namedArgs: {'spotName': spotName}),
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
@@ -47,7 +48,7 @@ class SpotFlagDialog extends StatelessWidget {
             onPressed: () => context.router.pop(true),
             borderWidth: 2,
             borderRadius: 30,
-            text: '깃발 등록하기',
+            text: '깃발 등록하기'.tr(),
             textStyle: context.textTheme.bodyMedium?.copyWith(
               color: Colors.black,
               fontWeight: FontWeight.bold,

@@ -1,17 +1,23 @@
+import 'dart:io';
 // ignore: implementation_imports
 import 'package:multiple_result/src/result.dart';
+
 import 'package:incheon_knowhow/data/response/safety_call.dart';
 import 'package:incheon_knowhow/data/datasource/api_client.dart';
+import 'package:incheon_knowhow/data/datasource/papago_api_client.dart';
 import 'package:incheon_knowhow/domain/model/push.dart';
 import 'package:incheon_knowhow/domain/model/business_info.dart';
 import 'package:incheon_knowhow/domain/model/notice_paging.dart';
 import 'package:incheon_knowhow/domain/model/faq_paging.dart';
 import 'package:incheon_knowhow/domain/model/qna_paging.dart';
+import 'package:incheon_knowhow/domain/model/translate_result.dart';
 import 'package:incheon_knowhow/domain/repository/etc_repository.dart';
 
 class EtcRepositoryImpl implements EtcRepository {
   final ApiClient apiClient;
-  const EtcRepositoryImpl({required this.apiClient});
+  final PapagoApiClient papagoApiClient;
+  const EtcRepositoryImpl(
+      {required this.apiClient, required this.papagoApiClient});
 
   @override
   Future<Result<NoticePaging, Exception>> findNotice() async {
@@ -65,5 +71,40 @@ class EtcRepositoryImpl implements EtcRepository {
     return res.isSuccess()
         ? const Result.success(true)
         : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<bool, Exception>> saveQna(
+    String title,
+    String question,
+    List<File> files,
+  ) async {
+    final data = {
+      'title': title,
+    };
+    final res = await safetyCall<String>(apiClient.saveQna(data));
+
+    return res.isSuccess()
+        ? const Result.success(true)
+        : Result.error(res.tryGetError() ?? Exception('unkonw error'));
+  }
+
+  @override
+  Future<Result<TranslateResult, Exception>> translate({
+    required String targetLocale,
+    required String text,
+  }) async {
+    try {
+      final data = {
+        'source': 'ko',
+        'target': targetLocale,
+        'text': text,
+      };
+      final res = await papagoApiClient.translation(data);
+      final result = res.message.result;
+      return Result.success(result);
+    } catch (e) {
+      return Result.error(Exception(e));
+    }
   }
 }

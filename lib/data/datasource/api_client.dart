@@ -215,6 +215,11 @@ abstract class ApiClient {
   @GET('/qna')
   Future<DataResponse<QnaPaging>> findQna();
 
+  @POST('/qna')
+  Future<DataResponse<String>> saveQna(
+    @Body() Map<String, dynamic> data,
+  );
+
   // 사업자정보 조회
   @GET('/client/info')
   Future<DataResponse<BusinessInfo>> getBusinessInfo();

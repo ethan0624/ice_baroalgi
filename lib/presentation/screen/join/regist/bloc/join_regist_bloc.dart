@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:incheon_knowhow/core/injection.dart';
 import 'package:incheon_knowhow/data/request/user_register_request.dart';
@@ -58,8 +59,8 @@ class JoinRegistBloc
 
       if (_duplicateCheckedEmail != event.email) {
         produceSideEffect(BlocEffect.showAlert(
-          title: '이메일오류',
-          message: '이메일 중복확인을 해주세요',
+          title: '이메일 오류'.tr(),
+          message: '이메일 중복확인을 해주세요'.tr(),
         ));
         return;
       }
@@ -90,8 +91,8 @@ class JoinRegistBloc
       emit(state.copyWith(isLoading: false));
 
       if (res.isError()) {
-        produceSideEffect(
-            BlocEffect.showAlert(title: '회원가입 실패', message: '회원가입처리에 실패하였습니다'));
+        produceSideEffect(BlocEffect.showAlert(
+            title: '회원가입 실패'.tr(), message: '회원가입처리에 실패하였습니다'.tr()));
         return;
       }
 

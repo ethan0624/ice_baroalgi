@@ -38,7 +38,7 @@ class _CertificationScreenState extends State<CertificationScreen> {
   _getCerificationResult(String uid) async {
     if (_accessToken.isEmpty) {
       context
-          .showAlert(title: '본인인증 실패', message: '본인인인증을 실패하였습니다')
+          .showAlert(title: '본인인증 실패'.tr(), message: '본인인인증을 실패하였습니다'.tr())
           .then((value) {
         context.router.pop();
       });

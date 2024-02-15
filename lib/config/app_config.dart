@@ -2,7 +2,6 @@ import 'package:incheon_knowhow/config/constrants.dart';
 
 class AppConfig {
   static const String appScheme = '';
-  static const String naverMapClientId = 'uihnwow7tv';
 
   static const String baseUrl = isRelease
       ? 'https://iceapp.ice-baroalgi.kr'
@@ -20,4 +19,12 @@ class AppConfig {
 
   // open neis (나이스 교육정보 개방 포털)
   static const String openNeisApiKey = '905ffa25d86a44e689bbd3958680c6d0';
+
+  // naver map api
+  static const String naverMapClientId = 'uihnwow7tv';
+
+  // naver papago api
+  static const String naverClientId = 'je2nwj0qa2';
+  static const String naverClientSecretKey =
+      'LVXr9ZqGmUWC95TX2gfq3HvgtaeTqbzG8PJOhQmH';
 }
