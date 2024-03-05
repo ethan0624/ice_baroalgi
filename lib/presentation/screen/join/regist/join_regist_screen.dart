@@ -62,6 +62,8 @@ class _JoinRegistScreenState extends State<JoinRegistScreen> {
       return;
     }
 
+    FocusManager.instance.primaryFocus?.unfocus();
+
     final bloc = _scaffoldKey.currentContext?.read<JoinRegistBloc>();
     if (bloc == null) return;
 

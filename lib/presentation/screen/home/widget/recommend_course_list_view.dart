@@ -80,9 +80,12 @@ class _RecommendCourseListViewState extends State<RecommendCourseListView> {
                 child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    AppCheckbox(
-                      isChecked: _isHideCompletedCourse,
-                      onCheckChanged: (value) => _onToggleHideCompleteCourse(),
+                    IgnorePointer(
+                      child: AppCheckbox(
+                        isChecked: _isHideCompletedCourse,
+                        onCheckChanged: (value) =>
+                            _onToggleHideCompleteCourse(),
+                      ),
                     ),
                     Text(
                       '완료코스 숨김'.tr(),

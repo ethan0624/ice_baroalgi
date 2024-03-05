@@ -104,9 +104,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               (e) => Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
-                                child: Text(
-                                  e,
-                                  overflow: TextOverflow.ellipsis,
+                                child: FittedBox(
+                                  child: Text(
+                                    e,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ),
                             )

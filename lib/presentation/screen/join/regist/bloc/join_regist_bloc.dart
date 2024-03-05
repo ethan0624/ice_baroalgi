@@ -45,6 +45,7 @@ class JoinRegistBloc
 
       if (res.isSuccess()) {
         _duplicateCheckedEmail = event.email;
+        produceSideEffect(BlocEffect.showAlert(title: '사용가능한 이메일입니다'));
       }
 
       emit(state.copyWith(

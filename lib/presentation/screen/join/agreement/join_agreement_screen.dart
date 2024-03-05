@@ -35,8 +35,9 @@ class _JoinAgreementScreenState extends State<JoinAgreementScreen> {
 
   _onAllAgreements() {
     setState(() {
+      final checked = !_isAllAgreed;
       for (final agreement in _agreements) {
-        _checkedAgreementMap[agreement] = true;
+        _checkedAgreementMap[agreement] = checked;
       }
     });
   }

@@ -21,10 +21,10 @@ class AppConfig {
   static const String openNeisApiKey = '905ffa25d86a44e689bbd3958680c6d0';
 
   // naver map api
-  static const String naverMapClientId = 'uihnwow7tv';
+  static const String naverMapClientId = 'a9a4j3mx6l';
 
   // naver papago api
-  static const String naverClientId = 'je2nwj0qa2';
+  static const String naverClientId = '1k4ip6d92p';
   static const String naverClientSecretKey =
-      'LVXr9ZqGmUWC95TX2gfq3HvgtaeTqbzG8PJOhQmH';
+      'hHif8DKjW5r81BTiRK91x6dhRjCQ7qly75bKJyDS';
 }

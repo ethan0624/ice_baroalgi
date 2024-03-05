@@ -56,14 +56,18 @@ class AppButton extends StatelessWidget {
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                text,
-                style: textStyle ??
-                    context.textTheme.bodyLarge?.copyWith(
-                      color: textColor ?? Colors.white,
-                      fontWeight:
-                          textBold ? FontWeight.bold : FontWeight.normal,
-                    ),
+              Expanded(
+                child: Text(
+                  text,
+                  style: textStyle ??
+                      context.textTheme.bodyLarge?.copyWith(
+                        color: textColor ?? Colors.white,
+                        fontWeight:
+                            textBold ? FontWeight.bold : FontWeight.normal,
+                      ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               if (suffixIcon != null) suffixIcon!,
             ],

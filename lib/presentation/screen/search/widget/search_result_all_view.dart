@@ -26,9 +26,11 @@ class SearchResultAllView extends StatelessWidget {
     return (courses.isEmpty && spots.isEmpty)
         ? Container(
             margin: const EdgeInsets.symmetric(vertical: 50),
-            child: Text(
-              '검색결과가 없습니다'.tr(),
-              style: context.textTheme.bodyMedium,
+            child: Center(
+              child: Text(
+                '검색결과가 없습니다'.tr(),
+                style: context.textTheme.bodyMedium,
+              ),
             ),
           )
         : Column(

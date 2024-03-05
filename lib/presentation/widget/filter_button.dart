@@ -26,6 +26,7 @@ class FilterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
+      borderRadius: BorderRadius.circular(30),
       child: Container(
         margin: margin,
         padding: padding,

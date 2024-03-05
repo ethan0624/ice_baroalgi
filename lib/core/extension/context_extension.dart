@@ -160,4 +160,17 @@ extension BuildContextExtension on BuildContext {
       onLoggedIn.call();
     }
   }
+
+  requestLogin({required VoidCallback onLoggedIn}) async {
+    final authProvider = getIt<AuthProvider>();
+    if (authProvider.isAuthenticated()) {
+      onLoggedIn.call();
+      return;
+    }
+
+    final isLoggedIn = await router.push<bool>(const LoginRoute());
+    if (isLoggedIn == true) {
+      onLoggedIn.call();
+    }
+  }
 }

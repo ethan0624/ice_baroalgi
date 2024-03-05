@@ -26,6 +26,8 @@ class AppInfo {
     _packageName = packageInfo.packageName;
     _appVersion = packageInfo.version;
 
+    print('>>>>>>> _packageName : $_packageName');
+
     final deviceInfo = DeviceInfoPlugin();
     final appInfo = 'incheonKnowhowApp/$_appVersion';
 

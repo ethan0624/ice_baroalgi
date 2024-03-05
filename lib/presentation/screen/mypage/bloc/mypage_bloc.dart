@@ -13,7 +13,23 @@ class MypageBloc extends BaseSideEffectBloc<MypageEvent, MypageState> {
 
   MypageBloc() : super(const MypageState()) {
     on<MypageOnInitial>((event, emit) async {
+      _authProvider.addListener(_handleAuthRefresh);
+
       emit(state.copyWith(userMe: _authProvider.userMe));
     });
+
+    on<MypageOnRefresh>((event, emit) async {
+      emit(state.copyWith(userMe: _authProvider.userMe));
+    });
+  }
+
+  _handleAuthRefresh() {
+    add(const MypageEvent.refresh());
+  }
+
+  @override
+  Future<void> close() {
+    _authProvider.removeListener(_handleAuthRefresh);
+    return super.close();
   }
 }

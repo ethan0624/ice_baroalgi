@@ -20,7 +20,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<Token>> login(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -52,7 +52,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<FindIdResult>> findUserId(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -84,7 +84,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<CertificationCode>> sendEmailCertificationCode(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -115,7 +115,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> duplicateEmail(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -146,7 +146,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> checkPassword(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -177,10 +177,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<User>> getUserMe() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DataResponse<User>>(Options(
       method: 'GET',
@@ -208,7 +208,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<String>> updateUserPassword(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -240,7 +240,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<String>> updateUserPhone(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -272,7 +272,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<String>> updateUserSchool(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -304,7 +304,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<String>> updateJinroAccount(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -335,7 +335,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> register(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -366,10 +366,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> withdraw() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'DELETE',
@@ -396,10 +396,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<List<TopicCourse>>> findTopicCourse() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<List<TopicCourse>>>(Options(
       method: 'GET',
@@ -432,7 +432,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<DataResponse<List<Course>>> findCourse(
       Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -467,10 +467,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<List<Course>>> findCourseInProgress() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<List<Course>>>(Options(
       method: 'GET',
@@ -501,10 +501,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<List<Course>>> findCourseWish() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<List<Course>>>(Options(
       method: 'GET',
@@ -535,10 +535,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<MyCourse>> myCourse() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<MyCourse>>(Options(
       method: 'GET',
@@ -565,10 +565,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<Course>> getCourseInfo(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<Course>>(Options(
       method: 'GET',
@@ -595,10 +595,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> updagteFavorite(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',
@@ -625,10 +625,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> startCourse(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',
@@ -655,10 +655,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> completedCourse(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',
@@ -685,10 +685,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> cancelCourse(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',
@@ -718,7 +718,7 @@ class _ApiClient implements ApiClient {
     int id,
     Map<String, dynamic> data,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -749,10 +749,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<Spot>> getSpotInfo(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DataResponse<Spot>>(Options(
       method: 'GET',
@@ -779,10 +779,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> setSpotFlag(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',
@@ -809,10 +809,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<NoticePaging>> findNotice() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<NoticePaging>>(Options(
       method: 'GET',
@@ -839,10 +839,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<FaqPaging>> findFaq() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<FaqPaging>>(Options(
       method: 'GET',
@@ -869,10 +869,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<List<Category>>> findQnaCategory() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<List<Category>>>(Options(
       method: 'GET',
@@ -904,10 +904,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<QnaPaging>> findQna() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<QnaPaging>>(Options(
       method: 'GET',
@@ -938,7 +938,7 @@ class _ApiClient implements ApiClient {
     required String question,
     required List<File> fileUrl,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
@@ -984,10 +984,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<BusinessInfo>> getBusinessInfo() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<BusinessInfo>>(Options(
       method: 'GET',
@@ -1014,10 +1014,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<List<Push>>> findPush() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<List<Push>>>(Options(
       method: 'GET',
@@ -1048,10 +1048,10 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<String>> updatePush(int id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DataResponse<String>>(Options(
       method: 'POST',
@@ -1078,7 +1078,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DataResponse<SearchResult>> search(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

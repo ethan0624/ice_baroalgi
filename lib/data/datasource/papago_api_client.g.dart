@@ -13,7 +13,7 @@ class _PapagoApiClient implements PapagoApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://naveropenapi.apigw.ntruss.com';
+    baseUrl ??= 'https://naveropenapi.apigw.gov-ntruss.com/nmt/v1';
   }
 
   final Dio _dio;
@@ -22,7 +22,7 @@ class _PapagoApiClient implements PapagoApiClient {
 
   @override
   Future<PapagoResponse> translation(Map<String, dynamic> data) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -35,7 +35,7 @@ class _PapagoApiClient implements PapagoApiClient {
     )
             .compose(
               _dio.options,
-              '/nmt/v1/translation',
+              '/translation',
               queryParameters: queryParameters,
               data: _data,
             )

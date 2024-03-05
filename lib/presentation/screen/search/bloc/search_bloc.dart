@@ -70,19 +70,25 @@ class SearchBloc extends BaseSideEffectBloc<SearchEvent, SearchState> {
     });
 
     on<SearchOnDeleteRecentKeyword>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
       final res = await _deleteRecentKeyword(event.keyword);
 
       _recentKeywords.clear();
       _recentKeywords.addAll(
           (res.tryGetSuccess() ?? []).map((e) => RecentKeyword(keyword: e)));
 
-      emit(state.copyWith(recentKeywords: [..._recentKeywords]));
+      emit(state.copyWith(
+        isLoading: false,
+        recentKeywords: _recentKeywords.isEmpty ? [] : [..._recentKeywords],
+      ));
     });
 
     on<SearchOnClearRecentKeyword>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
       await _clearRecentKeyword();
       _recentKeywords.clear();
       emit(state.copyWith(
+        isLoading: false,
         recentKeywords: [],
       ));
     });

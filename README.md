@@ -31,6 +31,7 @@ flutter pub run flutter_native_splash:create
 
 ```
 flutter build apk --target-platform=android-arm64
+flutter build appbundle
 ```
 
 ### iOS build

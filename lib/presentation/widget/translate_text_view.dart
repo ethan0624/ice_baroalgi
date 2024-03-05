@@ -19,6 +19,7 @@ class _TranslateTextViewState extends State<TranslateTextView> {
   String _tanslateText = '';
 
   _toggleTranslate() async {
+    print('>>>>> _toggleTranslate : $_tanslateText');
     if (_tanslateText.isNotEmpty) {
       setState(() {
         _showTranslateText = !_showTranslateText;
@@ -28,6 +29,7 @@ class _TranslateTextViewState extends State<TranslateTextView> {
 
     final res = await _getTranslateText(
         targetLocale: context.locale.languageCode, text: widget.text);
+    print('>>>>> _toggleTranslate res : $res');
     final translateText = res.tryGetSuccess()?.text ?? '';
     if (res.isSuccess() && translateText.isNotEmpty) {
       setState(() {

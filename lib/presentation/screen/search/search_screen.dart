@@ -155,6 +155,9 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
       create: (context) => SearchBloc()..add(const SearchEvent.initial()),
+      stateChanged: (context, state) {
+        print('>>>>>> state : ${state.recentKeywords}');
+      },
       builder: (context, bloc, state) {
         return Stack(
           children: [
