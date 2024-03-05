@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context.router.pop(true);
       return;
     } else if (effect is ShowAlertMessageEffect) {
-      _onClear();
+      // _onClear();
       return;
     }
   }
@@ -85,7 +85,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    _onClear();
     _emailTextController.dispose();
+    _passwordTextController.dispose();
     super.dispose();
   }
 

@@ -76,7 +76,6 @@ class AuthProvider extends ChangeNotifier {
   logout() async {
     _token = null;
     _user = null;
-    _skipJinroAccountSharedValue = false;
 
     await secureStorage.delete(key: _tokenPrefsKey);
     await sharedPreferences.remove(_skipJinroAccountRegistPrefsKey);

@@ -89,7 +89,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                 controller: _textController,
                 focusNode: widget.focusNode,
                 hintText: widget.hint ?? '비밀번호 입력'.tr(),
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.visiblePassword,
                 textInputAction: widget.textInputAction ?? TextInputAction.done,
                 maxLength: 40,
                 margin: EdgeInsets.zero,
